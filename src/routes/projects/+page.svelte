@@ -25,7 +25,7 @@
 
 <ol>
 	{#each filtered_projects as project (project.name)}
-		<li transition:fade={{ duration: 200 }}>
+		<li transition:fade|local={{ duration: 200 }}>
 			<Project {project} />
 		</li>
 	{/each}

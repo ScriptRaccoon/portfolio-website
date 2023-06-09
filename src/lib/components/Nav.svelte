@@ -10,7 +10,7 @@
 		{ name: "Home", href: "/" },
 		{ name: "YouTube", href: "/youtube" },
 		{ name: "Projects", href: "/projects" },
-		{ name: "Blog", href: "/blog" },
+		// { name: "Blog", href: "/blog" },
 		{ name: "About", href: "/about" },
 		{ name: "Contact", href: "/contact" },
 	];
