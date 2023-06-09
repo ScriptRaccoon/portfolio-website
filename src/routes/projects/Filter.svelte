@@ -6,12 +6,12 @@
 
 <section aria-label="Filters">
 	<details>
-		<summary>
+		<summary aria-live="polite">
 			Applied filter: {$selected_tag}
 		</summary>
-		<div class="tag-list" role="listbox">
+		<div class="tag-list" role="listbox" aria-label="list of tags">
 			{#each all_tags as tag}
-				<Tag {tag} />
+				<Tag {tag} interactive={true} />
 			{/each}
 		</div>
 		<div>

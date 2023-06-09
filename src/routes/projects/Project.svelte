@@ -33,10 +33,10 @@
 		{/if}
 	</div>
 	{#if $show_tags}
-		<ul class="tags">
+		<ul class="tag-list" aria-label="list of tags">
 			{#each [...project.tags].sort() as tag}
 				<li>
-					<Tag {tag} show_selection={false} />
+					<Tag {tag} interactive={false} />
 				</li>
 			{/each}
 		</ul>
@@ -55,12 +55,12 @@
 		font-size: 1rem;
 		color: var(--gray-color);
 	}
-	.tags {
+	.tag-list {
 		margin: 0;
 		list-style-type: none;
-		margin-top: 1rem;
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
+		margin-top: 1rem;
 	}
 </style>

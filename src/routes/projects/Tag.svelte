@@ -1,21 +1,27 @@
 <script lang="ts">
 	import { selected_tag } from "./stores";
 	import type { tag } from "./tags";
-	export let show_selection = true;
+	export let interactive = true;
 	export let tag: tag;
 </script>
 
-<button
-	role="option"
-	on:click={() => ($selected_tag = tag)}
-	aria-selected={tag === $selected_tag}
-	class:show_selection
->
-	{tag}
-</button>
+{#if interactive}
+	<button
+		class="tag"
+		role="option"
+		on:click={() => ($selected_tag = tag)}
+		aria-selected={tag === $selected_tag}
+	>
+		{tag}
+	</button>
+{:else}
+	<span class="tag">
+		{tag}
+	</span>
+{/if}
 
 <style>
-	button {
+	.tag {
 		font-size: 0.75rem;
 		background-color: var(--tag-color);
 		color: var(--gray-color);
@@ -25,7 +31,7 @@
 		justify-content: center;
 		align-items: center;
 	}
-	button[aria-selected="true"].show_selection {
+	.tag[aria-selected="true"] {
 		outline: 0.1rem solid var(--font-color);
 	}
 </style>
