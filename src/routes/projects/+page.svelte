@@ -35,5 +35,6 @@
 	ol {
 		list-style-type: none;
 		margin: 0;
+		margin-bottom: 2rem;
 	}
 </style>

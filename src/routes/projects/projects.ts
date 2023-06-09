@@ -7,7 +7,7 @@ export type project = {
 	image: string;
 	repository: string;
 	tutorial?: string;
-	url: string;
+	url?: string;
 	year: number;
 };
 
@@ -18,7 +18,7 @@ export const all_projects: project[] = [
 		url: "https://svt.ink/",
 		tags: ["SvelteKit", "Tool", "Full Stack", "MongoDB"],
 		description:
-			"This is a URL shortener made with SvelteKit and MongoDB.",
+			"This is a URL shortener made with SvelteKit. The redirections are stored in a MongoDB database.",
 		image: "svtink",
 		year: 2023,
 	},
@@ -29,7 +29,7 @@ export const all_projects: project[] = [
 		url: "https://sveltekit-auth.netlify.app/",
 		tags: ["Authentication", "Full Stack", "SvelteKit", "MongoDB"],
 		description:
-			"This is a template of a SvelteKit project which authenticates users stored in MongoDB, using JWTs.",
+			"This is a template of a SvelteKit project which authenticates users stored in MongoDB, using JWTs. Users can register, login, open a dashboard and an account page. ",
 		image: "sveltekitauth",
 		year: 2023,
 	},
@@ -38,7 +38,7 @@ export const all_projects: project[] = [
 		name: "Password-protect SvelteKit pages",
 		repository: "https://github.com/ScriptRaccoon/sveltekit-password",
 		url: "https://sveltekit-password.netlify.app/",
-		tags: ["Authentication", "SvelteKit"],
+		tags: ["Authentication", "SvelteKit", "Tutorial"],
 		description:
 			"This repository demonstrates how to password-protect a single or multiple pages inside of a SvelteKit application.",
 		image: "sveltekitpassword",
@@ -61,7 +61,7 @@ export const all_projects: project[] = [
 		name: "Abgeordnete im Bundestag",
 		repository: "https://github.com/ScriptRaccoon/Abgeordnete",
 		url: "https://abgeordnete.netlify.app/",
-		tags: ["Data visualization", "Svelte"],
+		tags: ["Data visualization", "Svelte", "SVG"],
 		description:
 			'An animated pie chart (made with Svelte) that visualizes the distribution of the members of the German "Bundestag" for different age groups.',
 		image: "abgeordnete",
@@ -111,7 +111,7 @@ export const all_projects: project[] = [
 		name: "Svorm",
 		repository: "https://github.com/ScriptRaccoon/svorm",
 		url: "https://svorm.netlify.app/",
-		tags: ["SvelteKit", "Tool", "Supabase", "Full Stack"],
+		tags: ["SvelteKit", "Tool", "Supabase", "Full Stack", "Tutorial"],
 		description:
 			"Google Forms clone made with SvelteKit and Supabase. The forms ('svorms') can be created, answered, and evaluated.",
 		tutorial:
@@ -135,7 +135,13 @@ export const all_projects: project[] = [
 		name: "Svelte Chat App",
 		repository: "https://github.com/ScriptRaccoon/svelte-chat-app",
 		url: "https://svelte-chat-app.onrender.com/",
-		tags: ["Svelte", "Express", "socket.io"],
+		tags: [
+			"Svelte",
+			"Express",
+			"socket.io",
+			"Tutorial",
+			"Full Stack",
+		],
 		description:
 			"Chat App made with Svelte on the front-end and Express / socket.io on the back-end.",
 		image: "sveltechat",
@@ -148,9 +154,9 @@ export const all_projects: project[] = [
 		repository:
 			"https://github.com/ScriptRaccoon/translations-web-dev-astro",
 		url: "https://translations-web-dev.netlify.app/",
-		tags: ["Astro", "Data visualization", "Tool"],
+		tags: ["Astro", "Data visualization", "Tool", "Tutorial"],
 		description:
-			"Searchable list of translations (English to German) of terms that are commonly used in web development.",
+			"This Astro project provides a searchable list of translations (English to German) of terms that are commonly used in web development.",
 		image: "translations",
 		tutorial: "https://www.youtube.com/watch?v=aHZCEiQh9AI",
 		year: 2022,
@@ -161,9 +167,9 @@ export const all_projects: project[] = [
 		repository:
 			"https://github.com/ScriptRaccoon/image-puzzle-effect",
 		url: "https://puzzle-effect.netlify.app/",
-		tags: ["CSS", "Creative Coding"],
+		tags: ["CSS", "Creative Coding", "Tutorial"],
 		description:
-			"Beautiful puzzle effect for images. Fully customizable.",
+			"Beautiful puzzle effect for images. It is fully customizable.",
 		image: "imagepuzzle",
 		tutorial: "https://www.youtube.com/watch?v=fT1VR5LF-Cs",
 		year: 2022,
@@ -174,7 +180,7 @@ export const all_projects: project[] = [
 		repository:
 			"https://github.com/ScriptRaccoon/game-of-life-svelte",
 		url: "https://game-of-life-svelte.netlify.app/",
-		tags: ["Svelte", "Browser game", "Creative Coding"],
+		tags: ["Svelte", "Browser game", "Creative Coding", "Tutorial"],
 		description:
 			"Conway's Game of Life as a fullscreen browser game, made with Svelte.",
 		image: "gameoflife",
@@ -187,9 +193,9 @@ export const all_projects: project[] = [
 		repository:
 			"https://github.com/ScriptRaccoon/rock-paper-scissors-css",
 		url: "https://rps-css.netlify.app/",
-		tags: ["CSS", "Browser game"],
+		tags: ["CSS", "Browser game", "Tutorial"],
 		description:
-			"This RPS game is written in HTML and CSS. No JavaScript is required! The state management is done with CSS selectors.",
+			"This Rock, Paper, Scissors game is written in HTML and CSS. No JavaScript is required! The state management is done with CSS selectors.",
 		image: "rps",
 		tutorial: "https://www.youtube.com/watch?v=raxsg0Lxdqg",
 		year: 2022,
@@ -199,9 +205,9 @@ export const all_projects: project[] = [
 		name: "Graph editor with SVG",
 		repository: "https://github.com/ScriptRaccoon/graph-editor-svg",
 		url: "https://graph-editor-svg.netlify.app/",
-		tags: ["Svelte", "Tool"],
+		tags: ["Svelte", "Tool", "Tutorial", "SVG"],
 		description:
-			"Interactive graph editor made with Svelte, but this time the graphs are SVGs.",
+			"Interactive graph editor made with Svelte and SVG. Nodes and edges can be edited easily by clicking on them.",
 		image: "graphsvg",
 		tutorial: "https://www.youtube.com/watch?v=ot4pcN_IQn8",
 		year: 2022,
@@ -211,7 +217,7 @@ export const all_projects: project[] = [
 		name: "Get This Done",
 		repository: "https://github.com/ScriptRaccoon/GetThisDone",
 		url: "https://get-this-done.netlify.app/",
-		tags: ["Svelte", "Tool"],
+		tags: ["Svelte", "Tool", "Tutorial"],
 		tutorial: "https://www.youtube.com/watch?v=ksHlDm727u4",
 		description:
 			"This is a (not so basic) to-do app made with Svelte, featuring in particular many of the built-in animations of Svelte. The tasks can be structured within several lists.",
@@ -225,7 +231,7 @@ export const all_projects: project[] = [
 			"Fully functional Rubik's Cube. The graphics are made with 3-dimensional CSS, no graphics library is used. Svelte makes it easy to construct the cube from its components.",
 		url: "https://rubikscubesvelte.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/RubiksCubeSvelte",
-		tags: ["Svelte", "CSS", "Browser game", "3D"],
+		tags: ["Svelte", "CSS", "Browser game", "3D", "Tutorial"],
 		tutorial: "https://www.youtube.com/watch?v=GdlUdnYZnfc",
 		image: "cube",
 		year: 2022,
@@ -234,10 +240,16 @@ export const all_projects: project[] = [
 	{
 		name: "Svordle",
 		description:
-			"The <a href='https://www.nytimes.com/games/wordle' target='_blank'>Wordle game</a> built with Svelte on the front-end and Netlify's serverless functions on the backend. Cheating is impossible since the correct word gets encrypted.",
-		url: "https://svordle.xyz",
+			"The <a href='https://www.nytimes.com/games/wordle' target='_blank'>Wordle game</a> built with Svelte on the front-end and Netlify's serverless functions on the back-end. Cheating is impossible since the correct word gets encrypted.",
+		url: "https://svordle.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/Svordle",
-		tags: ["Svelte", "Browser game", "Full Stack"],
+		tags: [
+			"Svelte",
+			"Browser game",
+			"Full Stack",
+			"Tutorial",
+			"Serverless",
+		],
 		tutorial: "https://youtu.be/CMIwJLS0dns",
 		image: "svordle",
 		year: 2022,
@@ -249,22 +261,10 @@ export const all_projects: project[] = [
 			"Fun pool game written in Vanilla JS. All drawing operations are done with an HTML canvas. Includes physics, light effects, shadows, and sound effects.",
 		url: "https://pool-game.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/pool-game",
-		tags: ["Vanilla JS", "HTML Canvas", "Browser game"],
+		tags: ["Vanilla JS", "HTML Canvas", "Browser game", "Tutorial"],
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8vGfIvK5-9P5RAavTxzoQWP",
 		image: "pool",
-		year: 2022,
-	},
-
-	{
-		name: "Graph editor",
-		description:
-			"Interactive graph editor made with Svelte. The nodes and edges can be edited directly by clicking on them.",
-		url: "https://graph-editor.netlify.app/",
-		repository: "https://github.com/ScriptRaccoon/graph-editor",
-		tags: ["Svelte", "Tool", "CSS"],
-		tutorial: "https://youtu.be/NRyYCifF1PQ",
-		image: "graph",
 		year: 2022,
 	},
 
@@ -284,7 +284,6 @@ export const all_projects: project[] = [
 		description:
 			"This is a clone of Strava's training log which is otherwise only available in the paid version. It shows all of your runs as bubbles whose sizes correspond to the total distance.",
 		repository: "https://github.com/ScriptRaccoon/run-diary",
-		url: "https://github.com/ScriptRaccoon/run-diary",
 		tags: ["Tool", "Svelte", "Data visualization"],
 		image: "rundiary",
 		year: 2022,
@@ -304,7 +303,7 @@ export const all_projects: project[] = [
 	{
 		name: "Comparison of JavaScript frameworks",
 		description:
-			"The very same shopping list SPA made with 7 JavaScript frameworks in order to compare them with respect to developer experience and bundle size.",
+			"The very same shopping list single-page application made with 7 different JavaScript frameworks in order to compare them with respect to developer experience and bundle size.",
 		url: "https://shopping-list-made-with-vanilla-js.netlify.app",
 		repository:
 			"https://github.com/ScriptRaccoon/shopping-list-frameworks",
@@ -327,8 +326,8 @@ export const all_projects: project[] = [
 			"Create a personal digital library. Features 3-dimensional animations for opening/closing the book covers. This project mainly illustrates Svelte components.",
 		url: "https://bookshelfsvelte.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/BookShelf",
+		tags: ["3D", "Svelte", "CSS", "Tool", "Tutorial"],
 		tutorial: "https://www.youtube.com/watch?v=gWYgy_JVLlQ",
-		tags: ["3D", "Svelte", "CSS", "Tool"],
 		image: "bookshelf",
 		year: 2022,
 	},
@@ -339,7 +338,7 @@ export const all_projects: project[] = [
 			"A simple weather app made with SvelteKit. The data comes from <a href='https://openweathermap.org/' target='_blank'>OpenWeather API</a> via a SvelteKit endpoint.",
 		url: "https://weather-sveltekit.netlify.app/",
 		repository: "https://github.com/ScriptRaccoon/sveltekit-weather",
-		tags: ["Full Stack", "SvelteKit"],
+		tags: ["Full Stack", "SvelteKit", "Tutorial"],
 		tutorial: "https://youtu.be/akJEOD3El8I",
 		image: "weather",
 		year: 2022,
@@ -359,7 +358,7 @@ export const all_projects: project[] = [
 	{
 		name: "Spotify playlist finder",
 		description:
-			"Finds all of your Spotify playlists that contain a specific song. Surprisingly, this specific feature is not built into the Spotify app.",
+			"This tool finds all of your Spotify playlists that contain a specific song. Surprisingly, this specific feature is not built into the Spotify app.",
 		repository:
 			"https://github.com/ScriptRaccoon/spotify-playlist-finder",
 		url: "https://spotify-playlist-finder.onrender.com/",
@@ -374,7 +373,7 @@ export const all_projects: project[] = [
 			"Share secrets via a one-time link and an optional password, very similar to <a href='https://onetimesecret.com/' target='_blank'>onetimesecret</a>. The data is encrypted and stored in Firebase.",
 		url: "https://whispernote.onrender.com",
 		repository: "https://github.com/ScriptRaccoon/WhisperNote",
-		tags: ["Full Stack", "Express", "Firebase", "Tool"],
+		tags: ["Full Stack", "Express", "Firebase", "Tool", "Tutorial"],
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8s2_B2xJaEwMrR5fR73_9U9",
 		image: "whispernote",
@@ -389,7 +388,7 @@ export const all_projects: project[] = [
 		url: "https://sprite-anima.netlify.app/",
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8uBdhvhRqIMBeX_4D-blFo6",
-		tags: ["Browser game", "Vanilla JS", "HTML Canvas"],
+		tags: ["Browser game", "Vanilla JS", "HTML Canvas", "Tutorial"],
 		image: "sprite",
 		year: 2021,
 	},
@@ -400,7 +399,7 @@ export const all_projects: project[] = [
 			"In this space shooter game, you navigate a spaceship through space and shoot asteroids with lasers. The stars in the background show a parallax effect, therefore the name.",
 		url: "https://spaceship-parallax.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/spaceship-parallax",
-		tags: ["Browser game", "Vanilla JS", "HTML Canvas"],
+		tags: ["Browser game", "Vanilla JS", "HTML Canvas", "Tutorial"],
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8sBtJOzgVKFHpxuMa-moSPX",
 		image: "space",
@@ -415,7 +414,15 @@ export const all_projects: project[] = [
 		url: "https://wherethetimegoes.netlify.app/",
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8twqDyMR9nb8Eh1pxsn3nlw",
-		tags: ["Full Stack", "Tool", "Firebase", "Vanilla JS", "CSS"],
+		tags: [
+			"Full Stack",
+			"Authentication",
+			"Tool",
+			"Firebase",
+			"Vanilla JS",
+			"CSS",
+			"Tutorial",
+		],
 		image: "calendar",
 		year: 2021,
 	},
@@ -437,7 +444,7 @@ export const all_projects: project[] = [
 			"A single-player chess program made with Vanilla JS and Sass. All chess rules are supported. There are highlights for previous and allowed moves.",
 		repository: "https://github.com/ScriptRaccoon/chess-singleplayer",
 		url: "https://chess-singleplayer.netlify.app/",
-		tags: ["Browser game", "Vanilla JS", "Sass", "CSS"],
+		tags: ["Browser game", "Vanilla JS", "CSS"],
 		image: "chess",
 		year: 2020,
 	},
@@ -445,7 +452,7 @@ export const all_projects: project[] = [
 	{
 		name: "Dancing circles",
 		description:
-			"Create circles that <i>dance</i> with each other when they are close enough. Very interesting and complex patterns emerge from a simple rule.",
+			"Create circles that dance with each other when they are close enough. Very interesting and complex patterns emerge from a simple rule.",
 		url: "https://dancing-circles.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/dancing-circles",
 		tags: ["Vanilla JS", "HTML Canvas", "Creative Coding"],
@@ -460,7 +467,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/mahjong-solitaire",
 		url: "https://mahjong-solitaire.netlify.app/",
 		tutorial: "https://youtu.be/oWDB4LaO4MU",
-		tags: ["Browser game", "Vanilla JS", "CSS"],
+		tags: ["Browser game", "Vanilla JS", "CSS", "Tutorial"],
 		image: "mahjong",
 		year: 2020,
 	},
