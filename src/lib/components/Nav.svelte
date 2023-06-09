@@ -46,6 +46,7 @@
 		margin: 0;
 		display: flex;
 		justify-content: space-between;
+		align-items: center;
 		flex-wrap: wrap;
 		gap: 1rem;
 	}
@@ -56,6 +57,7 @@
 
 	img {
 		width: 2rem;
+		transform: translateY(0.1rem);
 	}
 
 	@media (max-width: 38rem) {
