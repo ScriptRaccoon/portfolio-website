@@ -6,7 +6,8 @@
 
 <p>
 	The best way to contact me is via email: <a
-		href="mailto:scriptraccoon@gmail.com">scriptraccoon@gmail.com</a
+		href="mai&#108;t&#111;&#58;s&#99;r%69pt%72%61cc%6F&#111;%6E%40&#103;mail&#46;c%6&#70;m"
+		>sc&#114;i&#112;tr&#97;ccoo&#110;&#64;g&#109;&#97;il&#46;com</a
 	>
 </p>
 
