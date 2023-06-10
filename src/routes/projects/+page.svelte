@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
 	import Filter from "./Filter.svelte";
-	import Project from "./Project.svelte";
+	import ProjectPreview from "./ProjectPreview.svelte";
 	import { all_projects, type project } from "./projects";
 	import { selected_tag } from "./stores";
 	import { NO_TAG } from "./tags";
@@ -26,7 +26,7 @@
 <ol>
 	{#each filtered_projects as project (project.name)}
 		<li transition:fade|local={{ duration: 200 }}>
-			<Project {project} />
+			<ProjectPreview {project} />
 		</li>
 	{/each}
 </ol>
@@ -34,7 +34,6 @@
 <style>
 	ol {
 		list-style-type: none;
-		margin: 0;
-		margin-bottom: 2rem;
+		margin: 1rem 0rem 2rem 0rem;
 	}
 </style>

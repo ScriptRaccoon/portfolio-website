@@ -2,9 +2,9 @@ import type { tag } from "./tags";
 
 export type project = {
 	name: string;
+	id: string;
 	tags: tag[];
 	description: string;
-	image: string;
 	repository: string;
 	tutorial?: string;
 	url?: string;
@@ -19,7 +19,7 @@ export const all_projects: project[] = [
 		tags: ["SvelteKit", "Tool", "Full Stack", "MongoDB"],
 		description:
 			"This is a URL shortener made with SvelteKit. The redirections are stored in a MongoDB database.",
-		image: "svtink",
+		id: "svtink",
 		year: 2023,
 	},
 	{
@@ -30,7 +30,7 @@ export const all_projects: project[] = [
 		tags: ["Authentication", "Full Stack", "SvelteKit", "MongoDB"],
 		description:
 			"This is a template of a SvelteKit project which authenticates users stored in MongoDB, using JWTs. Users can register, login, open a dashboard and an account page. ",
-		image: "sveltekitauth",
+		id: "sveltekitauth",
 		year: 2023,
 	},
 
@@ -41,7 +41,7 @@ export const all_projects: project[] = [
 		tags: ["Authentication", "SvelteKit", "Tutorial"],
 		description:
 			"This repository demonstrates how to password-protect a single or multiple pages inside of a SvelteKit application.",
-		image: "sveltekitpassword",
+		id: "sveltekitpassword",
 		year: 2023,
 		tutorial: "https://youtu.be/Gf5cOJCAh4U",
 	},
@@ -53,7 +53,7 @@ export const all_projects: project[] = [
 		tags: ["SvelteKit"],
 		description:
 			"This repository shows how to implement reusable Codeblock components inside of a SvelteKit project, with syntax highlighting by Shiki. This is an alternative to the more common approach with markdown.",
-		image: "codeblocks",
+		id: "codeblocks",
 		year: 2023,
 	},
 
@@ -64,7 +64,7 @@ export const all_projects: project[] = [
 		tags: ["Data visualization", "Svelte", "SVG"],
 		description:
 			'An animated pie chart (made with Svelte) that visualizes the distribution of the members of the German "Bundestag" for different age groups.',
-		image: "abgeordnete",
+		id: "abgeordnete",
 		year: 2023,
 	},
 
@@ -75,7 +75,7 @@ export const all_projects: project[] = [
 		tags: ["Creative Coding", "HTML Canvas"],
 		description:
 			"This is an animation that creates a sequence of images built up from moving pixels.",
-		image: "wordsofpixels",
+		id: "wordsofpixels",
 		year: 2023,
 	},
 
@@ -86,7 +86,7 @@ export const all_projects: project[] = [
 		tags: ["Vue", "Svelte"],
 		description:
 			"This is a small quiz app made with Vue, serving as a demonstration to a feature-identical app made with Svelte. The app is also accessible via keyboard navigation and screen reader usage.",
-		image: "quizvue",
+		id: "quizvue",
 		year: 2023,
 	},
 
@@ -103,7 +103,7 @@ export const all_projects: project[] = [
 		],
 		description:
 			"Planning Poker is played in Scrum teams to estimate tickets for an upcoming sprint. This app is made with SvelteKit and uses socket.io for real-time communication.",
-		image: "planningpoker",
+		id: "planningpoker",
 		year: 2023,
 	},
 
@@ -116,7 +116,7 @@ export const all_projects: project[] = [
 			"Google Forms clone made with SvelteKit and Supabase. The forms ('svorms') can be created, answered, and evaluated.",
 		tutorial:
 			"https://www.youtube.com/watch?v=Ab0P2u0XFtY&list=PL1LHMFscti8sJ1R9qn_0fuQMZaSYURQhf",
-		image: "svorm",
+		id: "svorm",
 		year: 2023,
 	},
 
@@ -127,7 +127,7 @@ export const all_projects: project[] = [
 		tags: ["Svelte", "Music", "Tool"],
 		description:
 			"This is a drum computer in the browser. It is supposed to be accessible to anyone, even without any knowledge about music. Tracks can be shared with URLs.",
-		image: "drumcomputer",
+		id: "drumcomputer",
 		year: 2023,
 	},
 
@@ -144,7 +144,7 @@ export const all_projects: project[] = [
 		],
 		description:
 			"Chat App made with Svelte on the front-end and Express / socket.io on the back-end.",
-		image: "sveltechat",
+		id: "sveltechat",
 		tutorial: "https://www.youtube.com/watch?v=f5Mbd4txon4",
 		year: 2023,
 	},
@@ -157,7 +157,7 @@ export const all_projects: project[] = [
 		tags: ["Astro", "Data visualization", "Tool", "Tutorial"],
 		description:
 			"This Astro project provides a searchable list of translations (English to German) of terms that are commonly used in web development.",
-		image: "translations",
+		id: "translations",
 		tutorial: "https://www.youtube.com/watch?v=aHZCEiQh9AI",
 		year: 2022,
 	},
@@ -170,7 +170,7 @@ export const all_projects: project[] = [
 		tags: ["CSS", "Creative Coding", "Tutorial"],
 		description:
 			"Beautiful puzzle effect for images. It is fully customizable.",
-		image: "imagepuzzle",
+		id: "imagepuzzle",
 		tutorial: "https://www.youtube.com/watch?v=fT1VR5LF-Cs",
 		year: 2022,
 	},
@@ -183,7 +183,7 @@ export const all_projects: project[] = [
 		tags: ["Svelte", "Browser game", "Creative Coding", "Tutorial"],
 		description:
 			"Conway's Game of Life as a fullscreen browser game, made with Svelte.",
-		image: "gameoflife",
+		id: "gameoflife",
 		tutorial: "https://www.youtube.com/watch?v=_JT3w4y-Dlc",
 		year: 2022,
 	},
@@ -196,7 +196,7 @@ export const all_projects: project[] = [
 		tags: ["CSS", "Browser game", "Tutorial"],
 		description:
 			"This Rock, Paper, Scissors game is written in HTML and CSS. No JavaScript is required! The state management is done with CSS selectors.",
-		image: "rps",
+		id: "rps",
 		tutorial: "https://www.youtube.com/watch?v=raxsg0Lxdqg",
 		year: 2022,
 	},
@@ -208,7 +208,7 @@ export const all_projects: project[] = [
 		tags: ["Svelte", "Tool", "Tutorial", "SVG"],
 		description:
 			"Interactive graph editor made with Svelte and SVG. Nodes and edges can be edited easily by clicking on them.",
-		image: "graphsvg",
+		id: "graphsvg",
 		tutorial: "https://www.youtube.com/watch?v=ot4pcN_IQn8",
 		year: 2022,
 	},
@@ -221,7 +221,7 @@ export const all_projects: project[] = [
 		tutorial: "https://www.youtube.com/watch?v=ksHlDm727u4",
 		description:
 			"This is a (not so basic) to-do app made with Svelte, featuring in particular many of the built-in animations of Svelte. The tasks can be structured within several lists.",
-		image: "getthisdone",
+		id: "getthisdone",
 		year: 2022,
 	},
 
@@ -233,7 +233,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/RubiksCubeSvelte",
 		tags: ["Svelte", "CSS", "Browser game", "3D", "Tutorial"],
 		tutorial: "https://www.youtube.com/watch?v=GdlUdnYZnfc",
-		image: "cube",
+		id: "cube",
 		year: 2022,
 	},
 
@@ -251,7 +251,7 @@ export const all_projects: project[] = [
 			"Serverless",
 		],
 		tutorial: "https://youtu.be/CMIwJLS0dns",
-		image: "svordle",
+		id: "svordle",
 		year: 2022,
 	},
 
@@ -264,7 +264,7 @@ export const all_projects: project[] = [
 		tags: ["Vanilla JS", "HTML Canvas", "Browser game", "Tutorial"],
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8vGfIvK5-9P5RAavTxzoQWP",
-		image: "pool",
+		id: "pool",
 		year: 2022,
 	},
 
@@ -275,7 +275,7 @@ export const all_projects: project[] = [
 		url: "https://css-sphere.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/css-sphere",
 		tags: ["3D", "CSS", "Creative Coding"],
-		image: "sphere",
+		id: "sphere",
 		year: 2022,
 	},
 
@@ -285,7 +285,7 @@ export const all_projects: project[] = [
 			"This is a clone of Strava's training log which is otherwise only available in the paid version. It shows all of your runs as bubbles whose sizes correspond to the total distance.",
 		repository: "https://github.com/ScriptRaccoon/run-diary",
 		tags: ["Tool", "Svelte", "Data visualization"],
-		image: "rundiary",
+		id: "rundiary",
 		year: 2022,
 	},
 
@@ -296,7 +296,7 @@ export const all_projects: project[] = [
 		url: "https://svoodle.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/svoodle",
 		tags: ["Full Stack", "SvelteKit", "Firebase", "Tool"],
-		image: "svoodle",
+		id: "svoodle",
 		year: 2022,
 	},
 
@@ -316,7 +316,7 @@ export const all_projects: project[] = [
 			"Lit",
 			"Alpine",
 		],
-		image: "shoppinglist",
+		id: "shoppinglist",
 		year: 2022,
 	},
 
@@ -328,7 +328,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/BookShelf",
 		tags: ["3D", "Svelte", "CSS", "Tool", "Tutorial"],
 		tutorial: "https://www.youtube.com/watch?v=gWYgy_JVLlQ",
-		image: "bookshelf",
+		id: "bookshelf",
 		year: 2022,
 	},
 
@@ -340,7 +340,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/sveltekit-weather",
 		tags: ["Full Stack", "SvelteKit", "Tutorial"],
 		tutorial: "https://youtu.be/akJEOD3El8I",
-		image: "weather",
+		id: "weather",
 		year: 2022,
 	},
 
@@ -351,7 +351,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/slidepuzzles",
 		url: "https://slidepuzzles.netlify.app/",
 		tags: ["Browser game", "CSS", "Vanilla JS"],
-		image: "slide",
+		id: "slide",
 		year: 2022,
 	},
 
@@ -363,7 +363,7 @@ export const all_projects: project[] = [
 			"https://github.com/ScriptRaccoon/spotify-playlist-finder",
 		url: "https://spotify-playlist-finder.onrender.com/",
 		tags: ["Tool", "Express", "Vanilla JS", "Authentication"],
-		image: "spotify",
+		id: "spotify",
 		year: 2021,
 	},
 
@@ -376,7 +376,7 @@ export const all_projects: project[] = [
 		tags: ["Full Stack", "Express", "Firebase", "Tool", "Tutorial"],
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8s2_B2xJaEwMrR5fR73_9U9",
-		image: "whispernote",
+		id: "whispernote",
 		year: 2021,
 	},
 
@@ -389,7 +389,7 @@ export const all_projects: project[] = [
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8uBdhvhRqIMBeX_4D-blFo6",
 		tags: ["Browser game", "Vanilla JS", "HTML Canvas", "Tutorial"],
-		image: "sprite",
+		id: "sprite",
 		year: 2021,
 	},
 
@@ -402,7 +402,7 @@ export const all_projects: project[] = [
 		tags: ["Browser game", "Vanilla JS", "HTML Canvas", "Tutorial"],
 		tutorial:
 			"https://www.youtube.com/playlist?list=PL1LHMFscti8sBtJOzgVKFHpxuMa-moSPX",
-		image: "space",
+		id: "space",
 		year: 2021,
 	},
 
@@ -423,7 +423,7 @@ export const all_projects: project[] = [
 			"CSS",
 			"Tutorial",
 		],
-		image: "calendar",
+		id: "calendar",
 		year: 2021,
 	},
 
@@ -434,7 +434,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/Cell-Simulation",
 		url: "https://cell-simulation.netlify.app/",
 		tags: ["Vanilla JS", "HTML Canvas", "Creative Coding"],
-		image: "cell",
+		id: "cell",
 		year: 2021,
 	},
 
@@ -445,7 +445,7 @@ export const all_projects: project[] = [
 		repository: "https://github.com/ScriptRaccoon/chess-singleplayer",
 		url: "https://chess-singleplayer.netlify.app/",
 		tags: ["Browser game", "Vanilla JS", "CSS"],
-		image: "chess",
+		id: "chess",
 		year: 2020,
 	},
 
@@ -456,7 +456,7 @@ export const all_projects: project[] = [
 		url: "https://dancing-circles.netlify.app",
 		repository: "https://github.com/ScriptRaccoon/dancing-circles",
 		tags: ["Vanilla JS", "HTML Canvas", "Creative Coding"],
-		image: "dancing",
+		id: "dancing",
 		year: 2020,
 	},
 
@@ -468,7 +468,7 @@ export const all_projects: project[] = [
 		url: "https://mahjong-solitaire.netlify.app/",
 		tutorial: "https://youtu.be/oWDB4LaO4MU",
 		tags: ["Browser game", "Vanilla JS", "CSS", "Tutorial"],
-		image: "mahjong",
+		id: "mahjong",
 		year: 2020,
 	},
 ];

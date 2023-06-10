@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { selected_tag, show_tags } from "./stores";
+	import { selected_tag } from "./stores";
 	import Tag from "./Tag.svelte";
 	import { all_tags } from "./tags";
 </script>
@@ -13,14 +13,6 @@
 			{#each all_tags as tag}
 				<Tag {tag} interactive={true} />
 			{/each}
-		</div>
-		<div>
-			<label for="tag-toggle">Show tags per project</label>
-			<input
-				id="tag-toggle"
-				type="checkbox"
-				bind:checked={$show_tags}
-			/>
 		</div>
 	</details>
 </section>
