@@ -57,7 +57,6 @@
 
 	img {
 		width: 2rem;
-		transform: translateY(0.1rem);
 	}
 
 	@media (max-width: 38rem) {
