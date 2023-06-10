@@ -9,7 +9,7 @@
 </svelte:head>
 
 <h1>
-	{project.name}
+	{@html project.name}
 </h1>
 
 <div class="year">
@@ -17,7 +17,7 @@
 </div>
 
 <p>
-	{@html project.description}
+	{@html project.text}
 </p>
 
 <section aria-label="links">

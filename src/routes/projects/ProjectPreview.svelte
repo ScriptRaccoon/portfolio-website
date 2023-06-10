@@ -4,8 +4,9 @@
 </script>
 
 <a href="/projects/{project.id}">
-	<h2>{project.name}</h2>
-	<span>More...</span>
+	<h2>{@html project.name}</h2>
+	<div class="description">{project.description}</div>
+	<div class="more">More...</div>
 </a>
 
 <style>
@@ -15,7 +16,12 @@
 		padding-block: 1rem;
 		border-bottom: 1px solid var(--light-color);
 	}
-	span {
+	.description {
+		color: var(--gray-color);
+		margin-bottom: 0.5rem;
+	}
+
+	.more {
 		font-size: 1rem;
 		text-decoration: underline;
 	}
