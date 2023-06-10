@@ -41,6 +41,7 @@
 		position: sticky;
 		top: 0;
 		background-color: var(--bg-color);
+		box-shadow: 0rem -2rem 0rem 2rem var(--bg-color);
 	}
 
 	ul {
