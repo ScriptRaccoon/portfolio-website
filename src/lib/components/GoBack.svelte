@@ -1,0 +1,16 @@
+<script>
+	function go_back() {
+		history.back();
+	}
+</script>
+
+<button on:click={go_back}>Go back</button>
+
+<style>
+	button {
+		text-decoration: underline;
+		text-underline-offset: 0.1rem;
+		font-size: 1rem;
+		color: var(--gray-color);
+	}
+</style>
