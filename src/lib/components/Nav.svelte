@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 
+	import logo from "$lib/assets/ScriptRaccoon.png";
+
 	type link = {
 		name: string;
 		href: string;
@@ -22,7 +24,7 @@
 			<li>
 				<a {href} class:current={$page.url.pathname === href}>
 					{#if name === "Home"}
-						<img src="assets/ScriptRaccoon.png" alt="Home" />
+						<img src={logo} alt="Home" />
 					{:else}
 						{name}
 					{/if}

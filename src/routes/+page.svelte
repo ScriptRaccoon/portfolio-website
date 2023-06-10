@@ -1,3 +1,7 @@
+<script lang="ts">
+	import logo from "$lib/assets/ScriptRaccoon.png";
+</script>
+
 <svelte:head>
 	<title>Script Raccoon - Web developer</title>
 </svelte:head>
@@ -12,11 +16,7 @@
 </p>
 
 <p class="logo-container">
-	<img
-		class="logo"
-		src="assets/ScriptRaccoon.png"
-		alt="raccoon logo"
-	/>
+	<img class="logo" src={logo} alt="raccoon logo" />
 </p>
 
 <style>
