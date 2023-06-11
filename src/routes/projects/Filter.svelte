@@ -1,7 +1,8 @@
 <script lang="ts">
-	import { selected_tag } from "./stores";
+	import { selected_tag, NO_TAG } from "./stores";
 	import Tag from "./Tag.svelte";
-	import { all_tags } from "./tags";
+	export let tags: string[];
+	const _tags = [NO_TAG, ...tags];
 </script>
 
 <section aria-label="Filters">
@@ -10,7 +11,7 @@
 			Applied filter: {$selected_tag}
 		</summary>
 		<div class="tag-list" role="listbox" aria-label="list of tags">
-			{#each all_tags as tag}
+			{#each _tags as tag}
 				<Tag {tag} interactive={true} />
 			{/each}
 		</div>

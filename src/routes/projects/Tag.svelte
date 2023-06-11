@@ -1,8 +1,7 @@
 <script lang="ts">
-	import { selected_tag } from "./stores";
-	import type { tag } from "./tags";
+	import { NO_TAG, selected_tag } from "./stores";
 	export let interactive = true;
-	export let tag: tag;
+	export let tag = NO_TAG;
 </script>
 
 {#if interactive}
@@ -31,6 +30,7 @@
 		justify-content: center;
 		align-items: center;
 	}
+
 	.tag[aria-selected="true"] {
 		outline: 0.1rem solid var(--font-color);
 	}
