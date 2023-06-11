@@ -44,7 +44,10 @@
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://scriptraccoon.dev" />
 	<meta property="og:site_name" content="Script Raccoon" />
-	<meta property="og:image" content="ScriptRaccoon.png" />
+	<meta
+		property="og:image"
+		content="https://scriptraccoon.dev/ScriptRaccoon.png"
+	/>
 </svelte:head>
 
 <div class="wrapper">
