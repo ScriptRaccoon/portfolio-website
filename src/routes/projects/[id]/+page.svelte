@@ -2,17 +2,17 @@
 	import GoBack from "$lib/components/GoBack.svelte";
 	import Tag from "../Tag.svelte";
 
-	import type { attributes } from "../types";
+	export let data;
 
-	export let data: { attributes: attributes; htmlContent: string };
-
-	const { name, tags, url, repository, tutorial, date } =
-		data.attributes;
+	const { name, url, repository, tutorial, date } = data.attributes;
 
 	const year = date.getFullYear();
-	const sorted_tags = tags.split(",").sort();
 
-	const { htmlContent } = data;
+	const htmlContent = data.htmlContent;
+
+	const tag_list = data.tag_list;
+
+	console.log(tag_list);
 </script>
 
 <svelte:head>
@@ -54,7 +54,7 @@
 </section>
 
 <ul class="tag-list" aria-label="list of tags">
-	{#each sorted_tags as tag}
+	{#each tag_list as tag}
 		<li>
 			<Tag {tag} interactive={false} />
 		</li>

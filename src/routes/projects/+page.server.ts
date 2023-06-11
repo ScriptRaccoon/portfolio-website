@@ -18,7 +18,10 @@ export const load = async () => {
 		(p, q) => q.date.getTime() - p.date.getTime(),
 	);
 
-	const tag_list = projects.map((p) => p.tags.split(",")).flat();
+	const tag_list = projects
+		.map((p) => p.tags.split(","))
+		.flat()
+		.map((t) => t.trim());
 	const tags = [...new Set(tag_list)].sort();
 
 	return { projects, tags };
