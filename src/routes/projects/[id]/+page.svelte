@@ -11,8 +11,6 @@
 	const htmlContent = data.htmlContent;
 
 	const tag_list = data.tag_list;
-
-	console.log(tag_list);
 </script>
 
 <svelte:head>
