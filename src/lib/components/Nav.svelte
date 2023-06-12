@@ -19,7 +19,7 @@
 </script>
 
 <nav>
-	<ul>
+	<ul class="no-bullets">
 		{#each links as { name, href }}
 			<li>
 				<a {href} class:current={$page.url.pathname === href}>
@@ -45,8 +45,6 @@
 	}
 
 	ul {
-		list-style-type: none;
-		margin: 0;
 		display: flex;
 		justify-content: space-between;
 		align-items: center;

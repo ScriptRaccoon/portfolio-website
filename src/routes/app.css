@@ -54,6 +54,11 @@ ul {
 	margin-left: 1.5rem;
 }
 
+:is(ol, ul).no-bullets {
+	margin-left: 0;
+	list-style-type: none;
+}
+
 summary {
 	cursor: pointer;
 }

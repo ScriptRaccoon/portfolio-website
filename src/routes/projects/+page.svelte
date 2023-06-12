@@ -25,7 +25,7 @@
 
 <Filter {tags} />
 
-<ol>
+<ol class="no-bullets">
 	{#each filtered_projects as project (project.id)}
 		<li transition:fade|local={{ duration: 200 }}>
 			<a href="/projects/{project.id}">
@@ -39,8 +39,7 @@
 
 <style>
 	ol {
-		list-style-type: none;
-		margin: 1rem 0rem 2rem 0rem;
+		margin-block: 1rem;
 	}
 
 	a {
