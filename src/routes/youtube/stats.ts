@@ -20,15 +20,16 @@ export async function get_youtube_stats(): Promise<stats | null> {
 
 	const url = `${PUBLIC_YOUTUBE_API_URL}/channels?${params.toString()}`;
 	const response = await fetch(url);
+	const data = await response.json();
 
 	if (response.ok) {
-		const data = await response.json();
 		const statistics = data?.items?.[0]?.statistics;
 		const subscriber_count = parseInt(statistics.subscriberCount);
 		const video_count = parseInt(statistics.videoCount);
 		return { subscriber_count, video_count };
 	} else {
 		console.log("Request failed for ", url);
+		console.log(data?.error?.message);
 		return null;
 	}
 }

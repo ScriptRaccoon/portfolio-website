@@ -25,9 +25,9 @@ export async function get_latest_video(): Promise<video | null> {
 
 	const url = `${PUBLIC_YOUTUBE_API_URL}/search?${params.toString()}`;
 	const response = await fetch(url);
+	const data = await response.json();
 
 	if (response.ok) {
-		const data = await response.json();
 		const item = data?.items?.[0];
 		const id = item?.id?.videoId;
 		const url = `${PUBLIC_YOUTUBE_SHORT_URL}/${id}`;
@@ -36,6 +36,7 @@ export async function get_latest_video(): Promise<video | null> {
 		return { url, title, thumbnail_url };
 	} else {
 		console.log("Request failed for ", url);
+		console.log(data?.error?.message);
 		return null;
 	}
 }
