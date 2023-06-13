@@ -19,9 +19,9 @@
 	on web development.
 	{#if stats}
 		Today, the channel has
-		<strong>{stats.subscriberCount}</strong>
+		<strong>{stats.subscriber_count}</strong>
 		subscribers and
-		<strong>{stats.videoCount}</strong>
+		<strong>{stats.video_count}</strong>
 		published videos.
 	{/if}
 </p>
