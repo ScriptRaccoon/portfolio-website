@@ -1,5 +1,6 @@
 <script lang="ts">
 	export let data;
+	const { stats, video } = data;
 </script>
 
 <svelte:head>
@@ -15,14 +16,25 @@
 	>
 		YouTube channel
 	</a>
-	on web development. {#if data.stats}
-		Today, the channel has <strong
-			>{data.stats.subscriberCount}</strong
-		>
+	on web development.
+	{#if stats}
+		Today, the channel has
+		<strong>{stats.subscriberCount}</strong>
 		subscribers and
-		<strong>{data.stats.videoCount}</strong> published videos.
+		<strong>{stats.videoCount}</strong>
+		published videos.
 	{/if}
 </p>
+
+{#if video}
+	<p>My latest video (in German):</p>
+	<a href={video.url} target="_blank">
+		<img
+			src={video.thumbnail_url}
+			alt="thumbnail of latest video: {video.title}"
+		/>
+	</a>
+{/if}
 
 <p>
 	On my channel I usually do not talk about one concept per video,
@@ -74,3 +86,9 @@
 	video description. Of course, the code has English variable names, and
 	the README also often includes some pieces of explanation.
 </p>
+
+<style>
+	img {
+		width: 16rem;
+	}
+</style>
