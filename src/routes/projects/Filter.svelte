@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { active_filter } from "./stores";
+	import { active_filter, filters_expanded } from "./stores";
 	export let tags: string[];
 	export let years: number[];
 	let focussed_tag: string | null = null;
@@ -7,7 +7,7 @@
 </script>
 
 <section aria-label="Filters">
-	<details>
+	<details bind:open={$filters_expanded}>
 		<summary>Filters</summary>
 		<div class="filter-list">
 			{#each tags as tag}
