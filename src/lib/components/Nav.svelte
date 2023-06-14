@@ -24,7 +24,7 @@
 			<li>
 				<a {href} class:current={$page.url.pathname === href}>
 					{#if name === "Home"}
-						<img src={logo} alt="Home" />
+						<img class="logo" src={logo} alt="Home" />
 					{:else}
 						{name}
 					{/if}
@@ -34,7 +34,7 @@
 	</ul>
 </nav>
 
-<style>
+<style lang="scss">
 	nav {
 		padding-block: 1rem;
 		border-bottom: 1px solid var(--light-color);
@@ -42,6 +42,10 @@
 		top: 0;
 		background-color: var(--bg-color);
 		box-shadow: 0rem -2rem 0rem 2rem var(--bg-color);
+
+		@media (max-width: 38rem) {
+			padding-block: 0.5rem;
+		}
 	}
 
 	ul {
@@ -50,25 +54,20 @@
 		align-items: center;
 		flex-wrap: wrap;
 		gap: 1rem;
+
+		@media (max-width: 38rem) {
+			font-size: var(--small-font);
+			row-gap: 0rem;
+			column-gap: 0.75rem;
+			justify-content: start;
+		}
 	}
 
 	.current {
 		color: var(--primary-color);
 	}
 
-	img {
+	.logo {
 		width: 2rem;
-	}
-
-	@media (max-width: 38rem) {
-		nav {
-			padding-block: 0.5rem;
-		}
-		ul {
-			font-size: 1rem;
-			row-gap: 0rem;
-			column-gap: 0.75rem;
-			justify-content: start;
-		}
 	}
 </style>

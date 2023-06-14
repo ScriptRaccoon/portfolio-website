@@ -55,19 +55,16 @@
 		margin-block: 1rem;
 	}
 
-	a {
-		font-size: 1rem;
+	.year {
+		font-size: var(--small-font);
+		color: var(--gray-color);
 	}
 
 	.links {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-	}
-
-	.year {
-		font-size: 1rem;
-		color: var(--gray-color);
+		font-size: var(--small-font);
 	}
 
 	.tag-list {

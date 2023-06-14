@@ -16,18 +16,18 @@
 </p>
 
 <p class="logo-container">
-	<img class="logo" src={logo} alt="raccoon logo" />
+	<img src={logo} alt="raccoon logo" />
 </p>
 
-<style>
+<style lang="scss">
 	.logo-container {
 		margin-top: 2rem;
 		display: flex;
 		justify-content: center;
-	}
-	.logo {
-		width: min(70vw, 8rem);
-		border-radius: 50%;
-		box-shadow: 0rem 0rem 1rem var(--light-color);
+		img {
+			width: min(70vw, 8rem);
+			border-radius: 50%;
+			box-shadow: 0rem 0rem 1rem var(--light-color);
+		}
 	}
 </style>
