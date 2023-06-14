@@ -30,6 +30,7 @@
 	<p>My latest video (in German):</p>
 	<a href={video.url} target="_blank">
 		<img
+			class="thumbnail"
 			src={video.thumbnail_url}
 			alt="thumbnail of latest video: {video.title}"
 		/>
@@ -88,7 +89,7 @@
 </p>
 
 <style>
-	img {
+	.thumbnail {
 		width: 16rem;
 	}
 </style>

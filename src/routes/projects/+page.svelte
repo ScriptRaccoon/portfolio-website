@@ -58,7 +58,7 @@
 	}
 
 	.more {
-		font-size: 1rem;
+		font-size: var(--small-font);
 		text-decoration: underline;
 	}
 </style>

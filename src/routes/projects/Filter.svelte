@@ -48,7 +48,7 @@
 	</details>
 </section>
 
-<style>
+<style lang="scss">
 	.filter-list {
 		display: flex;
 		flex-wrap: wrap;
@@ -57,13 +57,13 @@
 	}
 	label {
 		cursor: pointer;
-	}
-	label.selected {
-		background-color: var(--primary-color);
-		color: var(--bg-color);
-	}
-	label.focus {
-		outline: 0.1rem solid var(--font-color);
-		outline-offset: 0.15rem;
+		&.selected {
+			background-color: var(--primary-color);
+			color: var(--bg-color);
+		}
+		&.focus {
+			outline: 0.1rem solid var(--primary-color);
+			outline-offset: 0.15rem;
+		}
 	}
 </style>

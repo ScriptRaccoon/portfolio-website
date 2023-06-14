@@ -11,6 +11,9 @@
 	--tag-color: #eef0f2;
 	--bg-color: #fff;
 	--font-color: #000;
+	--small-font: 1rem;
+	--medium-font: 1.125rem;
+	--tiny-font: 0.8rem;
 }
 
 body {
@@ -19,7 +22,7 @@ body {
 		"Helvetica Neue", sans-serif;
 	line-height: 1.5;
 	overflow-y: scroll;
-	font-size: 1.125rem;
+	font-size: var(--medium-font);
 	background-color: var(--bg-color);
 	color: var(--font-color);
 }
@@ -27,6 +30,7 @@ body {
 a {
 	color: inherit;
 	text-underline-offset: 0.1rem;
+	outline-color: var(--primary-color);
 }
 
 p {
@@ -70,6 +74,7 @@ button {
 	border: none;
 	background: none;
 	cursor: pointer;
+	outline-color: var(--primary-color);
 }
 
 img {
@@ -86,7 +91,7 @@ img {
 }
 
 .tag {
-	font-size: 0.8rem;
+	font-size: var(--tiny-font);
 	background-color: var(--tag-color);
 	color: var(--gray-color);
 	padding: 0.2rem 0.5rem;
