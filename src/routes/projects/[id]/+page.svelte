@@ -1,6 +1,5 @@
 <script lang="ts">
 	import GoBack from "$lib/components/GoBack.svelte";
-	import Tag from "../Tag.svelte";
 
 	export let data;
 
@@ -45,8 +44,8 @@
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
 	{#each tag_list as tag}
-		<li>
-			<Tag {tag} interactive={false} />
+		<li class="tag">
+			{tag}
 		</li>
 	{/each}
 </ul>
