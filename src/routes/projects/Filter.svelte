@@ -1,28 +1,69 @@
 <script lang="ts">
-	import { selected_tag, NO_TAG } from "./stores";
-	import Tag from "./Tag.svelte";
+	import { active_filter } from "./stores";
 	export let tags: string[];
-	const _tags = [NO_TAG, ...tags];
+	export let years: number[];
+	let focussed_tag: string | null = null;
+	let focussed_year: number | null = null;
 </script>
 
 <section aria-label="Filters">
 	<details>
-		<summary aria-live="polite">
-			Applied filter: {$selected_tag}
-		</summary>
-		<div class="tag-list" role="listbox" aria-label="list of tags">
-			{#each _tags as tag}
-				<Tag {tag} interactive={true} />
+		<summary>Filters</summary>
+		<div class="filter-list">
+			{#each tags as tag}
+				<label
+					class="tag"
+					class:selected={$active_filter.tags.includes(tag)}
+					class:focus={focussed_tag === tag}
+					on:focusin={() => (focussed_tag = tag)}
+					on:focusout={() => (focussed_tag = null)}
+				>
+					<input
+						type="checkbox"
+						value={tag}
+						bind:group={$active_filter.tags}
+						class="visually-hidden"
+					/>
+					{tag}
+				</label>
+			{/each}
+			{#each years as year}
+				<label
+					class="tag"
+					class:selected={$active_filter.years.includes(year)}
+					class:focus={focussed_year === year}
+					on:focusin={() => (focussed_year = year)}
+					on:focusout={() => (focussed_year = null)}
+				>
+					<input
+						type="checkbox"
+						value={year}
+						bind:group={$active_filter.years}
+						class="visually-hidden"
+					/>
+					{year}
+				</label>
 			{/each}
 		</div>
 	</details>
 </section>
 
 <style>
-	.tag-list {
+	.filter-list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
 		margin-block: 1rem;
+	}
+	label {
+		cursor: pointer;
+	}
+	label.selected {
+		background-color: var(--primary-color);
+		color: var(--bg-color);
+	}
+	label.focus {
+		outline: 0.1rem solid var(--font-color);
+		outline-offset: 0.15rem;
 	}
 </style>

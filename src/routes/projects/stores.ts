@@ -1,4 +1,6 @@
 import { writable } from "svelte/store";
 
-export const NO_TAG = "All";
-export const selected_tag = writable<string>(NO_TAG);
+export const active_filter = writable<{
+	tags: string[];
+	years: number[];
+}>({ tags: [], years: [] });

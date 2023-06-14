@@ -77,6 +77,21 @@ img {
 	max-width: 100%;
 }
 
-input[type="checkbox"] {
-	accent-color: var(--primary-color);
+.visually-hidden {
+	width: 1px;
+	height: 1px;
+	position: absolute;
+	left: -100000px;
+	overflow: hidden;
+}
+
+.tag {
+	font-size: 0.8rem;
+	background-color: var(--tag-color);
+	color: var(--gray-color);
+	padding: 0.2rem 0.5rem;
+	border-radius: 0.25rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }

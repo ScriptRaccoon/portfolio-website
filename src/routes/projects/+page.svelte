@@ -1,20 +1,19 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
 	import Filter from "./Filter.svelte";
-	import { selected_tag, NO_TAG } from "./stores";
-	import type { attributes } from "./types";
+	import { active_filter } from "./stores";
 
 	export let data;
-	const { projects, tags } = data;
+	const { projects, tags, years } = data;
 
-	$: filtered_projects = projects.filter((project) =>
-		match(project, $selected_tag),
+	$: filtered_projects = projects.filter(
+		(project) =>
+			$active_filter.tags.every((tag) =>
+				project.tags.includes(tag),
+			) &&
+			($active_filter.years.length == 0 ||
+				$active_filter.years.includes(project.date.getFullYear())),
 	);
-
-	function match(project: attributes, tag: string) {
-		if (tag === NO_TAG) return true;
-		return project.tags.includes(tag);
-	}
 </script>
 
 <svelte:head>
@@ -23,7 +22,7 @@
 
 <h1>Projects</h1>
 
-<Filter {tags} />
+<Filter {tags} {years} />
 
 <ol class="no-bullets">
 	{#each filtered_projects as project (project.id)}
@@ -34,6 +33,10 @@
 				<div class="more">More...</div>
 			</a>
 		</li>
+	{:else}
+		<p in:fade|local={{ duration: 200, delay: 200 }}>
+			No projects within this filter
+		</p>
 	{/each}
 </ol>
 
