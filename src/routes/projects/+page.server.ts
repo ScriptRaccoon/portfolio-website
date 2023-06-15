@@ -9,7 +9,7 @@ const projects_markdown = import.meta.glob(
 export const load = async () => {
 	const unsorted_projects = Object.values(projects_markdown).map(
 		(markdown) => {
-			const { attributes } = fm(markdown) as frontmatter;
+			const { attributes } = fm<frontmatter>(markdown);
 			return attributes;
 		},
 	);

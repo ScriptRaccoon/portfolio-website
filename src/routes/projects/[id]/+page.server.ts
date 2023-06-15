@@ -17,7 +17,7 @@ export const load = async (event) => {
 	}
 
 	const markdown = projects_markdown[path];
-	const { attributes, body } = fm(markdown) as frontmatter;
+	const { attributes, body } = fm<frontmatter>(markdown);
 
 	attributes.tags.sort();
 
