@@ -5,7 +5,7 @@ teaser: made with Astro
 repository: https://github.com/ScriptRaccoon/translations-web-dev-astro
 url: https://translations-web-dev.netlify.app/
 tutorial: https://www.youtube.com/watch?v=aHZCEiQh9AI
-tags: Astro,Data visualization,Tool,Tutorial,Svelte
+tags: Astro, Data visualization, Tool, Tutorial, Svelte, TypeScript
 date: 2022-11-13
 ---
 

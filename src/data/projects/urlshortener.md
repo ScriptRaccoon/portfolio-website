@@ -5,7 +5,7 @@ teaser: made with SvelteKit and MongoDB
 repository: https://github.com/ScriptRaccoon/svt.ink
 url: https://svt.ink/
 tutorial:
-tags: SvelteKit,Tool,Full Stack,MongoDB
+tags: SvelteKit, Tool, Full Stack, MongoDB, TypeScript
 date: 2023-05-27
 ---
 
