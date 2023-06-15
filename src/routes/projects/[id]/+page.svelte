@@ -3,13 +3,12 @@
 
 	export let data;
 
-	const { name, url, repository, tutorial, date } = data.attributes;
+	const { name, url, repository, tutorial, date, tags } =
+		data.attributes;
 
 	const year = date.getFullYear();
 
 	const htmlContent = data.htmlContent;
-
-	const tag_list = data.tag_list;
 
 	const links = [
 		{ label: "URL", href: url },
@@ -43,7 +42,7 @@
 </main>
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
-	{#each tag_list as tag}
+	{#each tags as tag}
 		<li class="tag">
 			{tag}
 		</li>

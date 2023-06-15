@@ -5,7 +5,7 @@ teaser: made with 3-dimensional CSS
 repository: https://github.com/ScriptRaccoon/css-sphere
 url: https://css-sphere.netlify.app
 tutorial:
-tags: 3D, CSS, Creative Coding
+tags: ["3D", "CSS", "Creative Coding"]
 date: 2022-02-20
 ---
 

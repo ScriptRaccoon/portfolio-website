@@ -4,7 +4,7 @@ export type attributes = {
 	repository: string;
 	url: string;
 	tutorial: string;
-	tags: string;
+	tags: string[];
 	teaser: string;
 	date: Date;
 };

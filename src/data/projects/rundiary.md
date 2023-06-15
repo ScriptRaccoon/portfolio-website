@@ -5,7 +5,7 @@ teaser: made with Svelte, clone of Strava's training log
 repository: https://github.com/ScriptRaccoon/run-diary
 url:
 tutorial:
-tags: Tool,Svelte,Data visualization
+tags: ["Tool", "Svelte", "Data visualization"]
 date: 2022-08-04
 ---
 

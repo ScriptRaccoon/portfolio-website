@@ -5,7 +5,7 @@ teaser: creating sequences of images
 repository: https://github.com/ScriptRaccoon/words-of-pixels
 url: https://wordsofpixels.netlify.app/
 tutorial:
-tags: Creative Coding, HTML Canvas, TypeScript
+tags: ["Creative Coding", "HTML Canvas", "TypeScript"]
 date: 2023-05-21
 ---
 
