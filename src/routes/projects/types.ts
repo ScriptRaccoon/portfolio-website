@@ -1,4 +1,4 @@
-export type attributes = {
+export type frontmatter = {
 	id: string;
 	name: string;
 	repository: string;
@@ -7,9 +7,4 @@ export type attributes = {
 	tags: string[];
 	teaser: string;
 	date: Date;
-};
-
-export type frontmatter = {
-	body: string;
-	attributes: attributes;
 };
