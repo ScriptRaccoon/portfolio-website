@@ -5,7 +5,7 @@ teaser: to compare the developer experience of both frameworks
 repository: https://github.com/ScriptRaccoon/quiz-about-vue
 url: https://quiz-about-vue.netlify.app/
 tutorial:
-tags: Vue, Svelte, TypeScript
+tags: ["Vue", "Svelte", "TypeScript"]
 date: 2023-04-01
 ---
 

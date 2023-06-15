@@ -5,7 +5,7 @@ teaser: with JWTs, users being stored in a MongoDB database
 repository: https://github.com/ScriptRaccoon/sveltekit-mongodb-auth
 url: https://sveltekit-auth.netlify.app/
 tutorial: https://youtu.be/gNOzCaOCxBU
-tags: Authentication, Full Stack, SvelteKit, MongoDB, Tutorial, TypeScript
+tags: ["Authentication", "Full Stack", "SvelteKit", "MongoDB", "Tutorial", "TypeScript"]
 date: 2023-04-22
 ---
 

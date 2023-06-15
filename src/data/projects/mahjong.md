@@ -5,7 +5,7 @@ teaser: made with Vanilla JS
 repository: https://github.com/ScriptRaccoon/mahjong-solitaire
 url: https://mahjong-solitaire.netlify.app/
 tutorial: https://youtu.be/oWDB4LaO4MU
-tags: Browser game, Vanilla JS, CSS, Tutorial
+tags: ["Browser game", "Vanilla JS", "CSS", "Tutorial"]
 date: 2020-12-07
 ---
 

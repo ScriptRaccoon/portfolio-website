@@ -18,14 +18,12 @@ export const load = async () => {
 		(p, q) => q.date.getTime() - p.date.getTime(),
 	);
 
-	const years = [
-		...new Set(unsorted_projects.map((p) => p.date.getFullYear())),
-	].sort();
+	const year_list = unsorted_projects.map((p) =>
+		p.date.getFullYear(),
+	);
+	const years = [...new Set(year_list)].sort();
 
-	const tag_list = projects
-		.map((p) => p.tags.split(","))
-		.flat()
-		.map((t) => t.trim());
+	const tag_list = projects.map((p) => p.tags).flat();
 	const tags = [...new Set(tag_list)].sort();
 
 	return { projects, tags, years };

@@ -5,7 +5,7 @@ teaser: made with Svelte, with multiple task lists and animations
 repository: https://github.com/ScriptRaccoon/GetThisDone
 url: https://get-this-done.netlify.app/
 tutorial: https://www.youtube.com/watch?v=ksHlDm727u4
-tags: Svelte, Tool, Tutorial
+tags: ["Svelte", "Tool", "Tutorial"]
 date: 2022-09-03
 ---
 

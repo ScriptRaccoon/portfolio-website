@@ -5,7 +5,7 @@ teaser: made with SvelteKit
 repository: https://github.com/ScriptRaccoon/svoodle
 url: https://svoodle.netlify.app
 tutorial:
-tags: Full Stack,SvelteKit,Firebase,Tool
+tags: ["Full Stack", "SvelteKit", "Firebase", "Tool"]
 date: 2022-07-03
 ---
 

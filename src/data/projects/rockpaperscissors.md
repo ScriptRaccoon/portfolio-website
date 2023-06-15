@@ -5,7 +5,7 @@ teaser: without JavaScript!
 repository: https://github.com/ScriptRaccoon/rock-paper-scissors-css
 url: https://rps-css.netlify.app/
 tutorial: https://www.youtube.com/watch?v=raxsg0Lxdqg
-tags: CSS,Browser game,Tutorial
+tags: ["CSS", "Browser game", "Tutorial"]
 date: 2022-10-02
 ---
 

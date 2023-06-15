@@ -19,15 +19,12 @@ export const load = async (event) => {
 	const markdown = projects_markdown[path];
 	const { attributes, body } = fm(markdown) as frontmatter;
 
-	const tag_list = attributes.tags
-		.split(",")
-		.map((t) => t.trim())
-		.sort();
+	attributes.tags.sort();
 
 	const htmlContent = marked(body, {
 		mangle: false,
 		headerIds: false,
 	});
 
-	return { attributes, tag_list, htmlContent };
+	return { attributes, htmlContent };
 };

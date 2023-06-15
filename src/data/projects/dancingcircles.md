@@ -5,7 +5,7 @@ teaser: producing fascinating patterns from a simple rule
 repository: https://github.com/ScriptRaccoon/dancing-circles
 url: https://dancing-circles.netlify.app
 tutorial:
-tags: Vanilla JS, HTML Canvas, Creative Coding
+tags: ["Vanilla JS", "HTML Canvas", "Creative Coding"]
 date: 2022-04-09
 ---
 
