@@ -5,7 +5,7 @@ teaser: accessible without any music knowledge
 repository: https://github.com/ScriptRaccoon/drumcomputer
 url: https://drumcomputer.netlify.app/
 tutorial:
-tags: Svelte, Music, Tool
+tags: Svelte, Music, Tool, TypeScript
 date: 2023-02-25
 ---
 

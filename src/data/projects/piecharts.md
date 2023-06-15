@@ -5,7 +5,7 @@ teaser: showing the distribution of the German "Bundestag"
 repository: https://github.com/ScriptRaccoon/Abgeordnete
 url: https://abgeordnete.netlify.app/
 tutorial:
-tags: Data visualization,Svelte,SVG
+tags: Data visualization, Svelte, SVG, TypeScript
 date: 2023-05-04
 ---
 
