@@ -3,7 +3,7 @@
 
 	export let data;
 
-	const { name, url, repository, tutorial, date, tags } =
+	const { name, url, repository, tutorial, date, tags, id } =
 		data.attributes;
 
 	const year = date.getFullYear();
@@ -15,6 +15,11 @@
 		{ label: "Repository", href: repository },
 		{ label: "Tutorial", href: tutorial },
 	].filter((link) => link.href?.length > 0);
+
+	const image_src = new URL(
+		`../../../lib/assets/projects/${id}.webp`,
+		import.meta.url,
+	).href;
 </script>
 
 <svelte:head>
@@ -40,6 +45,8 @@
 <main>
 	{@html htmlContent}
 </main>
+
+<img src={image_src} alt="screenshot" />
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
 	{#each tags as tag}
