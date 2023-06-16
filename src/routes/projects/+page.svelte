@@ -2,6 +2,7 @@
 	import { fade } from "svelte/transition";
 	import Filter from "./Filter.svelte";
 	import { active_filter } from "./stores";
+	import ProjectPreview from "./ProjectPreview.svelte";
 
 	export let data;
 	const { projects, tags, years } = data;
@@ -26,13 +27,7 @@
 
 <ol class="no-bullets">
 	{#each filtered_projects as project (project.id)}
-		<li transition:fade|local={{ duration: 200 }}>
-			<a href="/projects/{project.id}">
-				<h2>{project.name}</h2>
-				<div class="teaser">{project.teaser}</div>
-				<div class="more">More...</div>
-			</a>
-		</li>
+		<ProjectPreview {project} />
 	{:else}
 		<p in:fade|local={{ duration: 200, delay: 200 }}>
 			No projects within this filter
@@ -43,22 +38,5 @@
 <style>
 	ol {
 		margin-block: 1rem;
-	}
-
-	a {
-		text-decoration: none;
-		display: block;
-		padding-block: 1rem;
-		border-bottom: 1px solid var(--light-color);
-	}
-
-	.teaser {
-		color: var(--gray-color);
-		margin-bottom: 0.5rem;
-	}
-
-	.more {
-		font-size: var(--small-font);
-		text-decoration: underline;
 	}
 </style>
