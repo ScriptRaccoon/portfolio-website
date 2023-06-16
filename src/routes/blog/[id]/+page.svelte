@@ -66,5 +66,11 @@
 			color: var(--gray-color);
 			font-size: var(--small-font);
 		}
+
+		:global(p > code) {
+			font-family: "Courier New", Courier, monospace;
+			font-weight: 600;
+			color: var(--primary-color);
+		}
 	}
 </style>
