@@ -433,8 +433,8 @@ write the Tailwind classes once. This is what it could look like:
 This is still ugly and suffers from bad maintainability as already explained
 before, but at least we removed the code duplication.
 
-But this solution means that you are dependent on a component framework to avoid code duplication with Tailwind. Even though such frameworks
-are common for most web applications, it is not something you would normally
+But this solution means that you are dependent on a component framework to avoid code duplication with Tailwind.
+Even though such frameworks are common for most web applications, it is not something you would normally
 consider when you are about to quickly spin up a simple landing page with
 HTML and CSS, for example.
 
