@@ -8,7 +8,7 @@
 
 	const year = date.getFullYear();
 
-	const htmlContent = data.htmlContent;
+	const { html_code } = data;
 
 	const links = [
 		{ label: "URL", href: url },
@@ -43,7 +43,7 @@
 </section>
 
 <main>
-	{@html htmlContent}
+	{@html html_code}
 </main>
 
 <img src={image_src} alt="screenshot" />

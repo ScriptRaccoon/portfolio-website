@@ -25,7 +25,7 @@ export const load = async (event) => {
 
 	attributes.tags.sort();
 
-	const htmlContent = md.render(body);
+	const html_code = md.render(body);
 
-	return { attributes, htmlContent };
+	return { attributes, html_code };
 };
