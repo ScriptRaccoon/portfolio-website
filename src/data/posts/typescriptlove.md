@@ -163,4 +163,4 @@ In the introduction, I wrote that I felt more "free" writing JavaScript. Well, f
 
 ## Conclusion
 
-TypeScript is JavaScript with superpowers. If you haven't done it yet, give it a try. The [official documentation](typescriptlang.org/docs) is very good. If you know German, you can also have a look at my [YouTube crashcourse](https://www.youtube.com/watch?v=I4w4zO8AVes) on TypeScript.
+TypeScript is JavaScript with superpowers. If you haven't done it yet, give it a try. The [official documentation](https://typescriptlang.org/docs) is very good. If you know German, you can also have a look at my [YouTube crashcourse](https://www.youtube.com/watch?v=I4w4zO8AVes) on TypeScript.
