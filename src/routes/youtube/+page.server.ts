@@ -11,7 +11,11 @@ import { get_latest_video } from "./video";
 export const load = async () => {
 	const stats = await get_cached_youtube_stats();
 	const video = await get_cached_latest_video();
-	return { stats, video };
+	const meta = {
+		title: "Script Raccoon - YouTube",
+		description: "About my YouTube channel",
+	};
+	return { stats, video, meta };
 };
 
 const one_day = 24 * 60 * 60;

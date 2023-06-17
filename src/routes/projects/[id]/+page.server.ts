@@ -27,5 +27,10 @@ export const load = async (event) => {
 
 	const html_code = md.render(body);
 
-	return { attributes, html_code };
+	const meta = {
+		title: attributes.name,
+		description: attributes.teaser,
+	};
+
+	return { meta, attributes, html_code };
 };
