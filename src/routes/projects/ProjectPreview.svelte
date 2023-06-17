@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
-	import type { frontmatter } from "./types";
-	export let project: frontmatter;
+	import type { project } from "./types";
+	export let project: project;
 	const image_src = new URL(
 		`../../lib/assets/projects/${project.id}_thumb.webp`,
 		import.meta.url,

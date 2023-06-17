@@ -1,19 +1,13 @@
-import fm from "front-matter";
-import type { frontmatter } from "./types";
-
-const projects_markdown = import.meta.glob(
-	"/src/data/projects/*.md",
-	{ as: "raw", eager: true },
-);
+import type { project } from "./types";
+import { get_frontmatter } from "$lib/server/frontmatter";
 
 export const load = async () => {
-	const unsorted_projects: frontmatter[] = Object.entries(
-		projects_markdown,
-	).map(([path, markdown]) => {
-		const id = path.split("/").at(-1)!.replace(".md", "");
-		const { attributes } = fm<Omit<frontmatter, "id">>(markdown);
-		return { ...attributes, id };
-	});
+	const unsorted_projects = get_frontmatter<project>(
+		import.meta.glob("/src/data/projects/*.md", {
+			as: "raw",
+			eager: true,
+		}),
+	);
 
 	const projects = unsorted_projects.sort(
 		(p, q) => q.date.getTime() - p.date.getTime(),
