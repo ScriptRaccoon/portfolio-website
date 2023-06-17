@@ -5,7 +5,10 @@ import { PUBLIC_SHOW_ALL_POSTS } from "$env/static/public";
 import { highlight } from "$lib/server/highlight";
 
 import markdownit from "markdown-it";
-import { add_ids_to_headings } from "$lib/server/headings";
+import {
+	add_ids_to_headings,
+	get_table_of_contents,
+} from "$lib/server/headings";
 const md = new markdownit();
 
 const posts_record = import.meta.glob("/src/data/posts/*.md", {
@@ -31,8 +34,9 @@ export const load = async (event) => {
 	}
 
 	const html_code_raw = md.render(body);
+	const toc = get_table_of_contents(html_code_raw);
 	const html_code_with_ids = add_ids_to_headings(html_code_raw);
 	const html_code = highlight(html_code_with_ids);
 
-	return { attributes, html_code };
+	return { attributes, html_code, toc };
 };
