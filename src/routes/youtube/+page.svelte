@@ -6,10 +6,8 @@
 <h1>YouTube</h1>
 
 <p>
-	In 2019 I started a <a
-		href="https://www.youtube.com/scriptraccoon"
-		target="_blank"
-	>
+	In 2019 I started a
+	<a href="https://www.youtube.com/scriptraccoon" target="_blank">
 		YouTube channel
 	</a>
 	on web development.
@@ -35,22 +33,21 @@
 
 <p>
 	On my channel I usually do not talk about one concept per video,
-	what most other channels do. Instead, I focus on <strong
-		>full projects</strong
-	>, which therefore cover several concepts and pieces of technology
-	and also put them more into context. These kinds of videos motivated
-	and helped me a lot when I started my journey in web development,
-	which is also why I like to produce these.
+	what most other channels do. Instead, I focus on
+	<strong>full projects</strong>, which therefore cover several
+	concepts and pieces of technology and also put them more into
+	context. These kinds of videos motivated and helped me a lot when I
+	started my journey in web development, which is also why I like to
+	produce these.
 </p>
 <p>
-	I also choose a rather slow-paced approach, explaining every <strong
-		>step by step</strong
-	>, so that also newbies should be able to follow. On the other hand,
-	I also use my YouTube channel to document my learnings. Both the
-	preparation and the recording of a video improve my understanding of
-	the subject. This is also why the videos started with rather basic
-	Vanilla JavaScript projects in 2019 and nowadays present full stack
-	applications with SvelteKit.
+	I also choose a rather slow-paced approach, explaining everything
+	<strong>step by step</strong>, so that also newbies should be able
+	to follow. On the other hand, I also use my YouTube channel to
+	document my learnings. Both the preparation and the recording of a
+	video improve my understanding of the subject. This is also why the
+	videos started with rather basic Vanilla JavaScript projects in 2019
+	and nowadays present full stack applications with SvelteKit.
 </p>
 
 <p>
