@@ -1,4 +1,4 @@
-export type frontmatter = {
+export type project = {
 	id: string;
 	name: string;
 	repository: string;

@@ -1,4 +1,4 @@
-export type frontmatter = {
+export type post = {
 	id: string;
 	title: string;
 	published: Date;
