@@ -1,11 +1,13 @@
 ---
 title: Why I Love TypeScript
 published: 2023-06-17
-updated: null
+updated: 2023-06-17
 public: true
 description: "Autocompletion, Documentation, Identification, Fewer Bugs"
 showtoc: true
 ---
+
+## Introduction
 
 TypeScript and I weren't good friends from the start. I despised it and thought that it slows me down because I need to need to write more code and get more errors during development. It was a hassle to fix them. I thought that I can be more "free" when writing plain JavaScript. This has changed quite a bit ...
 
