@@ -3,10 +3,6 @@
 	const { posts } = data;
 </script>
 
-<svelte:head>
-	<title>Script Raccoon - Blog</title>
-</svelte:head>
-
 <h1>Blog</h1>
 
 <ol class="no-bullets">

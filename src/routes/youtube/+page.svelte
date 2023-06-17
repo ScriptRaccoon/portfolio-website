@@ -3,10 +3,6 @@
 	const { stats, video } = data;
 </script>
 
-<svelte:head>
-	<title>Script Raccoon - YouTube</title>
-</svelte:head>
-
 <h1>YouTube</h1>
 
 <p>
