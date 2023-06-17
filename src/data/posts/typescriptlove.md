@@ -160,10 +160,19 @@ This is a rather trivial example. But even bigger refactorings are like a charm 
 
 ## Fewer bugs
 
-We have already seen in the previous sections why TypeScript will prevent us from writing stupid bugs. The type errors tell us _during development_ which bugs will most likely appear when running the code. I cannot stress enough how convenient this feature is. This is even more true in big codebases when reloading the dev server and logging is very time-consuming.
+We have already seen in the previous sections why TypeScript will prevent us from writing stupid bugs. The type errors tell us _during development_ which bugs will most likely appear when running the code. I cannot stress enough how convenient this feature is. This is even more true in big codebases when reloading the dev server and logging can be very time-consuming.
 
-In the introduction, I wrote that I felt more "free" writing JavaScript. Well, from today's perspective, this is merely the freedom to produce more bugs, and I am very OK with losing this freedom.
+For example, how many times did we encounter the following type of error when running JavaScript code?
+
+```bash
+Uncaught TypeError: Cannot read properties of undefined (reading 'age')
+```
+
+How many hours did we spend debugging such issues? When we pay attention to the
+errors detected by TypeScript during development _and_ avoid the type `any`, with TypeScript this error will (almost) never happen again.
 
 ## Conclusion
+
+In the introduction, I wrote that I felt more "free" writing JavaScript. Well, from today's perspective, this was merely the freedom to produce more bugs, and I am very OK with losing this freedom.
 
 TypeScript is JavaScript with superpowers. If you haven't done it yet, give it a try. The [official documentation](https://typescriptlang.org/docs) is very good. If you know German, you can also have a look at my [YouTube crash course](https://www.youtube.com/watch?v=I4w4zO8AVes) on TypeScript.
