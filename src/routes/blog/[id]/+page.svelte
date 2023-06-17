@@ -31,6 +31,8 @@
 	{@html htmlContent}
 </main>
 
+<GoBack />
+
 <style lang="scss">
 	h1 {
 		margin-block: 1rem;
