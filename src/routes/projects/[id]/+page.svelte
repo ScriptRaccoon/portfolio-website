@@ -3,12 +3,12 @@
 
 	export let data;
 
-	const { name, url, repository, tutorial, date, tags, id } =
-		data.attributes;
+	const {
+		attributes: { name, url, repository, tutorial, date, tags, id },
+		html_code,
+	} = data;
 
 	const year = date.getFullYear();
-
-	const { html_code } = data;
 
 	const links = [
 		{ label: "URL", href: url },
