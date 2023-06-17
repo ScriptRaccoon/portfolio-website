@@ -41,7 +41,9 @@
 	{@html htmlContent}
 </main>
 
-<GoBack />
+<div class="back">
+	<GoBack />
+</div>
 
 <style lang="scss">
 	h1 {
@@ -82,5 +84,9 @@
 			font-weight: 600;
 			color: var(--primary-color);
 		}
+	}
+
+	.back {
+		margin-block: 1rem 2rem;
 	}
 </style>
