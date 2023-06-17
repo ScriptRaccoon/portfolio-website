@@ -4,7 +4,7 @@
 	export let data;
 	const { title, updated, published, description, id } =
 		data.attributes;
-	const { htmlContent } = data;
+	const { html_code } = data;
 </script>
 
 <svelte:head>
@@ -38,7 +38,7 @@
 </div>
 
 <main>
-	{@html htmlContent}
+	{@html html_code}
 </main>
 
 <div class="back">
