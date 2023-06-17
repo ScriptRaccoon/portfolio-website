@@ -59,7 +59,7 @@
 		cursor: pointer;
 		&.selected {
 			background-color: var(--primary-color);
-			color: var(--bg-color);
+			color: var(--inverted-font-color);
 		}
 		&.focus {
 			outline: 0.1rem solid var(--primary-color);

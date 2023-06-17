@@ -77,9 +77,13 @@
 		}
 
 		:global(p > code) {
-			font-family: "Courier New", Courier, monospace;
-			font-weight: 600;
-			color: var(--primary-color);
+			font-family: monospace;
+			background-color: var(--gray-color);
+			color: var(--inverted-font-color);
+			padding-inline: 0.5rem;
+			padding-block: 0.05rem;
+			border-radius: 0.2rem;
+			font-size: var(--small-font);
 		}
 	}
 

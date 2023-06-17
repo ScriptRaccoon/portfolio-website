@@ -22,7 +22,7 @@
 	<ul class="no-bullets">
 		{#each links as { name, href }}
 			<li>
-				<a {href} class:current={$page.url.pathname === href}>
+				<a {href}>
 					{#if name === "Home"}
 						<img class="logo" src={logo} alt="Home" />
 					{:else}
@@ -61,10 +61,6 @@
 			column-gap: 0.75rem;
 			justify-content: start;
 		}
-	}
-
-	.current {
-		color: var(--primary-color);
 	}
 
 	.logo {
