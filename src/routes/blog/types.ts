@@ -4,4 +4,5 @@ export type post = {
 	published: Date;
 	updated: Date | null;
 	public: boolean;
+	description: string;
 };

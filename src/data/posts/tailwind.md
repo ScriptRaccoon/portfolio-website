@@ -3,6 +3,7 @@ title: Disadvantages of Tailwind
 published: 3000-01-01
 updated: null
 public: false
+description: Why the popular CSS framework is not maintainable
 ---
 
 ## Introduction

@@ -2,12 +2,22 @@
 	import GoBack from "$lib/components/GoBack.svelte";
 
 	export let data;
-	const { title, updated, published } = data.attributes;
+	const { title, updated, published, description, id } =
+		data.attributes;
 	const { htmlContent } = data;
 </script>
 
 <svelte:head>
 	<title>{title}</title>
+
+	<meta property="og:title" content="{title} - by Script Raccoon" />
+	<meta property="og:description" content={description} />
+	<meta property="og:type" content="website" />
+	<meta
+		property="og:url"
+		content="https://scriptraccoon.dev/posts/{id}"
+	/>
+	<meta property="og:site_name" content="Script Raccoon" />
 </svelte:head>
 
 <GoBack />

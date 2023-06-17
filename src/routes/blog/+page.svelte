@@ -20,6 +20,7 @@
 					{/if}
 				</h2>
 				<div class="date">{post.published.toLocaleDateString()}</div>
+				<p class="description">{post.description}</p>
 				<div class="more">More...</div>
 			</a>
 		</li>
