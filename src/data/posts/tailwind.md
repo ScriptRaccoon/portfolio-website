@@ -475,9 +475,7 @@ we like.
 Another issue is that your Tailwind-bloated HTML output _does_ contain code
 duplication, thereby increasing its file size; more on that later.
 
-The Tailwind docs have a [dedicated page](https://tailwindcss.com/docs/reusing-styles)
-
-on how to deal with Tailwind's inherent code duplication. It is quite astonishing how they downplay the problem. It is claimed that often the code duplication is only in one place and hence can be edited with the multi-cursor feature of your editor. There is so much wrong with this:
+The Tailwind docs have a [dedicated page](https://tailwindcss.com/docs/reusing-styles) on how to deal with Tailwind's inherent code duplication. It is quite astonishing how they downplay the problem. It is claimed that often the code duplication is only in one place and hence can be edited with the multi-cursor feature of your editor. There is so much wrong with this:
 
 -   Code duplication is rarely only in one place. And even if it
     was: how can you guarantee this for sure? Do you always search for the
