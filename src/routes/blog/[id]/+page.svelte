@@ -50,21 +50,19 @@
 			margin-top: 1.5rem;
 		}
 
-		:global(pre) {
-			border-radius: 0.4rem;
-			font-size: var(--small-font);
-			padding: 1rem;
-			overflow: scroll;
-			background-color: #333;
-			color: white;
-			max-height: 30rem;
-		}
-
 		:global(blockquote) {
 			margin-left: 1.5rem;
 			padding-left: 0.5rem;
 			color: var(--gray-color);
 			font-size: var(--small-font);
+		}
+
+		:global(pre) {
+			border-radius: 0.4rem;
+			font-size: var(--small-font);
+			padding: 1rem;
+			overflow: auto;
+			max-height: 30rem;
 		}
 
 		:global(p > code) {

@@ -1,8 +1,11 @@
-import { marked } from "marked";
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
 import type { frontmatter } from "../types";
 import { PUBLIC_SHOW_ALL_POSTS } from "$env/static/public";
+import { highlight } from "$lib/server/highlight";
+
+import markdownit from "markdown-it";
+const md = new markdownit();
 
 const posts_markdown = import.meta.glob("/src/data/posts/*.md", {
 	as: "raw",
@@ -27,10 +30,7 @@ export const load = async (event) => {
 		throw error(403, "This post is not public");
 	}
 
-	const htmlContent = marked(body, {
-		mangle: false,
-		headerIds: false,
-	});
+	let htmlContent = highlight(md.render(body));
 
 	return { attributes, htmlContent };
 };

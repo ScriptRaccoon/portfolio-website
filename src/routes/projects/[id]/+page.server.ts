@@ -1,4 +1,3 @@
-import { marked } from "marked";
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
 import type { frontmatter } from "../types";
@@ -7,6 +6,9 @@ const projects_markdown = import.meta.glob(
 	"/src/data/projects/*.md",
 	{ as: "raw", eager: true },
 );
+
+import markdownit from "markdown-it";
+const md = new markdownit();
 
 export const load = async (event) => {
 	const id = event.params.id;
@@ -21,10 +23,7 @@ export const load = async (event) => {
 
 	attributes.tags.sort();
 
-	const htmlContent = marked(body, {
-		mangle: false,
-		headerIds: false,
-	});
+	const htmlContent = md.render(body);
 
 	return { attributes, htmlContent };
 };
