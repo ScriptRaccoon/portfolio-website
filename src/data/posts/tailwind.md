@@ -28,18 +28,18 @@ Tailwind is a CSS framework that seeks to style every HTML element using predefi
 imagine there is a corresponding Tailwind utility class. So for example
 instead of writing
 
-```
+```css
 div {
-  margin-top: 1rem;
-  color: #991b1b;
-  display: flex;
-  align-items: center;
+    margin-top: 1rem;
+    color: #991b1b;
+    display: flex;
+    align-items: center;
 }
 ```
 
 in a CSS file, with Tailwind you write the following directly in your HTML:
 
-```
+```html
 <div class="mt-4 text-red-800 flex items-center">...</div>
 ```
 
@@ -47,10 +47,10 @@ Check the [Tailwind Docs](https://tailwindcss.com/docs) for more details.
 
 Tailwind makes the following promises (and some others as well):
 
-- Write CSS faster
-- Unified design system
-- Avoids switching between HTML and CSS files
-- Smaller bundle size
+-   Write CSS faster
+-   Unified design system
+-   Avoids switching between HTML and CSS files
+-   Smaller bundle size
 
 In the following sections, these promises will be debunked, and several disadvantages of Tailwind will be exposed as well.
 
@@ -72,136 +72,140 @@ Tailwind project.
 
 ```html
 <div class="flex font-sans">
-	<div class="flex-none w-48 relative">
-		<img
-			src="/classic-utility-jacket.jpg"
-			alt=""
-			class="absolute inset-0 w-full h-full object-cover"
-			loading="lazy"
-		/>
-	</div>
-	<form class="flex-auto p-6">
-		<div class="flex flex-wrap">
-			<h1 class="flex-auto text-lg font-semibold text-slate-900">
-				Classic Utility Jacket
-			</h1>
-			<div class="text-lg font-semibold text-slate-500">$110.00</div>
-			<div
-				class="w-full flex-none text-sm font-medium text-slate-700 mt-2"
-			>
-				In stock
-			</div>
-		</div>
-		<div
-			class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200"
-		>
-			<div class="space-x-2 flex text-sm">
-				<label>
-					<input
-						class="sr-only peer"
-						name="size"
-						type="radio"
-						value="xs"
-						checked
-					/>
-					<div
-						class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
-					>
-						XS
-					</div>
-				</label>
-				<label>
-					<input
-						class="sr-only peer"
-						name="size"
-						type="radio"
-						value="s"
-					/>
-					<div
-						class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
-					>
-						S
-					</div>
-				</label>
-				<label>
-					<input
-						class="sr-only peer"
-						name="size"
-						type="radio"
-						value="m"
-					/>
-					<div
-						class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
-					>
-						M
-					</div>
-				</label>
-				<label>
-					<input
-						class="sr-only peer"
-						name="size"
-						type="radio"
-						value="l"
-					/>
-					<div
-						class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
-					>
-						L
-					</div>
-				</label>
-				<label>
-					<input
-						class="sr-only peer"
-						name="size"
-						type="radio"
-						value="xl"
-					/>
-					<div
-						class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
-					>
-						XL
-					</div>
-				</label>
-			</div>
-		</div>
-		<div class="flex space-x-4 mb-6 text-sm font-medium">
-			<div class="flex-auto flex space-x-4">
-				<button
-					class="h-10 px-6 font-semibold rounded-md bg-black text-white"
-					type="submit"
-				>
-					Buy now
-				</button>
-				<button
-					class="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900"
-					type="button"
-				>
-					Add to bag
-				</button>
-			</div>
-			<button
-				class="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200"
-				type="button"
-				aria-label="Like"
-			>
-				<svg
-					width="20"
-					height="20"
-					fill="currentColor"
-					aria-hidden="true"
-				>
-					<path
-						fill-rule="evenodd"
-						clip-rule="evenodd"
-						d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
-					/>
-				</svg>
-			</button>
-		</div>
-		<p class="text-sm text-slate-700">
-			Free shipping on all continental US orders.
-		</p>
-	</form>
+    <div class="flex-none w-48 relative">
+        <img
+            src="/classic-utility-jacket.jpg"
+            alt=""
+            class="absolute inset-0 w-full h-full object-cover"
+            loading="lazy"
+        />
+    </div>
+    <form class="flex-auto p-6">
+        <div class="flex flex-wrap">
+            <h1
+                class="flex-auto text-lg font-semibold text-slate-900"
+            >
+                Classic Utility Jacket
+            </h1>
+            <div class="text-lg font-semibold text-slate-500">
+                $110.00
+            </div>
+            <div
+                class="w-full flex-none text-sm font-medium text-slate-700 mt-2"
+            >
+                In stock
+            </div>
+        </div>
+        <div
+            class="flex items-baseline mt-4 mb-6 pb-6 border-b border-slate-200"
+        >
+            <div class="space-x-2 flex text-sm">
+                <label>
+                    <input
+                        class="sr-only peer"
+                        name="size"
+                        type="radio"
+                        value="xs"
+                        checked
+                    />
+                    <div
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+                    >
+                        XS
+                    </div>
+                </label>
+                <label>
+                    <input
+                        class="sr-only peer"
+                        name="size"
+                        type="radio"
+                        value="s"
+                    />
+                    <div
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+                    >
+                        S
+                    </div>
+                </label>
+                <label>
+                    <input
+                        class="sr-only peer"
+                        name="size"
+                        type="radio"
+                        value="m"
+                    />
+                    <div
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+                    >
+                        M
+                    </div>
+                </label>
+                <label>
+                    <input
+                        class="sr-only peer"
+                        name="size"
+                        type="radio"
+                        value="l"
+                    />
+                    <div
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+                    >
+                        L
+                    </div>
+                </label>
+                <label>
+                    <input
+                        class="sr-only peer"
+                        name="size"
+                        type="radio"
+                        value="xl"
+                    />
+                    <div
+                        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+                    >
+                        XL
+                    </div>
+                </label>
+            </div>
+        </div>
+        <div class="flex space-x-4 mb-6 text-sm font-medium">
+            <div class="flex-auto flex space-x-4">
+                <button
+                    class="h-10 px-6 font-semibold rounded-md bg-black text-white"
+                    type="submit"
+                >
+                    Buy now
+                </button>
+                <button
+                    class="h-10 px-6 font-semibold rounded-md border border-slate-200 text-slate-900"
+                    type="button"
+                >
+                    Add to bag
+                </button>
+            </div>
+            <button
+                class="flex-none flex items-center justify-center w-9 h-9 rounded-md text-slate-300 border border-slate-200"
+                type="button"
+                aria-label="Like"
+            >
+                <svg
+                    width="20"
+                    height="20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                >
+                    <path
+                        fill-rule="evenodd"
+                        clip-rule="evenodd"
+                        d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z"
+                    />
+                </svg>
+            </button>
+        </div>
+        <p class="text-sm text-slate-700">
+            Free shipping on all continental US orders.
+        </p>
+    </form>
 </div>
 ```
 
@@ -269,7 +273,7 @@ it up, whereas there is no translation necessary when reading:
 
 ```css
 * {
-	padding-top: 1rem;
+    padding-top: 1rem;
 }
 ```
 
@@ -287,7 +291,7 @@ A long list of Tailwind classes such as
 
 ```html
 <div
-	class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+    class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
 />
 ```
 
@@ -309,9 +313,9 @@ immediately what
 
 ```css
 .grid {
-	flex-basis: 2.5rem;
-	grid-template-columns: auto 1fr;
-	background-image: linear-gradient(20deg, transparent, #ddd);
+    flex-basis: 2.5rem;
+    grid-template-columns: auto 1fr;
+    background-image: linear-gradient(20deg, transparent, #ddd);
 }
 ```
 
@@ -351,58 +355,58 @@ Let's have a look at a real-world example, the footer on Netlify's page:
 
 ```html
 <footer class="app-footer" role="contentinfo">
-	<div class="container">
-		<nav>
-			<ul
-				class="tw-flex tw-flex-wrap tw-list-none tw-mx-[-12px] tw-my-0 tw-p-0 tw-items-center"
-				aria-label="External links"
-			>
-				<li class="tw-flex tw-items-center tw-m-[4px]">
-					<a
-						class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-						href="https://docs.netlify.com/"
-						>Docs</a
-					>
-				</li>
-				<li class="tw-flex tw-items-center tw-m-[4px]">
-					<a
-						class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-						href="https://www.netlify.com/pricing/"
-						>Pricing</a
-					>
-				</li>
-				<li class="tw-flex tw-items-center tw-m-[4px]">
-					<a
-						class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-						href="https://www.netlify.com/support/"
-						>Support</a
-					>
-				</li>
-				<li class="tw-flex tw-items-center tw-m-[4px]">
-					<a
-						class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-						href="https://www.netlify.com/blog/"
-						>Blog</a
-					>
-				</li>
-				<li class="tw-flex tw-items-center tw-m-[4px]">
-					<a
-						class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-						href="https://www.netlify.com/blog/tags/changelog/"
-						>Changelog</a
-					>
-				</li>
-				<li class="tw-flex tw-items-center tw-m-[4px]">
-					<a
-						class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-						href="https://www.netlify.com/legal/terms-of-use/"
-						>Terms</a
-					>
-				</li>
-			</ul>
-		</nav>
-		<p><small>© 2023 Netlify</small></p>
-	</div>
+    <div class="container">
+        <nav>
+            <ul
+                class="tw-flex tw-flex-wrap tw-list-none tw-mx-[-12px] tw-my-0 tw-p-0 tw-items-center"
+                aria-label="External links"
+            >
+                <li class="tw-flex tw-items-center tw-m-[4px]">
+                    <a
+                        class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+                        href="https://docs.netlify.com/"
+                        >Docs</a
+                    >
+                </li>
+                <li class="tw-flex tw-items-center tw-m-[4px]">
+                    <a
+                        class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+                        href="https://www.netlify.com/pricing/"
+                        >Pricing</a
+                    >
+                </li>
+                <li class="tw-flex tw-items-center tw-m-[4px]">
+                    <a
+                        class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+                        href="https://www.netlify.com/support/"
+                        >Support</a
+                    >
+                </li>
+                <li class="tw-flex tw-items-center tw-m-[4px]">
+                    <a
+                        class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+                        href="https://www.netlify.com/blog/"
+                        >Blog</a
+                    >
+                </li>
+                <li class="tw-flex tw-items-center tw-m-[4px]">
+                    <a
+                        class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+                        href="https://www.netlify.com/blog/tags/changelog/"
+                        >Changelog</a
+                    >
+                </li>
+                <li class="tw-flex tw-items-center tw-m-[4px]">
+                    <a
+                        class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+                        href="https://www.netlify.com/legal/terms-of-use/"
+                        >Terms</a
+                    >
+                </li>
+            </ul>
+        </nav>
+        <p><small>© 2023 Netlify</small></p>
+    </div>
 </footer>
 ```
 
@@ -418,15 +422,15 @@ write the Tailwind classes once. This is what it could look like:
 <!-- Link.svelte -->
 
 <script>
-	export let href = "";
-	export let text = "";
+    export let href = "";
+    export let text = "";
 </script>
 
 <a
-	class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
-	{href}
+    class="btn btn-default btn-tertiary btn-tertiary--standard tw-w-auto tw-font-semibold tw-p-1 tw-min-h-4 tw-leading-3 tw-text-left dark:hover:tw-text-teal-lightest dark:hover:tw-bg-teal-darkest tw-text-gray-darker dark:tw-text-gray-light tw-text-textMuted hover:tw-text-teal-darkest"
+    {href}
 >
-	{text}
+    {text}
 </a>
 ```
 
@@ -443,9 +447,9 @@ this page, I have added the following to my stylesheet.
 
 ```css
 p > code {
-	font-family: "Courier New", Courier, monospace;
-	font-weight: 600;
-	color: var(--primary-color);
+    font-family: "Courier New", Courier, monospace;
+    font-weight: 600;
+    color: var(--primary-color);
 }
 ```
 
@@ -474,17 +478,17 @@ The Tailwind docs have a [dedicated page](https://tailwindcss.com/docs/reusing-s
 
 on how to deal with Tailwind's inherent code duplication. It is quite astonishing how they downplay the problem. It is claimed that often the code duplication is only in one place and hence can be edited with the multi-cursor feature of your editor. There is so much wrong with this:
 
-- Code duplication is rarely only in one place. And even if it
-  was: how can you guarantee this for sure? Do you always search for the
-  whole Tailwind class string through the whole codebase?
-- Multi-cursor editing is cumbersome and error-prone.
-- This approach does not get rid of the code duplication.
-- Their arguments are not Tailwind-specific and try to persuade us
-  that code duplication is not a big deal in general. Many decades of
-  research and practice in software development by thousands of
-  professionals have shown and confirmed that code duplication needs to be
-  avoided in every programming language, and Tailwind responds with "Nah
-  it's ok because you can edit with multi-cursor". This is just absurd.
+-   Code duplication is rarely only in one place. And even if it
+    was: how can you guarantee this for sure? Do you always search for the
+    whole Tailwind class string through the whole codebase?
+-   Multi-cursor editing is cumbersome and error-prone.
+-   This approach does not get rid of the code duplication.
+-   Their arguments are not Tailwind-specific and try to persuade us
+    that code duplication is not a big deal in general. Many decades of
+    research and practice in software development by thousands of
+    professionals have shown and confirmed that code duplication needs to be
+    avoided in every programming language, and Tailwind responds with "Nah
+    it's ok because you can edit with multi-cursor". This is just absurd.
 
 They also suggest using loops in your markup, which is a valid approach,
 but again only works with frameworks, and does not always fit either. For
@@ -511,9 +515,9 @@ this:
 
 ```html
 <a
-	class="hover:text-blue-700 hover:underline hover:font-bold focus:text-blue-700 focus:underline focus:font-bold"
-	href="/"
-	>...</a
+    class="hover:text-blue-700 hover:underline hover:font-bold focus:text-blue-700 focus:underline focus:font-bold"
+    href="/"
+    >...</a
 >
 ```
 
@@ -522,9 +526,9 @@ With regular CSS, it would look like this:
 ```css
 .link:focus,
 .link:hover {
-	color: blue;
-	text-decoration: underline;
-	font-weight: bold;
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
 }
 ```
 
@@ -532,9 +536,9 @@ Or even shorter:
 
 ```css
 .link:is(:focus, :hover) {
-	color: blue;
-	text-decoration: underline;
-	font-weight: bold;
+    color: blue;
+    text-decoration: underline;
+    font-weight: bold;
 }
 ```
 
