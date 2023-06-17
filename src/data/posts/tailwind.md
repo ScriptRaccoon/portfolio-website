@@ -255,7 +255,7 @@ What do the [Tailwind Docs](https://tailwindcss.com/docs/utility-first) write ab
 
 There is no justification for the claim that HTML is easier to
 maintain than CSS, in particular when it is littered with utility classes
-and no descriptive [class names](#class_names). Then they go
+and no descriptive [class names](#class-names). Then they go
 ahead and tell us how many companies already use Tailwind. This is just poor
 marketing inside of a documentation page (?!) and does not tell us anything
 about why Tailwind is maintainable (which it isn't).
@@ -507,7 +507,7 @@ not need to touch the `.btn` class at all and just add a button with
 that class. It cannot be any simpler, and Tailwind prevents you from doing this.
 
 They also mention component frameworks, which are not always suitable as
-already mentioned, and the @apply feature, which will be addressed in a [separate section](#apply).
+already mentioned, and the @apply feature, which will be addressed in a [separate section](#the-@apply-feature).
 
 There is yet another feature of Tailwind that leads to code duplication.
 Say you want to style a link when it is focussed or hovered. In these cases,
@@ -556,5 +556,89 @@ each in its own line.
 
 The code repetition here is of course bad for maintainability. Say you want
 to change `bold` to `semibold`. In the Tailwind code,
-you need to make three adjustments. In the CSS code, you just change the
+you need to make three adjustments. In the CSS code, you just change
 `font-weight` to 600 _once_, and you are done.
+
+## Speed
+
+One of Tailwind's biggest selling points is that you can style your HTML
+very fast (which is not quite true, as we have seen above). But you do
+not need Tailwind to write CSS fast. Here are two methods:
+
+First, use autocompletion of your IDE. For example, in Visual Studio Code,
+simply typing `tex` autocompletes to `text-align`. The value `center`
+is now already preselected, you just have to confirm.
+With just 5 keystrokes (t, e, x, Tab, Tab) you can write:
+
+```css
+* {
+    text-align: center;
+}
+```
+
+With just 6 keystrokes (d, i, s, Tab, f, Tab) you can
+write:
+
+```css
+* {
+    display: flex;
+}
+```
+
+I do this all the time. I rarely write any CSS property till the end.
+
+A second, much more powerful method is to use the [Emmet extension](https://docs.emmet.io) (which is preinstalled in Visual Studio Code). Many developers are familiar with this fantastic extension inside HTML files since it boosts development speed a lot. But Emmet is also capable of writing CSS for us.
+
+Here are some examples:
+
+```css
+* {
+    /* type: m0 */
+    margin: 0;
+    /* type: p5rem */
+    padding: 5rem;
+    /* type: d:f */
+    display: flex;
+    /* type: bxz */
+    box-sizing: border-box;
+    /* type: tac */
+    text-align: center;
+    /* type: gca */
+    grid-column: auto;
+    /* type: bg#fff */
+    background: #fff;
+}
+```
+
+For a list of all abbreviations, see the [Emmet Cheat Sheet](https://docs.emmet.io/cheat-sheet/) (section on CSS).
+
+Both of these methods have a big advantage over Tailwind in that, in the end,
+your source code is regular CSS, thus very easy to maintain.
+
+## Class names
+
+## Bundle size
+
+## The @apply feature
+
+## There is no way back
+
+## Consistent design
+
+## Multiple files
+
+## Setup
+
+## Useless diffs
+
+## Developer experience
+
+## Separation of concerns
+
+## Side effects
+
+## Community
+
+## The solution
+
+## References
