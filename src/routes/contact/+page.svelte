@@ -1,7 +1,3 @@
-<svelte:head>
-	<title>Script Raccoon - Contact</title>
-</svelte:head>
-
 <h1>Contact</h1>
 
 <p>

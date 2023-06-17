@@ -2,10 +2,6 @@
 	import logo from "$lib/assets/ScriptRaccoon.png";
 </script>
 
-<svelte:head>
-	<title>Script Raccoon - Web developer</title>
-</svelte:head>
-
 <h1>Script Raccoon</h1>
 
 <p>Welcome! I am Martin, a web developer based in Berlin, Germany.</p>
