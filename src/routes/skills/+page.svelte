@@ -4,10 +4,6 @@
 	const levels = Object.keys(headings);
 </script>
 
-<svelte:head>
-	<title>Script Raccoon - Skills</title>
-</svelte:head>
-
 <h1>Skills</h1>
 
 <section>

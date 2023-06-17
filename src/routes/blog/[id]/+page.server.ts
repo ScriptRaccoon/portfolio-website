@@ -38,5 +38,8 @@ export const load = async (event) => {
 	const html_code_with_ids = add_ids_to_headings(html_code_raw);
 	const html_code = highlight(html_code_with_ids);
 
-	return { attributes, html_code, toc };
+	const { title, description } = attributes;
+	const meta = { title, description };
+
+	return { meta, attributes, html_code, toc };
 };

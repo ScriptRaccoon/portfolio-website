@@ -22,10 +22,6 @@
 	).href;
 </script>
 
-<svelte:head>
-	<title>{name}</title>
-</svelte:head>
-
 <GoBack />
 
 <h1>

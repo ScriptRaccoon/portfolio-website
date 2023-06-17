@@ -17,10 +17,6 @@
 	);
 </script>
 
-<svelte:head>
-	<title>Script Raccoon - Projects</title>
-</svelte:head>
-
 <h1>Projects</h1>
 
 <Filter {tags} {years} />

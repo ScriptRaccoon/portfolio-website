@@ -19,5 +19,10 @@ export const load = async () => {
 		(p, q) => q.published.getTime() - p.published.getTime(),
 	);
 
-	return { posts };
+	const meta = {
+		title: "Script Raccoon - Blog",
+		description: "Some thoughts on web development",
+	};
+
+	return { meta, posts };
 };

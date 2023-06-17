@@ -21,5 +21,11 @@ export const load = async () => {
 	const tag_list = projects.map((p) => p.tags).flat();
 	const tags = [...new Set(tag_list)].sort();
 
-	return { projects, tags, years };
+	const meta = {
+		title: "Script Raccoon - Projects",
+		description:
+			"Find out about my personal projects in web development",
+	};
+
+	return { meta, projects, tags, years };
 };

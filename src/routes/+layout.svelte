@@ -1,6 +1,7 @@
 <script>
 	import "./app.css";
 	import Nav from "$lib/components/Nav.svelte";
+	import { page } from "$app/stores";
 </script>
 
 <svelte:head>
@@ -32,14 +33,11 @@
 	<meta name="theme-color" content="#ffffff" />
 
 	<!-- meta tags -->
-	<title>Script Raccoon - Web developer</title>
-	<meta
-		property="og:title"
-		content="Script Raccoon - Web developer"
-	/>
+	<title>{$page.data.meta?.title ?? ""}</title>
+	<meta property="og:title" content={$page.data.meta?.title ?? ""} />
 	<meta
 		property="og:description"
-		content="Find more about me and my personal projects in web development"
+		content={$page.data.meta?.description ?? ""}
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://scriptraccoon.dev" />

@@ -1,7 +1,3 @@
-<svelte:head>
-	<title>Script Raccoon - About me</title>
-</svelte:head>
-
 <h1>About me</h1>
 
 <p>
