@@ -27,13 +27,9 @@
 </h1>
 
 <div class="dates">
-	<div>
-		Published: {published.toLocaleDateString()}
-	</div>
+	<div>Published: {published.toLocaleDateString()}</div>
 	{#if updated}
-		<div>
-			Last updasted: {updated.toLocaleDateString()}
-		</div>
+		<div>Updated: {updated.toLocaleDateString()}</div>
 	{/if}
 </div>
 
@@ -66,10 +62,6 @@
 	.dates {
 		font-size: var(--small-font);
 		color: var(--gray-color);
-		display: flex;
-		flex-wrap: wrap;
-		column-gap: 0.5rem;
-		justify-content: space-between;
 	}
 
 	.toc {
@@ -78,7 +70,8 @@
 
 	main {
 		:global(h2) {
-			margin-top: 1.5rem;
+			padding-top: 5rem;
+			margin-top: -3.5rem;
 		}
 
 		:global(blockquote) {
