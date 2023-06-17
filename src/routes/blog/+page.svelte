@@ -11,14 +11,15 @@
 
 <ol class="no-bullets">
 	{#each posts as post (post.id)}
-		<li>
+		<li class:draft={!post.public}>
 			<a href="/blog/{post.id}">
 				<h2>
-					{post.title}
 					{#if !post.public}
-						[DRAFT]
+						Draft:
 					{/if}
+					{post.title}
 				</h2>
+
 				<div class="date">{post.published.toLocaleDateString()}</div>
 				<p class="description">{post.description}</p>
 				<div class="more">More...</div>
@@ -50,5 +51,9 @@
 	.more {
 		font-size: var(--small-font);
 		text-decoration: underline;
+	}
+
+	.draft {
+		opacity: 0.6;
 	}
 </style>

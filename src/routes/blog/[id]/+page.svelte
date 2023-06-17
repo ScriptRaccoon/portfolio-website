@@ -76,7 +76,7 @@
 			max-height: 30rem;
 		}
 
-		:global(p > code) {
+		:global(code:not(pre code)) {
 			font-family: monospace;
 			background-color: var(--gray-color);
 			color: var(--inverted-font-color);
