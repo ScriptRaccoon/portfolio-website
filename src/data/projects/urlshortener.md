@@ -1,5 +1,4 @@
 ---
-id: urlshortener
 name: URL shortener "svt.ink"
 teaser: made with SvelteKit and MongoDB
 repository: https://github.com/ScriptRaccoon/svt.ink

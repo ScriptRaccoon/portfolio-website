@@ -1,5 +1,4 @@
 ---
-id: spriteanimations
 name: Sprite animations
 teaser: made with Vanilla JS
 repository: https://github.com/ScriptRaccoon/Sprite-Animation

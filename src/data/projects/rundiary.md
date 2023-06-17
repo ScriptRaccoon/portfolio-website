@@ -1,5 +1,4 @@
 ---
-id: rundiary
 name: Run diary
 teaser: made with Svelte, clone of Strava's training log
 repository: https://github.com/ScriptRaccoon/run-diary

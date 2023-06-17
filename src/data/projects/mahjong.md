@@ -1,5 +1,4 @@
 ---
-id: mahjong
 name: Mahjong solitaire game
 teaser: made with Vanilla JS
 repository: https://github.com/ScriptRaccoon/mahjong-solitaire

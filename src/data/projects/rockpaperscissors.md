@@ -1,5 +1,4 @@
 ---
-id: rockpaperscissors
 name: Rock, Paper, Scissors game with CSS only
 teaser: without JavaScript!
 repository: https://github.com/ScriptRaccoon/rock-paper-scissors-css

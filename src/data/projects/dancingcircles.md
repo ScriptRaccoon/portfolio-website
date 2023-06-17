@@ -1,5 +1,4 @@
 ---
-id: dancingcircles
 name: Dancing circles simulation
 teaser: producing fascinating patterns from a simple rule
 repository: https://github.com/ScriptRaccoon/dancing-circles

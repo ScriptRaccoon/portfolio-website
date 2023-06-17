@@ -1,5 +1,4 @@
 ---
-id: rubikscube
 name: Rubik's Cube with CSS
 teaser: fully functional, made with Svelte
 repository: https://github.com/ScriptRaccoon/RubiksCubeSvelte

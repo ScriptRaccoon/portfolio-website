@@ -1,5 +1,4 @@
 ---
-id: gameoflife
 name: Conway's Game of Life
 teaser: made with Svelte
 repository: https://github.com/ScriptRaccoon/game-of-life-svelte

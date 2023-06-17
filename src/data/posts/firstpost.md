@@ -1,5 +1,4 @@
 ---
-id: firstpost
 title: First post
 published: 2022-06-16
 updated: null

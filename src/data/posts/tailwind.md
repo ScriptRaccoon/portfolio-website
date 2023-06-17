@@ -1,5 +1,4 @@
 ---
-id: tailwind
 title: Disadvantages of Tailwind
 published: 3000-01-01
 updated: null

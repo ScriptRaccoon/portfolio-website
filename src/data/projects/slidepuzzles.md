@@ -1,5 +1,4 @@
 ---
-id: slidepuzzles
 name: Slide puzzles
 teaser: featuring nice graphics and smooth animations
 repository: https://github.com/ScriptRaccoon/slidepuzzles

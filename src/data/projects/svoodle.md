@@ -1,5 +1,4 @@
 ---
-id: svoodle
 name: Doodle clone made with SvelteKit
 teaser: made with SvelteKit
 repository: https://github.com/ScriptRaccoon/svoodle
