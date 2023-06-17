@@ -77,6 +77,16 @@
 			padding: 1rem;
 			overflow: auto;
 			max-height: 30rem;
+			scrollbar-width: thin;
+
+			&::-webkit-scrollbar {
+				width: 6px;
+				height: 6px;
+			}
+
+			&::-webkit-scrollbar-thumb {
+				background-color: var(--gray-color);
+			}
 		}
 
 		:global(code:not(pre code)) {
@@ -87,6 +97,7 @@
 			padding-block: 0.05rem;
 			border-radius: 0.2rem;
 			font-size: var(--small-font);
+			white-space: nowrap;
 		}
 	}
 
