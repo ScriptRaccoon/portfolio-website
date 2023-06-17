@@ -2,9 +2,12 @@
 	import GoBack from "$lib/components/GoBack.svelte";
 
 	export let data;
-	const { title, updated, published, description, showtoc } =
-		data.attributes;
-	const { html_code, toc } = data;
+
+	const {
+		attributes: { title, updated, published, showtoc },
+		html_code,
+		toc,
+	} = data;
 </script>
 
 <GoBack />
