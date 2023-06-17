@@ -21,7 +21,9 @@ export const load = async (event) => {
 	}
 
 	const markdown = posts_record[path];
-	const { attributes, body } = fm<post>(markdown);
+	const { attributes: _attributes, body } =
+		fm<Omit<post, "id">>(markdown);
+	const attributes: post = { ..._attributes, id };
 
 	if (PUBLIC_SHOW_ALL_POSTS === "false" && !attributes.public) {
 		throw error(403, "This post is not public");

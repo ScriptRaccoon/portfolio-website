@@ -19,7 +19,9 @@ export const load = async (event) => {
 	}
 
 	const markdown = projects_record[path];
-	const { attributes, body } = fm<project>(markdown);
+	const { attributes: _attributes, body } =
+		fm<Omit<project, "id">>(markdown);
+	const attributes: project = { ..._attributes, id };
 
 	attributes.tags.sort();
 
