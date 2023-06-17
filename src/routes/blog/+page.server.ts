@@ -8,12 +8,13 @@ const posts_markdown = import.meta.glob("/src/data/posts/*.md", {
 });
 
 export const load = async () => {
-	const unsorted_posts = Object.values(posts_markdown).map(
-		(markdown) => {
-			const { attributes } = fm<frontmatter>(markdown);
-			return attributes;
-		},
-	);
+	const unsorted_posts: frontmatter[] = Object.entries(
+		posts_markdown,
+	).map(([path, markdown]) => {
+		const id = path.split("/").at(-1)!.replace(".md", "");
+		const { attributes } = fm<Omit<frontmatter, "id">>(markdown);
+		return { ...attributes, id };
+	});
 
 	const public_posts =
 		PUBLIC_SHOW_ALL_POSTS === "true"

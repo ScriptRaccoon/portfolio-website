@@ -1,5 +1,4 @@
 ---
-id: quizapp
 name: Quiz app made with Vue and Svelte
 teaser: to compare the developer experience of both frameworks
 repository: https://github.com/ScriptRaccoon/quiz-about-vue

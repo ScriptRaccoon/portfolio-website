@@ -7,12 +7,13 @@ const projects_markdown = import.meta.glob(
 );
 
 export const load = async () => {
-	const unsorted_projects = Object.values(projects_markdown).map(
-		(markdown) => {
-			const { attributes } = fm<frontmatter>(markdown);
-			return attributes;
-		},
-	);
+	const unsorted_projects: frontmatter[] = Object.entries(
+		projects_markdown,
+	).map(([path, markdown]) => {
+		const id = path.split("/").at(-1)!.replace(".md", "");
+		const { attributes } = fm<Omit<frontmatter, "id">>(markdown);
+		return { ...attributes, id };
+	});
 
 	const projects = unsorted_projects.sort(
 		(p, q) => q.date.getTime() - p.date.getTime(),

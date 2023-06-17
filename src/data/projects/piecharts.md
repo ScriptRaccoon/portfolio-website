@@ -1,5 +1,4 @@
 ---
-id: piecharts
 name: Animated pie charts in Svelte
 teaser: showing the distribution of the German "Bundestag"
 repository: https://github.com/ScriptRaccoon/Abgeordnete

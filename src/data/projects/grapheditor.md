@@ -1,5 +1,4 @@
 ---
-id: grapheditor
 name: Graph editor
 teaser: made with Svelte and SVG
 repository: https://github.com/ScriptRaccoon/graph-editor-svg

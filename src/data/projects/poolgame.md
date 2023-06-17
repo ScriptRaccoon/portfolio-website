@@ -1,5 +1,4 @@
 ---
-id: poolgame
 name: Pool game
 teaser: made with Vanilla JS, featuring rich graphics
 repository: https://github.com/ScriptRaccoon/pool-game

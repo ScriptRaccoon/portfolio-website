@@ -1,5 +1,4 @@
 ---
-id: imagepuzzleeffect
 name: Beautiful image puzzle effect
 teaser: fully customizable
 repository: https://github.com/ScriptRaccoon/image-puzzle-effect

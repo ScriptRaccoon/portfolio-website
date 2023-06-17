@@ -1,5 +1,4 @@
 ---
-id: bookshelf
 name: Digital bookshelf
 teaser: made with Svelte and 3-dimensional CSS
 repository: https://github.com/ScriptRaccoon/BookShelf

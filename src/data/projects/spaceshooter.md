@@ -1,5 +1,4 @@
 ---
-id: spaceshooter
 name: Space shooter game
 teaser: made with Vanilla JS
 repository: https://github.com/ScriptRaccoon/spaceship-parallax

@@ -1,5 +1,4 @@
 ---
-id: passwordprotection
 name: How to password-protect SvelteKit pages
 teaser: using page server loads and environment variables
 repository: https://github.com/ScriptRaccoon/sveltekit-password

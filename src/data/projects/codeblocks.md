@@ -1,5 +1,4 @@
 ---
-id: codeblocks
 name: Codeblock components with Shiki
 teaser: to easily display code in Svelte projects
 repository: https://github.com/ScriptRaccoon/codeblocks

@@ -1,5 +1,4 @@
 ---
-id: cellsimulation
 name: Cell simulation
 teaser: with several stages of evolution
 repository: https://github.com/ScriptRaccoon/Cell-Simulation

@@ -1,5 +1,4 @@
 ---
-id: pixelanimation
 name: Beautiful pixel animation
 teaser: creating sequences of images
 repository: https://github.com/ScriptRaccoon/words-of-pixels

@@ -1,5 +1,4 @@
 ---
-id: getthisdone
 name: Complex to-do app
 teaser: made with Svelte, with multiple task lists and animations
 repository: https://github.com/ScriptRaccoon/GetThisDone

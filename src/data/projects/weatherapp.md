@@ -1,5 +1,4 @@
 ---
-id: weatherapp
 name: Weather app
 teaser: made with SvelteKit
 repository: https://github.com/ScriptRaccoon/sveltekit-weather

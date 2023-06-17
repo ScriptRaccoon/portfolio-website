@@ -1,5 +1,4 @@
 ---
-id: whispernote
 name: onetimesecret clone "Whisper Note"
 teaser: share secrets via one-time links
 repository: https://github.com/ScriptRaccoon/WhisperNote

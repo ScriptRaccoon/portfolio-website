@@ -1,5 +1,4 @@
 ---
-id: drumcomputer
 name: Drum Computer
 teaser: accessible without any music knowledge
 repository: https://github.com/ScriptRaccoon/drumcomputer

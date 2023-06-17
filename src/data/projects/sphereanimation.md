@@ -1,5 +1,4 @@
 ---
-id: sphereanimation
 name: Sphere animation
 teaser: made with 3-dimensional CSS
 repository: https://github.com/ScriptRaccoon/css-sphere
