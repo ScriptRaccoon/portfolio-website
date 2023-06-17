@@ -9,6 +9,7 @@ import {
 	add_ids_to_headings,
 	get_table_of_contents,
 } from "$lib/server/headings";
+import { transform_external_links } from "$lib/server/external-links";
 const md = new markdownit();
 
 const posts_record = import.meta.glob("/src/data/posts/*.md", {
@@ -35,8 +36,9 @@ export const load = async (event) => {
 
 	const html_code_raw = md.render(body);
 	const toc = get_table_of_contents(html_code_raw);
-	const html_code_with_ids = add_ids_to_headings(html_code_raw);
-	const html_code = highlight(html_code_with_ids);
+	const html_code_raw2 = transform_external_links(html_code_raw);
+	const html_code_raw3 = add_ids_to_headings(html_code_raw2);
+	const html_code = highlight(html_code_raw3);
 
 	const { title, description } = attributes;
 	const meta = { title, description };
