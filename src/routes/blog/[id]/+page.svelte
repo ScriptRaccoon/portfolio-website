@@ -33,9 +33,9 @@
 	</details>
 {/if}
 
-<main>
+<article>
 	{@html html_code}
-</main>
+</article>
 
 <div class="back">
 	<GoBack />

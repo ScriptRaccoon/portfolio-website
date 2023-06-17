@@ -38,9 +38,9 @@
 	{/each}
 </section>
 
-<main>
+<article>
 	{@html html_code}
-</main>
+</article>
 
 <img src={image_src} alt="screenshot" />
 
