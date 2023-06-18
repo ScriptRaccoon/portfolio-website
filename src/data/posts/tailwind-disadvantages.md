@@ -750,6 +750,12 @@ slow you down.
 
 ## Setup
 
+When you want to work with Tailwind on a project, you have to set it up first. With Vanilla CSS, you do not have to do anything.
+
+This is a kind of trivial remark, of course. When Tailwind had a lot of benefits, the setup would be beneficial, after all. The problem, however, is that with every additional framework you attach to your project, things might go wrong.
+
+Let me give you an example from the codebase at my job. For some reason, the purging process of Tailwind is broken. (This is the process of removing all unused utilities from the CSS output.) As a result, as of writing this, I am not able to add any less common CSS grid styles with Tailwind, even though they are supported by Tailwind, generally speaking. Debugging already took hours, and the problem is still not fixed, also because it is a large and complex codebase. Fixing the issue will require several hours for the engineers who built the infrastructure. I know (and hope) that not many people will face these issues, but I wanted to mention them, since they add to my frustration with using Tailwind.
+
 ## Useless diffs
 
 ## Developer experience
