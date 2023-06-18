@@ -901,10 +901,34 @@ Also, Tailwind sometimes requires you to [write regular CSS](https://tailwindcss
 
 ## Community
 
+This section is about the Tailwind community. Strictly speaking, nothing of this speaks against using Tailwind. Feel free to just ignore all these statements, and make up your own mind. But I wanted to include this here, since it also makes it quite clear that Tailwind users have almost nothing substantial to say against the disadvantages outlined above.
+
+Oftentimes criticism about Tailwind is silenced by saying "When you don't like it, just don't use it". Imagine someone saying "I don't like cars because they pollute the environment" and the response is "When you don't like cars, don't drive them!". Clearly, this type of reasoning cannot refute any of the disadvantages of Tailwind &ndash; it is just a cheap way of ending the conversation. Ironically, the same people will tell you that this is the future of writing CSS. Now what?
+
+And in fact, it is not true either. When you work in a company where some engineering managers (or ill-informed developers) have decided to adopt Tailwind for the project, you have no choice (unless you quit the job). You are forced to use Tailwind. This will also become more common the more popular Tailwind becomes. (And keep in mind that popularity does not need to correlate with quality.)
+
+For example, in my team, every developer I talked with about Tailwind shares my concerns. But we cannot do anything about it. We have to use this framework, although we know how regular CSS could make our lives much easier.
+
+Another weird claim is that "Yeah Tailwind is ugly first, but you will get used to it!", which you can also find very prominently on the website. What is strange since there is no other technology which needs to make this excuse for marketing &ndash; or do I miss something? And also it is just not true. At least speaking of me, Tailwind did not lose any of its initial ugliness.
+
+But the most absurd claim I got several times is "You clearly haven't used Tailwind yet. You don't know what you are talking about!". Seriously, is there any web technology whose users argue like this? For me, this is a desperate attempt to defend a seriously flawed technology. And clearly all these defenses have literally nothing to do with Tailwind itself. They are just cheap ad hominem attacks.
+
+What is also strange is that many Tailwind users admit that they do not like or even are not able to write regular CSS. They claim that Tailwind makes their life so much easier. This is really strange since CSS is a prerequisite for Tailwind. The Tailwind docs also do not teach you CSS, you need to know it already.
+
+Someone argued that Tailwind is not an all-or-nothing thing. You can use its utility classes as much as you like, but use regular CSS for everything else. This sounds like a reasonable idea at first. But this worsens the problem of [Multiple Files][#multiple-files]. It adds unnecessary complexity to your codebase since you always have to a) decide if your class should be written with Tailwind or with regular CSS, and b) look at two files (minimum) to understand how an element is styled. And this suggestion is something the Tailwind docs and its community clearly do not recommend at all. They suggest that you should write all your styles with Tailwind, which also explains why limitations such as missing values have been clumsily solved with the [bracket syntax](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
+
+Some statements in the Tailwind Docs are also quite remarkable. The page on [Utility-First Fundamentals](https://tailwindcss.com/docs/utility-first) claims:
+
+> When you realize how productive you can be working exclusively in HTML with predefined utility classes, working any other way will feel like torture.
+
+What the f\*\*k?! Tailwind should be the only reasonable way to write CSS? Maybe CSS is torture for Adam Wathan and some of his followers, but certainly not for most web developers. Why don't they just write "When working exclusively in HTML with predefined utility classes, you will feel a big boost in productivity"? This, at least, is not a slap in the face of all CSS developers and maintainers out there.
+
+Here is another quote from the page on [Reusing styles](https://tailwindcss.com/docs/reusing-styles):
+
+> Yes, HTML templates littered with Tailwind classes are kind of ugly. Making changes in a project that has tons of custom CSS is worse.
+
+Again, there is no justification for this bold claim.
+
 ## The solution
 
 ## References
-
-```
-
-```
