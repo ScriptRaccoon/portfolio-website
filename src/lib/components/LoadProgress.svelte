@@ -1,18 +1,8 @@
 <script lang="ts">
-	import { afterNavigate, beforeNavigate } from "$app/navigation";
-
-	let loading = false;
-
-	beforeNavigate(() => {
-		loading = true;
-	});
-
-	afterNavigate(() => {
-		loading = false;
-	});
+	import { navigating } from "$app/stores";
 </script>
 
-{#if loading}
+{#if $navigating}
 	<div />
 {/if}
 
