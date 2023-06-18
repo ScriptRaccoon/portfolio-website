@@ -537,7 +537,7 @@ not need to touch the `.btn` class at all and just add a button with
 that class. It cannot be any simpler, and Tailwind prevents you from doing this.
 
 They also mention component frameworks, which are not always suitable as
-already mentioned, and the @apply feature, which will be addressed in a [separate section](#the-@apply-feature).
+already mentioned, and the @apply directive, which will be addressed in a [separate section](#the-@apply-directive).
 
 There is yet another feature of Tailwind that leads to code duplication.
 Say you want to style a link when it is focussed or hovered. In these cases,
@@ -867,7 +867,50 @@ code quality of the codebase. The bad quality will emerge everywhere else.
 Ironically, we have seen that introducing Tailwind produces even more
 non-clean code (bad readability, bad maintainability, code duplication).
 
-## The @apply feature
+## The @apply directive
+
+When I speak up about [code duplication](#code-duplication) and [ugly HTML](#maintainability) with Tailwind, I often hear that Tailwind offers a solution to this problem: the [@apply directive](https://tailwindcss.com/docs/reusing-styles).
+On the other hand, Tailwind creator Adam Wathan himself does not recommend using it. He admits in a [tweet](https://twitter.com/adamwathan/status/1226511611592085504) that it
+
+> [...] basically only exists to trick people who are put off by long lists of classes into trying the framework.
+
+In another [tweet](https://twitter.com/adamwathan/status/1559250403547652097), he even says that @apply should not have been included in Tailwind. So,
+should we use it now, or not? And if we should not use it, why on earth is
+this feature still available in Tailwind and described in its documentation?
+
+Here are some problems with the @apply directive:
+
+-   It contradicts Tailwind's core principle of using utilities only.
+-   It can only be used in a separate CSS file. So it is also against Tailwind's promise to have only one file for markup and styling.
+-   The feature is very similar to CSS classes but is a useless abstraction of these.
+
+To elaborate on the last point, let us look at the example from the Tailwind
+documentation (removing the focus styles for simplicity):
+
+```css
+.btn-primary {
+    @apply py-2 px-4 bg-blue-500 text-white font-semibold rounded-lg shadow-md hover:bg-blue-700;
+}
+```
+
+Why would you prefer this over the CSS or SCSS version?
+
+```scss
+.btn-primary {
+    background-color: #3c83f6;
+    color: white;
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px -1px #0002;
+
+    &:hover {
+        background-color: #1d4fd7;
+    }
+}
+```
+
+You just write a minified version of a regular CSS class which suffers from worse maintainability.
 
 ## There is no way back
 
