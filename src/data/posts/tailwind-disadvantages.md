@@ -931,15 +931,9 @@ Again, there is no justification for this bold claim.
 
 ## The solution
 
-This page gathered a lot of disadvantages of using Tailwind. But is there
-any solution? How we can write CSS then?
+This page gathered a lot of disadvantages of using Tailwind. But is there any solution? How we can write CSS then?
 
-The solution is quite simple.
-**Write regular CSS**. Learn all the fundamentals of CSS, and
-then dive into the more advanced parts of CSS. Follow CSS experts like Kevin
-Powell, Sara Soueidan, Adam Argyle, Lea Verou, Chris Coyier, Ahmad Shadeed,
-Jhey Tompkins, Temani Afif, Zoran Jambor, Stephanie Eckles and others. You
-will be amazed at what Vanilla CSS is capable of.
+The solution is quite simple. **Write regular CSS**. Learn all the fundamentals of CSS, and then dive into the more advanced parts of CSS. Follow CSS experts like Kevin Powell, Sara Soueidan, Adam Argyle, Lea Verou, Chris Coyier, Ahmad Shadeed, Jhey Tompkins, Temani Afif, Zoran Jambor, Stephanie Eckles and others. You will be amazed at what Vanilla CSS is capable of.
 
 Try to run the following.
 
@@ -1026,21 +1020,13 @@ Try to run the following.
 </style>
 ```
 
-This will make you a better developer, and you will always have the most
-modern features of CSS at your fingertips, while not having to deal with
-_any_ of the mentioned drawbacks of Tailwind.
+This will make you a better developer, and you will always have the most modern features of CSS at your fingertips, while not having to deal with _any_ of the mentioned drawbacks of Tailwind.
 
-If necessary, use CSS preprocessors such as
-[Sass](https://sass-lang.com),
-[Less](https://lesscss.org), etc. They make your
-CSS more powerful without destroying its core syntax. Also keep in mind that
-many of their features are arriving at Vanilla CSS sooner or later (such as
-nesting, and we already have CSS variables and CSS modules).
+If necessary, use CSS preprocessors such as [Sass](https://sass-lang.com), [Less](https://lesscss.org), etc. They make your CSS more powerful without destroying its core syntax. Also keep in mind that many of their features are arriving at Vanilla CSS sooner or later (such as nesting, and we already have CSS variables and CSS modules).
 
 ## References
 
-Below you will find some other references which describe the disadvantages
-of using Tailwind.
+Below you will find some other references which describe the disadvantages of using Tailwind.
 
 -   [Why I Don't Like Tailwind CSS](https://www.aleksandrhovhannisyan.com/blog/why-i-dont-like-tailwind-css) by Aleksandr Hovhannisyan
 -   [Why I don't use Tailwind CSS in Production](https://blog.shimin.io/why-i-dont-use-tailwind-in-production/) by Shimin Zhang
