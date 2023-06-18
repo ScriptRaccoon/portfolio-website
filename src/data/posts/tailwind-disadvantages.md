@@ -246,7 +246,7 @@ What do the [Tailwind Docs](https://tailwindcss.com/docs/utility-first) write ab
 
 > Maintaining a utility-first CSS project turns out to be a lot easier than maintaining a large CSS codebase, simply because HTML is so much easier to maintain than CSS. Large companies like GitHub, Netflix, Heroku, Kickstarter, Twitch, Segment, and more are using this approach with great success.
 
-There is no justification for the claim that HTML is easier to maintain than CSS, in particular when it is littered with utility classes and no descriptive [class names](#class-names). Then they go ahead and tell us how many companies already use Tailwind. This is just poor marketing inside of a documentation page (what?!) and does not tell us anything about why Tailwind is maintainable (which it isn't).
+There is no justification for the claim that HTML is easier to maintain than CSS, in particular when it is littered with utility classes and no descriptive [class names](#class-names). With Tailwind you create hard-to-maintain HTML instead of hard-to-maintain CSS. Then they go ahead and tell us how many companies already use Tailwind. This is just poor marketing inside of a documentation page (what?!) and does not tell us anything about why Tailwind is maintainable (which it isn't).
 
 ## Translation from Tailwind to CSS
 
@@ -293,6 +293,12 @@ This means that Tailwind's marketing promise of writing CSS faster (which is oft
 In case you are just building a simple landing page with nothing complicated happening with regards to the CSS, Tailwind could make you faster. When you work on other projects, however, Tailwind will slow you down.
 
 A related problem is that Tailwind's class names are not consistent. For example, `justify-content: center` becomes `justify-center`, but `align-items: center` (for some reason) does not become `align-center`, but rather `items-center`. When I wanted to add a border of size 1, I was confused that `border-1` does not do anything. So I went to the [border documentation](https://tailwindcss.com/docs/border-width) and found that you have to write `border`, whereas `border-2` indeed yields a border of size 2. I will probably not stumble upon this again but have to remember all these quirks of the language. Speaking of borders, a border at the top is abbreviated by `border-t`, but the [top property](https://tailwindcss.com/docs/top-right-bottom-left) is abbreviated `top`.
+
+The following quote describes best how I feel writing Tailwind.
+
+> CSS is like writing with your hands, Tailwind is like cutting words from a newspaper.
+
+I cannot just write CSS like I normally would, instead I need to find utility classes (words) that achieve what I want.
 
 ## Code duplication
 
@@ -552,9 +558,9 @@ section > h2 + p {
 }
 ```
 
-This is simply not possible with Tailwind. We would need to manually repeat the corresponding utility classes for every paragraph of this kind (which leads to [code duplication](#code-duplication)). Which also means that when we want to switch these paragraphs, we need to switch the classes as well.
+This is simply not possible with Tailwind. We would need to manually repeat the corresponding utility classes for every paragraph of this kind (which leads to [code duplication](#code-duplication)). This also means that when we want to switch these paragraphs, we need to switch the classes as well.
 
-What can also be quite frustrating is that many values are missing. For example, there are only six available [z-indices](https://tailwindcss.com/docs/z-index) by default. In order to use other values, you have to expand your theme or use arbitrary values (which, again, bails out of Tailwind's philosophy). In the codebase at my job, we have often run into this issue, and for technical reasons the two alternatives did not work (see also [Setup](#setup)). With regular CSS there would be absolutely no problem to use any z-index value you like. Similarly, the available [width classes](https://tailwindcss.com/docs/width) are very limited, by default.
+What can also be quite frustrating is that many values are missing. For example, there are only six available [z-indices](https://tailwindcss.com/docs/z-index) by default. In order to use other values, you have to expand your theme or use arbitrary values (which, again, bails out of Tailwind's philosophy). In the codebase at my job, we have often run into this issue, and for technical reasons, the two alternatives did not work (see also [Setup](#setup)). With regular CSS there would be absolutely no problem to use any z-index value you like. Similarly, the available [width classes](https://tailwindcss.com/docs/width) are very limited, by default.
 
 ## Speed
 
@@ -761,7 +767,7 @@ This is a valid Svelte and Astro component and in Vue.js you have to write `<sty
 
 ## Developer tools
 
-When working on a large-scale web application, you will often find yourself wondering where an element (or a component) can be found in the codebase &ndash; in particular when you are new to the project. So you open the inspector tool in the developers tools, find a class that is on (or close to) your element, copy it, paste it into your editor and voilà, you can start to work on it.
+When working on a large-scale web application, you will often find yourself wondering where an element (or a component) can be found in the codebase &ndash; in particular when you are new to the project. So you open the inspector tool in the developer tools, find a class that is on (or close to) your element, copy it, paste it into your editor, and voilà, you can start to work on it.
 
 This works in particular well when all your classes have descriptive names such as `.social-media-list` for a list of social media links. Probably you will find this only once in your codebase.
 
@@ -771,7 +777,7 @@ With Tailwind, however, you will only find a long list of class names such as
 flex justify-center flex-col md:flex-row gap-5
 ```
 
-which &ndash; by design &ndash; can be found everywhere in your codebase. Even pasting the whole class name string will not always help you out, since there can be many search results, or in fact no results when the classes were applied conditionally or were authored with a CSS-in-JS solution. Therefore, inspection gets much harder.
+which (by design) can be found everywhere in your codebase. Even pasting the whole class name string will not always help you out, since there can be many search results, or in fact, no results when the classes were applied conditionally or were authored with a CSS-in-JS solution. Therefore, inspection gets much harder.
 
 Tailwind also prevents you to change the styling of all elements of a given type in your developer tools, which can be helpful to tweak the design during development. Instead, you can always adjust only one element.
 
@@ -799,7 +805,9 @@ When a codebase contains lots of unused CSS, this is a sign that the development
 
 Tailwind is claimed to provide a consistent design system for free, which is not true. For example, you can add arbitrary paddings like `p-2`, `p-3`, `p-4`, ... to any element you like. You can even put arbitrary values with `p-[5.5rem]`. You would still need a documentation page associated with your project which dictates in which situations which spaces should be used. But in practice, this does not exist. Every developer writes whatever padding or margin he/she finds suitable.
 
-This is even more true with colors. With Tailwind, you can give one button a background color of `sky-400`, the other one `blue-400`, and nothing in the editor will tell you about this inconsistency.
+The whole idea of a design system is that it dictates _globally_ how elements in your product look like. By default, Tailwind styles every element _locally_. See the difference? Imagine that within a large-scale application, you want to give all elements some more room and hence increase their padding. How do you want to do this with Tailwind, where every element is styled in isolation?
+
+The arbitrariness is even more true with colors. With Tailwind, you can give one button a background color of `sky-400`, and the other one `blue-400`, and nothing in the editor will tell you about this inconsistency.
 
 Of course, in practice, you will have a button component, maybe with some adjustable theme such as primary, secondary, etc. In this case, the background color is only declared in one file, which is good and prevents inconsistencies.
 
@@ -821,13 +829,13 @@ But otherwise, it works the same. It is also remarkable that [Theming in Tailwin
 
 ## Multiple files
 
-Tailwind promises that styling and markup can be found in only one file, and that this speeds up our development. It is claimed that we do need to switch less often between files.
+Tailwind promises that styling and markup can be found in only one file and that this speeds up our development. It is claimed that we do need to switch less often between files.
 
-Theoretically, this is true by design: we put all the styles directly on the HTML elements, so that the HTML is (or should be) the single source of truth for markup and design. In practice, this is not the case. In fact, Tailwind forces you to switch between files quite often:
+Theoretically, this is true by design: we put all the styles directly on the HTML elements so that the HTML is (or should be) the single source of truth for markup and design. In practice, this is not the case. In reality, Tailwind forces you to switch between files quite often:
 
 -   Not every portion of CSS can be realized with Tailwind. Sometimes, this is due to the complexity of the CSS. Sometimes, this is due to newer or less common CSS features which are not (yet) implemented in Tailwind. So you do end up with a separate CSS file. And now every time you want to change the styling you have to ask yourself which file you need to look at!
 -   The standard configuration of Tailwind can be adjusted, and many projects do this. Often you have to check this custom configuration to know what certain Tailwind classes actually mean. This applies in particular to custom colors and sizes.
--   At my job, we have a large codebase, which has started to migrate the styles from Less (a CSS preprocessor) to Tailwind. The migration is incomplete (and takes a lot of time). The Less files are considered to be legacy, but there are still a lot of them. And it is not clear when and sometimes even how (as mentioned above) to migrate these. So again we have to switch between our Tailwind-styled markup and CSS resp. Less files. I am aware that not everyone using Tailwind will face this issue, but on the other hand I can imagine that this kind of incomplete migration is not untypical.
+-   At my job, we have a large codebase, which has started to migrate the styles from Less (a CSS preprocessor) to Tailwind. The migration is incomplete (and takes a lot of time). The Less files are considered to be legacy, but there are still a lot of them. And it is not clear when and sometimes even how (as mentioned above) to migrate these. So again we have to switch between our Tailwind-styled markup and CSS resp. Less files. I am aware that not everyone using Tailwind will face this issue, but on the other hand, I can imagine that this kind of incomplete migration is not untypical.
 
 This kind of switching is yet another reason why working with Tailwind will
 slow you down.
@@ -838,11 +846,11 @@ When you want to work with Tailwind on a project, you have to set it up first. W
 
 This is a kind of trivial remark, of course. When Tailwind had a lot of benefits, the setup would be beneficial, after all. The problem, however, is that with every additional framework you attach to your project, things might go wrong.
 
-Let me give you an example from the codebase at my job. For some reason, the purging process of Tailwind is broken. (This is the process of removing all unused utilities from the CSS output.) As a result, as of writing this, I am not able to add any less common CSS grid styles with Tailwind, even though they are supported by Tailwind, generally speaking. Debugging already took hours, and the problem is still not fixed, also because it is a large and complex codebase. Fixing the issue will require several hours for the engineers who built the infrastructure. I know (and hope) that not many people will face these issues, but I wanted to mention them, since they add to my frustration with using Tailwind.
+Let me give you an example from the codebase at my job. For some reason, the purging process of Tailwind is broken. (This is the process of removing all unused utilities from the CSS output.) As a result, as of writing this, I am not able to add any less common CSS grid styles with Tailwind, even though they are supported by Tailwind, generally speaking. Debugging already took hours, and the problem is still not fixed, also because it is a large and complex codebase. Fixing the issue will require several hours for the engineers who built the infrastructure. I know (and hope) that not many people will face these issues, but I wanted to mention them since they add to my frustration with using Tailwind.
 
 ## Useless diffs
 
-When a commit contains a change in a long line of Tailwind classes, the diff may not be shown clearly &ndash; both in your editor and on GitHub. Here is an example commit, which I saw during a code review at my job. We use a prefix for our Tailwind classes, which I have replaced by `tw`, since the specific prefix does not matter.
+When a commit contains a change in a long line of Tailwind classes, the diff may not be shown clearly, both in your editor and on GitHub. Here is an example commit, which I saw during a code review at my job. We use a prefix for our Tailwind classes, which I have replaced with `tw` since the specific prefix does not matter.
 
 ```diff
 <a
@@ -893,29 +901,29 @@ What is considered to be a bug by Tailwind's marketing, is indeed a useful featu
 
 Literally _every_ non-functional programming language has side effects, and this applies in particular to CSS. And we as developers already know how to deal with it: scoping and modularization.
 
-By the way, if you doubt that CSS is a programming language, watch the great talk [CSS Algorithms](#https://www.youtube.com/watch?v=dxY5CdZNzsk) by Lara Schenck, or check out these amazing [14 Pure CSS Games](#https://freefrontend.com/css-games/). Whatever principles you know about programming languages apply to CSS as well.
+By the way, if you doubt that CSS is a programming language, watch the great talk on [CSS Algorithms](#https://www.youtube.com/watch?v=dxY5CdZNzsk) by Lara Schenck, or check out these amazing [14 Pure CSS Games](#https://freefrontend.com/css-games/). Whatever principles you know about programming languages apply to CSS as well.
 
-Component frameworks such as React, Vue, and Svelte make it easy to author our CSS in a modular way. Styles in Svelte are scoped by default, in Vue this is achieved by adding the _scoped_ keyboard to the style block, and with React you can use [CSS modules](https://github.com/css-modules/css-modules), for instance. This means that many of the alleged painpoints of unexpected class effects have already been dealt with. And with these solutions, we can still write regular CSS and do not face any of the maintainability issues of Tailwind which we saw before.
+Component frameworks such as React, Vue, and Svelte make it easy to author our CSS in a modular way. Styles in Svelte are scoped by default, in Vue, this is achieved by adding the _scoped_ keyboard to the style block, and with React you can use [CSS modules](https://github.com/css-modules/css-modules), for instance. This means that many of the alleged pain points of unexpected class effects have already been dealt with. And with these solutions, we can still write regular CSS and do not face any of the maintainability issues of Tailwind which we saw before.
 
 Also, Tailwind sometimes requires you to [write regular CSS](https://tailwindcss.com/docs adding-custom-styles) because of its limited features, but these classes could have unexpected side effects, too. Tailwind's marketing is inconsistent.
 
 ## Community
 
-This section is about the Tailwind community. Strictly speaking, nothing of this speaks against using Tailwind. Feel free to just ignore all these statements, and make up your own mind. But I wanted to include this here, since it also makes it quite clear that Tailwind users have almost nothing substantial to say against the disadvantages outlined above.
+This section is about the Tailwind community. Strictly speaking, nothing of this speaks against using Tailwind. Feel free to just ignore all these statements, and make up your own mind. But I wanted to include this here since it also makes it quite clear that Tailwind users have almost nothing substantial to say against the disadvantages outlined above.
 
-Oftentimes criticism about Tailwind is silenced by saying "When you don't like it, just don't use it". Imagine someone saying "I don't like cars because they pollute the environment" and the response is "When you don't like cars, don't drive them!". Clearly, this type of reasoning cannot refute any of the disadvantages of Tailwind &ndash; it is just a cheap way of ending the conversation. Ironically, the same people will tell you that this is the future of writing CSS. Now what?
+Oftentimes criticism about Tailwind is silenced by saying "When you don't like it, just don't use it". Imagine someone saying "I don't like cars because they pollute the environment" and the response is "When you don't like cars, don't drive them!". Clearly, this type of reasoning cannot refute any of the disadvantages of Tailwind. It is just a cheap way of ending the conversation. Ironically, the same people will tell you that this is the future of writing CSS. Now what?
 
 And in fact, it is not true either. When you work in a company where some engineering managers (or ill-informed developers) have decided to adopt Tailwind for the project, you have no choice (unless you quit the job). You are forced to use Tailwind. This will also become more common the more popular Tailwind becomes. (And keep in mind that popularity does not need to correlate with quality.)
 
 For example, in my team, every developer I talked with about Tailwind shares my concerns. But we cannot do anything about it. We have to use this framework, although we know how regular CSS could make our lives much easier.
 
-Another weird claim is that "Yeah Tailwind is ugly first, but you will get used to it!", which you can also find very prominently on the website. What is strange since there is no other technology which needs to make this excuse for marketing &ndash; or do I miss something? And also it is just not true. At least speaking of me, Tailwind did not lose any of its initial ugliness.
+Another weird claim is that "Yeah Tailwind is ugly first, but you will get used to it!", which you can also find very prominently on the website. What is strange since there is no other technology which needs to make this excuse for marketing, or do I miss something? And also it is just not true. At least speaking of me, Tailwind did not lose any of its initial ugliness.
 
-But the most absurd claim I got several times is "You clearly haven't used Tailwind yet. You don't know what you are talking about!". Seriously, is there any web technology whose users argue like this? For me, this is a desperate attempt to defend a seriously flawed technology. And clearly all these defenses have literally nothing to do with Tailwind itself. They are just cheap ad hominem attacks.
+But the most absurd claim I got several times is "You clearly haven't used Tailwind yet. You don't know what you are talking about!". Seriously, is there any web technology whose users argue like this? For me, this is a desperate attempt to defend a seriously flawed technology. And clearly, all these defenses have literally nothing to do with Tailwind itself. They are just cheap ad hominem attacks.
 
-What is also strange is that many Tailwind users admit that they do not like or even are not able to write regular CSS. They claim that Tailwind makes their life so much easier. This is really strange since CSS is a prerequisite for Tailwind. The Tailwind docs also do not teach you CSS, you need to know it already.
+What is also strange is that many Tailwind users admit that they do not like or even are not able to write regular CSS. They claim that Tailwind makes their life so much easier. This is very strange since CSS is a prerequisite for Tailwind. The Tailwind docs also do not teach you CSS, you need to know it already.
 
-Someone argued that Tailwind is not an all-or-nothing thing. You can use its utility classes as much as you like, but use regular CSS for everything else. This sounds like a reasonable idea at first. But this worsens the problem of [Multiple Files][#multiple-files]. It adds unnecessary complexity to your codebase since you always have to a) decide if your class should be written with Tailwind or with regular CSS, and b) look at two files (minimum) to understand how an element is styled. And this suggestion is something the Tailwind docs and its community clearly do not recommend at all. They suggest that you should write all your styles with Tailwind, which also explains why limitations such as missing values have been clumsily solved with the [bracket syntax](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
+Someone argued that Tailwind is not an all-or-nothing thing. You can use its utility classes as much as you like, but use regular CSS for everything else. This sounds like a reasonable idea at first. But this worsens the problem of [Multiple Files][#multiple-files]. It adds unnecessary complexity to your codebase since you always have to a) decide if your class should be written with Tailwind or with regular CSS, and b) look at two files (minimum) to understand how an element is styled. And this suggestion is something the Tailwind docs and its community do not recommend at all. They suggest that you should write all your styles with Tailwind, which also explains why limitations such as missing values have been clumsily solved with the [bracket syntax](https://tailwindcss.com/docs/adding-custom-styles#using-arbitrary-values).
 
 Some statements in the Tailwind Docs are also quite remarkable. The page on [Utility-First Fundamentals](https://tailwindcss.com/docs/utility-first) claims:
 
@@ -933,7 +941,7 @@ Again, there is no justification for this bold claim.
 
 This page gathered a lot of disadvantages of using Tailwind. But is there any solution? How we can write CSS then?
 
-The solution is quite simple. **Write regular CSS**. Learn all the fundamentals of CSS, and then dive into the more advanced parts of CSS. Follow CSS experts like Kevin Powell, Sara Soueidan, Adam Argyle, Lea Verou, Chris Coyier, Ahmad Shadeed, Jhey Tompkins, Temani Afif, Zoran Jambor, Stephanie Eckles and others. You will be amazed at what Vanilla CSS is capable of.
+The solution is quite simple. **Write regular CSS**. Learn all the fundamentals of CSS, and then dive into the more advanced parts of CSS. Follow CSS experts like Kevin Powell, Sara Soueidan, Adam Argyle, Lea Verou, Chris Coyier, Ahmad Shadeed, Jhey Tompkins, Temani Afif, Zoran Jambor, Stephanie Eckles, and others. You will be amazed at what Vanilla CSS is capable of.
 
 Try to run the following.
 
@@ -1032,3 +1040,4 @@ Below you will find some other references which describe the disadvantages of us
 -   [Why I don't use Tailwind CSS in Production](https://blog.shimin.io/why-i-dont-use-tailwind-in-production/) by Shimin Zhang
 -   [TailwindCSS: Adds complexity, does nothing.](https://dev.to/brianboyko/tailwindcss-adds-complexity-does-nothing-3hpn) by Brian Boyko
 -   [Why Tailwind Isn't for Me](https://www.spicyweb.dev/why-tailwind-isnt-for-me/) by Jared White
+-   [Why you’ll probably regret using Tailwind](https://johanronsse.be/2020/07/08/why-youll-probably-regret-using-tailwind/) by Johan Ronsse
