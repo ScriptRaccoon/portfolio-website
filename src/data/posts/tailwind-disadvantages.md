@@ -1038,3 +1038,11 @@ many of their features are arriving at Vanilla CSS sooner or later (such as
 nesting, and we already have CSS variables and CSS modules).
 
 ## References
+
+Below you will find some other references which describe the disadvantages
+of using Tailwind.
+
+-   [Why I Don't Like Tailwind CSS](https://www.aleksandrhovhannisyan.com/blog/why-i-dont-like-tailwind-css) by Aleksandr Hovhannisyan
+-   [Why I don't use Tailwind CSS in Production](https://blog.shimin.io/why-i-dont-use-tailwind-in-production/) by Shimin Zhang
+-   [TailwindCSS: Adds complexity, does nothing.](https://dev.to/brianboyko/tailwindcss-adds-complexity-does-nothing-3hpn) by Brian Boyko
+-   [Why Tailwind Isn't for Me](https://www.spicyweb.dev/why-tailwind-isnt-for-me/) by Jared White
