@@ -1,6 +1,7 @@
 <script>
 	import "./app.css";
 	import Nav from "$lib/components/Nav.svelte";
+	import LoadProgress from "$lib/components/LoadProgress.svelte";
 	import { page } from "$app/stores";
 </script>
 
@@ -48,8 +49,11 @@
 	/>
 </svelte:head>
 
+<LoadProgress />
+
 <div class="wrapper">
 	<Nav />
+
 	<main>
 		<slot />
 	</main>
