@@ -97,4 +97,8 @@
 			white-space: nowrap;
 		}
 	}
+
+	.back {
+		margin-block: 1rem 2rem;
+	}
 </style>
