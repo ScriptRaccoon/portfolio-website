@@ -53,11 +53,8 @@
 </ul>
 
 <style>
-	h1 {
-		margin-block: 1rem;
-	}
-
 	.year {
+		margin-top: -0.5rem;
 		font-size: var(--small-font);
 		color: var(--gray-color);
 	}
@@ -73,6 +70,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-		margin-block: 1.5rem;
+		margin-top: 1.5rem;
 	}
 </style>

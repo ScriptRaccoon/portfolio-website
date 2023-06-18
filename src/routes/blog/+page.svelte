@@ -28,7 +28,7 @@
 
 <style>
 	ol {
-		margin-block: 1rem;
+		margin-top: 1rem;
 	}
 
 	a {

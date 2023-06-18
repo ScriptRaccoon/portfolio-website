@@ -44,7 +44,7 @@ strong {
 
 h1 {
 	font-weight: 600;
-	margin-bottom: 1.5rem;
+	margin-block: 1rem 1.5rem;
 	line-height: 1.2;
 }
 

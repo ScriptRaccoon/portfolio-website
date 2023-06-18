@@ -62,6 +62,6 @@
 		padding-inline: 1rem;
 	}
 	main {
-		padding-block: 1rem;
+		padding-block: 1rem 2rem;
 	}
 </style>

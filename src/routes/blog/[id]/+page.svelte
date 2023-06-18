@@ -45,11 +45,8 @@
 </div>
 
 <style lang="scss">
-	h1 {
-		margin-block: 1rem;
-	}
-
 	.dates {
+		margin-top: -0.5rem;
 		font-size: var(--small-font);
 		color: var(--gray-color);
 	}
@@ -99,9 +96,5 @@
 			font-size: var(--small-font);
 			white-space: nowrap;
 		}
-	}
-
-	.back {
-		margin-block: 1rem 2rem;
 	}
 </style>
