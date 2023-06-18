@@ -939,6 +939,28 @@ go anywhere.
 
 ## Consistent design
 
+Tailwind is claimed to provide a consistent design system for free, which is not true. For example, you can add arbitrary paddings like `p-2`, `p-3`, `p-4`, ... to any element you like. You can even put arbitrary values with `p-[5.5rem]`. You would still need a documentation page associated with your project which dictates in which situations which spaces should be used. But in practice, this does not exist. Every developer writes whatever padding or margin he/she finds suitable.
+
+This is even more true with colors. With Tailwind, you can give one button a background color of `sky-400`, the other one `blue-400`, and nothing in the editor will tell you about this inconsistency.
+
+Of course, in practice, you will have a button component, maybe with some adjustable theme such as primary, secondary, etc. In this case, the background color is only declared in one file, which is good and prevents inconsistencies.
+
+But for that, you do not need Tailwind at all. Consistency is achieved by a set of reusable components and CSS custom properties (which I simply call CSS variables). For example, you can declare a CSS variable
+
+```css
+:root {
+    --spacing-1: 0.25rem;
+}
+```
+
+in your root selector and use that variable wherever you want. This feature is built into CSS, there is no need to use a framework for that. If you are using Sass, you can declare a (static) variable as follows:
+
+```scss
+$spacing-1: 0.25rem;
+```
+
+But otherwise, it works the same. It is also remarkable that [Theming in Tailwind](https://tailwindcss.com/docs/theme) requires a JavaScript file. Yes, you need a JavaScript file to adjust your CSS.
+
 ## Multiple files
 
 ## Setup
