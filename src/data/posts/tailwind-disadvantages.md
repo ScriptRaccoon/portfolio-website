@@ -821,6 +821,20 @@ Some Tailwind users have suggested that the 'separation of concerns' principle i
 
 ## Side effects
 
+An alleged advantage of Tailwind is the absence of unexpected side effects of CSS classes. Because every HTML element gets only those "atomic" utility classes that are visible on it, it cannot be affected by other styles which are defined somewhere else. The latter is common in CSS. For example, you can put a margin on all paragraphs in a global stylesheet, and then when adding a new paragraph you might be surprised about this margin and where it comes from.
+
+What is considered to be a bug by Tailwind's marketing, is indeed a useful feature. Even more: Tailwind removes most of the great CSS features, most notably the cascade! (See also [Limites Features](#limited-features)).
+
+Literally _every_ non-functional programming language has side effects, and this applies in particular to CSS. And we as developers already know how to deal with it: scoping and modularization.
+
+By the way, if you doubt that CSS is a programming language, watch the great talk [CSS Algorithms](#https://www.youtube.com/watch?v=dxY5CdZNzsk) by Lara Schenck, or check out these amazing [14 Pure CSS Games](#https://freefrontend.com/css-games/). Whatever principles you know about programming languages apply to CSS as well.
+
+Component frameworks such as React, Vue, and Svelte make it easy to author our CSS in a modular way. Styles in Svelte are scoped by default, in Vue this is achieved by adding the _scoped_ keyboard to the style block, and with React you can use [CSS modules](https://github.com/css-modules/css-modules), for instance. This means that many of the alleged painpoints of unexpected class effects have already been dealt with. And with these solutions, we can still write regular CSS and do not face any of the maintainability issues of Tailwind which we saw before.
+
+Also, Tailwind sometimes requires you to [write regular CSS](https://tailwindcss.com/docs adding-custom-styles) because of its limited features, but these classes could have unexpected side effects, too. Tailwind's marketing is inconsistent.
+
+## Limited Features
+
 ## Community
 
 ## The solution
