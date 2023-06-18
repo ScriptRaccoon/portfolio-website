@@ -539,6 +539,8 @@ For a list of all abbreviations, see the [Emmet Cheat Sheet](https://docs.emmet.
 
 Both of these methods have a big advantage over Tailwind in that, in the end, your source code is regular CSS, thus very easy to maintain.
 
+While writing Tailwind code can be fast, seeing the result in the browser can take longer. This is because recompiling CSS is much faster than recompiling HTML. This means that, when you work with Tailwind, your changes will be slower to see. In a large-scale project, it can take a couple of seconds. Regular CSS would be updated instantly. There is no problem in waiting once for a couple of seconds. The problem is that you have to wait _again and again_ for every little change you make in your Tailwind-authored CSS.
+
 ## Class names
 
 Tailwind users praise the fact that they do not have to come up with class names for their elements to style them. This is true since you can just style any element by attaching utility classes to it. However, this is not the whole story.
@@ -691,6 +693,22 @@ For another example, consider this header component:
 
 This is a valid Svelte and Astro component and in Vue.js you have to write `<style scoped>`. Because of scoping, the style for the paragraph will not leak outside of the component, and you do not need to come up with a class name such as `subtitle` (which would not be hard anyway). I code a lot in Svelte and rarely need to use class names because of this and since I use semantic HTML tags if possible.
 
+## Developer tools
+
+When working on a large-scale web application, you will often find yourself wondering where an element (or a component) can be found in the codebase &ndash; in particular when you are new to the project. So you open the inspector tool in the developers tools, find a class that is on (or close to) your element, copy it, paste it into your editor and voilà, you can start to work on it.
+
+This works in particular well when all your classes have descriptive names such as `.social-media-list` for a list of social media links. Probably you will find this only once in your codebase.
+
+With Tailwind, however, you will only find a long list of class names such as
+
+```html
+flex justify-center flex-col md:flex-row gap-5
+```
+
+which &ndash; by design &ndash; can be found everywhere in your codebase. Even pasting the whole class name string will not always help you out, since there can be many search results, or in fact no results when the classes were applied conditionally or were authored with a CSS-in-JS solution. Therefore, inspection gets much harder.
+
+Tailwind also prevents you to change the styling of all elements of a given type in your developer tools, which can be helpful to tweak the design during development. Instead, you can always adjust only one element.
+
 ## There is no way back
 
 Imagine a big project takes the endeavor to refactor all its CSS to Tailwind. Let's imagine this process is finished and the team works with Tailwind for some years. These days, Tailwind is very popular, and it seems like it will stay here for a while.
@@ -788,8 +806,6 @@ a {
 Of course, we could also write Tailwind this way, or even write editor
 extensions that format the classes automatically, but the point is (again)
 that Tailwind forces us to _fix_ its inherent maintainability issues.
-
-## Developer experience
 
 ## Separation of concerns
 
