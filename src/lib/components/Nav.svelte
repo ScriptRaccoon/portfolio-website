@@ -21,7 +21,10 @@
 <nav>
 	<ul class="no-bullets">
 		{#each links as { name, href }}
-			<li>
+			<li
+				class:current={(href === "/" && $page.url.pathname === "/") ||
+					(href !== "/" && $page.url.pathname.startsWith(href))}
+			>
 				<a {href}>
 					{#if name === "Home"}
 						<img class="logo" src={logo} alt="Home" />
@@ -69,8 +72,20 @@
 
 	a {
 		text-decoration: none;
-		&:hover {
-			text-decoration: underline;
-		}
+	}
+
+	li {
+		position: relative;
+	}
+
+	li.current::after {
+		content: "";
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: -0.15rem;
+		height: 0.1rem;
+		background-color: var(--primary-color);
+		border-radius: 100vw;
 	}
 </style>
