@@ -615,6 +615,198 @@ your source code is regular CSS, thus very easy to maintain.
 
 ## Class names
 
+Tailwind users praise the fact that they do not have to come up with class
+names for their elements to style them. This is true since you can
+just style any element by attaching utility classes to it.
+However, this is not the whole story.
+
+When you style an element, you need to know _which_ element you are currently styling.
+When you want to change the styles of some element (which you have identified by
+looking at the website), you have to _find_ it in the code. Both tasks are difficult when
+you do not have any name for the element. It helps when you style a semantic
+element, for example when you have exactly one button in the component, which
+makes it easy to find. But less so for containers.
+
+For example, imagine a footer with different containers with social media
+links, internal links, logos, and lots of other stuff. Your task is to change
+the spacing of the social media icons. How fast will you be able to find it
+inside of Tailwind code? And how fast will you be able to find it if the
+container had a class name `social-media-icons` which you can
+find _immediately_ by searching in your editor for `social`?
+
+These things happen to me all the time at my job: I have to scroll and
+search for quite a while, again and again, before I find the element which I
+need to adjust. Sometimes, I find myself adding comments in the
+markup to remember what is what.
+
+```html
+<!-- container of cart item -->
+<div
+    class="some-extremely-long-class-list-without-any-descriptive-name"
+></div>
+```
+
+One of many good measures of software quality is how descriptive the
+objects, variables, and functions are named. Names which are very short or even
+abbreviated (like `strlen` in PHP) are not good, since they do not
+speak for themselves. Tailwind just ignores this core principle of clean code
+and removes all names. It is not surprising that maintainability will suffer
+from this approach.
+
+That being said, I do not understand why it should be complicated to come up
+with class names. You do not have to follow any naming methodology (like
+BEM) either, just keep it simple. Imagine someone came up with a JavaScript
+framework where no variables have names because
+_it is too hard to come up with good names_. Of course, this would be
+mad. With every programming language, including CSS.
+
+To support their claim that it is hard to come up with class names,
+the [Tailwind docs](https://tailwindcss.com/docs/utility-first)
+have a quite contrived example:
+
+```html
+<div class="chat-notification">
+    <div class="chat-notification-logo-wrapper">
+        <img
+            class="chat-notification-logo"
+            src="/img/logo.svg"
+            alt="ChitChat Logo"
+        />
+    </div>
+    <div class="chat-notification-content">
+        <h4 class="chat-notification-title">ChitChat</h4>
+        <p class="chat-notification-message">
+            You have a new message!
+        </p>
+    </div>
+</div>
+
+<style>
+    .chat-notification {
+        /* ... */
+    }
+    .chat-notification-logo-wrapper {
+        /* ... */
+    }
+    .chat-notification-logo {
+        /* ... */
+    }
+    .chat-notification-content {
+        /* ... */
+    }
+    .chat-notification-title {
+        /* ... */
+    }
+    .chat-notification-message {
+        /* ... */
+    }
+</style>
+```
+
+Nothing forces you to declare a class for every single HTML element
+to style it. Here is how you can do it (and there are other ways as well):
+
+```html
+<dialog class="chat-notification">
+    <div class="logo-wrapper">
+        <img src="/img/logo.svg" alt="ChitChat Logo" />
+    </div>
+    <div class="content">
+        <h4>ChitChat</h4>
+        <p>You have a new message!</p>
+    </div>
+</dialog>
+
+<style>
+    .chat-notification {
+        /* ... */
+    }
+    .chat-notification .logo-wrapper {
+        /* ... */
+    }
+    .chat-notification img {
+        /* ... */
+    }
+    .chat-notification .content {
+        /* ... */
+    }
+    .chat-notification .content h4 {
+        /* ... */
+    }
+    .chat-notification .content p {
+        /* ... */
+    }
+</style>
+```
+
+With the upcoming [CSS nesting](https://developer.chrome.com/articles/css-nesting/),
+which we have been already using for years with the help of preprocessors such as Sass,
+we can write it even more simply:
+
+```scss
+.chat-notification {
+    /* ... */
+
+    .logo-wrapper {
+        /* ... */
+    }
+
+    img {
+        /* ... */
+    }
+
+    .content {
+        /* ... */
+
+        h4 {
+            /* ... */
+        }
+
+        p {
+            /* ... */
+        }
+    }
+}
+```
+
+The Tailwind docs make you believe that CSS is complicated, only because they
+do not use their most basic features, namely element selectors and combinators!
+
+The Tailwind docs on [Reusing styles](https://tailwindcss.com/docs/reusing-styles) make an exaggerated claim:
+
+> You have to think up class names all the time &mdash; nothing will slow you down or drain your energy like coming up with a class name for something that doesn't deserve to be named.
+
+Really? Developers have much more energy-draining tasks. And again: having a
+descriptive name such as "logo-wrapper" in the component will be very useful
+when you need to adjust the component!
+
+Finally, it is worth mentioning that many frameworks make it easy to make
+styles _scoped_ to the respective component. In this case, you can usually style elements
+just by their tag name. In the above example, we can style the dialog simply
+by selecting `dialog`.
+
+For another example, consider this header component:
+
+```svelte
+<header>
+    <h1>Tailwind</h1>
+    <p>A utility-first CSS framework</p>
+</header>
+
+<style>
+    p {
+        color: #555;
+    }
+</style>
+```
+
+This is a valid Svelte and Astro component and in Vue.js you have
+to write `<style scoped>`. Because of scoping, the style for the paragraph
+will not leak outside of the component, and you do not need to come up with
+a class name such as `subtitle` (which would not be hard anyway).
+I code a lot in Svelte and rarely need to use class names
+because of this and since I use semantic HTML tags if possible.
+
 ## Bundle size
 
 ## The @apply feature
