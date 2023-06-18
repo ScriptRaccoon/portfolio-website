@@ -809,6 +809,16 @@ that Tailwind forces us to _fix_ its inherent maintainability issues.
 
 ## Separation of concerns
 
+Perhaps you remember that old-school HTML had elements for styling content, such as the `<center>` and the `<font>` elements. There was a good reason to deprecate all such elements, improve the CSS language and do all the styling in separate CSS files. In fact, CSS was actually invented to separate content/structure from its presentation. It is kind of curious that Tailwind reverses the history of HTML without learning from it.
+
+Separating markup from styling had (and still has) many advantages:
+
+-   When you want to change the styling, you know exactly where to go: to the CSS file. When you want to change the markup or content, you know exactly where to go: to the HTML file. Since each file is smaller as compared to a combination file of HTML and CSS, you will find the relevant code faster.
+
+-   By using CSS classes for reoccurring elements (such as buttons or headings), you do not have to repeat the same styles again and again. See also [code duplication](#code-duplication).
+
+Some Tailwind users have suggested that the 'separation of concerns' principle is simply not working. I highly disagree and still have not seen any proof of why this principle does not work in practice.
+
 ## Side effects
 
 ## Community
