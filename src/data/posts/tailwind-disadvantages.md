@@ -490,6 +490,72 @@ Why would you prefer this over the CSS or SCSS version?
 
 You just write a minified version of a regular CSS class which suffers from worse maintainability.
 
+## Limited Features
+
+When it comes to new or complex CSS features, Tailwind will always lack behind. Since it is a library on top of CSS, new features will take some time and need additional implementation before they arrive in Tailwind. Why not just work with CSS and enjoy all new features directly?
+
+For example, try to write the following with Tailwind! This CSS code gives a form a red outline when it has an invalid, non-focussed input field.
+
+```css
+form:has(input:invalid:not(:focus)) {
+    outline: 0.1rem solid red;
+}
+```
+
+Actually, CSS is such a complex and powerful programming language, that it will never be possible to achieve the same with utility classes, no matter how many utility classes you are using.
+
+Even quite basic CSS tasks can be a pain with a Tailwind. Let us look at the following grid layout:
+
+```css
+.grid {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: 1fr auto;
+}
+```
+
+Since Tailwind's predefined [grid utilities](https://tailwindcss.com/docs/grid-template-columns) are quite limited, Tailwind requires you to bail out of its system and use arbitrary values and a really strange syntax instead.
+
+```html
+<div
+    class="grid grid-cols-[auto_auto_1fr] grid-rows-[1fr_auto]"
+></div>
+```
+
+The docs also suggest expanding your theme file, which is not something you want to do every time you want to use a simple grid layout.
+
+```javascript
+// tailwind.config.js
+
+module.exports = {
+    theme: {
+        extend: {
+            gridTemplateColumns: {
+                mygrid: "auto auto 1fr",
+            },
+            gridTemplateRows: {
+                mygrid: "1fr auto",
+            },
+        },
+    },
+};
+```
+
+In particular, when you only want to use it once, this seems to be overly complicated compared to writing regular CSS. Also, you will have to come up with a name, which was one of the promises of Tailwind that you don't have to do.
+
+But also very basic CSS features are missing in Tailwind, by design so to say. For instance, there is no equivalent of the child or sibling selectors. Tailwind users would argue that you don't need this, since you can just style the element directly. Ok, say I want to style always the first paragraph inside of a section, which follows a heading. With CSS, we can simply write:
+
+```css
+section > h2 + p {
+    border-left: 0.1rem solid gray;
+    padding-left: 0.5rem;
+}
+```
+
+This is simply not possible with Tailwind. We would need to manually repeat the corresponding utility classes for every paragraph of this kind (which leads to [code duplication](#code-duplication)). Which also means that when we want to switch these paragraphs, we need to switch the classes as well.
+
+What can also be quite frustrating is that many values are missing. For example, there are only six available [z-indices](https://tailwindcss.com/docs/z-index) by default. In order to use other values, you have to expand your theme or use arbitrary values (which, again, bails out of Tailwind's philosophy). In the codebase at my job, we have often run into this issue, and for technical reasons the two alternatives did not work (see also [Setup](#setup)). With regular CSS there would be absolutely no problem to use any z-index value you like. Similarly, the available [width classes](https://tailwindcss.com/docs/width) are very limited, by default.
+
 ## Speed
 
 One of Tailwind's biggest selling points is that you can style your HTML very fast (which is not quite true, as we have seen above). But you do not need Tailwind to write CSS fast. Here are two methods:
@@ -823,7 +889,7 @@ Some Tailwind users have suggested that the 'separation of concerns' principle i
 
 An alleged advantage of Tailwind is the absence of unexpected side effects of CSS classes. Because every HTML element gets only those "atomic" utility classes that are visible on it, it cannot be affected by other styles which are defined somewhere else. The latter is common in CSS. For example, you can put a margin on all paragraphs in a global stylesheet, and then when adding a new paragraph you might be surprised about this margin and where it comes from.
 
-What is considered to be a bug by Tailwind's marketing, is indeed a useful feature. Even more: Tailwind removes most of the great CSS features, most notably the cascade! (See also [Limites Features](#limited-features)).
+What is considered to be a bug by Tailwind's marketing, is indeed a useful feature. Even more: Tailwind removes most of the great CSS features, most notably the cascade! (See also [Limited Features](#limited-features)).
 
 Literally _every_ non-functional programming language has side effects, and this applies in particular to CSS. And we as developers already know how to deal with it: scoping and modularization.
 
@@ -832,8 +898,6 @@ By the way, if you doubt that CSS is a programming language, watch the great tal
 Component frameworks such as React, Vue, and Svelte make it easy to author our CSS in a modular way. Styles in Svelte are scoped by default, in Vue this is achieved by adding the _scoped_ keyboard to the style block, and with React you can use [CSS modules](https://github.com/css-modules/css-modules), for instance. This means that many of the alleged painpoints of unexpected class effects have already been dealt with. And with these solutions, we can still write regular CSS and do not face any of the maintainability issues of Tailwind which we saw before.
 
 Also, Tailwind sometimes requires you to [write regular CSS](https://tailwindcss.com/docs adding-custom-styles) because of its limited features, but these classes could have unexpected side effects, too. Tailwind's marketing is inconsistent.
-
-## Limited Features
 
 ## Community
 
