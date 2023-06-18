@@ -19,9 +19,7 @@ I understand that many people enjoy working with Tailwind. And that's fine. I al
 
 _Skip this section if you are already familiar with Tailwind._
 
-Tailwind is a CSS framework that seeks to style every HTML element using predefined utility classes. For (almost) every CSS property you can
-imagine there is a corresponding Tailwind utility class. So for example
-instead of writing
+Tailwind is a CSS framework that seeks to style every HTML element using predefined utility classes. For (almost) every CSS property you can imagine there is a corresponding Tailwind utility class. So for example instead of writing
 
 ```css
 div {
@@ -53,19 +51,11 @@ In the following sections, these promises will be debunked, and several disadvan
 
 ## Maintainability
 
-We all know that it is hard to read long lines of text. The wider text is,
-the harder it becomes to jump to the exact next line for our eyes, and the
-more likely it is that we get lost in the middle of a line. This is why
-books have their common layout and why we design our websites accordingly
-(such as this one), setting a `max-width` to text containers.
-There is no precise rule, but up to 70 characters per line are usually OK.
+We all know that it is hard to read long lines of text. The wider text is, the harder it becomes to jump to the exact next line for our eyes, and the more likely it is that we get lost in the middle of a line. This is why books have their common layout and why we design our websites accordingly (such as this one), setting a `max-width` to text containers. There is no precise rule, but up to 70 characters per line are usually OK.
 
-The same rule applies to the code we read and write. Code formatters such as
-Prettier do the job for us and set appropriate line breaks automatically.
+The same rule applies to the code we read and write. Code formatters such as Prettier do the job for us and set appropriate line breaks automatically.
 
-Keep this in mind when reading the following example, which is taken
-directly from the Tailwind website. You will find similar code in every
-Tailwind project.
+Keep this in mind when reading the following example, which is taken directly from the Tailwind website. You will find similar code in every Tailwind project.
 
 ```html
 <div class="flex font-sans">
@@ -206,20 +196,9 @@ Tailwind project.
 </div>
 ```
 
-Clearly, the HTML is bloated with lots of utility classes, which are
-necessary with Tailwind to achieve the desired styles. This has numerous
-disadvantages, in particular concerning maintainability and
-readability:
+Clearly, the HTML is bloated with lots of utility classes, which are necessary with Tailwind to achieve the desired styles. This has numerous disadvantages, in particular concerning maintainability and readability:
 
-First of all, the Tailwind classes for one element are gathered inside a
-long horizontal string, a "class soup". This happens even though the snippet
-uses Prettier with a maximal print width of 80: Prettier cannot linebreak
-long string literals. This makes it hard to find which property or
-utility class you need to adjust. Often you need to scroll. And even if you
-turn on word wrap in your editor, or take the manual work to indent the
-lines somehow, it takes time to find the relevant class. Adjusting a single
-property is much easier with regular CSS, since here every property has an
-individual line as a key-value pair.
+First of all, the Tailwind classes for one element are gathered inside a long horizontal string, a "class soup". This happens even though the snippet uses Prettier with a maximal print width of 80: Prettier cannot linebreak long string literals. This makes it hard to find which property or utility class you need to adjust. Often you need to scroll. And even if you turn on word wrap in your editor, or take the manual work to indent the lines somehow, it takes time to find the relevant class. Adjusting a single property is much easier with regular CSS, since here every property has an individual line as a key-value pair.
 
 For example, in the following snippet from the code above, try to find and then change the background color of the label when the radio button is checked. How long does it take you?
 
@@ -253,56 +232,27 @@ And now try to find and change the background color in the corresponding CSS (or
 }
 ```
 
-You will find the CSS property faster, right? This is because you only need to scan the keys, which are under each other and visible clearly. Alternatively, you can look for the values and quickly identify the colors. You can also skip the whole first selector since only the second one
-is about the checked state.
+You will find the CSS property faster, right? This is because you only need to scan the keys, which are under each other and visible clearly. Alternatively, you can look for the values and quickly identify the colors. You can also skip the whole first selector since only the second one is about the checked state.
 
-Readability is also negatively impacted by the lack of syntax highlighting:
-Tailwind class names are just displayed as strings. Also, they tend to be
-short but not descriptive enough (more on that later). CSS code is much
-more expressive.
+Readability is also negatively impacted by the lack of syntax highlighting: Tailwind class names are just displayed as strings. Also, they tend to be short but not descriptive enough (more on that later). CSS code is much more expressive.
 
-Another problem is that the actual text content in the markup is harder to
-find because it is "hidden" between the dozens of class names.
+Another problem is that the actual text content in the markup is harder to find because it is "hidden" between the dozens of class names.
 
-As a consequence, reading and maintaining Tailwind code can be quite
-frustrating. Many Tailwind users emphasize that Tailwind classes are so fast
-to write down. This may be true in some cases (more on that later). But
-writing code fast has never been an indicator of code quality. The code has
-to be easy to maintain. This is easily forgotten when you follow Tailwind's
-philosophy and quickly write down all these utility classes. We should not
-just talk about how fast the code can be written, but (maybe even more) how
-fast it can be
-_understood_ by other developers (or ourselves in the future).
+As a consequence, reading and maintaining Tailwind code can be quite frustrating. Many Tailwind users emphasize that Tailwind classes are so fast to write down. This may be true in some cases (more on that later). But writing code fast has never been an indicator of code quality. The code has to be easy to maintain. This is easily forgotten when you follow Tailwind's philosophy and quickly write down all these utility classes. We should not just talk about how fast the code can be written, but (maybe even more) how fast it can be _understood_ by other developers (or ourselves in the future).
 
-The initial reaction when looking at some Tailwind code as above is that it
-is _ugly_. Although this impression is subjective, it is
-closely connected to the (more objective) lack of readability of the code.
-Many people initially share this feeling that Tailwind code is ugly, but got
-used to it after some time. This did not happen to me, though.
-Other aspects of maintainability will be covered in the sections below.
+The initial reaction when looking at some Tailwind code as above is that it is _ugly_. Although this impression is subjective, it is closely connected to the (more objective) lack of readability of the code. Many people initially share this feeling that Tailwind code is ugly, but got used to it after some time. This did not happen to me, though. Other aspects of maintainability will be covered in the sections below.
 
 What do the [Tailwind Docs](https://tailwindcss.com/docs/utility-first) write about maintainability?
 
 > Maintaining a utility-first CSS project turns out to be a lot easier than maintaining a large CSS codebase, simply because HTML is so much easier to maintain than CSS. Large companies like GitHub, Netflix, Heroku, Kickstarter, Twitch, Segment, and more are using this approach with great success.
 
-There is no justification for the claim that HTML is easier to
-maintain than CSS, in particular when it is littered with utility classes
-and no descriptive [class names](#class-names). Then they go
-ahead and tell us how many companies already use Tailwind. This is just poor
-marketing inside of a documentation page (what?!) and does not tell us anything
-about why Tailwind is maintainable (which it isn't).
+There is no justification for the claim that HTML is easier to maintain than CSS, in particular when it is littered with utility classes and no descriptive [class names](#class-names). Then they go ahead and tell us how many companies already use Tailwind. This is just poor marketing inside of a documentation page (what?!) and does not tell us anything about why Tailwind is maintainable (which it isn't).
 
 ## Translation from Tailwind to CSS
 
-The Tailwind class names are short and hence (in theory) fast to write (see
-the section on [speed](#speed) for how to achieve the same with Vanilla
-CSS) but suffer from bad readability since, after all, they are just abbreviations.
+The Tailwind class names are short and hence (in theory) fast to write (see the section on [speed](#speed) for how to achieve the same with Vanilla CSS) but suffer from bad readability since, after all, they are just abbreviations.
 
-After working with Tailwind for a while, of course, you know what most of
-these abbreviations mean. For example, `pt-4` stands for
-top padding of 4 units. You have to remember that 1 unit is 0.25rem (if not
-configured otherwise). You need to do this translation in your mind or look
-it up, whereas there is no translation necessary when reading:
+After working with Tailwind for a while, of course, you know what most of these abbreviations mean. For example, `pt-4` stands for top padding of 4 units. You have to remember that 1 unit is 0.25rem (if not configured otherwise). You need to do this translation in your mind or look it up, whereas there is no translation necessary when reading:
 
 ```css
 * {
@@ -310,15 +260,9 @@ it up, whereas there is no translation necessary when reading:
 }
 ```
 
-With Vanilla CSS, you get what you read. With Tailwind, every single class
-(of which there can be many for every element, as we have seen) needs to be
-translated in your head. This is cognitive overload and an unnecessary one.
+With Vanilla CSS, you get what you read. With Tailwind, every single class (of which there can be many for every element, as we have seen) needs to be translated in your head. This is cognitive overload and an unnecessary one.
 
-Most of the time developers within a big project do not write code: they
-_read_ code, since this is a prerequisite for adjusting it, and it is also
-done during code reviews. As a consequence, using Tailwind classes will slow
-you (and the whole team) down. After some time you will notice that the slowdown
-decreases, but it will always be there when compared to Vanilla CSS.
+Most of the time developers within a big project do not write code: they _read_ code, since this is a prerequisite for adjusting it, and it is also done during code reviews. As a consequence, using Tailwind classes will slow you (and the whole team) down. After some time you will notice that the slowdown decreases, but it will always be there when compared to Vanilla CSS.
 
 A long list of Tailwind classes such as
 
@@ -328,21 +272,11 @@ A long list of Tailwind classes such as
 />
 ```
 
-resembles very much _minified code_. No developer would get the idea to write minified
-JavaScript -- this is the job of build tools. Why? Because it is hard
-to write, read, and maintain. But this applies to every language, and CSS
-is no exception. Writing minified CSS is bad for maintainability.
+resembles very much _minified code_. No developer would get the idea to write minified JavaScript &ndash; this is the job of build tools. Why? Because it is hard to write, read, and maintain. But this applies to every language, and CSS is no exception. Writing minified CSS is bad for maintainability.
 
 ## Translation from CSS to Tailwind
 
-It is well understood that CSS is a prerequisite for using Tailwind (which
-is what some beginners seem to misunderstand, who are afraid to learn CSS
-properly and hence jump on Tailwind too fast). But even experienced Tailwind
-users will have the Tailwind Docs open all the time and use the search
-function. Why? Because it is hard to remember all the Tailwind utility
-classes (their names and their definitions). You will be able to remember
-some of the classes, but never all of those you need. Do you know
-immediately what
+It is well understood that CSS is a prerequisite for using Tailwind (which is what some beginners seem to misunderstand, who are afraid to learn CSS properly and hence jump on Tailwind too fast). But even experienced Tailwind users will have the Tailwind Docs open all the time and use the search function. Why? Because it is hard to remember all the Tailwind utility classes (their names and their definitions). You will be able to remember some of the classes, but never all of those you need. Do you know immediately what
 
 ```css
 .grid {
@@ -354,35 +288,15 @@ immediately what
 
 translates to in Tailwind?
 
-This means that Tailwind's marketing promise of writing CSS faster (which
-is often praised by Tailwind users) is, in fact, a lie because you
-constantly lose time while looking up the Tailwind style of writing CSS.
-You have to learn a whole new language, with its own grammar,
-just to write CSS.
+This means that Tailwind's marketing promise of writing CSS faster (which is often praised by Tailwind users) is, in fact, a lie because you constantly lose time while looking up the Tailwind style of writing CSS. You have to learn a whole new language, with its own grammar, just to write CSS.
 
-In case you are just building a simple landing page with nothing
-complicated happening with regards to the CSS, Tailwind could make you
-faster. When you work on other projects, however, Tailwind will slow you
-down.
+In case you are just building a simple landing page with nothing complicated happening with regards to the CSS, Tailwind could make you faster. When you work on other projects, however, Tailwind will slow you down.
 
-A related problem is that Tailwind's class names are not consistent. For
-example, `justify-content: center` becomes `justify-center`, but
-`align-items: center` (for some reason) does not become `align-center`, but rather `items-center`. When I wanted to add a border of size 1, I was confused that `border-1`
-does not do anything. So I went to the [border documentation](https://tailwindcss.com/docs/border-width) and found that you have to write `border`, whereas `border-2`
-indeed yields a border of size 2. I will probably not stumble upon this again
-but have to remember all these quirks of the language. Speaking of borders, a
-border at the top is abbreviated by `border-t`, but the
-[top property](https://tailwindcss.com/docs/top-right-bottom-left)
-is abbreviated `top`.
+A related problem is that Tailwind's class names are not consistent. For example, `justify-content: center` becomes `justify-center`, but `align-items: center` (for some reason) does not become `align-center`, but rather `items-center`. When I wanted to add a border of size 1, I was confused that `border-1` does not do anything. So I went to the [border documentation](https://tailwindcss.com/docs/border-width) and found that you have to write `border`, whereas `border-2` indeed yields a border of size 2. I will probably not stumble upon this again but have to remember all these quirks of the language. Speaking of borders, a border at the top is abbreviated by `border-t`, but the [top property](https://tailwindcss.com/docs/top-right-bottom-left) is abbreviated `top`.
 
 ## Code duplication
 
-Since Tailwind's philosophy is against using reusable classes but your page
-will usually contain several elements which should behave and look similar
-(links, buttons, headings, inputs, ...), you are likely to repeat the same
-Tailwind utility classes over and over again. This leads to code
-duplication, which is a [code smell](https://en.wikipedia.org/wiki/Code_smell). The code
-becomes [wet](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
+Since Tailwind's philosophy is against using reusable classes but your page will usually contain several elements which should behave and look similar (links, buttons, headings, inputs, ...), you are likely to repeat the same Tailwind utility classes over and over again. This leads to code duplication, which is a [code smell](https://en.wikipedia.org/wiki/Code_smell). The code becomes [wet](https://en.wikipedia.org/wiki/Don%27t_repeat_yourself).
 
 Let's have a look at a real-world example, the footer on Netlify's page:
 
@@ -443,13 +357,9 @@ Let's have a look at a real-world example, the footer on Netlify's page:
 </footer>
 ```
 
-Here, every link has an extremely long list of utility classes attached
-(they use Tailwind with a `tw`-prefix), and this list is
-repeated 6 times in this code snippet alone.
+Here, every link has an extremely long list of utility classes attached (they use Tailwind with a `tw`-prefix), and this list is repeated 6 times in this code snippet alone.
 
-Of course, this is only the compiled HTML code. In development, you will
-create a reusable component (in this case, for a type of link) and only
-write the Tailwind classes once. This is what it could look like:
+Of course, this is only the compiled HTML code. In development, you will create a reusable component (in this case, for a type of link) and only write the Tailwind classes once. This is what it could look like:
 
 ```html
 <!-- Link.svelte -->
@@ -467,16 +377,11 @@ write the Tailwind classes once. This is what it could look like:
 </a>
 ```
 
-This is still ugly and suffers from bad maintainability as already explained
-before, but at least we removed the code duplication.
+This is still ugly and suffers from bad maintainability as already explained before, but at least we removed the code duplication.
 
-But this solution means that you are dependent on a component framework to avoid code duplication with Tailwind.
-Even though such frameworks are common for most web applications, it is not something you would normally
-consider when you are about to quickly spin up a simple landing page with
-HTML and CSS, for example.
+But this solution means that you are dependent on a component framework to avoid code duplication with Tailwind. Even though such frameworks are common for most web applications, it is not something you would normally consider when you are about to quickly spin up a simple landing page with HTML and CSS, for example.
 
-For example, to style all inline code like `this one` on
-this page, I have added the following to my stylesheet.
+For example, to style all inline code like `this one` on this page, I have added the following to my stylesheet.
 
 ```css
 p > code {
@@ -486,63 +391,28 @@ p > code {
 }
 ```
 
-Then I can just use these `<code>like so</code>`. It would be much more
-cumbersome to first generate a component for this.
+Then I can just use these `<code>like so</code>`. It would be much more cumbersome to first generate a component for this.
 
-In his course [Tailwind CSS from Scratch](https://www.udemy.com/course/tailwind-from-scratch/) by Brad Traversy (from whom I learned a lot in the past!) several projects suffer
-from code duplication for exactly this reason. My concern is that he did not
-even mention that this is a problem, even copy-pasted code several times. Newcomers
-might not understand that code duplication needs to be avoided. Brad Traversy
-has hundreds of thousands of followers, and thousands of people start learning
-Tailwind via his course, which effectively teaches one of the biggest code smells
-out there.
+In his course [Tailwind CSS from Scratch](https://www.udemy.com/course/tailwind-from-scratch/) by Brad Traversy (from whom I learned a lot in the past!) several projects suffer from code duplication for exactly this reason. My concern is that he did not even mention that this is a problem, even copy-pasted code several times. Newcomers might not understand that code duplication needs to be avoided. Brad Traversy has hundreds of thousands of followers, and thousands of people start learning Tailwind via his course, which effectively teaches one of the biggest code smells out there.
 
-Of course, not every Tailwind course will do this. The issue, however, is
-that Tailwind's philosophy nudges you toward code duplication. You have to
-actively do something to avoid it. In contrast, Vanilla CSS with
-its class system is tailored towards avoiding code duplication. In the
-example above, we simply declare a class `.link` once and use it wherever
-we like.
+Of course, not every Tailwind course will do this. The issue, however, is that Tailwind's philosophy nudges you toward code duplication. You have to actively do something to avoid it. In contrast, Vanilla CSS with its class system is tailored towards avoiding code duplication. In the example above, we simply declare a class `.link` once and use it wherever we like.
 
-Another issue is that your Tailwind-bloated HTML output _does_ contain code
-duplication, thereby increasing its file size; more on that later.
+Another issue is that your Tailwind-bloated HTML output _does_ contain code duplication, thereby increasing its file size; more on that later.
 
 The Tailwind docs have a [dedicated page](https://tailwindcss.com/docs/reusing-styles) on how to deal with Tailwind's inherent code duplication. It is quite astonishing how they downplay the problem. It is claimed that often the code duplication is only in one place and hence can be edited with the multi-cursor feature of your editor. There is so much wrong with this:
 
--   Code duplication is rarely only in one place. And even if it
-    was: how can you guarantee this for sure? Do you always search for the
-    whole Tailwind class string through the whole codebase?
+-   Code duplication is rarely only in one place. And even if it was: how can you guarantee this for sure? Do you always search for the whole Tailwind class string through the whole codebase?
 -   Multi-cursor editing is cumbersome and error-prone.
 -   This approach does not get rid of the code duplication.
--   Their arguments are not Tailwind-specific and try to persuade us
-    that code duplication is not a big deal in general. Many decades of
-    research and practice in software development by thousands of
-    professionals have shown and confirmed that code duplication needs to be
-    avoided in every programming language, and Tailwind responds with "Nah
-    it's ok because you can edit with multi-cursor". This is just absurd.
+-   Their arguments are not Tailwind-specific and try to persuade us that code duplication is not a big deal in general. Many decades of research and practice in software development by thousands of professionals have shown and confirmed that code duplication needs to be avoided in every programming language, and Tailwind responds with "Nah it's ok because you can edit with multi-cursor". This is just absurd.
 
-They also suggest using loops in your markup, which is a valid approach,
-but again only works with frameworks, and does not always fit either. For
-instance, when you have three buttons (Login, Logout, Dashboard) in a menu,
-do you want to create an array for the button data and loop over them? In
-any case, it is so much easier to just declare a `.btn` class
-and attach it to the buttons.
+They also suggest using loops in your markup, which is a valid approach, but again only works with frameworks, and does not always fit either. For instance, when you have three buttons (Login, Logout, Dashboard) in a menu, do you want to create an array for the button data and loop over them? In any case, it is so much easier to just declare a `.btn` class and attach it to the buttons.
 
-And what happens, in this example, when you want to add a fourth button? Do
-you want to add a fourth element to an array, just to render a
-button? With Tailwind, many developers will instead just copy-paste the
-existing code, since this is the easiest Tailwind-compatible solution
-here, thus producing code duplication. With regular CSS, you do
-not need to touch the `.btn` class at all and just add a button with
-that class. It cannot be any simpler, and Tailwind prevents you from doing this.
+And what happens, in this example, when you want to add a fourth button? Do you want to add a fourth element to an array, just to render a button? With Tailwind, many developers will instead just copy-paste the existing code, since this is the easiest Tailwind-compatible solution here, thus producing code duplication. With regular CSS, you do not need to touch the `.btn` class at all and just add a button with that class. It cannot be any simpler, and Tailwind prevents you from doing this.
 
-They also mention component frameworks, which are not always suitable as
-already mentioned, and the @apply directive, which will be addressed in a [separate section](#the-@apply-directive).
+They also mention component frameworks, which are not always suitable as already mentioned, and the @apply directive, which will be addressed in a [separate section](#the-@apply-directive).
 
-There is yet another feature of Tailwind that leads to code duplication.
-Say you want to style a link when it is focussed or hovered. In these cases,
-it should become blue and underlined. With Tailwind, it would look like
-this:
+There is yet another feature of Tailwind that leads to code duplication. Say you want to style a link when it is focussed or hovered. In these cases, it should become blue and underlined. With Tailwind, it would look like this:
 
 ```html
 <a
@@ -573,32 +443,17 @@ Or even shorter:
 }
 ```
 
-Tailwind requires you to repeat `hover:` and `focus:` three
-times. You need six classes to achieve the styling. With regular CSS, you only
-need to specify one selector and three properties. When you want to add another
-property (when the link is focussed or hovered), with Tailwind you have to add
-three classes. With regular CSS it is just one property.
+Tailwind requires you to repeat `hover:` and `focus:` three times. You need six classes to achieve the styling. With regular CSS, you only need to specify one selector and three properties. When you want to add another property (when the link is focussed or hovered), with Tailwind you have to add three classes. With regular CSS it is just one property.
 
-In general, Tailwind requires you to write `n * m` classes when
-you want to have `n` properties across `m` states. The regular CSS version only has
-one selector describing the `m` states and then `n` properties,
-each in its own line.
+In general, Tailwind requires you to write `n * m` classes when you want to have `n` properties across `m` states. The regular CSS version only has one selector describing the `m` states and then `n` properties, each in its own line.
 
-The code repetition here is of course bad for maintainability. Say you want
-to change `bold` to `semibold`. In the Tailwind code,
-you need to make three adjustments. In the CSS code, you just change
-`font-weight` to 600 _once_, and you are done.
+The code repetition here is of course bad for maintainability. Say you want to change `bold` to `semibold`. In the Tailwind code, you need to make three adjustments. In the CSS code, you just change `font-weight` to 600 _once_, and you are done.
 
 ## Speed
 
-One of Tailwind's biggest selling points is that you can style your HTML
-very fast (which is not quite true, as we have seen above). But you do
-not need Tailwind to write CSS fast. Here are two methods:
+One of Tailwind's biggest selling points is that you can style your HTML very fast (which is not quite true, as we have seen above). But you do not need Tailwind to write CSS fast. Here are two methods:
 
-First, use autocompletion of your IDE. For example, in Visual Studio Code,
-simply typing `tex` autocompletes to `text-align`. The value `center`
-is now already preselected, you just have to confirm.
-With just 5 keystrokes (t, e, x, Tab, Tab) you can write:
+First, use autocompletion of your IDE. For example, in Visual Studio Code, simply typing `tex` autocompletes to `text-align`. The value `center` is now already preselected, you just have to confirm. With just 5 keystrokes (t, e, x, Tab, Tab) you can write:
 
 ```css
 * {
@@ -606,8 +461,7 @@ With just 5 keystrokes (t, e, x, Tab, Tab) you can write:
 }
 ```
 
-With just 6 keystrokes (d, i, s, Tab, f, Tab) you can
-write:
+With just 6 keystrokes (d, i, s, Tab, f, Tab) you can write:
 
 ```css
 * {
@@ -642,34 +496,17 @@ Here are some examples:
 
 For a list of all abbreviations, see the [Emmet Cheat Sheet](https://docs.emmet.io/cheat-sheet/) (section on CSS).
 
-Both of these methods have a big advantage over Tailwind in that, in the end,
-your source code is regular CSS, thus very easy to maintain.
+Both of these methods have a big advantage over Tailwind in that, in the end, your source code is regular CSS, thus very easy to maintain.
 
 ## Class names
 
-Tailwind users praise the fact that they do not have to come up with class
-names for their elements to style them. This is true since you can
-just style any element by attaching utility classes to it.
-However, this is not the whole story.
+Tailwind users praise the fact that they do not have to come up with class names for their elements to style them. This is true since you can just style any element by attaching utility classes to it. However, this is not the whole story.
 
-When you style an element, you need to know _which_ element you are currently styling.
-When you want to change the styles of some element (which you have identified by
-looking at the website), you have to _find_ it in the code. Both tasks are difficult when
-you do not have any name for the element. It helps when you style a semantic
-element, for example when you have exactly one button in the component, which
-makes it easy to find. But less so for containers.
+When you style an element, you need to know _which_ element you are currently styling. When you want to change the styles of some element (which you have identified by looking at the website), you have to _find_ it in the code. Both tasks are difficult when you do not have any name for the element. It helps when you style a semantic element, for example when you have exactly one button in the component, which makes it easy to find. But less so for containers.
 
-For example, imagine a footer with different containers with social media
-links, internal links, logos, and lots of other stuff. Your task is to change
-the spacing of the social media icons. How fast will you be able to find it
-inside of Tailwind code? And how fast will you be able to find it if the
-container had a class name `social-media-icons` which you can
-find _immediately_ by searching in your editor for `social`?
+For example, imagine a footer with different containers with social media links, internal links, logos, and lots of other stuff. Your task is to change the spacing of the social media icons. How fast will you be able to find it inside of Tailwind code? And how fast will you be able to find it if the container had a class name `social-media-icons` which you can find _immediately_ by searching in your editor for `social`?
 
-These things happen to me all the time at my job: I have to scroll and
-search for quite a while, again and again, before I find the element which I
-need to adjust. Sometimes, I find myself adding comments in the
-markup to remember what is what.
+These things happen to me all the time at my job: I have to scroll and search for quite a while, again and again, before I find the element which I need to adjust. Sometimes, I find myself adding comments in the markup to remember what is what.
 
 ```html
 <!-- container of cart item -->
@@ -678,23 +515,11 @@ markup to remember what is what.
 ></div>
 ```
 
-One of many good measures of software quality is how descriptive the
-objects, variables, and functions are named. Names which are very short or even
-abbreviated (like `strlen` in PHP) are not good, since they do not
-speak for themselves. Tailwind just ignores this core principle of clean code
-and removes all names. It is not surprising that maintainability will suffer
-from this approach.
+One of many good measures of software quality is how descriptive the objects, variables, and functions are named. Names which are very short or even abbreviated (like `strlen` in PHP) are not good, since they do not speak for themselves. Tailwind just ignores this core principle of clean code and removes all names. It is not surprising that maintainability will suffer from this approach.
 
-That being said, I do not understand why it should be complicated to come up
-with class names. You do not have to follow any naming methodology (like
-BEM) either, just keep it simple. Imagine someone came up with a JavaScript
-framework where no variables have names because
-_it is too hard to come up with good names_. Of course, this would be
-mad. With every programming language, including CSS.
+That being said, I do not understand why it should be complicated to come up with class names. You do not have to follow any naming methodology (like BEM) either, just keep it simple. Imagine someone came up with a JavaScript framework where no variables have names because _it is too hard to come up with good names_. Of course, this would be mad. With every programming language, including CSS.
 
-To support their claim that it is hard to come up with class names,
-the [Tailwind docs](https://tailwindcss.com/docs/utility-first)
-have a quite contrived example:
+To support their claim that it is hard to come up with class names, the [Tailwind docs](https://tailwindcss.com/docs/utility-first) have a quite contrived example:
 
 ```html
 <div class="chat-notification">
@@ -735,8 +560,7 @@ have a quite contrived example:
 </style>
 ```
 
-Nothing forces you to declare a class for every single HTML element
-to style it. Here is how you can do it (and there are other ways as well):
+Nothing forces you to declare a class for every single HTML element to style it. Here is how you can do it (and there are other ways as well):
 
 ```html
 <dialog class="chat-notification">
@@ -771,9 +595,7 @@ to style it. Here is how you can do it (and there are other ways as well):
 </style>
 ```
 
-With the upcoming [CSS nesting](https://developer.chrome.com/articles/css-nesting/),
-which we have been already using for years with the help of preprocessors such as Sass,
-we can write it even more simply:
+With the upcoming [CSS nesting](https://developer.chrome.com/articles/css-nesting/), which we have been already using for years with the help of preprocessors such as Sass, we can write it even more simply:
 
 ```scss
 .chat-notification {
@@ -801,21 +623,15 @@ we can write it even more simply:
 }
 ```
 
-The Tailwind docs make you believe that CSS is complicated, only because they
-do not use their most basic features, namely element selectors and combinators!
+The Tailwind docs make you believe that CSS is complicated, only because they do not use their most basic features, namely element selectors and combinators!
 
 The Tailwind docs on [Reusing styles](https://tailwindcss.com/docs/reusing-styles) make an exaggerated claim:
 
 > You have to think up class names all the time &mdash; nothing will slow you down or drain your energy like coming up with a class name for something that doesn't deserve to be named.
 
-Really? Developers have much more energy-draining tasks. And again: having a
-descriptive name such as "logo-wrapper" in the component will be very useful
-when you need to adjust the component!
+Really? Developers have much more energy-draining tasks. And again: having a descriptive name such as "logo-wrapper" in the component will be very useful when you need to adjust the component!
 
-Finally, it is worth mentioning that many frameworks make it easy to make
-styles _scoped_ to the respective component. In this case, you can usually style elements
-just by their tag name. In the above example, we can style the dialog simply
-by selecting `dialog`.
+Finally, it is worth mentioning that many frameworks make it easy to make styles _scoped_ to the respective component. In this case, you can usually style elements just by their tag name. In the above example, we can style the dialog simply by selecting `dialog`.
 
 For another example, consider this header component:
 
@@ -832,51 +648,25 @@ For another example, consider this header component:
 </style>
 ```
 
-This is a valid Svelte and Astro component and in Vue.js you have
-to write `<style scoped>`. Because of scoping, the style for the paragraph
-will not leak outside of the component, and you do not need to come up with
-a class name such as `subtitle` (which would not be hard anyway).
-I code a lot in Svelte and rarely need to use class names
-because of this and since I use semantic HTML tags if possible.
+This is a valid Svelte and Astro component and in Vue.js you have to write `<style scoped>`. Because of scoping, the style for the paragraph will not leak outside of the component, and you do not need to come up with a class name such as `subtitle` (which would not be hard anyway). I code a lot in Svelte and rarely need to use class names because of this and since I use semantic HTML tags if possible.
 
 ## Bundle size
 
-Tailwind promises to produce smaller bundle sizes of the CSS since only
-those utility classes are included in the bundle which are actually used in
-the markup. This prevents teams to ship CSS which is not used in production.
+Tailwind promises to produce smaller bundle sizes of the CSS since only those utility classes are included in the bundle which are actually used in the markup. This prevents teams to ship CSS which is not used in production.
 
-This is only one half of the reality. Namely, the HTML gets _much_
-bigger when it is bloated with Tailwind utility classes. And even though you
-write your CSS in the markup, the browser still has to fetch the CSS file
-generated by Tailwind, so that the number of network requests is not
-decreased either. And since the HTML contains the same classes over and over
-again (see also [code duplication](#code-duplication)), Tailwind
-increases the size of the HTML far more than the size of a regular CSS file.
+This is only one half of the reality. Namely, the HTML gets _much_ bigger when it is bloated with Tailwind utility classes. And even though you write your CSS in the markup, the browser still has to fetch the CSS file generated by Tailwind, so that the number of network requests is not decreased either. And since the HTML contains the same classes over and over again (see also [code duplication](#code-duplication)), Tailwind increases the size of the HTML far more than the size of a regular CSS file.
 
-But it is not a good argument either: removing unnecessary classes from your
-CSS files is part of the development process, the same way that unnecessary
-variables and functions are removed from the JavaScript. There are also
-developer tools to make this easier for us. For example, when you work with
-Svelte, the Svelte extension for VS Code warns you about unused classes.
+But it is not a good argument either: removing unnecessary classes from your CSS files is part of the development process, the same way that unnecessary variables and functions are removed from the JavaScript. There are also developer tools to make this easier for us. For example, when you work with Svelte, the Svelte extension for VS Code warns you about unused classes.
 
-When a codebase contains lots of unused CSS, this is a sign that the
-development process has serious flaws, that the code lacks quality, and that
-maybe even the developers are not able to write clean code. This issue
-cannot be solved by writing CSS in a different way. This will not change the
-code quality of the codebase. The bad quality will emerge everywhere else.
-Ironically, we have seen that introducing Tailwind produces even more
-non-clean code (bad readability, bad maintainability, code duplication).
+When a codebase contains lots of unused CSS, this is a sign that the development process has serious flaws, that the code lacks quality, and that maybe even the developers are not able to write clean code. This issue cannot be solved by writing CSS in a different way. This will not change the code quality of the codebase. The bad quality will emerge everywhere else. Ironically, we have seen that introducing Tailwind produces even more non-clean code (bad readability, bad maintainability, code duplication).
 
 ## The @apply directive
 
-When I speak up about [code duplication](#code-duplication) and [ugly HTML](#maintainability) with Tailwind, I often hear that Tailwind offers a solution to this problem: the [@apply directive](https://tailwindcss.com/docs/reusing-styles).
-On the other hand, Tailwind creator Adam Wathan himself does not recommend using it. He admits in a [tweet](https://twitter.com/adamwathan/status/1226511611592085504) that it
+When I speak up about [code duplication](#code-duplication) and [ugly HTML](#maintainability) with Tailwind, I often hear that Tailwind offers a solution to this problem: the [@apply directive](https://tailwindcss.com/docs/reusing-styles). On the other hand, Tailwind creator Adam Wathan himself does not recommend using it. He admits in a [tweet](https://twitter.com/adamwathan/status/1226511611592085504) that it
 
 > [...] basically only exists to trick people who are put off by long lists of classes into trying the framework.
 
-In another [tweet](https://twitter.com/adamwathan/status/1559250403547652097), he even says that @apply should not have been included in Tailwind. So,
-should we use it now, or not? And if we should not use it, why on earth is
-this feature still available in Tailwind and described in its documentation?
+In another [tweet](https://twitter.com/adamwathan/status/1559250403547652097), he even says that @apply should not have been included in Tailwind. So, should we use it now, or not? And if we should not use it, why on earth is this feature still available in Tailwind and described in its documentation?
 
 Here are some problems with the @apply directive:
 
@@ -884,8 +674,7 @@ Here are some problems with the @apply directive:
 -   It can only be used in a separate CSS file. So it is also against Tailwind's promise to have only one file for markup and styling.
 -   The feature is very similar to CSS classes but is a useless abstraction of these.
 
-To elaborate on the last point, let us look at the example from the Tailwind
-documentation (removing the focus styles for simplicity):
+To elaborate on the last point, let us look at the example from the Tailwind documentation (removing the focus styles for simplicity):
 
 ```css
 .btn-primary {
@@ -914,28 +703,13 @@ You just write a minified version of a regular CSS class which suffers from wors
 
 ## There is no way back
 
-Imagine a big project takes the endeavor to refactor all its CSS to
-Tailwind. Let's imagine this process is finished and the team works with
-Tailwind for some years. These days, Tailwind is very popular, and it seems
-like it will stay here for a while.
+Imagine a big project takes the endeavor to refactor all its CSS to Tailwind. Let's imagine this process is finished and the team works with Tailwind for some years. These days, Tailwind is very popular, and it seems like it will stay here for a while.
 
-But for how long, exactly? What happens when Tailwind will not be maintained
-at some point in the future? Or what happens when a new, much better
-paradigm of writing CSS will emerge and you would like to switch? Or maybe
-you find out that Tailwind (as explained in the other sections) actually was
-a bad choice since it cripples the maintainability of your codebase and
-slows your team down?
+But for how long, exactly? What happens when Tailwind will not be maintained at some point in the future? Or what happens when a new, much better paradigm of writing CSS will emerge and you would like to switch? Or maybe you find out that Tailwind (as explained in the other sections) actually was a bad choice since it cripples the maintainability of your codebase and slows your team down?
 
-The problem is that, as soon as you have removed all the class names and
-semantics from your codebase, there is no way to get them back. Converting a
-codebase from regular CSS to Tailwind is feasible (and can even be automated
-to some extent), but it does not work the other way around. This means that,
-once you are using Tailwind throughout your project, you are
-locked into Tailwind's paradigm of utility classes.
+The problem is that, as soon as you have removed all the class names and semantics from your codebase, there is no way to get them back. Converting a codebase from regular CSS to Tailwind is feasible (and can even be automated to some extent), but it does not work the other way around. This means that, once you are using Tailwind throughout your project, you are locked into Tailwind's paradigm of utility classes.
 
-This is something projects which will be maintained for many years (or even
-decades) need to keep in mind. Of course, regular CSS will not
-go anywhere.
+This is something projects which will be maintained for many years (or even decades) need to keep in mind. Of course, regular CSS will not go anywhere.
 
 ## Consistent design
 
