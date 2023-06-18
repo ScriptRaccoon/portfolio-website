@@ -914,6 +914,29 @@ You just write a minified version of a regular CSS class which suffers from wors
 
 ## There is no way back
 
+Imagine a big project takes the endeavor to refactor all its CSS to
+Tailwind. Let's imagine this process is finished and the team works with
+Tailwind for some years. These days, Tailwind is very popular, and it seems
+like it will stay here for a while.
+
+But for how long, exactly? What happens when Tailwind will not be maintained
+at some point in the future? Or what happens when a new, much better
+paradigm of writing CSS will emerge and you would like to switch? Or maybe
+you find out that Tailwind (as explained in the other sections) actually was
+a bad choice since it cripples the maintainability of your codebase and
+slows your team down?
+
+The problem is that, as soon as you have removed all the class names and
+semantics from your codebase, there is no way to get them back. Converting a
+codebase from regular CSS to Tailwind is feasible (and can even be automated
+to some extent), but it does not work the other way around. This means that,
+once you are using Tailwind throughout your project, you are
+locked into Tailwind's paradigm of utility classes.
+
+This is something projects which will be maintained for many years (or even
+decades) need to keep in mind. Of course, regular CSS will not
+go anywhere.
+
 ## Consistent design
 
 ## Multiple files
