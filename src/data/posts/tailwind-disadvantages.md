@@ -11,19 +11,13 @@ showtoc: true
 
 This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/).
 
-Numerous blog posts, articles, and tweets have been written on the subject.
-This post attempts to give a summary of them. I have also included my
-concerns with Tailwind and write about my experience of working with
-Tailwind within a large codebase. Many of the issues presented here apply to
-every utility-based CSS framework.
+Numerous blog posts, articles, and tweets have been written on the subject. Here I will give a summary of them. I have also included my own concerns with Tailwind and write about my frustrating experience of working with Tailwind within a large codebase at my job.
 
-I understand that many people enjoy working with Tailwind. And that's
-fine. But maybe you find something on this page which makes you
-reconsider your choice.
+I understand that many people enjoy working with Tailwind. And that's fine. I also enjoyed working with Tailwind on a small personal project. But maybe you will find something here that makes you reconsider your choice. Many of the issues presented here do apply to every utility-based CSS framework.
 
 ## What is Tailwind
 
-Skip this section if you are already familiar with Tailwind.
+_Skip this section if you are already familiar with Tailwind._
 
 Tailwind is a CSS framework that seeks to style every HTML element using predefined utility classes. For (almost) every CSS property you can
 imagine there is a corresponding Tailwind utility class. So for example
@@ -41,7 +35,9 @@ div {
 in a CSS file, with Tailwind you write the following directly in your HTML:
 
 ```html
-<div class="mt-4 text-red-800 flex items-center">...</div>
+<div class="mt-4 text-red-800 flex items-center">
+    <!-- markup -->
+</div>
 ```
 
 Check the [Tailwind Docs](https://tailwindcss.com/docs) for more details.
@@ -61,7 +57,7 @@ We all know that it is hard to read long lines of text. The wider text is,
 the harder it becomes to jump to the exact next line for our eyes, and the
 more likely it is that we get lost in the middle of a line. This is why
 books have their common layout and why we design our websites accordingly
-(such as this one), setting a `max-width` to large text containers.
+(such as this one), setting a `max-width` to text containers.
 There is no precise rule, but up to 70 characters per line are usually OK.
 
 The same rule applies to the code we read and write. Code formatters such as
@@ -225,14 +221,50 @@ lines somehow, it takes time to find the relevant class. Adjusting a single
 property is much easier with regular CSS, since here every property has an
 individual line as a key-value pair.
 
+For example, in the following snippet from the code above, try to find and then change the background color of the label when the radio button is checked. How long does it take you?
+
+```html
+<label>
+    <input class="sr-only peer" name="size" type="radio" value="m" />
+    <div
+        class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
+    >
+        M
+    </div>
+</label>
+```
+
+And now try to find and change the background color in the corresponding CSS (or Sass) code:
+
+```scss
+.size-label {
+    width: 2.25rem;
+    height: 2.25rem;
+    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: rgb(51, 65, 85);
+}
+.size-input:checked + .size-label {
+    color: white;
+    font-weigt: 600;
+    background-color: rgb(15, 23, 42);
+}
+```
+
+You will find the CSS property faster, right? This is because you only need to scan the keys, which are under each other and visible clearly. Alternatively, you can look for the values and quickly identify the colors. You can also skip the whole first selector since only the second one
+is about the checked state.
+
 Readability is also negatively impacted by the lack of syntax highlighting:
 Tailwind class names are just displayed as strings. Also, they tend to be
-short but not descriptive enough (more on that later).
+short but not descriptive enough (more on that later). CSS code is much
+more expressive.
 
 Another problem is that the actual text content in the markup is harder to
 find because it is "hidden" between the dozens of class names.
 
-As a consequence, reading and maintaining Tailwind code can be
+As a consequence, reading and maintaining Tailwind code can be quite
 frustrating. Many Tailwind users emphasize that Tailwind classes are so fast
 to write down. This may be true in some cases (more on that later). But
 writing code fast has never been an indicator of code quality. The code has
@@ -247,17 +279,17 @@ is _ugly_. Although this impression is subjective, it is
 closely connected to the (more objective) lack of readability of the code.
 Many people initially share this feeling that Tailwind code is ugly, but got
 used to it after some time. This did not happen to me, though.
-Other aspects of maintainability will be covered in the sections below.</p>
+Other aspects of maintainability will be covered in the sections below.
 
 What do the [Tailwind Docs](https://tailwindcss.com/docs/utility-first) write about maintainability?
 
-> [...] maintaining a utility-first CSS project turns out to be a lot easier than maintaining a large CSS codebase, simply because HTML is so much easier to maintain than CSS. Large companies like GitHub, Netflix, Heroku, Kickstarter, Twitch, Segment, and more are using this approach with great success.
+> Maintaining a utility-first CSS project turns out to be a lot easier than maintaining a large CSS codebase, simply because HTML is so much easier to maintain than CSS. Large companies like GitHub, Netflix, Heroku, Kickstarter, Twitch, Segment, and more are using this approach with great success.
 
 There is no justification for the claim that HTML is easier to
 maintain than CSS, in particular when it is littered with utility classes
 and no descriptive [class names](#class-names). Then they go
 ahead and tell us how many companies already use Tailwind. This is just poor
-marketing inside of a documentation page (?!) and does not tell us anything
+marketing inside of a documentation page (what?!) and does not tell us anything
 about why Tailwind is maintainable (which it isn't).
 
 ## Translation from Tailwind to CSS
