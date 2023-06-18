@@ -737,6 +737,17 @@ But otherwise, it works the same. It is also remarkable that [Theming in Tailwin
 
 ## Multiple files
 
+Tailwind promises that styling and markup can be found in only one file, and that this speeds up our development. It is claimed that we do need to switch less often between files.
+
+Theoretically, this is true by design: we put all the styles directly on the HTML elements, so that the HTML is (or should be) the single source of truth for markup and design. In practice, this is not the case. In fact, Tailwind forces you to switch between files quite often:
+
+-   Not every portion of CSS can be realized with Tailwind. Sometimes, this is due to the complexity of the CSS. Sometimes, this is due to newer or less common CSS features which are not (yet) implemented in Tailwind. So you do end up with a separate CSS file. And now every time you want to change the styling you have to ask yourself which file you need to look at!
+-   The standard configuration of Tailwind can be adjusted, and many projects do this. Often you have to check this custom configuration to know what certain Tailwind classes actually mean. This applies in particular to custom colors and sizes.
+-   At my job, we have a large codebase, which has started to migrate the styles from Less (a CSS preprocessor) to Tailwind. The migration is incomplete (and takes a lot of time). The Less files are considered to be legacy, but there are still a lot of them. And it is not clear when and sometimes even how (as mentioned above) to migrate these. So again we have to switch between our Tailwind-styled markup and CSS resp. Less files. I am aware that not everyone using Tailwind will face this issue, but on the other hand I can imagine that this kind of incomplete migration is not untypical.
+
+This kind of switching is yet another reason why working with Tailwind will
+slow you down.
+
 ## Setup
 
 ## Useless diffs
