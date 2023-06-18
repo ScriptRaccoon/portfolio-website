@@ -3,6 +3,7 @@
 	import Nav from "$lib/components/Nav.svelte";
 	import LoadProgress from "$lib/components/LoadProgress.svelte";
 	import { page } from "$app/stores";
+	import ScrollUp from "$lib/components/ScrollUp.svelte";
 </script>
 
 <svelte:head>
@@ -50,6 +51,7 @@
 </svelte:head>
 
 <LoadProgress />
+<ScrollUp />
 
 <div class="wrapper">
 	<Nav />
