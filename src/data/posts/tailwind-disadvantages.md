@@ -758,6 +758,37 @@ Let me give you an example from the codebase at my job. For some reason, the pur
 
 ## Useless diffs
 
+When a commit contains a change in a long line of Tailwind classes, the diff may not be shown clearly &ndash; both in your editor and on GitHub. Here is an example commit, which I saw during a code review at my job. We use a prefix for our Tailwind classes, which I have replaced by `tw`, since the specific prefix does not matter.
+
+```diff
+<a
+- href="tw-flex tw-flex-col tw-bg-white tw-rounded-md gt-tablet:tw-flex-row tw-p-4 gt-tablet:tw-p-6 tw-gap-4 tw-mx-4 hover:tw-shadow-md"
++ href="tw-flex tw-flex-col tw-bg-white tw-rounded-md gt-tablet:tw-flex-row tw-items-center tw-p-4 gt-tablet:tw-p-6 tw-gap-4 tw-mx-4 hover:tw-shadow-md"
+  >...</a
+>
+```
+
+It seems like the whole line has been adjusted! How long does it take you to find out that the author only added the class `tw-items-center`? But even after you have found this, notice that you need to check the remaining classes as well, since something might have changed there as well. This is a bit cumbersome here since the corresponding classes are shifted.
+
+Normally, we can rely on GitHub which highlights the part which has changed. But here, it highlighted `items-start tw-` which indicates that actually two classes have been adjusted somehow. This is quite confusing. The first time it took me about one minute to understand what had changed.
+
+This confusion will never happen with regular CSS, since here every property has its own line, and the diff will be displayed correctly and in a very clear way. You only need two seconds to see what has changed here:
+
+```diff
+a {
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    border-radius: 0.375rem;
+-   align-items: center;
+    padding: 1rem;
+}
+```
+
+Of course, we could also write Tailwind this way, or even write editor
+extensions that format the classes automatically, but the point is (again)
+that Tailwind forces us to _fix_ its inherent maintainability issues.
+
 ## Developer experience
 
 ## Separation of concerns
@@ -769,3 +800,7 @@ Let me give you an example from the codebase at my job. For some reason, the pur
 ## The solution
 
 ## References
+
+```
+
+```
