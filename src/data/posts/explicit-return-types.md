@@ -4,7 +4,7 @@ published: 2023-06-20
 updated: null
 public: true
 description: They improve documentation, correctness and refactoring experience
-showtoc: false
+show_toc: true
 ---
 
 ## Introduction
@@ -39,7 +39,7 @@ function add_one(a: number): number {
 
 Here are **five benefits** of explicit return types:
 
-## 1. Documentation
+## Documentation
 
 When you check the code on GitHub, for example for a code review, you cannot see the inferred return type. The type becomes only visible when it is written down as part of the code.
 
@@ -84,7 +84,7 @@ Quite a bit is happening here, but right away in the third line you already know
 
 Also, keep in mind that other developers will read your code. Better documentation makes their life easier and also improves code maintainability.
 
-## 2. Wrongly inferred types
+## Wrongly inferred types
 
 Sometimes, the inferred return type is not the one intended. For the function `create_redirection` above, TypeScript infers:
 
@@ -107,7 +107,7 @@ which is not quite right (ignore the `interface` which was only added for proper
 interface Promise<{ errors: string[] } | { shortcut: string }>;
 ```
 
-## 3. Correctness
+## Correctness
 
 An explicit return type gives you a better chance that the implementation of the function is correct.
 
@@ -155,7 +155,7 @@ function sign(a: number): number {
 
 TypeScript will complain about this function because the inferred return type `number | undefined` does not match the written return type `number`, which eventually makes you realize that you forgot to handle the case `a == 0`.
 
-## 4. Refactoring
+## Refactoring
 
 Say you want to refactor the implementation of a function. How do you know that the implementation is still correct? If unit tests for the function are available, just run them. In practice, this is not always the case.
 
@@ -177,7 +177,7 @@ TypeScript has no problem with the function, it will only complain about the inv
 
 In real word examples, these errors can be anywhere in the codebase, which makes it harder to pin down their actual cause. By writing an explicit return type, the error will be alerted exactly where it comes from, making it easier to be fixed.
 
-## 5. Performance
+## Performance
 
 Writing explicit return types improves the performance of the TypeScript compiler. To quote from the [TS wiki](https://github.com/microsoft/TypeScript/wiki/Performance#using-type-annotations):
 
