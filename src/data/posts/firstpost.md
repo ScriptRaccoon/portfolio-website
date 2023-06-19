@@ -1,6 +1,6 @@
 ---
 title: First post
-published: 2022-06-16
+published: 2023-06-16
 updated: null
 public: true
 description: Welcome to my blog
