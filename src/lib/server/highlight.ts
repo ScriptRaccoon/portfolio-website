@@ -2,7 +2,7 @@ import he from "he";
 import shiki from "shiki";
 
 const highlighter = await shiki.getHighlighter({
-	theme: "material-theme-darker",
+	theme: "dark-plus",
 	langs: [
 		"javascript",
 		"html",
