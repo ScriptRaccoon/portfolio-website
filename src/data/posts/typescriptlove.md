@@ -4,7 +4,7 @@ published: 2023-06-17
 updated: 2023-06-17
 public: true
 description: "Autocompletion, Documentation, Identification, Fewer Bugs"
-showtoc: true
+show_toc: true
 ---
 
 ## Introduction
@@ -19,7 +19,7 @@ Let me explain what I love about TypeScript, in combination with Visual Studio C
 
 Whenever I begin to type something, TypeScript gives me indications of how it can be completed. This speeds up the development process a lot since I can just accept the completion by Enter or Tab. There is no need to write down all the letters. When multiple completions are possible, I navigate to the correct one with the arrow keys.
 
-I like this in particular with SvelteKit. Say you are in a `load` function of the route `/blog/[id]`. It accepts an event object, which is automatically typed. When I type `event.` (with the dot in the end) I get a list of all possible functions and properties on the event object. One of these is `event.params`. When I type this and add another dot, I get the _only_ possible parameter `id` already autocompleted. I just need to accept with Enter. So the following code is written basically in no time.
+I like this in particular with SvelteKit. Say you are in a `load` function of the route `/blog/[id]`. It accepts an event object, which is automatically typed. When I type `event.` (with the dot at the end) I get a list of all possible functions and properties on the event object. One of these is `event.params`. When I type this and add another dot, I get the _only_ possible parameter `id` already autocompleted. I just need to accept with "Enter". So the following code is written basically in no time.
 
 ```typescript
 export const load = async (event) => {
@@ -36,7 +36,7 @@ Autocompletion is even more useful when you are working with an object or an API
 await supabase.from("posts").insert(posts);
 ```
 
-You don't need to learn or remember the syntax! Autocompletion will guide you. And even more: if the array of posts does not fit to the database schema (which you can import as a type definition file), you will get an error, during development!
+You don't need to learn or remember the syntax! Autocompletion will guide you. And even more: if the array of posts does not fit the database schema (which you can import as a type definition file), you will get an error, during development!
 
 ## Documentation
 

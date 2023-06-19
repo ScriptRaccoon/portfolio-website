@@ -4,7 +4,7 @@ published: 3000-01-01
 updated: null
 public: false
 description: Why the popular CSS framework is not maintainable
-showtoc: true
+show_toc: true
 ---
 
 ## Introduction

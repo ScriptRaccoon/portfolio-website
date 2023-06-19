@@ -5,5 +5,5 @@ export type post = {
 	updated: Date | null;
 	public: boolean;
 	description: string;
-	showtoc: boolean;
+	show_toc: boolean;
 };
