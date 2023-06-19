@@ -62,10 +62,12 @@
 		}
 
 		:global(blockquote) {
-			margin-left: 1.5rem;
+			margin-left: 1rem;
 			padding-left: 0.5rem;
 			color: var(--gray-color);
 			font-size: var(--small-font);
+			border-left: 0.2rem solid var(--light-color);
+			line-height: 1.6;
 		}
 
 		:global(pre) {
