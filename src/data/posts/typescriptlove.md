@@ -148,7 +148,11 @@ export function draw_circle(options: {
 }
 ```
 
-TypeScript will immediately tell you that the function call above is not correct anymore: `Expected 1 arguments, but got 3.` When you hover over the function, you see the type it expects. So you change the function call to
+TypeScript will immediately tell you that the function call above is not correct anymore:
+
+> Expected 1 arguments, but got 3.
+
+When you hover over the function, you see the type it expects. So you change the function call to
 
 ```typescript
 draw_circle({ x: 10, y: 10, r: 2 });
@@ -164,9 +168,7 @@ We have already seen in the previous sections why TypeScript will prevent us fro
 
 For example, how many times did we encounter the following type of error when running JavaScript code?
 
-```bash
-Uncaught TypeError: Cannot read properties of undefined (reading 'age')
-```
+> Uncaught TypeError: Cannot read properties of undefined (reading 'age')
 
 How many hours did we spend debugging such issues? When we pay attention to the
 errors detected by TypeScript during development _and_ avoid the type `any`, with TypeScript this error will (almost) never happen again.
