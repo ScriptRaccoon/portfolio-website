@@ -288,6 +288,8 @@ After working with Tailwind for a while, of course, you know what most of these 
 
 With Vanilla CSS, you get what you read. With Tailwind, every single class (of which there can be many for every element, as we have seen) needs to be translated in your head. This is cognitive overload and an unnecessary one.
 
+To reduce cognitive overload, you will most likely want to install [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss) in VS Code. Tailwind users praise the fact that a) it autocompletes classes for you and b) shows the CSS definitions on hover. This is true, but a) autocompletion also works in CSS files (see also [Speed](#speed)), and b) would not even be necessary if you authored CSS without an additional abstraction.
+
 Most of the time developers within a big project do not write code: they _read_ code, since this is a prerequisite for adjusting it, and it is also done during code reviews. As a consequence, using Tailwind classes will slow you (and the whole team) down. After some time you will notice that the slowdown decreases, but it will always be there when compared to Vanilla CSS.
 
 A long list of Tailwind classes such as
