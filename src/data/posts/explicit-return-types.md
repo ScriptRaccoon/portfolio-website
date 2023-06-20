@@ -1,7 +1,7 @@
 ---
 title: Benefits of explicit function return types in TypeScript
 published: 2023-06-20
-updated: null
+updated: 2023-06-20
 public: true
 description: They improve documentation, correctness and refactoring experience
 show_toc: true
@@ -188,6 +188,6 @@ Writing explicit return types improves the performance of the TypeScript compile
 If you are working with ESlint and want to enforce writing explicit function return types, there is a plugin for that:
 [explicit-function-return-type](https://typescript-eslint.io/rules/explicit-function-return-type/).
 
-There is arguably only one downside in writing explicit return types. You need to write more. But here, Visual Studio Code can help you out, at least when the implementation is already done: Right-click on the function > "Refactor" > "Infer function return type". Alternatively, press `Cmd + .` when the cursor is on the function name, and select "Infer function return type".
+There is arguably only one downside in writing explicit return types. You need to write more. But here, Visual Studio Code can help you out, at least when the implementation is already done: Right-click on the function > "Refactor" > "Infer function return type". Alternatively, press `Cmd + .` on Mac or `Ctrl + .` on Windows when the cursor is on the function name, and select "Infer function return type".
 
 TypeScript also infers types in other situations. I would not go so far as to also write explicit types for variable definitions. This is the kind of work the TypeScript compiler should do for us.
