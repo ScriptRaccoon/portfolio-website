@@ -260,7 +260,7 @@ This looks a bit better, indeed. The issue is that this indentation takes extra,
 
 Readability is also negatively impacted by the lack of **syntax highlighting**: Tailwind class names are just displayed as strings. Also, they tend to be short but not descriptive enough (more on that later). CSS code is much more expressive and therefore easier to understand.
 
-Another problem is that the actual **text content** in the markup is harder to find because it is "hidden" between the dozens of class names. A potential solution for this problem is to use a VS Code extension such as [Inline Fold](https://github.com/moalamri/vscode-inline-fold) which collapses or expands all the utility classes. However, this introduces an extra step to edit the CSS or HTML, which goes against Tailwind's marketing promise that you can edit the CSS easily in your HTML. In reality, **Tailwind introduces maintainability issues** that need to be _fixed_, for example, with VS Code extensions. This will be a common theme in the following sections.
+Another problem is that the actual **text content** in the markup is harder to find because it is "hidden" between the dozens of class names. A potential solution for this problem is to use VS Code extensions such as [Inline Fold](https://github.com/moalamri/vscode-inline-fold) or [Tailwind Fold](https://marketplace.visualstudio.com/items?itemName=stivo.tailwind-fold) which collapse or expand all the utility classes. However, this introduces an extra step to edit the CSS or HTML, which goes against Tailwind's marketing promise that you can edit the CSS easily in your HTML. In reality, **Tailwind introduces maintainability issues** that need to be _fixed_, for example, with VS Code extensions. This will be a common theme in the following sections.
 
 As a consequence, reading and maintaining Tailwind code can be quite frustrating. Many Tailwind users emphasize that Tailwind classes are so fast to write down. This may be true in some cases (more on that later). But writing code fast has never been an indicator of code quality. The code has to be easy to maintain. This is easily forgotten when you follow Tailwind's philosophy to write down utility classes as quickly as possible. We should not just talk about how fast the code can be written, but also how fast it can be _understood_ by other developers (or ourselves in the future).
 
@@ -806,6 +806,8 @@ flex justify-center flex-col md:flex-row gap-5
 which (by design) can be found everywhere in your codebase. Even pasting the whole class name string will not always help you out, since there can be many search results, or in fact, no results when the classes were applied conditionally or were authored with a CSS-in-JS solution. Therefore, inspection gets much harder.
 
 Tailwind also prevents you to change the styling of all elements of a given type in your developer tools, which can be helpful to tweak the design during development. Instead, you can always adjust only one element.
+
+When you want to add a Tailwind class in the developer tools, there is a good chance that it is not yet contained in the build (Tailwind strips away all unused classes, which is good) and hence does not apply. You can use [DevTools for Tailwind](https://devtoolsfortailwind.com/) to fix this issue. Once again, Tailwind introduces maintainability issues that need to be fixed by yourself; in this case, also by spending money.
 
 ## There is no way back
 
