@@ -51,7 +51,7 @@ In the following sections, these promises will be debunked, and several disadvan
 
 ## Maintainability
 
-We all know that it is hard to read long lines of text. The wider text is, the harder it becomes to jump to the exact next line for our eyes, and the more likely it is that we get lost in the middle of a line. This is why books have their common layout and why we design our websites accordingly (such as this one), setting a `max-width` to text containers. There is no precise rule, but up to 70 characters per line are usually OK.
+We all know that it is hard to read long lines of text. The wider text is, the harder it becomes to jump to the exact next line for our eyes, and the more likely it is that we get lost in the middle of a line. This is why books have their common layout and why we design our websites accordingly, setting a `max-width` to text containers. There is no precise rule, but up to 70 characters per line are usually OK.
 
 The same rule applies to the code we read and write. Code formatters such as Prettier do the job for us and set appropriate line breaks automatically.
 
@@ -196,9 +196,9 @@ Keep this in mind when reading the following example, which is taken directly fr
 </div>
 ```
 
-Clearly, the HTML is bloated with lots of utility classes, which are necessary with Tailwind to achieve the desired styles. This has numerous disadvantages, in particular concerning maintainability and readability:
+Clearly, the HTML is **bloated** with lots of utility classes, which are necessary with Tailwind to achieve the desired styles. This has numerous disadvantages, in particular concerning **maintainability** and **readability**:
 
-First of all, the Tailwind classes for one element are gathered inside a long horizontal string, a "class soup". This happens even though the snippet uses Prettier with a maximal print width of 80: Prettier cannot linebreak long string literals. This makes it hard to find which property or utility class you need to adjust. Often you need to scroll. And even if you turn on word wrap in your editor, or take the manual work to indent the lines somehow, it takes time to find the relevant class. Adjusting a single property is much easier with regular CSS, since here every property has an individual line as a key-value pair.
+First of all, the Tailwind classes for one element are gathered inside a **long horizontal string**, a "class soup". This happens even though the snippet uses Prettier with a maximal print width of 80: Prettier cannot linebreak long string literals. This makes it **hard to find** which property or utility class you need to adjust. Often you need to scroll. And even if you turn on word wrap in your editor, or take the manual work to indent the lines somehow, it takes time to find the relevant class. Adjusting a single property is much easier with regular CSS, since here every property has an individual line as a key-value pair.
 
 For example, in the following snippet from the code above, try to find and then change the background color of the label when the radio button is checked. How long does it take you?
 
@@ -213,7 +213,7 @@ For example, in the following snippet from the code above, try to find and then 
 </label>
 ```
 
-And now try to find and change the background color in the corresponding CSS (or Sass) code:
+Now try to find and change the background color in the corresponding CSS code:
 
 ```scss
 .size-label {
@@ -232,21 +232,47 @@ And now try to find and change the background color in the corresponding CSS (or
 }
 ```
 
-You will find the CSS property faster, right? This is because you only need to scan the keys, which are under each other and visible clearly. Alternatively, you can look for the values and quickly identify the colors. You can also skip the whole first selector since only the second one is about the checked state.
+You will find the CSS property faster, right? This is because you only need to scan the keys, which are **aligned under each other** and hence easy to see. Alternatively, you can look for the values and quickly identify the colors. You can also skip the whole first selector since only the second one is about the checked state. In a Tailwind class string, you cannot skip anything. You are also faster at looking for the background color in the CSS since the whole string `background-color` is present in the code, not just its abbreviation `bg`.
 
-Readability is also negatively impacted by the lack of syntax highlighting: Tailwind class names are just displayed as strings. Also, they tend to be short but not descriptive enough (more on that later). CSS code is much more expressive.
+You might argue that the Tailwind code could also be written like so:
 
-Another problem is that the actual text content in the markup is harder to find because it is "hidden" between the dozens of class names.
+```html
+<label>
+    <input class="sr-only peer" name="size" type="radio" value="m" />
+    <div
+        class="w-9
+               h-9
+               rounded-lg
+               flex
+               items-center
+               justify-center
+               text-slate-700
+               peer-checked:font-semibold
+               peer-checked:bg-slate-900
+               peer-checked:text-white"
+    >
+        M
+    </div>
+</label>
+```
 
-As a consequence, reading and maintaining Tailwind code can be quite frustrating. Many Tailwind users emphasize that Tailwind classes are so fast to write down. This may be true in some cases (more on that later). But writing code fast has never been an indicator of code quality. The code has to be easy to maintain. This is easily forgotten when you follow Tailwind's philosophy and quickly write down all these utility classes. We should not just talk about how fast the code can be written, but (maybe even more) how fast it can be _understood_ by other developers (or ourselves in the future).
+This looks a bit better, indeed. The issue is that this indentation takes extra, **manual work**. Prettier does not do it for you. Apart from that, I have never seen this in practice. At my job, where we also use Tailwind, I started to group related utility classes in one line.
 
-The initial reaction when looking at some Tailwind code as above is that it is _ugly_. Although this impression is subjective, it is closely connected to the (more objective) lack of readability of the code. Many people initially share this feeling that Tailwind code is ugly, but got used to it after some time. This did not happen to me, though. Other aspects of maintainability will be covered in the sections below.
+Readability is also negatively impacted by the lack of **syntax highlighting**: Tailwind class names are just displayed as strings. Also, they tend to be short but not descriptive enough (more on that later). CSS code is much more expressive and therefore easier to understand.
+
+Another problem is that the actual **text content** in the markup is harder to find because it is "hidden" between the dozens of class names. A potential solution for this problem is to use a VS Code extension such as [Inline Fold](https://github.com/moalamri/vscode-inline-fold) which collapses or expands all the utility classes. However, this introduces an extra step to edit the CSS or HTML, which goes against Tailwind's marketing promise that you can edit the CSS easily in your HTML. In reality, **Tailwind introduces maintainability issues** that need to be _fixed_, for example, with VS Code extensions. This will be a common theme in the following sections.
+
+As a consequence, reading and maintaining Tailwind code can be quite frustrating. Many Tailwind users emphasize that Tailwind classes are so fast to write down. This may be true in some cases (more on that later). But writing code fast has never been an indicator of code quality. The code has to be easy to maintain. This is easily forgotten when you follow Tailwind's philosophy to write down utility classes as quickly as possible. We should not just talk about how fast the code can be written, but also how fast it can be _understood_ by other developers (or ourselves in the future).
+
+The initial reaction when looking at some Tailwind code as above is that it is **ugly**. Although this impression is subjective, it is closely connected to the (more objective) lack of readability of the code. Many people initially share this feeling that Tailwind code is ugly, but got used to it after some time. This did not happen to me, though.
 
 What do the [Tailwind Docs](https://tailwindcss.com/docs/utility-first) write about maintainability?
 
 > Maintaining a utility-first CSS project turns out to be a lot easier than maintaining a large CSS codebase, simply because HTML is so much easier to maintain than CSS. Large companies like GitHub, Netflix, Heroku, Kickstarter, Twitch, Segment, and more are using this approach with great success.
 
-There is no justification for the claim that HTML is easier to maintain than CSS, in particular when it is littered with utility classes and no descriptive [class names](#class-names). With Tailwind you create hard-to-maintain HTML instead of hard-to-maintain CSS. Then they go ahead and tell us how many companies already use Tailwind. This is just poor marketing inside of a documentation page (what?!) and does not tell us anything about why Tailwind is maintainable (which it isn't).
+There is no justification for the claim that HTML is easier to maintain than CSS, which I highly doubt when it is littered with utility classes and no descriptive [class names](#class-names). With Tailwind you create hard-to-maintain HTML instead of hard-to-maintain CSS. Then they go ahead and tell us how many companies already use Tailwind. This is just poor marketing inside of a documentation page, where it does not belong, which sounds to me like a desperate attempt to convince the reader. It also does not tell us anything about why Tailwind is maintainable.
+
+This is only the beginning. Other aspects of maintainability will be covered in the sections below.
 
 ## Translation from Tailwind to CSS
 
@@ -1041,3 +1067,4 @@ Below you will find some other references which describe the disadvantages of us
 -   [TailwindCSS: Adds complexity, does nothing.](https://dev.to/brianboyko/tailwindcss-adds-complexity-does-nothing-3hpn) by Brian Boyko
 -   [Why Tailwind Isn't for Me](https://www.spicyweb.dev/why-tailwind-isnt-for-me/) by Jared White
 -   [Why you’ll probably regret using Tailwind](https://johanronsse.be/2020/07/08/why-youll-probably-regret-using-tailwind/) by Johan Ronsse
+-   [Why I personally hate Tailwind](https://www.reddit.com/r/webdev/comments/y7lkgs/why_i_personally_hate_tailwind/) by u/Normal_Fishing9824
