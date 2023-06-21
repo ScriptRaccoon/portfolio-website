@@ -2,6 +2,7 @@
 	import { page } from "$app/stores";
 
 	import logo from "$lib/assets/ScriptRaccoon.png";
+	import ThemeToggler from "./ThemeToggler.svelte";
 
 	type link = {
 		name: string;
@@ -34,6 +35,9 @@
 				</a>
 			</li>
 		{/each}
+		<li>
+			<ThemeToggler />
+		</li>
 	</ul>
 </nav>
 
