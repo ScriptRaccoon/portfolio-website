@@ -56,7 +56,7 @@
 		border-radius: 50%;
 		display: grid;
 		place-content: center;
-		background-color: var(--gray-color);
+		background-color: var(--accent-color);
 		color: var(--inverted-font-color);
 	}
 </style>

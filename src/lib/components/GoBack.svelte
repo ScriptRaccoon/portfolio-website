@@ -11,6 +11,6 @@
 		text-decoration: underline;
 		text-underline-offset: 0.1rem;
 		font-size: var(--small-font);
-		color: var(--gray-color);
+		color: var(--secondary-font-color);
 	}
 </style>

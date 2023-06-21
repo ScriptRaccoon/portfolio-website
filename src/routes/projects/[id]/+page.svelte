@@ -56,7 +56,7 @@
 	.year {
 		margin-top: -0.5rem;
 		font-size: var(--small-font);
-		color: var(--gray-color);
+		color: var(--secondary-font-color);
 	}
 
 	.links {

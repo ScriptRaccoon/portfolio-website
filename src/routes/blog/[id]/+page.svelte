@@ -48,7 +48,7 @@
 	.dates {
 		margin-top: -0.5rem;
 		font-size: var(--small-font);
-		color: var(--gray-color);
+		color: var(--secondary-font-color);
 	}
 
 	.toc {
@@ -64,9 +64,9 @@
 		:global(blockquote) {
 			margin-left: 1rem;
 			padding-left: 0.5rem;
-			color: var(--gray-color);
+			color: var(--secondary-font-color);
 			font-size: var(--small-font);
-			border-left: 0.2rem solid var(--light-color);
+			border-left: 0.2rem solid var(--border-color);
 			line-height: 1.6;
 		}
 
@@ -77,20 +77,22 @@
 			overflow: auto;
 			max-height: 30rem;
 			scrollbar-width: thin;
+			border: var(--code-border);
+			background-color: var(--code-bg-color) !important;
 
 			&::-webkit-scrollbar {
-				width: 6px;
-				height: 6px;
+				width: 0.4rem;
+				height: 0.4rem;
 			}
 
 			&::-webkit-scrollbar-thumb {
-				background-color: var(--gray-color);
+				background-color: var(--secondary-font-color);
 			}
 		}
 
 		:global(code:not(pre code)) {
 			font-family: monospace;
-			background-color: var(--gray-color);
+			background-color: var(--inline-code-color);
 			color: var(--inverted-font-color);
 			padding-inline: 0.5rem;
 			padding-block: 0.05rem;

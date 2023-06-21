@@ -58,12 +58,11 @@
 	label {
 		cursor: pointer;
 		&.selected {
-			background-color: var(--primary-color);
+			background-color: var(--accent-color);
 			color: var(--inverted-font-color);
 		}
 		&.focus {
-			outline: 0.1rem solid var(--primary-color);
-			outline-offset: 0.15rem;
+			outline: 0.1rem solid var(--accent-color);
 		}
 	}
 </style>
