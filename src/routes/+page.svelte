@@ -23,7 +23,7 @@
 		img {
 			width: min(70vw, 8rem);
 			border-radius: 50%;
-			box-shadow: 0rem 0rem 1rem var(--light-color);
+			box-shadow: 0rem 0rem 1rem var(--shadow-color);
 		}
 	}
 </style>

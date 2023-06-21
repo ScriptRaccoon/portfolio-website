@@ -35,11 +35,11 @@
 		text-decoration: none;
 		display: block;
 		padding-block: 1rem;
-		border-bottom: 1px solid var(--light-color);
+		border-bottom: 1px solid var(--border-color);
 	}
 
 	.date {
-		color: var(--gray-color);
+		color: var(--secondary-font-color);
 		font-size: var(--small-font);
 		margin-bottom: 0.5rem;
 	}

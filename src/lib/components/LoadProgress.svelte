@@ -12,7 +12,7 @@
 		top: 0;
 		left: 0;
 		height: 0.5rem;
-		background-color: var(--primary-color);
+		background-color: var(--accent-color);
 		z-index: 10;
 		animation: grow 12s 200ms ease-out forwards;
 	}

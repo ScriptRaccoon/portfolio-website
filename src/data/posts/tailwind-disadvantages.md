@@ -421,7 +421,8 @@ For example, to style all inline code like `this one` on this page, I have added
 p > code {
     font-family: "Courier New", Courier, monospace;
     font-weight: 600;
-    color: var(--primary-color);
+    background-color: var(--inline-code-color);
+    color: var(--inverted-font-color);
 }
 ```
 

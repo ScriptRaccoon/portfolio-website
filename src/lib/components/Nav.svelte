@@ -40,11 +40,12 @@
 <style lang="scss">
 	nav {
 		padding-block: 1rem;
-		border-bottom: 1px solid var(--light-color);
+		border-bottom: 1px solid var(--border-color);
 		position: sticky;
 		top: 0;
 		background-color: var(--bg-color);
 		box-shadow: 0rem -2rem 0rem 2rem var(--bg-color);
+		z-index: 1;
 
 		@media (max-width: 38rem) {
 			padding-block: 0.5rem;
@@ -68,6 +69,7 @@
 
 	.logo {
 		width: 2rem;
+		border-radius: 50%;
 	}
 
 	a {
@@ -85,7 +87,7 @@
 		right: 0;
 		bottom: -0.15rem;
 		height: 0.1rem;
-		background-color: var(--primary-color);
+		background-color: var(--accent-color);
 		border-radius: 100vw;
 	}
 </style>

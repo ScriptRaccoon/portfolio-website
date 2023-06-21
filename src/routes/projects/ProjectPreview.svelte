@@ -25,12 +25,12 @@
 	a {
 		text-decoration: none;
 		padding-block: 1rem;
-		border-bottom: 1px solid var(--light-color);
+		border-bottom: 1px solid var(--border-color);
 		display: block;
 	}
 
 	.teaser {
-		color: var(--gray-color);
+		color: var(--secondary-font-color);
 		margin-bottom: 0.5rem;
 	}
 
