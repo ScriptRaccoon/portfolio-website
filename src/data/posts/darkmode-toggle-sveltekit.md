@@ -158,7 +158,7 @@ The button triggers a function that toggles the theme:
 
 ```typescript
 function toggle_theme(): void {
-    const theme = current_theme === "light" ? "dark" : "light;
+    const theme = current_theme === "light" ? "dark" : "light";
     set_theme(theme);
 }
 ```
