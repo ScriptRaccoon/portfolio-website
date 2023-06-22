@@ -4,24 +4,37 @@
 	import logo from "$lib/assets/ScriptRaccoon.png";
 	import ThemeToggler from "./ThemeToggler.svelte";
 
+	import Fa from "svelte-fa";
+	import {
+		faYoutube,
+		type IconDefinition,
+	} from "@fortawesome/free-brands-svg-icons";
+	import {
+		faCircleQuestion,
+		faClipboardList,
+		faEnvelope,
+		faPenToSquare,
+	} from "@fortawesome/free-solid-svg-icons";
+
 	type link = {
 		name: string;
 		href: string;
+		icon?: IconDefinition;
 	};
 
 	const links: link[] = [
 		{ name: "Home", href: "/" },
-		{ name: "YouTube", href: "/youtube" },
-		{ name: "Projects", href: "/projects" },
-		{ name: "Blog", href: "/blog" },
-		{ name: "About", href: "/about" },
-		{ name: "Contact", href: "/contact" },
+		{ name: "YouTube", href: "/youtube", icon: faYoutube },
+		{ name: "Projects", href: "/projects", icon: faClipboardList },
+		{ name: "Blog", href: "/blog", icon: faPenToSquare },
+		{ name: "About", href: "/about", icon: faCircleQuestion },
+		{ name: "Contact", href: "/contact", icon: faEnvelope },
 	];
 </script>
 
 <nav>
 	<ul class="no-bullets">
-		{#each links as { name, href }}
+		{#each links as { name, href, icon }}
 			<li
 				class:current={(href === "/" && $page.url.pathname === "/") ||
 					(href !== "/" && $page.url.pathname.startsWith(href))}
@@ -30,7 +43,8 @@
 					{#if name === "Home"}
 						<img class="logo" src={logo} alt="Home" />
 					{:else}
-						{name}
+						<Fa {icon} />
+						<span class="name">{name}</span>
 					{/if}
 				</a>
 			</li>
@@ -41,7 +55,7 @@
 	</ul>
 </nav>
 
-<style lang="scss">
+<style>
 	nav {
 		padding-block: 1rem;
 		border-bottom: 1px solid var(--border-color);
@@ -50,10 +64,6 @@
 		background-color: var(--bg-color);
 		box-shadow: 0rem -2rem 0rem 2rem var(--bg-color);
 		z-index: 1;
-
-		@media (max-width: 38rem) {
-			padding-block: 0.5rem;
-		}
 	}
 
 	ul {
@@ -61,14 +71,7 @@
 		justify-content: space-between;
 		align-items: center;
 		flex-wrap: wrap;
-		gap: 1rem;
-
-		@media (max-width: 38rem) {
-			font-size: var(--small-font);
-			row-gap: 0rem;
-			column-gap: 0.75rem;
-			justify-content: start;
-		}
+		gap: 0.75rem;
 	}
 
 	.logo {
@@ -93,5 +96,24 @@
 		height: 0.1rem;
 		background-color: var(--accent-color);
 		border-radius: 100vw;
+	}
+
+	.name {
+		font-size: var(--small-font);
+	}
+
+	@media (max-width: 38rem) {
+		nav {
+			padding-block: 0.5rem;
+		}
+
+		li:not(.current) .name {
+			/* visually hidden */
+			width: 1;
+			height: 1;
+			overflow: hidden;
+			position: absolute;
+			left: -10000px;
+		}
 	}
 </style>
