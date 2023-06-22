@@ -5,7 +5,7 @@
 }
 
 html {
-	/* COLORS FOR LIGHT MODE */
+	/* LIGHT COLORS */
 	--bg-color: #fff;
 	--font-color: #000;
 	--secondary-font-color: #555;
@@ -18,15 +18,14 @@ html {
 	--code-border: none;
 	--code-bg-color: #222;
 	--inline-code-color: var(--secondary-font-color);
-
-	/* FONT SIZES */
+	/* FONTS */
 	--small-font: 1rem;
 	--medium-font: 1.125rem;
 	--tiny-font: 0.8rem;
 }
 
-html.dark {
-	/* COLORS FOR DARK MODE */
+html[data-theme="dark"] {
+	/* DARK COLORS */
 	--bg-color: #222223;
 	--font-color: #fff;
 	--secondary-font-color: #999;
