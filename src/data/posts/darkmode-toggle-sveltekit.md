@@ -103,7 +103,7 @@ body {
 
 In `Nav.svelte`, we need to calculate the current theme. We will do this in the `onMount` lifecycle function.
 
-Either there is already a theme set on the `html` element (this is `document.documentElement.getAttribute`), or we retrieve it from a media query, as follows.
+Either there is already a theme set on the `html` element, or we retrieve it from a media query, as follows.
 
 ```typescript
 let current_theme: string;
