@@ -182,7 +182,7 @@ Before we go on, we add an empty theme to the `html` tag in `src/app.html`:
 
 SvelteKit offers us to intercept server requests with the server-side handle hook. This is a function that is exported from the `src/hooks.server.ts` file. This is somewhat similar to **middleware** which you might know from the Express framework.
 
-We will use this hook to change the `data-theme` attribute above. This happens on the server so that the user will not see any flashing anymore.
+We will use this hook to change the `data-theme` attribute above. This happens on the server so that the user will not see any flashing anymore. For this to work, you cannot use a [prerendered website](https://kit.svelte.dev/docs/page-options).
 
 The default handle hook looks like this.
 
