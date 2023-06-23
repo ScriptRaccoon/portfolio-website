@@ -4,7 +4,13 @@
 	box-sizing: border-box;
 }
 
-html {
+:root {
+	--small-font: 1rem;
+	--medium-font: 1.125rem;
+	--tiny-font: 0.8rem;
+}
+
+body[data-theme="light"] {
 	/* LIGHT COLORS */
 	--bg-color: #fff;
 	--font-color: #000;
@@ -18,13 +24,9 @@ html {
 	--code-border: none;
 	--code-bg-color: #222;
 	--inline-code-color: var(--secondary-font-color);
-	/* FONTS */
-	--small-font: 1rem;
-	--medium-font: 1.125rem;
-	--tiny-font: 0.8rem;
 }
 
-html[data-theme="dark"] {
+body[data-theme="dark"] {
 	/* DARK COLORS */
 	--bg-color: #222223;
 	--font-color: #fff;

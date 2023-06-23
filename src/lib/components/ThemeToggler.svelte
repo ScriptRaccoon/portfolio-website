@@ -2,48 +2,25 @@
 	import Fa from "svelte-fa";
 	import { faMoon } from "@fortawesome/free-solid-svg-icons";
 	import { faSun } from "@fortawesome/free-regular-svg-icons";
-	import { onMount } from "svelte";
 	import { THEMES } from "$lib/shared/config";
-
-	let current_theme: string;
-
-	onMount(() => {
-		const saved_theme =
-			document.documentElement.getAttribute("data-theme");
-		if (saved_theme && Object.values(THEMES).includes(saved_theme)) {
-			current_theme = saved_theme;
-			return;
-		}
-
-		const preference_is_dark = window.matchMedia(
-			"(prefers-color-scheme: dark)",
-		).matches;
-
-		const theme = preference_is_dark ? THEMES.DARK : THEMES.LIGHT;
-
-		set_theme(theme);
-	});
 
 	function set_theme(theme: string) {
 		if (!Object.values(THEMES).includes(theme)) return;
-		const one_year = 60 * 60 * 24 * 365;
-		document.cookie = `theme=${theme}; max-age=${one_year}; path=/`;
-		document.documentElement.setAttribute("data-theme", theme);
-		current_theme = theme;
+		localStorage.setItem("theme", theme);
+		document.body.setAttribute("data-theme", theme);
 	}
 
 	function toggle_theme(): void {
+		const current_theme = document.body.getAttribute("data-theme");
 		const theme =
 			current_theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
 		set_theme(theme);
 	}
 </script>
 
-<button
-	on:click={toggle_theme}
-	aria-label="Toggle theme, current theme is {current_theme}"
->
-	<Fa icon={current_theme === THEMES.DARK ? faMoon : faSun} />
+<button on:click={toggle_theme} aria-label="Toggle theme">
+	<Fa icon={faMoon} class="moon" />
+	<Fa icon={faSun} class="sun" />
 </button>
 
 <style>
@@ -54,5 +31,17 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		position: relative;
+	}
+
+	button :global(svg) {
+		position: absolute;
+		transition: opacity 250ms linear, rotate 250ms linear;
+	}
+
+	:global(body[data-theme="dark"] .sun),
+	:global(body[data-theme="light"] .moon) {
+		opacity: 0;
+		rotate: 45deg;
 	}
 </style>
