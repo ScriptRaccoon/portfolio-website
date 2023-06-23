@@ -49,7 +49,6 @@ body {
 	font-size: var(--medium-font);
 	background-color: var(--bg-color);
 	color: var(--font-color);
-	transition: background-color 250ms linear, color 250ms linear;
 }
 
 a {
