@@ -1,3 +1,5 @@
+export const prerender = true;
+
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
 import type { post } from "../types";
