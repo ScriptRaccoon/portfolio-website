@@ -53,6 +53,10 @@
 
 	.toc {
 		margin-top: 1rem;
+
+		ol {
+			margin-top: 0.5rem;
+		}
 	}
 
 	article {
@@ -62,6 +66,7 @@
 		}
 
 		:global(blockquote) {
+			margin-block: 1rem;
 			margin-left: 1rem;
 			padding-left: 0.5rem;
 			color: var(--secondary-font-color);
@@ -74,10 +79,11 @@
 			border-radius: 0.4rem;
 			font-size: var(--small-font);
 			padding: 1rem;
+			margin-block: 1rem;
 			overflow: auto;
 			max-height: 30rem;
 			scrollbar-width: thin;
-			border: var(--code-border);
+			border: 0.15rem solid var(--code-border-color);
 			background-color: var(--code-bg-color) !important;
 
 			&::-webkit-scrollbar {

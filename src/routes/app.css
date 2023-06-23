@@ -21,7 +21,7 @@ body[data-theme="light"] {
 	--accent-color: #003a4c;
 	--tag-color: #eef0f2;
 	--tag-font-color: var(--secondary-font-color);
-	--code-border: none;
+	--code-border-color: transparent;
 	--code-bg-color: #222;
 	--inline-code-color: var(--secondary-font-color);
 }
@@ -37,7 +37,7 @@ body[data-theme="dark"] {
 	--accent-color: #d14613;
 	--tag-color: #404040;
 	--tag-font-color: var(--inverted-font-color);
-	--code-border: 0.15rem solid var(--border-color);
+	--code-border-color: var(--border-color);
 	--code-bg-color: #111;
 	--inline-code-color: #555;
 }
@@ -79,13 +79,15 @@ h2 {
 	line-height: 1.2;
 }
 
-ol,
-ul {
-	margin-left: 1.5rem;
+:is(ol, ul):not(.no-bullets) {
+	margin-left: 2rem;
+}
+
+:is(ol, ul):not(.no-bullets) li + li {
+	margin-block: 0.5rem;
 }
 
 :is(ol, ul).no-bullets {
-	margin-left: 0;
 	list-style-type: none;
 }
 
