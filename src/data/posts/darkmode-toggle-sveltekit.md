@@ -2,7 +2,7 @@
 title: How to implement a cookie-based dark mode toggle in SvelteKit
 published: 2023-06-24
 updated: null
-public: true
+public: false
 description: featuring server-side rendering and the handle hook
 show_toc: true
 ---
