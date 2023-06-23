@@ -1,3 +1,0 @@
-# Include all files in all functions
-[functions]
-  included_files = ["node_modules/shiki/themes/*.json","node_modules/shiki/languages/*.json"]
