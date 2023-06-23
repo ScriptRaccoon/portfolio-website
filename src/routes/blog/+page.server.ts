@@ -1,3 +1,5 @@
+export const prerender = true;
+
 import type { post } from "./types";
 import { PUBLIC_SHOW_ALL_POSTS } from "$env/static/public";
 import { get_frontmatter } from "$lib/server/frontmatter";
