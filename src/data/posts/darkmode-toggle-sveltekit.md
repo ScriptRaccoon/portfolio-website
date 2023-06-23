@@ -1,7 +1,7 @@
 ---
 title: How to implement a cookie-based dark mode toggle in SvelteKit
 published: 2023-06-23
-updated: null
+updated: 2023-06-23
 public: true
 description: featuring server-side rendering and the handle hook
 show_toc: true
@@ -14,7 +14,7 @@ Implementing a basic dark mode toggle is a fairly easy task. One idea might be t
 1. does not remember the user's choice,
 2. does not use the user's theme from the system settings.
 
-To address 1., one might save the preference in the browser's `localStorage`. With every page visit, we check with it if a theme is saved. This works well, but it will cause the website to flash because it takes some time to download and execute the JavaScript. This is a bad user experience. We need the correct theme to be rendered already on the server. This will be covered in this post, using **cookies** and SvelteKit's **handle hook**.
+To address 1., one might save the preference in the browser's `localStorage`. With every page visit, we check with it if a theme is saved. This works well, but it will cause the website to flash because it takes some time to download and execute the JavaScript. This is a bad user experience. We need the correct theme to be rendered already on the server. This will be covered in this post, using **cookies** and SvelteKit's **handle hook**. (See the later-added [Bonus](#bonus) section on how to fix this with `localStorage` directly.)
 
 To address 2., we can use a media query:
 
@@ -257,3 +257,16 @@ A different, much more server-side approach is taken here:
 -   HuntaByte, [SvelteKit Dark Mode Toggle/Theme Selector (with SSR)](https://www.youtube.com/watch?v=3GpZkVBjXfE)
 
 This prevents the initial flashing but does not take into account the initial user preference with a media query, as far as I can tell.
+
+## Bonus
+
+After publishing this post, I was made aware that we can make the `localStorage` solution work also without flashing. Then we do not need any server-side logic and can also work with prerendered pages (such as a blog). In fact, the initial theme can be retrieved (via a media query or a `localStorage` value if it exists) in a script tag which is directly put into the `body` element of the `app.html`. You can also make it a static file `static/darkmode.js` and import it like so:
+
+```html
+<body data-sveltekit-preload-data="hover">
+    <script src="%sveltekit.assets%/darkmode.js"></script>
+    <div style="display: contents">%sveltekit.body%</div>
+</body>
+```
+
+The rest is an easy exercise... Please check out [this repository](https://github.com/ScriptRaccoon/sveltekit-darkmode-toggler-localstorage/) for more details. This approach is also used (more or less) on [Svelte's website](https://svelte.dev).
