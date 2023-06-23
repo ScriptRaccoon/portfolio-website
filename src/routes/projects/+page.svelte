@@ -21,15 +21,17 @@
 
 <Filter {tags} {years} />
 
-<ol class="no-bullets">
-	{#each filtered_projects as project (project.id)}
-		<ProjectPreview {project} />
-	{:else}
-		<p in:fade|local={{ duration: 200, delay: 200 }}>
-			No projects within this filter
-		</p>
-	{/each}
-</ol>
+{#if filtered_projects.length > 0}
+	<ol class="no-bullets">
+		{#each filtered_projects as project (project.id)}
+			<ProjectPreview {project} />
+		{/each}
+	</ol>
+{:else}
+	<p in:fade|local={{ duration: 200, delay: 200 }}>
+		No projects within this filter
+	</p>
+{/if}
 
 <style>
 	ol {
