@@ -69,14 +69,14 @@
 	ul {
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
 		flex-wrap: wrap;
 		gap: 0.75rem;
 	}
 
 	.logo {
-		width: 2rem;
+		width: 1.75rem;
 		border-radius: 50%;
+		outline: 0.1rem solid var(--border-color);
 	}
 
 	a {
@@ -85,6 +85,9 @@
 
 	li {
 		position: relative;
+		display: flex;
+		align-items: center;
+		padding-block: 0.1rem;
 	}
 
 	li.current::after {
