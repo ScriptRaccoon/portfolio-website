@@ -1,5 +1,3 @@
-export const prerender = false;
-
 import { SECRET_REDIS_URL } from "$env/static/private";
 import Redis from "ioredis";
 const redis = new Redis(SECRET_REDIS_URL);
