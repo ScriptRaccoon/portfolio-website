@@ -34,7 +34,7 @@
 	a {
 		text-decoration: none;
 		display: block;
-		padding-block: 1rem;
+		padding-block: 1.25rem;
 		border-bottom: 1px solid var(--border-color);
 	}
 

@@ -24,9 +24,12 @@
 <style>
 	a {
 		text-decoration: none;
-		padding-block: 1rem;
+		padding-block: 1.25rem;
 		border-bottom: 1px solid var(--border-color);
-		display: block;
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+		align-items: center;
+		gap: 0.25rem;
 	}
 
 	.teaser {
@@ -37,23 +40,10 @@
 	.more {
 		font-size: var(--small-font);
 		text-decoration: underline;
-		margin-bottom: 1rem;
 	}
 
 	.image-container {
 		display: flex;
 		justify-content: center;
-	}
-
-	@media (min-width: 30rem) {
-		a {
-			display: grid;
-			grid-template-columns: 2fr 1fr;
-			align-items: center;
-			gap: 0.5rem;
-		}
-		.more {
-			margin-bottom: 0rem;
-		}
 	}
 </style>
