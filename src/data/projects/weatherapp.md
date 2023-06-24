@@ -8,4 +8,4 @@ tags: ["Full Stack", "SvelteKit", "Tutorial"]
 date: 2022-06-12
 ---
 
-A simple weather app made with SvelteKit. The data comes from <a href='https://openweathermap.org/' target='_blank'>OpenWeather API</a> via a SvelteKit endpoint. Notice that this project uses the old SvelteKit routing structure.
+A simple weather app made with SvelteKit. The data comes from [OpenWeather API](https://openweathermap.org/) via a SvelteKit endpoint. Notice that this project uses the old SvelteKit routing structure.

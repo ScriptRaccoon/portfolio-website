@@ -9,4 +9,4 @@ tags:
 date: 2022-02-10
 ---
 
-The <a href='https://www.nytimes.com/games/wordle' target='_blank'>Wordle game</a> built with Svelte on the front-end and Netlify's serverless functions on the back-end. Cheating is impossible since the correct word gets encrypted.
+The [Wordle game](https://www.nytimes.com/games/wordle) built with Svelte on the front-end and Netlify's serverless functions on the back-end. Cheating is impossible since the correct word gets encrypted.

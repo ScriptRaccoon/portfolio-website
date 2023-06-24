@@ -8,4 +8,4 @@ tags: ["Full Stack", "Express", "Firebase", "Tool", "Tutorial"]
 date: 2021-10-13
 ---
 
-Share secrets via a one-time link and an optional password, very similar to <a href='https://onetimesecret.com/' target='_blank'>onetimesecret</a>. The data is encrypted and stored in Firebase.
+Share secrets via a one-time link and an optional password, very similar to [onetimesecret](https://onetimesecret.com/). The data is encrypted and stored in Firebase.

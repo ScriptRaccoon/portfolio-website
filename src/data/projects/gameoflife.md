@@ -8,4 +8,8 @@ tags: ["Svelte", "Browser game", "Creative Coding", "Tutorial"]
 date: 2022-10-25
 ---
 
-Conway's Game of Life as a fullscreen browser game, made with Svelte.
+This is [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) as a fullscreen browser game, made with Svelte.
+
+The cells can be toggled via mouse click. In the menu, you can start or pause the simulation. When paused, you can also go to the next step of the simulation. There is also an option to randomize all the cells.
+
+I literally could watch this game forever!

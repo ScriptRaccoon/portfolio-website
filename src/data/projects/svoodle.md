@@ -8,4 +8,4 @@ tags: ["Full Stack", "SvelteKit", "Firebase", "Tool"]
 date: 2022-07-03
 ---
 
-A <a href='https://doodle.com' target='_blank'>doodle</a>-like app made with SvelteKit and Firebase which lets you quickly create polls that can be shared via links. Polls get deleted after a month.
+A [doodle](https://doodle.com)-like app made with SvelteKit and Firebase which lets you quickly create polls that can be shared via links. Polls get deleted after a month.
