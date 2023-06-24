@@ -53,6 +53,9 @@
 </ul>
 
 <style>
+	img {
+		margin-block: 1.5rem;
+	}
 	.year {
 		margin-top: -0.5rem;
 		font-size: var(--small-font);
@@ -70,6 +73,5 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-		margin-top: 1.5rem;
 	}
 </style>

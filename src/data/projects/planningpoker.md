@@ -16,4 +16,13 @@ tags:
 date: 2023-03-18
 ---
 
-Planning Poker is played in Scrum teams to estimate tickets for an upcoming sprint. This app is made with SvelteKit and uses socket.io for real-time communication.
+Planning Poker is played in Scrum teams to estimate the complexity of stories for an upcoming sprint. This app is made with SvelteKit and deployed as a Node app via the corresponding adapter. To this Node app, we attach a socket.io instance for real-time communication within each room.
+
+In the app, you can
+
+-   log in with a name (which is saved as a cookie)
+-   create a room
+-   join an existing room
+-   give an estimate
+-   reveal all estimates in the room
+-   reset all estimates
