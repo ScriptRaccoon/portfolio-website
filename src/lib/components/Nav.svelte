@@ -19,11 +19,10 @@
 	type link = {
 		name: string;
 		href: string;
-		icon?: IconDefinition;
+		icon: IconDefinition;
 	};
 
 	const links: link[] = [
-		{ name: "Home", href: "/" },
 		{ name: "YouTube", href: "/youtube", icon: faYoutube },
 		{ name: "Projects", href: "/projects", icon: faClipboardList },
 		{ name: "Blog", href: "/blog", icon: faPenToSquare },
@@ -34,18 +33,16 @@
 
 <nav>
 	<ul class="no-bullets">
+		<li class:current={$page.url.pathname === "/"}>
+			<a href="/">
+				<img src={logo} alt="Home" class="logo" />
+			</a>
+		</li>
 		{#each links as { name, href, icon }}
-			<li
-				class:current={(href === "/" && $page.url.pathname === "/") ||
-					(href !== "/" && $page.url.pathname.startsWith(href))}
-			>
+			<li class:current={$page.url.pathname.startsWith(href)}>
 				<a {href}>
-					{#if name === "Home"}
-						<img class="logo" src={logo} alt="Home" />
-					{:else}
-						<Fa {icon} />
-						<span class="name">{name}</span>
-					{/if}
+					<Fa {icon} />
+					<span class="name">{name}</span>
 				</a>
 			</li>
 		{/each}
