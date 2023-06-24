@@ -1,7 +1,7 @@
 ---
 title: Benefits of explicit function return types in TypeScript
 published: 2023-06-20
-updated: 2023-06-20
+updated: 2023-06-24
 public: true
 description: They improve documentation, correctness and refactoring experience
 show_toc: true
@@ -106,6 +106,14 @@ which is not quite right (ignore the `interface` which was only added for proper
 ```typescript
 interface Promise<{ errors: string[] } | { shortcut: string }>;
 ```
+
+JavaScript has a built-in function that generates unique, random IDs:
+
+```javascript
+crypto.randomUUID();
+```
+
+Unfortunately, the return type is a concatenation of five strings. You probably want to view this just as a string. So when you use this function within a function that generates an object containing an ID, the inferred return type is probably not the one you want. You need to make it explicit.
 
 ## Correctness
 
