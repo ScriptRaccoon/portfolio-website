@@ -260,6 +260,10 @@ A different, much more server-side approach is taken here:
 
 This prevents the initial flashing but does not take into account the initial user preference with a media query, as far as I can tell.
 
+A similar cookie-based approach is taken in this video (with the deprecated SvelteKit routing system, though):
+
+-   Johnny Magrippis, [How to: SvelteKit SSR Dark Mode 🌒 with cookies!](https://www.youtube.com/watch?v=5A21S5mMijI)
+
 ## Bonus
 
 After publishing this post, I was made aware that we can make the `localStorage` solution work also without flashing. Then we do not need any server-side logic and can also work with prerendered pages (such as a blog). In fact, the initial theme can be retrieved (via a media query or a `localStorage` value if it exists) in a script tag which is directly put into the `body` element of the `app.html`. You can also make it a static file `static/darkmode.js` and import it like so:
