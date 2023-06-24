@@ -109,11 +109,8 @@
 
 		li:not(.current) .name {
 			/* visually hidden */
-			width: 1;
-			height: 1;
-			overflow: hidden;
 			position: absolute;
-			left: -10000px;
+			left: -100000px;
 		}
 	}
 </style>
