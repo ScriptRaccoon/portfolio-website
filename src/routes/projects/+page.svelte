@@ -28,7 +28,7 @@
 		{/each}
 	</ol>
 {:else}
-	<p in:fade|local={{ duration: 200, delay: 200 }}>
+	<p in:fade={{ duration: 200, delay: 200 }}>
 		No projects within this filter
 	</p>
 {/if}
