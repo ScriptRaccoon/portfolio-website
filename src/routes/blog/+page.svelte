@@ -1,4 +1,6 @@
 <script lang="ts">
+	import PreviewCard from "$lib/components/PreviewCard.svelte";
+
 	export let data;
 	const { posts } = data;
 </script>
@@ -8,7 +10,7 @@
 <ol class="no-bullets">
 	{#each posts as post (post.id)}
 		<li class:draft={!post.public}>
-			<a href="/blog/{post.id}">
+			<PreviewCard href="/blog/{post.id}">
 				<h2>
 					{#if !post.public}
 						Draft:
@@ -19,7 +21,7 @@
 				<div class="date">{post.published.toLocaleDateString()}</div>
 				<p class="description">{post.description}</p>
 				<div class="more">More...</div>
-			</a>
+			</PreviewCard>
 		</li>
 	{:else}
 		<p>No post published yet</p>
@@ -31,22 +33,10 @@
 		margin-top: 1rem;
 	}
 
-	a {
-		text-decoration: none;
-		display: block;
-		padding-block: 1.25rem;
-		border-bottom: 1px solid var(--border-color);
-	}
-
 	.date {
 		color: var(--secondary-font-color);
 		font-size: var(--small-font);
 		margin-bottom: 0.5rem;
-	}
-
-	.more {
-		font-size: var(--small-font);
-		text-decoration: underline;
 	}
 
 	.draft {
