@@ -4,8 +4,16 @@ teaser: made with SvelteKit and MongoDB
 repository: https://github.com/ScriptRaccoon/svt.ink
 url: https://svt.ink/
 tutorial:
-tags: ["SvelteKit", "Tool", "Full Stack", "MongoDB", "TypeScript"]
+tags:
+    [
+        "SvelteKit",
+        "Tool",
+        "Full Stack",
+        "MongoDB",
+        "TypeScript",
+        "Tailwind",
+    ]
 date: 2023-05-27
 ---
 
-This is a URL shortener made with SvelteKit. The redirections are stored in a MongoDB database.
+This is a URL shortener made with SvelteKit. The redirections are stored in a MongoDB database. To interact with the database, we use the Mongoose package. Progressively enhanced form actions make the app also usable without client-side JavaScript. The number of visits and the date of the last visit are tracked as well.
