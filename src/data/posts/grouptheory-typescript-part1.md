@@ -415,8 +415,8 @@ console.assert(Zmod2.compose(1, 1) === 0);
 
 ## Outlook
 
-For me, it was a joy to build a bridge between my old profession (mathematics) and my new one (web development). I hope that you also found the investigation interesting.
+Since this post is already very long, I have decided to split it into several parts. The next part will be about [finite cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group) and [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group). We will also implement some general constructions for groups, and add some further methods to our group class, showcasing how group theory can be modeled within TypeScript.
 
 Of course, when you want to do some serious computations with groups, you will most likely want to use a different, more performant programming language or even computer algebra system, tailored towards group theory in particular (GAP, Magma, Sage, ...).
 
-Since this post is already very long, I have decided to split it into two parts. The next part will be about [finite cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group) and [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group). We will also implement some general constructions for groups, and add some further methods to our group class, showcasing how group theory can be modeled within TypeScript.
+For me, it was a joy to build a bridge between my old profession (mathematics) and my new one (web development). I hope that you also found the investigation interesting.
