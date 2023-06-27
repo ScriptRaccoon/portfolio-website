@@ -15,7 +15,7 @@ Even if you haven't heard of groups (in mathematics) yet, you use them all the t
 
 `Z = {..., -1, 0, +1, +2, ...}`
 
-equipped with the common arithmetic operations `+` and `-` of adding and subtracting integers. (A more precise definition is explained below.)
+equipped with the common arithmetical operations `+` and `-` of adding and subtracting integers. (A more precise definition is explained below.)
 
 Ever wondered why, when performing the same set of moves to a solved Rubik's cube again and again (for example: front, top, front, top, ...), you [eventually get back to its original position](/media/rubikscuberotations.mp4)? Well, this is a consequence of Lagrange's theorem in group theory. The beauty of mathematics, and group theory in particular, is that it allows us to understand these "happy accidents" on a much more conceptual level.
 
@@ -38,13 +38,13 @@ A group consists of a set `X` together with
 -   a function `c : X x X ---> X` ("composition")
 -   a function `i : X ---> X` ("inverse")
 
-satisfying some conditions. The notation means that, given any two elements `a,b` in `X`, we get a new element `c(a,b)` in `X`. Also, we have an element `i(a)` of `X`, for every element `a` of `X`. So, `e` is a constant, `c` is a function of two arguments, and `i` is a function of one argument. The group is the tuple `G=(X,e,c,i)` with all the data.
+satisfying some conditions. The notation means that, given any two elements `x,y` in `X`, we get a new element `c(x,y)` in `X`. Also, we have an element `i(x)` of `X`, for every element `x` of `X`. So, `e` is a constant, `c` is a function of two arguments, and `i` is a function of one argument. The group is the tuple `G = (X,e,c,i)` with all the data.
 
-For example, in the group of integers `Z`, the set consists of all integers `...,-1,0,+1,+2,...`, the unit is the zero `0`, the composition maps two integers `a,b` to their _sum_ `a + b`, and the inverse of `a` is `-a`.
+For example, in the group of integers `Z`, the set consists of all integers `...,-1,0,+1,+2,...`, the unit is the zero `0`, the composition maps two integers `x,y` to their _sum_ `x + y`, and the inverse of `x` is `-x`.
 
-Another example is the group `Q*` of all non-zero rational numbers (floats) with the unit element `1`, the composition of `a,b` is their _product_ `a * b`, and the inverse of `a` is `1/a`.
+Another example is the group `Q*` of all non-zero rational numbers (floats) with the unit element `1`, the composition of `x,y` is their _product_ `x * y`, and the inverse of `x` is `1/x`.
 
-The conditions (called "group axioms") are the following:
+The conditions for a group, called _group axioms_, are the following:
 
 1. **Associativity law**: For all elements `x,y,z` we have `c(x,c(y,z)) = c(c(x,y),z)`.
 2. **Unit law**: For all elements `x` we have `c(x,e) = x` and `c(e,x) = x`.
@@ -52,21 +52,23 @@ The conditions (called "group axioms") are the following:
 
 When you write down these conditions for `Q*`, you get:
 
-1. `a * (b * c) = (a * b) * c` for all rational numbers `a,b,c`
-2. `a * 1 = a` and `1 * a = a` for all rational numbers `a`
-3. `a * 1/a = 1` and `1/a * a = e` for all rational numbers `a`
+1. `x * (y * z) = (x * y) * z` for all non-zero rational numbers `x,y,z`
+2. `x * 1 = x` and `1 * x = x` for all non-zero rational numbers `x`
+3. `x * 1/x = 1` and `1/x * x = 1` for all non-zero rational numbers `x`
 
 Looks familiar, right? And for `Z`, the conditions are:
 
-1. `a + (b + c) = (a + b) + c` for all integers `a,b,c`
-2. `a + 0 = a` and `0 + a = a` for all integers `a`
-3. `a + (-a) = 0` and `(-a) + a = 0` for all integers `a`
+1. `x + (y + z) = (x + y) + z` for all integers `x,y,z`
+2. `x + 0 = x` and `0 + x = x` for all integers `x`
+3. `x + (-x) = 0` and `(-x) + x = 0` for all integers `x`
 
-These equations are true, verifying that `Z`and `Q*` are in fact groups.
+These equations are true, verifying that `Z`and `Q*` are, indeed, groups.
+
+Groups are nothing but structures in which you can compute like you normally would, just in a more abstract way.
 
 ## Group interface
 
-To translate the definition of a group to TypeScript, we will replace the set `X` with any type. It has to be arbitrary so that we will use a generic type.
+To translate the definition of a group to TypeScript, we will replace the set `X` with a type. It has to be arbitrary so that we will use a generic type.
 
 The unit can be any element of type `X`. The composition is a function of two arguments, both of type `X`, producing an element of type `X`. And the inverse operation takes an element of type `X` to an element of type `X`.
 
@@ -89,7 +91,7 @@ We will solve this in the next section.
 
 ## Sets with equality
 
-In JavaScript, we cannot iterate over types, but over array-like structures. We will work with [sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) since we want to prevent duplicate elements. Instead of the class `Set` we will use the generic class `Set<X>` in TypeScript which ensures that all elements belong to `X`.
+In JavaScript, we cannot iterate over types, but over array-like structures. We will work with [sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) since we want to prevent duplicate elements. Instead of the class `Set` we will use the generic class `Set<X>` in TypeScript which ensures that all elements belong to the type `X`.
 
 ```typescript
 interface GroupData<X> {
@@ -103,9 +105,9 @@ interface GroupData<X> {
 
 Remember that all sets in JavaScript / TypeScript are finite so we will only be able to model _finite groups_. Infinite groups can only be modeled "partially".
 
-The interface above is still not finished. Remember that we want to write down the group axioms which require the equality of two elements. But in JavaScript, the equality of two elements is often a too strict notion. For example, `[1,2] === [1,2]` is actually false!
+The interface above is still not finished. Remember that we want to write down the group axioms which require the equality of two elements. But in JavaScript, the equality of two non-primitive objects is often a too strict notion. For example, `[1,2] === [1,2]` is actually false!
 
-Hence, we need to introduce a more flexible notion of equality of elements of our sets. To achieve this, we extend the generic class `Set<X>` with a new generic class that has such a notion:
+We need a more flexible notion of equality of elements of our sets. To achieve this, we extend the generic class `Set<X>` with a new generic class that has such a notion by definition:
 
 ```typescript
 // set.ts
@@ -155,6 +157,22 @@ interface GroupData<X> {
 }
 ```
 
+Before we go on, let us add a (non-abstract) method to the `SetWithEquality` class which enables us later to check if an element is contained in the set &ndash; using the custom equality function (otherwise, `Set.has` would be enough):
+
+```typescript
+contains(a: T): boolean {
+    return Array.from(this).some((b) => this.equal(a, b));
+}
+```
+
+For example:
+
+```typescript
+const M = new SetOfTuples([[0, 1]]);
+console.log(M.contains([0, 1])); // true
+console.log(M.has([0, 1])); // false, since this uses the "wrong" equality
+```
+
 ## Generic Group class
 
 To construct groups and also verify the group axioms, we need to create a generic class that implements the interface from before.
@@ -174,32 +192,44 @@ class Group<X> implements GroupData<X> {
         this.unit = unit;
         this.inverse = inverse;
         this.compose = compose;
-
         // TODO: check group axioms
     }
+    // TODO: add methods
 }
 ```
 
-## The example `G`
+## A basic example
 
-Before we continue with the group class, let us look at an instructive example.
+Before we continue with the group class, let us look at a basic example. This is a subgroup of `Q*` which has just two elements: `1` and `-1`. The group operations are inherited from `Q*`, so for example the composition is just ordinary multiplication.
 
 ```typescript
-const G = new Group<number>({
-    set: new SetOfNumbers([0, 1, 2, 3, 4]),
-    unit: 0,
-    inverse: (a) => -a,
-    compose: (a, b) => a + b,
+import { SetOfNumbers } from "./set";
+
+export const S = new Group<number>({
+    set: new SetOfNumbers([-1, 1]),
+    unit: 1,
+    compose: (a, b) => a * b,
+    inverse: (a) => 1 / a,
 });
 ```
 
-This is, strictly speaking, not a group, but only a _subset_ of the group of integers `Z`. The group axioms are satisfied for `G` except for the fact that inverse and composition are not _closed_: For example, `3` is contained in the set, but its inverse `-3` is not. Also, `1` and `4` are contained in the set, but their sum `5` is not.
+For example:
 
-We have to make this compromise here since we cannot model infinite groups. We cannot write `new SetOfNumbers(Integers)`, unfortunately.
+```typescript
+console.assert(S.compose(-1, -1) === 1);
+```
 
-On the other hand, we have not just implemented inverse and composition for the elements `0,1,2,3,4` of `G`, but rather for _all_ numbers (at least, those JavaScript can handle).
+Reminder: `console.assert` does only log something when the assertion is not true. In our case, nothing is logged, which means that the assertion is true!
 
-Clearly, the TypeScript version of a group differs from the mathematical version. Nevertheless, we can try to bring over some group theory to TypeScript.
+There is a big difference here to the mathematical group `{-1,-1}`, though. This one has composition and inverse defined only for these two elements. The group `S` defined in TypeScript has a function `S.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
+
+```typescript
+console.assert(S.compose(2, 3) === 6);
+```
+
+One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple. In mathematics, the _type_ of the elements of a group and its underlying set are practically the same (and they really are in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `SetOfNumbers(AllNumbers)`.
+
+The TypeScript version of a group clearly differs from the mathematical version. Nevertheless, we can try to bring over some group theory to TypeScript. We will cover the group axioms next.
 
 ## Class methods
 
@@ -259,8 +289,6 @@ We can test this with our example "group" from before.
 console.assert(G.isAssociative === true);
 ```
 
-Reminder: `console.assert` does only log something when the assertion is not true. In our case, nothing is logged, which means that `G` is, indeed, associative. Yay!
-
 ### Unit law
 
 Next, we treat the unit law. As before, we define a helper method first which checks this for a single element.
@@ -301,61 +329,34 @@ get hasInverseElements(): boolean {
 }
 ```
 
-### Group axioms
-
-We have everything together to check the group axioms. We also add this check to the constructor.
-
-```typescript
-constructor(data: GroupData<X>) {
-    // ...
-    if (!this.isGroup) throw "Group axioms are not satisfied";
-}
-
-get isGroup(): boolean {
-    return (
-        this.isAssociative &&
-        this.hasUnit &&
-        this.hasInverseElements
-    );
-}
-```
-
-The example group `G` from before does not throw an error, implying that the group axioms (except for closedness) are satisfied! Try to mess up the definition of `G.inverse` for example, you will get an error.
-
 ### Closedness
 
-We will not make this mandatory like the group axioms but want to have a method to check if the group is closed, i.e. that
+We almost forgot something! We need to make sure that the group operations are indeed operating on the underlying set, one says that they are _closed_. This means:
 
 -   the unit is contained in the set
 -   the composition of two elements in the set is again in the set
 -   the inverse of an element in the set is again in the set
 
-It is a bit unfortunate that this is not guaranteed by our type system. After all, we are saying that, for example, the inverse of an element of type `X` is again of type `X`, via the group data interface. But these are two different things. Remember that the types are only adding some type-safety to our class, whereas the set says exactly which elements we have and over which elements we can iterate. In mathematics (and type theory), these things are the same, but unfortunately, it is not the case here. Please let me know if you find an approach in TypeScript that unifies the type and the set!
+It is a bit unfortunate that this is not guaranteed by our type system. After all, we are saying that, for example, the inverse of an element of type `X` is again of type `X`, via the group data interface. But as we have already explained [before](#a-basic-example), these are two different things. Remember that the types are only adding some type-safety to our class, whereas the set says exactly which elements we have and over which elements we can iterate.
 
-When implementing the closedness check, we also have to make sure to use the notion of equality in our set. Therefore, it is _not_ enough to use the `Set.has` class method.
+When implementing the closedness check, we also have to make sure to use the notion of equality in our set. Therefore, it is _not_ enough to use the `Set.has` class method to verify that an element is contained in the set.
 
 So let's do it:
 
 ```typescript
 get isClosedUnderUnit(): boolean {
-    return this.elements.some((a) =>
-        this.set.equal(a, this.unit)
-    );
+    return this.set.contains(this.unit);
 }
 
 get isClosedUnderComposition(): boolean {
     return squareOfArray(this.elements).every(([a, b]) =>
-        this.elements.some((c) =>
-            this.set.equal(this.compose(a, b), c)
-        )
+        this.set.contains(this.compose(a, b))
     );
 }
 
 get isClosedUnderInverses(): boolean {
     return this.elements.every((a) =>
-        this.elements.some((b) =>
-            this.set.equal(this.inverse(a), b)
-        )
+        this.set.contains(this.inverse(a))
     );
 }
 
@@ -368,7 +369,29 @@ get isClosed(): boolean {
 }
 ```
 
-We use a `squareOfArray` utility function, implemented similarly to our `cubeOfArray` function from before. For our example, `G.isClosed` will be false. When you reduce the list of elements to `0` in its definition, it will be true. This is the so-called trivial group.
+We use a `squareOfArray` utility function, implemented similarly to our `cubeOfArray` function from before.
+
+### Group axioms
+
+We have everything together to check the group axioms. We also add this check to the constructor.
+
+```typescript
+constructor(data: GroupData<X>) {
+    // ...
+    if (!this.isGroup) throw "Group axioms are not satisfied";
+}
+
+get isGroup(): boolean {
+    return (
+        this.isClosed &&
+        this.isAssociative &&
+        this.hasUnit &&
+        this.hasInverseElements
+    );
+}
+```
+
+The example group `S` from [before](#a-basic-example) does not throw an error, implying that the group axioms are satisfied! Try to mess up the definition of `S.inverse` for example, you will get an error.
 
 ### Commutativity
 
@@ -387,39 +410,29 @@ get isCommutative(): boolean {
 }
 ```
 
-Our example "group" `G` is commutative:
+Our example group `S` is commutative:
 
 ```typescript
-console.assert(G.isCommutative === true);
+console.assert(S.isCommutative === true);
 ```
 
-## A finite simple group of order 2
+### Order
 
-There is a group with two elements `0,1` and composition (written as `+`) defined by `1 + 1 = 0` and the condition that `0` is a unit. This is the cyclic group `Z/2Z` or `Z modulo 2`. There is even a
-[song named after this group](https://www.youtube.com/watch?v=BipvGD-LCjU)!
-
-It is essentially the same as (mathematicians say: _isomorphic_ to) the group of truth values with the `XOR` operation.
-
-Let us build it with our class.
+A lot of group theory can now be added to our group class. For now, let us only look at a very basic example: the _order_ of a group is the number of its elements. We can easily implement this as a class method:
 
 ```typescript
-const Zmod2 = new Group<number>({
-    set: new SetOfNumbers([0, 1]),
-    unit: 0,
-    compose: (a, b) => (a == b && a == 1 ? 0 : a + b),
-    inverse: (a) => a,
-});
+get order(): number {
+    return this.set.size;
+}
 ```
 
-Again, notice that our implementation of `compose` and `inverse` covers _all_ numbers, but we are only interested in their action on the set `0,1`, in particular with regards to the group axioms.
-
-Let us test the implementation:
+For example:
 
 ```typescript
-console.assert(Zmod2.isClosed === true);
-console.assert(Zmod2.isCommutative === true);
-console.assert(Zmod2.compose(1, 1) === 0);
+console.assert(S.order === 2);
 ```
+
+We will add more group theory in the next parts of this series.
 
 ## Outlook
 
