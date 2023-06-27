@@ -1,8 +1,8 @@
 ---
 title: Group theory in TypeScript (Part 1)
-published: 2023-06-26
+published: 2023-06-28
 updated: null
-public: false
+public: true
 description: Let's develop some mathematics with generic classes!
 show_toc: true
 ---
@@ -21,14 +21,14 @@ Ever wondered why, when performing the same set of moves to a solved Rubik's cub
 
 The objective of this series of posts is to develop some basic group theory in the context of **TypeScript**. We will make heavy use of [generics](https://typescriptlang.org/docs/handbook/2/generics.html) and [generic classes](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-classes) in particular. It turns out that they fit quite well to model mathematical structures.
 
-The definition of a group requires the notion of a _set_, which is (roughly) a collection of mathematical things (numbers, functions, geometric objects, other sets, ...). It turns out that sets can be mentally mapped to _types_ in TypeScript. Please check out the following blog posts explaining the analogy between sets and types in detail.
+The definition of a group requires the notion of a _set_, which is (roughly) a collection of mathematical things, such as numbers, functions, geometric objects, and other sets. It turns out that sets can be mentally mapped to _types_ in TypeScript. Please check out the following blog posts explaining the analogy between sets and types in detail.
 
 -   Vladimir Klepov, [Making sense of TypeScript using set theory](https://blog.thoughtspile.tech/2023/01/23/typescript-sets/)
 -   Iván Ovejero, [TypeScript and Set Theory](https://ivov.dev/notes/typescript-and-set-theory)
 
 In the following, I will make use of this analogy all the time. Also, functions in mathematics are nothing but [pure functions](https://en.wikipedia.org/wiki/Pure_function) in programming.
 
-All of the code can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
+All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
 
 ## What is a group?
 
@@ -91,7 +91,7 @@ We will solve this in the next section.
 
 ## Sets with equality
 
-In JavaScript, we cannot iterate over types, but over array-like structures. We will work with [sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) since we want to prevent duplicate elements. Instead of the class `Set` we will use the generic class `Set<X>` in TypeScript which ensures that all elements belong to the type `X`.
+In JavaScript, we cannot iterate over types, but over array-like structures. We will work with [sets](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set) since we want to prevent duplicate elements. Instead of the class `Set`, we will use the generic class `Set<X>` in TypeScript which ensures that all elements belong to the type `X`.
 
 ```typescript
 interface GroupData<X> {
@@ -113,7 +113,7 @@ We need a more flexible notion of equality of elements of our sets. To achieve t
 // set.ts
 
 abstract class SetWithEquality<X> extends Set<X> {
-    abstract equal(a: T, b: T): boolean;
+    abstract equal(a: X, b: X): boolean;
 }
 ```
 
@@ -160,7 +160,7 @@ interface GroupData<X> {
 Before we go on, let us add a (non-abstract) method to the `SetWithEquality` class which enables us later to check if an element is contained in the set &ndash; using the custom equality function (otherwise, `Set.has` would be enough):
 
 ```typescript
-contains(a: T): boolean {
+contains(a: X): boolean {
     return Array.from(this).some((b) => this.equal(a, b));
 }
 ```
@@ -203,9 +203,7 @@ class Group<X> implements GroupData<X> {
 Before we continue with the group class, let us look at a basic example. This is a subgroup of `Q*` which has just two elements: `1` and `-1`. The group operations are inherited from `Q*`, so for example the composition is just ordinary multiplication.
 
 ```typescript
-import { SetOfNumbers } from "./set";
-
-export const S = new Group<number>({
+const S = new Group<number>({
     set: new SetOfNumbers([-1, 1]),
     unit: 1,
     compose: (a, b) => a * b,
@@ -227,11 +225,13 @@ There is a big difference here to the mathematical group `{-1,-1}`, though. This
 console.assert(S.compose(2, 3) === 6);
 ```
 
-One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple. In mathematics, the _type_ of the elements of a group and its underlying set are practically the same (and they really are in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `SetOfNumbers(AllNumbers)`.
+One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple.
+
+In mathematics, the _type_ of the group elements and its underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `SetOfNumbers(AllNumbers)`.
 
 The TypeScript version of a group clearly differs from the mathematical version. Nevertheless, we can try to bring over some group theory to TypeScript. We will cover the group axioms next.
 
-## Class methods
+## Group axioms
 
 All functions in this section are methods inside of the generic class `Group<X>` unless stated otherwise.
 
@@ -314,7 +314,7 @@ Let us continue with inverses in the same fashion.
 hasInverseElement(a: X): boolean {
     return (
         this.set.equal(
-            this.compose(a, this.inverse(a)),
+            this.compose(this.inverse(a),a),
             this.unit
         ) &&
         this.set.equal(
@@ -339,9 +339,7 @@ We almost forgot something! We need to make sure that the group operations are i
 
 It is a bit unfortunate that this is not guaranteed by our type system. After all, we are saying that, for example, the inverse of an element of type `X` is again of type `X`, via the group data interface. But as we have already explained [before](#a-basic-example), these are two different things. Remember that the types are only adding some type-safety to our class, whereas the set says exactly which elements we have and over which elements we can iterate.
 
-When implementing the closedness check, we also have to make sure to use the notion of equality in our set. Therefore, it is _not_ enough to use the `Set.has` class method to verify that an element is contained in the set.
-
-So let's do it:
+Here is the code.
 
 ```typescript
 get isClosedUnderUnit(): boolean {
@@ -393,6 +391,10 @@ get isGroup(): boolean {
 
 The example group `S` from [before](#a-basic-example) does not throw an error, implying that the group axioms are satisfied! Try to mess up the definition of `S.inverse` for example, you will get an error.
 
+## Class methods
+
+A lot of group theory can now be added to our group class. For now, let us only look at two simple examples.
+
 ### Commutativity
 
 In mathematics, a group `(X,e,c,i)` is called _commutative_ if `c(x,y) = c(y,x)` holds for all elements `x,y` of `X`. For example, `Z` and `Q*` are commutative.
@@ -418,7 +420,7 @@ console.assert(S.isCommutative === true);
 
 ### Order
 
-A lot of group theory can now be added to our group class. For now, let us only look at a very basic example: the _order_ of a group is the number of its elements. We can easily implement this as a class method:
+The _order_ of a group is the number of its elements. We can easily implement this as a class method:
 
 ```typescript
 get order(): number {
@@ -426,22 +428,28 @@ get order(): number {
 }
 ```
 
-For example:
+For example,
 
 ```typescript
 console.assert(S.order === 2);
 ```
 
-We will add more group theory in the next parts of this series.
+confirms that `S` is the [finite simple group of order two](https://www.youtube.com/watch?v=BipvGD-LCjU).
 
-## Outlook
+## Conclusion
 
-I have decided to split this topic into several parts. The next parts will be about [finite cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group), [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group), [homomorphisms of groups](https://en.wikipedia.org/wiki/Group_homomorphism), and maybe more. We will also implement some general constructions for groups, and add some further methods to our group class, showcasing how group theory can be modeled within TypeScript.
+Because this post is already quite long, I have decided to split the topic into several parts. The next parts will be about [finite cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group), [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group), [homomorphisms of groups](https://en.wikipedia.org/wiki/Group_homomorphism), and maybe more concepts showcasing how group theory can be modeled within TypeScript.
 
-Of course, when you want to do some serious computations with groups, you will most likely want to use a different, more performant programming language or even computer algebra system, tailored towards group theory in particular (GAP, Magma, Sage, ...).
+Of course, when you want to do some serious _computations_ with groups, you will most likely want to use a different, more performant programming language or even computer algebra system, tailored towards group theory in particular (GAP, Magma, Sage, ...).
 
-For developing the _theory_ of groups with the help of types, [Martin-Löw type theory](https://en.wikipedia.org/wiki/Intuitionistic_type_theory) is a very powerful choice, which puts a different perspective on the group axioms as well. Essentially, the group axioms are witnessed by proofs, and these proofs are contained in the group _data_! For example, instead of saying that `a + (b + c) = (a + b) + c` (for all `a,b,c`) is a true statement, this actually becomes a _type_, and a member of this type, witnessing associativity, is part of the group data. Unfortunately, I was not able to get this idea running within TypeScript, which seems to be more "computational" in nature. It would be nice to add something like a proof of associativity to our group data, but apparently, this is not possible, which is why we had to loop over an array to check associativity instead.
+For developing the _theory_ of groups with the help of types, [Martin-Löw type theory](https://en.wikipedia.org/wiki/Intuitionistic_type_theory) is a very powerful choice, which also experienced a renaissance within the mathematics community via the introduction of [homotopy type theory](https://en.wikipedia.org/wiki/Homotopy_type_theory).
 
-Put shorty: in type theory, associativity is _part of the data_, whereas here, as well as in classical mathematics, it is a _condition_.
+Type theory puts a different perspective on the group axioms. For example, instead of saying that `a + (b + c) = (a + b) + c` is a true statement, this statement becomes a _type_, and a member of this type
+
+`p : a + (b + c) = (a + b) + c`
+
+is a _proof_ of associativity and becomes part of the group _data_! Unfortunately, I was not able to get this idea running within TypeScript, which seems to be more "computational" in nature. Instead, we had to loop over an array to check associativity.
+
+Put shorty: in type theory, associativity is part of the _data_, whereas here, as well as in classical mathematics, it is a _condition_.
 
 For me, it was a joy to build a bridge between my old profession (mathematics) and my new one (web development). I hope that you also found the investigation interesting.
