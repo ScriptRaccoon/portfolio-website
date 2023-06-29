@@ -70,7 +70,7 @@ There are more conceptual constructions of the group `Z/nZ` (with quotient group
 
 ### Permutations
 
-For every set `X`, there is a group that consists of all the bijective functions `f : X ---> X`. A function is _bijective_ it has an inverse function. This essentially means that `f` just _permutes_ or _reorders_ the elements of `X`. For example, `f : Z ---> Z`, `f(z) := -z` is bijective, but `f : Z ---> Z`, `f(z) := 0` is not.
+For every set `X`, there is a group that consists of all the bijective functions `f : X ---> X`. A function is _bijective_ if it has an inverse function. This essentially means that `f` just _permutes_ or _reorders_ the elements of `X`. For example, `f : Z ---> Z`, `f(z) := -z` is bijective, but `f : Z ---> Z`, `f(z) := 0` is not.
 
 The group composition of two functions `f : X ---> X`, `g : X ---> X` is, well, their composition:
 
@@ -214,6 +214,110 @@ console.assert(KleinFourGroup.isCommutative === true);
 console.assert(KleinFourGroup.compose("a", "b") === "c");
 ```
 
+## Groups of matrices
+
+This example requires some more prior mathematics knowledge, and I will keep it brief.
+
+If `F` is a field (or even just a commutative ring) and `n` is a non-negative integer, there is a group `GL_n(F)` of invertible matrices over `F` of size `n`, called the _general linear group_.
+
+In this section, we will implement the special case when `n = 2` and `F = F_2` is the field with two elements, and indicate how it can be generalized.
+
+### Implementation
+
+The modulo operator in JavaScript does not behave correctly, since `-1 % 2 = -1` &ndash; it should be `1`. We need to redefine it.
+
+```typescript
+function mod(a: number, r: number) {
+    return ((a % r) + r) % r;
+}
+```
+
+In JavaScript, matrices can be modeled with two-dimensional arrays. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo `2`).
+
+```typescript
+const matrices = squareOfArray(squareOfArray(interval(2)));
+
+const invertibleMatrices = matrices.filter(
+    ([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
+);
+```
+
+Next, we have to define a class for sets of such matrices. We also calculate modulo `2`.
+
+```typescript
+const matrices = squareOfArray(squareOfArray(interval(2)));
+
+const invertibleMatrices = matrices.filter(
+    ([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
+);
+
+class SetOfMatrices extends SetWithEquality<number[][]> {
+    equal(a: number[][], b: number[][]): boolean {
+        if (a.length !== b.length) return false;
+        for (let i = 0; i < a.length; i++) {
+            const row_a = a[i];
+            const row_b = b[i];
+            if (row_a.length !== row_b.length) return false;
+            for (let j = 0; j < row_a.length; j++) {
+                if (mod(row_a[j], 2) !== mod(row_b[j], 2))
+                    return false;
+            }
+        }
+        return true;
+    }
+}
+```
+
+Now we can define the group of invertible matrices. The unit element is the unit matrix. The formula for the inverse of a matrix is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication.
+
+```typescript
+const GL2_F2 = new Group<number[][]>({
+    set: new SetOfMatrices(invertibleMatrices),
+    unit: [
+        [1, 0],
+        [0, 1],
+    ],
+    inverse: ([[a, b], [c, d]]) => [
+        [mod(d, 2), mod(-b, 2)],
+        [mod(-c, 2), mod(a, 2)],
+    ],
+    compose: ([[a, b], [c, d]], [[p, q], [r, s]]) => [
+        [mod(a * p + b * r, 2), mod(a * q + b * s, 2)],
+        [mod(c * p + d * r, 2), mod(c * q + d * s, 2)],
+    ],
+});
+```
+
+As always, let us test this implementation:
+
+```typescript
+console.assert(GL2_F2.order === 6);
+console.assert(GL2_F2.isCommutative === false);
+```
+
+Since this does not throw an error, this shows in particular that the group axioms are verified.
+
+### Generalization
+
+This example can be extended to a much more general construction. It is possible to define a generic class `CommRing<X>` for commutative rings in TypeScript. The interface looks like this:
+
+```typescript
+interface CommRingData<X> {
+    set: SetWithEquality<X>;
+    zero: X;
+    one: X;
+    addition: (a: X, b: X) => X;
+    inverse: (a: X) => X;
+    multiplication: (a: X, b: X) => X;
+}
+```
+
+Specific finite fields can be modeled with this class. And the general linear group will be a function of type:
+
+```typescript
+function GL<X>(n: number, R: CommRing<X>): Group<X>;
+```
+
 ## Conclusion
 
-This part was about implementing more examples of finite groups within TypeScript. There are many more such basic examples. They are the building blocks of more fascinating examples of finite groups. In fact, there are several constructions that build groups out of (simpler) groups. This is what we will cover in the next part.
+This part was about implementing more concrete examples of finite groups within TypeScript. In the next part, we will investigate how more interesting groups can be constructed from simpler ones, and how groups can be compared with each other.
