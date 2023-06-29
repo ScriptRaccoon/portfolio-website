@@ -11,9 +11,13 @@ show_toc: true
 
 [Group theory](https://en.wikipedia.org/wiki/Group_theory) is a fascinating branch of pure mathematics, which allows us to understand arithmetical operations, solutions of algebraic equations, symmetries of geometric objects, cryptographic algorithms, and much more.
 
-This series of posts is about modeling group theory within TypeScript. In [Part 1](/blog/grouptheory-typescript-part1) we already developed a generic class `Group<X>` which models finite groups whose elements are of type `X`. Their underlying sets are instances of an abstract class `SetWithEquality<X>`, which are like sets in TypeScript but with a custom notion of equality of their elements. If you haven't read that post, please check it out first.
+This series of posts is about modeling group theory within TypeScript.
 
-In the previous part, we have only seen one specific example of a group in TypeScript. This part will be about introducing more interesting examples of groups. All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
+In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we already developed a generic class `Group<X>` which models finite groups whose elements are of type `X`. Their underlying sets are instances of an abstract class `SetWithEquality<X>`, which are like sets in TypeScript but with a custom notion of equality of their elements. If you haven't read that post, please check it out first.
+
+In Part 1, we have only seen one specific example of a group in TypeScript. This part will be about implementing further examples of groups. We will look at [cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group), [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group), the [Klein Four-Group](https://en.wikipedia.org/wiki/Klein_four-group) and the [General linear group](https://en.wikipedia.org/wiki/General_linear_group).
+
+All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
 
 ## Finite cyclic groups
 
@@ -23,7 +27,7 @@ Before giving the definition, let me tell you that you already know an example o
 
 Let `n` be a positive integer. There is a group `Z/nZ` of order `n` (that means, with `n` elements) constructed as follows:
 
-The underlying set consists of the numbers `0,1,2,...,n-1`. We take the group operations inherited from the additive group `Z`, but calculate the result _modulo `n`_. This means that the composition of `a` and `b` is the remainder of `a + b` divided by `n`. The inverse of `a` is the remainder of `-a` divided by `n`. This works since the remainder is always in the list `0,1,2,...,n-1`.
+The underlying set consists of the numbers `0,1,2,...,n-1`. We take the group operations inherited from the additive group `Z`, but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) `n`. This means that the composition of `a` and `b` is the remainder of `a + b` divided by `n`. The inverse of `a` is the remainder of `-a` divided by `n`. This works since the remainder is always in the list `0,1,2,...,n-1`.
 
 And it can be simplified even further: If `a + b < n`, then the composition of `a,b` is just `a + b`. Otherwise, it is `a + b - n`. The inverse of `0` is `0`, and for `0 < a < n` the inverse of `a` is `n - a`.
 
@@ -64,15 +68,15 @@ console.assert(Zmod7.isCommutative === true);
 
 No error is thrown by the declaration of the group, which means that the group axioms are indeed satisfied. (We implemented this behavior in Part 1.) Also, the group behaves as expected.
 
-There are more conceptual constructions of the group `Z/nZ` (with quotient groups), but the one above is more practical for the code. There is also an infinite cyclic group, `Z`, but as already explained in Part 1, we cannot model this in TypeScript. There is also a better, more abstract definition of cyclic groups (via generators), but this is not relevant for now.
+There are more conceptual constructions of the group `Z/nZ` (with quotient groups), but the one above is easier to implement in our setup. There is also an infinite cyclic group, `Z`, but as already explained in Part 1, we cannot model it in TypeScript.
 
 ## Symmetric groups
 
 ### Permutations
 
-For every set `X`, there is a group that consists of all the bijective functions `f : X ---> X`. A function is _bijective_ if it has an inverse function. This essentially means that `f` just _permutes_ or _reorders_ the elements of `X`. For example, `f : Z ---> Z`, `f(z) := -z` is bijective, but `f : Z ---> Z`, `f(z) := 0` is not.
+For every set `X`, there is a group that consists of all the bijective functions `f : X ---> X`. A function is _bijective_ if it has an [inverse function](https://en.wikipedia.org/wiki/Inverse_function). This essentially means that `f` just _permutes_ or _reorders_ the elements of `X`.
 
-The group composition of two functions `f : X ---> X`, `g : X ---> X` is, well, their composition:
+The group composition of two bijective functions `f : X ---> X`, `g : X ---> X` is, well, their composition:
 
 `X ---f---> X ---g--> X`
 
@@ -86,16 +90,16 @@ This is the _symmetric group_ on `X`. If `X` is a finite set with `n` elements, 
 
 For example, `S_3` consists of the following six permutations, written as arrays:
 
--   `[0,1,2]`
--   `[0,2,1]`
--   `[1,0,2]`
--   `[1,2,0]`
 -   `[2,0,1]`
+-   `[0,2,1]`
+-   `[0,1,2]`
 -   `[2,1,0]`
+-   `[1,2,0]`
+-   `[1,0,2]`
 
 How do we generate all permutations?
 
-The idea is to do this recursively. For `n = 0`, there is a unique permutation, the empty array. Otherwise, assume that we know all the permutations of the numbers `0,...,n-2`. They are seen as arrays of length `n-1`. Then, take any of the `n` spots and insert `n-1` there.
+The idea is to do this recursively. For `n = 0`, there is a unique permutation, the empty array. Otherwise, assume that we know all the permutations of the numbers `0,...,n-2`. They are seen as arrays of length `n-1`. Then, take any of the `n` spots and insert `n-1` there. This yields a permutation of the numbers `0,...,n-1`, and they all arise this way.
 
 For example, `S_2` has exactly two permutations, `[0,1]` and `[1,0]`. The elements of `S_3` above result from these by inserting `2` anywhere.
 
@@ -104,7 +108,7 @@ For example, `S_2` has exactly two permutations, `[0,1]` and `[1,0]`. The elemen
 We are now able to write a recursive function that generates all permutations of the numbers `0,...,n-1`.
 
 ```typescript
-export function listOfPermutations(n: number): number[][] {
+function listOfPermutations(n: number): number[][] {
     if (n < 0) throw "Only non-negative numbers are allowed";
     if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
 
@@ -132,7 +136,7 @@ export function listOfPermutations(n: number): number[][] {
 And now, we can implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the class `SetOfTuples` from Part 1 with the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
 
 ```typescript
-export function symmetricGroup(n: number): Group<number[]> {
+function symmetricGroup(n: number): Group<number[]> {
     if (n < 0) throw "Only non-negative numbers are allowed";
     if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
 
@@ -150,9 +154,9 @@ export function symmetricGroup(n: number): Group<number[]> {
 
 Let me explain this a bit more:
 
-The unit is just the array `[0,...,n-1]`, which is just the interval we implemented before.
+The unit is the array `[0,...,n-1]`, which is just the interval we implemented before.
 
-The inverse of a permutation `a` is the permutation that maps a number `y` to the (unique) number `x` with `y = a(x)`. Now, since we are working with arrays, `inverse(a)(y)` is really just the index of `y` inside of the array `a`.
+The inverse of a permutation `a` is the permutation that maps a number `y` to the (unique) number `x` with `y = a(x)`. Since we are working with arrays, `x` is just the index of `y` inside of the array `a`.
 
 The composition `c(a,b)` is defined by `c(a,b)(x) := a(b(x))`. This means that the array corresponding to `c(a,b)` results from the array for `b` by applying `a` to all of its entries, i.e., by mapping it via `a`.
 
@@ -175,12 +179,12 @@ There is a group that has exactly four elements `e,a,b,c` such that (we write th
 
 So when multiplying two distinct non-units, the result is always the other of the three elements.
 
-This is called the Klein Four-Group (named after the mathematician _Felix Klein_). Let's implement it in our code!
+This is called the Klein Four-Group, named after the mathematician _Felix Klein_. Let's implement it in our code!
 
 First, we need to implement a corresponding class for sets of strings. Since strings are primitive, the equality method is simple.
 
 ```typescript
-export class SetOfStrings extends SetWithEquality<string> {
+class SetOfStrings extends SetWithEquality<string> {
     equal(a: string, b: string): boolean {
         return a === b;
     }
@@ -190,7 +194,7 @@ export class SetOfStrings extends SetWithEquality<string> {
 Our description of the group can be translated as follows.
 
 ```typescript
-export const KleinFourGroup = new Group<string>({
+const KleinFourGroup = new Group<string>({
     set: new SetOfStrings(["e", "a", "b", "c"]),
     unit: "e",
     inverse: (x) => x,
@@ -216,7 +220,7 @@ console.assert(KleinFourGroup.compose("a", "b") === "c");
 
 ## Groups of matrices
 
-This example requires some more prior mathematics knowledge, and I will keep it brief.
+This example requires some prior knowledge of matrices and linear algebra.
 
 If `F` is a field (or even just a commutative ring) and `n` is a non-negative integer, there is a group `GL_n(F)` of invertible matrices over `F` of size `n`, called the _general linear group_.
 
@@ -232,7 +236,7 @@ function mod(a: number, r: number) {
 }
 ```
 
-In JavaScript, matrices can be modeled with two-dimensional arrays. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo `2`).
+In JavaScript, matrices can be modeled with two-dimensional arrays. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo `2`). We use the `squareOfArray` utility function from Part 1.
 
 ```typescript
 const matrices = squareOfArray(squareOfArray(interval(2)));
@@ -245,12 +249,6 @@ const invertibleMatrices = matrices.filter(
 Next, we have to define a class for sets of such matrices. We also calculate modulo `2`.
 
 ```typescript
-const matrices = squareOfArray(squareOfArray(interval(2)));
-
-const invertibleMatrices = matrices.filter(
-    ([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
-);
-
 class SetOfMatrices extends SetWithEquality<number[][]> {
     equal(a: number[][], b: number[][]): boolean {
         if (a.length !== b.length) return false;
@@ -268,7 +266,7 @@ class SetOfMatrices extends SetWithEquality<number[][]> {
 }
 ```
 
-Now we can define the group of invertible matrices. The unit element is the unit matrix. The formula for the inverse of a matrix is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication.
+Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication.
 
 ```typescript
 const GL2_F2 = new Group<number[][]>({
@@ -312,7 +310,7 @@ interface CommRingData<X> {
 }
 ```
 
-Specific finite fields can be modeled with this class. And the general linear group will be a function of type:
+The general linear group will be a function of type:
 
 ```typescript
 function GL<X>(n: number, R: CommRing<X>): Group<X>;
