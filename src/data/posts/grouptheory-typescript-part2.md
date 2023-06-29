@@ -165,6 +165,55 @@ console.assert(S3.order === 6);
 console.assert(S3.set.equal(S3.inverse([1, 2, 0]), [2, 0, 1]));
 ```
 
+## Klein Four-Group
+
+There is a group that has exactly four elements `e,a,b,c` such that (we write the group composition as multiplication here)
+
+-   `e` is the unit
+-   every element is inverse to itself (`a * a = e`, etc.)
+-   `a * b = b * a = c`, `a * c = c * a =  b`, `b * c = c * b = a`.
+
+So when multiplying two distinct non-units, the result is always the other of the three elements.
+
+This is called the Klein Four-Group (named after the mathematician _Felix Klein_). Let's implement it in our code!
+
+First, we need to implement a corresponding class for sets of strings. Since strings are primitive, the equality method is simple.
+
+```typescript
+export class SetOfStrings extends SetWithEquality<string> {
+    equal(a: string, b: string): boolean {
+        return a === b;
+    }
+}
+```
+
+Our description of the group can be translated as follows.
+
+```typescript
+export const KleinFourGroup = new Group<string>({
+    set: new SetOfStrings(["e", "a", "b", "c"]),
+    unit: "e",
+    inverse: (x) => x,
+    compose: (x, y) => {
+        if (x === "e") return y;
+        if (y === "e") return x;
+        if (x === y) return "e";
+        return ["a", "b", "c"].find((u) => u !== x && u !== y)!;
+    },
+});
+```
+
+Notice that we have to tell TypeScript that the result of the `find` method is not undefined, using the `!` operator. Otherwise, it will complain.
+
+Let us test our implementation:
+
+```typescript
+import { KleinFourGroup } from "./examples/groups/klein-four-group";
+console.assert(KleinFourGroup.order === 4);
+console.assert(KleinFourGroup.isCommutative === true);
+console.assert(KleinFourGroup.compose("a", "b") === "c");
+```
+
 ## Conclusion
 
 This part was about implementing more examples of finite groups within TypeScript. There are many more such basic examples. They are the building blocks of more fascinating examples of finite groups. In fact, there are several constructions that build groups out of (simpler) groups. This is what we will cover in the next part.
