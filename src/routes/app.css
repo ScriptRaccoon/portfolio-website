@@ -24,6 +24,7 @@ body[data-theme="light"] {
 	--code-border-color: transparent;
 	--code-bg-color: #222;
 	--inline-code-color: var(--secondary-font-color);
+	--h2-color: var(--accent-color);
 }
 
 body[data-theme="dark"] {
@@ -40,6 +41,7 @@ body[data-theme="dark"] {
 	--code-border-color: var(--border-color);
 	--code-bg-color: #111;
 	--inline-code-color: #333;
+	--h2-color: skyblue;
 }
 
 body {
@@ -77,6 +79,7 @@ h2 {
 	font-weight: 600;
 	margin-block: 0.5rem;
 	line-height: 1.2;
+	color: var(--h2-color);
 }
 
 h3 {
