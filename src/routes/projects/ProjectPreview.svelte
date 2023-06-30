@@ -9,7 +9,7 @@
 	).href;
 </script>
 
-<li transition:fade={{ duration: 200 }}>
+<li transition:fade|local={{ duration: 200 }}>
 	<PreviewCard href="../projects/{project.id}">
 		<div class="grid">
 			<div>
