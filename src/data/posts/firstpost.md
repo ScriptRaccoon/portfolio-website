@@ -3,7 +3,7 @@ title: First post
 published: 2023-06-16
 updated: null
 public: true
-description: Welcome to my blog
+description: Welcome to my blog!
 show_toc: false
 ---
 
