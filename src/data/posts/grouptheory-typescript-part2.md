@@ -2,7 +2,7 @@
 title: Group theory in TypeScript (Part 2)
 published: 2023-06-30
 updated: null
-public: false
+public: true
 description: Let's investigate more interesting examples of groups!
 show_toc: true
 ---

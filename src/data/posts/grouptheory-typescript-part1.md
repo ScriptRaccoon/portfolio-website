@@ -453,3 +453,5 @@ is a _proof_ of associativity and becomes part of the group _data_! Unfortunatel
 Put shorty: in type theory, associativity is part of the _data_, whereas here, as well as in classical mathematics, it is a _condition_.
 
 For me, it was a joy to build a bridge between my old profession (mathematics) and my new one (web development). I hope that you also found the investigation interesting.
+
+[Link to Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2)
