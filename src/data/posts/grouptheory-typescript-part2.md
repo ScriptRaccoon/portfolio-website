@@ -13,7 +13,7 @@ show_toc: true
 
 This series of posts is about modeling group theory within TypeScript.
 
-In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we already developed a generic class `Group<X>` which models finite groups whose elements are of type `X`. Their underlying sets are instances of an abstract class `SetWithEquality<X>`, which are like sets in TypeScript but with a custom notion of equality of their elements. If you haven't read that post, please check it out first.
+In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we already developed a generic class `Group<X>` which models finite groups whose elements are of type `X`. Their underlying sets are instances of a generic class `SetWithEquality<X>`, which are like sets in TypeScript but with a custom notion of equality of their elements. If you haven't read that post, please check it out first.
 
 In Part 1, we have only seen one specific example of a group in TypeScript. This part will be about implementing further examples of groups. We will look at [cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group), [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group), the [Klein Four-Group](https://en.wikipedia.org/wiki/Klein_four-group) and the [General linear group](https://en.wikipedia.org/wiki/General_linear_group).
 
@@ -49,7 +49,7 @@ function additiveGroupModulo(n: number): Group<number> {
     if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
 
     return new Group<number>({
-        set: new SetOfNumbers(interval(n)),
+        set: new SetWithEquality(interval(n)),
         unit: 0,
         inverse: (a) => (a === 0 ? 0 : n - a),
         compose: (a, b) => (a + b >= n ? a + b - n : a + b),
@@ -133,7 +133,7 @@ function listOfPermutations(n: number): number[][] {
 }
 ```
 
-And now, we can implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the class `SetOfTuples` from Part 1 with the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
+Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the function `equalTuples` which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
 
 ```typescript
 function symmetricGroup(n: number): Group<number[]> {
@@ -141,12 +141,10 @@ function symmetricGroup(n: number): Group<number[]> {
     if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
 
     return new Group<number[]>({
-        set: new SetOfTuples(listOfPermutations(n)),
+        set: new SetWithEquality(listOfPermutations(n), equalTuples),
         unit: interval(n),
         inverse: (a) =>
-            interval(n).map(y) =>
-                a.findIndex((_y) => _y === y),
-            ),
+            interval(n).map((y) => a.findIndex((_y) => _y === y)),
         compose: (a, b) => b.map((y) => a[y]),
     });
 }
@@ -181,21 +179,9 @@ So when multiplying two distinct non-units, the result is always the other of th
 
 This is called the Klein Four-Group, named after the mathematician _Felix Klein_. Let's implement it in our code!
 
-First, we need to implement a corresponding class for sets of strings. Since strings are primitive, the equality method is simple.
-
-```typescript
-class SetOfStrings extends SetWithEquality<string> {
-    equal(a: string, b: string): boolean {
-        return a === b;
-    }
-}
-```
-
-Our description of the group can be translated as follows.
-
 ```typescript
 const KleinFourGroup = new Group<string>({
-    set: new SetOfStrings(["e", "a", "b", "c"]),
+    set: new SetWithEquality(["e", "a", "b", "c"]),
     unit: "e",
     inverse: (x) => x,
     compose: (x, y) => {
@@ -241,28 +227,25 @@ In JavaScript, matrices can be modeled with two-dimensional arrays. We filter ou
 ```typescript
 const matrices = squareOfArray(squareOfArray(interval(2)));
 
-const invertibleMatrices = matrices.filter(
+const invertibleMatrices: number[][][] = matrices.filter(
     ([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
 );
 ```
 
-Next, we have to define a class for sets of such matrices. We also calculate modulo `2`.
+Next, we have to define the correct notion of equality.
 
 ```typescript
-class SetOfMatrices extends SetWithEquality<number[][]> {
-    equal(a: number[][], b: number[][]): boolean {
-        if (a.length !== b.length) return false;
-        for (let i = 0; i < a.length; i++) {
-            const row_a = a[i];
-            const row_b = b[i];
-            if (row_a.length !== row_b.length) return false;
-            for (let j = 0; j < row_a.length; j++) {
-                if (mod(row_a[j], 2) !== mod(row_b[j], 2))
-                    return false;
-            }
+function equalModulo2(a: number[][], b: number[][]): boolean {
+    if (a.length !== b.length) return false;
+    for (let i = 0; i < a.length; i++) {
+        const row_a = a[i];
+        const row_b = b[i];
+        if (row_a.length !== row_b.length) return false;
+        for (let j = 0; j < row_a.length; j++) {
+            if (mod(row_a[j], 2) !== mod(row_b[j], 2)) return false;
         }
-        return true;
     }
+    return true;
 }
 ```
 
@@ -270,7 +253,7 @@ Now we can define the group of invertible matrices. The unit element is the unit
 
 ```typescript
 const GL2_F2 = new Group<number[][]>({
-    set: new SetOfMatrices(invertibleMatrices),
+    set: new SetWithEquality(invertibleMatrices, equalModulo2),
     unit: [
         [1, 0],
         [0, 1],
