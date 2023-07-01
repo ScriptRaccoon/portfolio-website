@@ -8,6 +8,8 @@
 		html_code,
 		toc,
 	} = data;
+
+	const is_long_toc = toc.length > 10;
 </script>
 
 <GoBack />
@@ -34,6 +36,16 @@
 			{/each}
 		</ol>
 	</details>
+
+	<div class="outer-toc" class:long={is_long_toc} aria-hidden="true">
+		<ol>
+			{#each toc as item}
+				<li>
+					<a href="#{item.id}">{item.text}</a>
+				</li>
+			{/each}
+		</ol>
+	</div>
 {/if}
 
 <article>
@@ -56,6 +68,53 @@
 
 		ol {
 			margin-top: 0.5rem;
+		}
+	}
+
+	.outer-toc {
+		opacity: 0;
+		pointer-events: none;
+
+		@media (min-width: 68rem) {
+			opacity: 1;
+			pointer-events: initial;
+		}
+
+		transition: opacity 250ms linear;
+		position: fixed;
+		top: 0;
+		height: 100vh;
+		transform: translateX(38rem);
+		overflow-y: auto;
+
+		display: flex;
+		align-items: center;
+		color: var(--secondary-font-color);
+
+		ol {
+			margin-left: 0;
+			padding-left: 2rem;
+			border-left: 1px solid var(--border-color);
+		}
+
+		a:hover {
+			color: var(--font-color);
+		}
+
+		&.long {
+			align-items: start;
+
+			li + li {
+				margin-block: 0;
+			}
+
+			ol {
+				padding-block: 1rem;
+				height: 100vh;
+				display: flex;
+				flex-direction: column;
+				justify-content: space-between;
+			}
 		}
 	}
 
@@ -82,15 +141,14 @@
 			margin-block: 1rem;
 			overflow: auto;
 			max-height: 30rem;
-			scrollbar-width: thin;
 			border: 0.15rem solid var(--code-border-color);
 			background-color: var(--code-bg-color) !important;
 
+			scrollbar-width: thin;
 			&::-webkit-scrollbar {
 				width: 0.4rem;
 				height: 0.4rem;
 			}
-
 			&::-webkit-scrollbar-thumb {
 				background-color: var(--secondary-font-color);
 			}
