@@ -105,46 +105,45 @@ interface GroupData<X> {
 
 Remember that all sets in JavaScript / TypeScript are finite so we will only be able to model _finite groups_. Infinite groups can only be modeled "partially".
 
-The interface above is still not finished. Remember that we want to write down the group axioms which require the equality of two elements. But in JavaScript, the equality of two non-primitive objects is often a too strict notion. For example, `[1,2] === [1,2]` is actually false!
+The interface above is still not finished. Remember that we want to write down the group axioms, and these require the equality of pairs of elements. But in JavaScript, the equality of two non-primitive objects is often too strict. For example, `[1,2] === [1,2]` is actually false!
 
 We need a more flexible notion of equality of elements of our sets. To achieve this, we extend the generic class `Set<X>` with a new generic class that has such a notion by definition:
 
 ```typescript
 // set.ts
 
-abstract class SetWithEquality<X> extends Set<X> {
-    abstract equal(a: X, b: X): boolean;
-}
-```
+export class SetWithEquality<X> extends Set<X> {
+    public equal: (a: X, b: X) => boolean;
 
-We need to make this an [abstract class](https://www.typescriptlang.org/docs/handbook/classes.html#abstract-classes) since we cannot implement the `equal` method at this stage: this is the job of more _concrete_ classes which inherit from our abstract class.
-
-For example, the following two classes implement the notion of equality for numbers and arrays of numbers.
-
-```typescript
-class SetOfNumbers extends SetWithEquality<number> {
-    equal(a: number, b: number): boolean {
-        return a === b;
-    }
-}
-
-class SetOfTuples extends SetWithEquality<number[]> {
-    equal(a: number[], b: number[]): boolean {
-        return (
-            a.length === b.length &&
-            a.every((element, index) => element === b[index])
-        );
+    constructor(elements: X[], equal?: (a: X, b: X) => boolean) {
+        super(elements);
+        this.equal = equal ?? ((a, b) => a === b);
     }
 }
 ```
 
-Remember that these classes inherit from the class `Set<X>`, so we can use its constructor and all the usual methods. For example,
+When no equality function is passed to the constructor, we take the default one. For example,
 
 ```typescript
-new SetOfNumbers([0, 1, 2, 3, 4]);
+new SetWithEquality([0, 1, 2, 3, 4]);
 ```
 
-declares a set of 5 numbers with our own notion of equality.
+declares a set of 5 numbers with the usual notion of equality. For tuples, we define the utility function
+
+```typescript
+function equalTuples<T>(a: T[], b: T[]): boolean {
+    return (
+        a.length === b.length &&
+        a.every((_, index) => a[index] === b[index])
+    );
+}
+```
+
+and can declare a set of tuples like so:
+
+```typescript
+new SetWithEquality([[0], [1]], equalTuples);
+```
 
 This is our finished interface for groups:
 
@@ -157,7 +156,7 @@ interface GroupData<X> {
 }
 ```
 
-Before we go on, let us add a (non-abstract) method to the `SetWithEquality` class which enables us later to check if an element is contained in the set &ndash; using the custom equality function (otherwise, `Set.has` would be enough):
+Before we go on, let us add a method to the `SetWithEquality` class which enables us later to check if an element is contained in the set &ndash; using the custom equality function (otherwise, `Set.has` would be enough):
 
 ```typescript
 contains(a: X): boolean {
@@ -168,7 +167,7 @@ contains(a: X): boolean {
 For example:
 
 ```typescript
-const M = new SetOfTuples([[0, 1]]);
+const M = new SetWithEquality([[0, 1]], equalTuples);
 console.log(M.contains([0, 1])); // true
 console.log(M.has([0, 1])); // false, since this uses the "wrong" equality
 ```
@@ -204,7 +203,7 @@ Before we continue with the group class, let us look at a basic example. This is
 
 ```typescript
 const S = new Group<number>({
-    set: new SetOfNumbers([-1, 1]),
+    set: new SetWithEquality([-1, 1]),
     unit: 1,
     compose: (a, b) => a * b,
     inverse: (a) => 1 / a,
@@ -227,7 +226,7 @@ console.assert(S.compose(2, 3) === 6);
 
 One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple.
 
-In mathematics, the _type_ of the group elements and its underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `SetOfNumbers(AllNumbers)`.
+In mathematics, the _type_ of the group elements and their underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `SetOfNumbers(AllNumbers)`.
 
 The TypeScript version of a group clearly differs from the mathematical version. Nevertheless, we can try to bring over some group theory to TypeScript. We will cover the group axioms next.
 
@@ -283,10 +282,10 @@ get isAssociative(): boolean {
 
 I ran into issues without the `bind(this)`. I assume this is because the `every` function takes over the meaning of `this` otherwise. Instead, `this` should refer to the group instance.
 
-We can test this with our example "group" from before.
+We can test this with our example `S`.
 
 ```typescript
-console.assert(G.isAssociative === true);
+console.assert(S.isAssociative === true);
 ```
 
 ### Unit law
