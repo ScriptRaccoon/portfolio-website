@@ -66,6 +66,8 @@ These equations are true, verifying that `Z`and `Q*` are, indeed, groups.
 
 Groups are nothing but structures in which you can compute like you normally would, just in a more abstract way.
 
+Examples such as `Q*` are the reason why many authors also write `x * y` instead of `c(x,y)` in the case of an abstract group, but this is confusing for beginners (after all, the composition operation could even be an addition!) and will be avoided here.
+
 ## Group interface
 
 To translate the definition of a group to TypeScript, we will replace the set `X` with a type. It has to be arbitrary so that we will use a generic type.
@@ -168,11 +170,13 @@ For example:
 
 ```typescript
 const M = new SetWithEquality([[0, 1]], equalTuples);
-console.log(M.contains([0, 1])); // true
-console.log(M.has([0, 1])); // false, since this uses the "wrong" equality
+console.assert(M.contains([0, 1]) === true);
+console.assert(M.has([0, 1]) === false); // "wrong" equality
 ```
 
-## Generic Group class
+Reminder: `console.assert` does only log something when the assertion is not true. In our case, nothing is logged, which means that the assertions are true.
+
+## Generic group class
 
 To construct groups and also verify the group axioms, we need to create a generic class that implements the interface from before.
 
@@ -216,8 +220,6 @@ For example:
 console.assert(S.compose(-1, -1) === 1);
 ```
 
-Reminder: `console.assert` does only log something when the assertion is not true. In our case, nothing is logged, which means that the assertion is true!
-
 There is a big difference here to the mathematical group `{-1,-1}`, though. This one has composition and inverse defined only for these two elements. The group `S` defined in TypeScript has a function `S.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
 
 ```typescript
@@ -226,7 +228,7 @@ console.assert(S.compose(2, 3) === 6);
 
 One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple.
 
-In mathematics, the _type_ of the group elements and their underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `SetOfNumbers(AllNumbers)`.
+In mathematics, the _type_ of the group elements and their underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group `Q*` in TypeScript, since it is infinite. We cannot write `Set(AllNumbers)`.
 
 The TypeScript version of a group clearly differs from the mathematical version. Nevertheless, we can try to bring over some group theory to TypeScript. We will cover the group axioms next.
 
@@ -447,10 +449,12 @@ Type theory puts a different perspective on the group axioms. For example, inste
 
 `p : a + (b + c) = (a + b) + c`
 
-is a _proof_ of associativity and becomes part of the group _data_! Unfortunately, I was not able to get this idea running within TypeScript, which seems to be more "computational" in nature. Instead, we had to loop over an array to check associativity.
+is a _proof_ of associativity and becomes part of the group _data_!
+
+Unfortunately, I was not able to get this idea running within TypeScript, which seems to be more "computational" in nature. Instead, we had to loop over an array to check associativity.
 
 Put shorty: in type theory, associativity is part of the _data_, whereas here, as well as in classical mathematics, it is a _condition_.
 
 For me, it was a joy to build a bridge between my old profession (mathematics) and my new one (web development). I hope that you also found the investigation interesting.
 
-[Link to Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2)
+→ [Link to Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2)

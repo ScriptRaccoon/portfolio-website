@@ -133,7 +133,7 @@ function listOfPermutations(n: number): number[][] {
 }
 ```
 
-Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the function `equalTuples` which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
+Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the function `equalTuples` from Part 1 which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
 
 ```typescript
 function symmetricGroup(n: number): Group<number[]> {
@@ -198,7 +198,6 @@ Notice that we have to tell TypeScript that the result of the `find` method is n
 Let us test our implementation:
 
 ```typescript
-import { KleinFourGroup } from "./examples/groups/klein-four-group";
 console.assert(KleinFourGroup.order === 4);
 console.assert(KleinFourGroup.isCommutative === true);
 console.assert(KleinFourGroup.compose("a", "b") === "c");
@@ -232,28 +231,22 @@ const invertibleMatrices: number[][][] = matrices.filter(
 );
 ```
 
-Next, we have to define the correct notion of equality.
+Next, we have to define the correct notion of equality for matrices.
 
 ```typescript
-function equalModulo2(a: number[][], b: number[][]): boolean {
-    if (a.length !== b.length) return false;
-    for (let i = 0; i < a.length; i++) {
-        const row_a = a[i];
-        const row_b = b[i];
-        if (row_a.length !== row_b.length) return false;
-        for (let j = 0; j < row_a.length; j++) {
-            if (mod(row_a[j], 2) !== mod(row_b[j], 2)) return false;
-        }
-    }
-    return true;
+function equalMatrices<T>(a: T[][], b: T[][]): boolean {
+    return (
+        a.length === b.length &&
+        a.every((_, index) => equalTuples(a[index], b[index]))
+    );
 }
 ```
 
-Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication.
+Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication modulo `2`.
 
 ```typescript
 const GL2_F2 = new Group<number[][]>({
-    set: new SetWithEquality(invertibleMatrices, equalModulo2),
+    set: new SetWithEquality(invertibleMatrices, equalMatrices),
     unit: [
         [1, 0],
         [0, 1],
