@@ -2,7 +2,6 @@
 title: Benefits of explicit function return types in TypeScript
 published: 2023-06-20
 updated: 2023-06-24
-public: true
 description: Explicit return types improve documentation, code correctness and the refactoring experience.
 ---
 

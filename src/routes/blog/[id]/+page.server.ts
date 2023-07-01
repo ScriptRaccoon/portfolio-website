@@ -1,7 +1,6 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
 import type { post } from "../types";
-import { PUBLIC_SHOW_ALL_POSTS } from "$env/static/public";
 import { highlight } from "$lib/server/highlight";
 
 import markdownit from "markdown-it";
@@ -29,10 +28,6 @@ export const load = async (event) => {
 	const { attributes: _attributes, body } =
 		fm<Omit<post, "id">>(markdown);
 	const attributes: post = { ..._attributes, id };
-
-	if (PUBLIC_SHOW_ALL_POSTS === "false" && !attributes.public) {
-		throw error(403, "This post is not public");
-	}
 
 	const html_code_raw = md.render(body);
 	const toc = get_table_of_contents(html_code_raw);

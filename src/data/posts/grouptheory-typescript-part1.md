@@ -2,7 +2,6 @@
 title: Group theory in TypeScript (Part 1)
 published: 2023-06-28
 updated: null
-public: true
 description: Let's develop some mathematics with generic classes!
 ---
 

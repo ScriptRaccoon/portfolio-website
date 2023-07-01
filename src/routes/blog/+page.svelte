@@ -9,12 +9,11 @@
 
 <ol class="no-bullets">
 	{#each posts as post (post.id)}
-		<li class:draft={!post.public}>
+		{@const draft = post.id.includes("_draft")}
+		<li class:draft>
 			<PreviewCard href="/blog/{post.id}">
 				<h2>
-					{#if !post.public}
-						Draft:
-					{/if}
+					{#if draft}Draft:{/if}
 					{post.title}
 				</h2>
 

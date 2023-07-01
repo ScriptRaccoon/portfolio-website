@@ -2,7 +2,6 @@
 title: Why I Love TypeScript
 published: 2023-06-17
 updated: 2023-06-17
-public: true
 description: TypeScript is used for autocompletion, better documentation and understanding of code, and to reduce bugs.
 ---
 
