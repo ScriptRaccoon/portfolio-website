@@ -4,7 +4,6 @@ published: 2023-06-16
 updated: null
 public: true
 description: Welcome to my blog!
-show_toc: false
 ---
 
 Welcome to my blog!

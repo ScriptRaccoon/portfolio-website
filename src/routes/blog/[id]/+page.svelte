@@ -4,7 +4,7 @@
 	export let data;
 
 	const {
-		attributes: { title, updated, published, show_toc },
+		attributes: { title, updated, published },
 		html_code,
 		toc,
 	} = data;
@@ -25,7 +25,7 @@
 	{/if}
 </div>
 
-{#if show_toc}
+{#if toc.length > 0}
 	<details class="toc">
 		<summary>Table of Contents</summary>
 		<ol>

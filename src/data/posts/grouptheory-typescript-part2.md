@@ -4,7 +4,6 @@ published: 2023-06-30
 updated: null
 public: true
 description: Let's investigate more interesting examples of groups!
-show_toc: true
 ---
 
 ## Introduction
