@@ -1,7 +1,7 @@
 ---
 title: Group theory in TypeScript (Part 1)
 published: 2023-06-28
-updated: null
+updated: 2023-06-02
 description: Let's develop some mathematics with generic classes!
 ---
 
@@ -26,7 +26,7 @@ The definition of a group requires the notion of a _set_, which is (roughly) a c
 
 In the following, I will make use of this analogy all the time. Also, functions in mathematics are nothing but [pure functions](https://en.wikipedia.org/wiki/Pure_function) in programming.
 
-All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
+All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript). _The repository is still in development. This post will be updated accordingly._
 
 ## What is a group?
 
