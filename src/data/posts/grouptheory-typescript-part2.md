@@ -42,9 +42,8 @@ function interval(n: number): number[] {
 Finally:
 
 ```typescript
-function additiveGroupModulo(n: number): Group<number> {
-    if (n <= 0) throw "Only positive numbers are allowed";
-    if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
+function additiveGroupModulo(n: number): Group<number> | undefined {
+    // TODO: error handling
 
     return new Group<number>({
         set: new SetWithEquality(interval(n)),
@@ -55,16 +54,31 @@ function additiveGroupModulo(n: number): Group<number> {
 }
 ```
 
+Since invalid arguments may be passed to the function, we need to add some error handling:
+
+```typescript
+if (n <= 0) {
+    console.error(
+        "Error: Only positive numbers are allowed for Z/nZ",
+    );
+    return undefined;
+}
+
+if (n != Math.ceil(n)) {
+    console.error("Error: Only whole numbers are allowed for Z/nZ");
+    return undefined;
+}
+```
+
 Let us test this by looking at the group `Z/7Z`:
 
 ```typescript
-const Zmod7 = additiveGroupModulo(7);
+const Zmod7 = additiveGroupModulo(7)!;
+console.assert(Zmod7.isGroup);
 console.assert(Zmod7.order === 7);
 console.assert(Zmod7.compose(5, 3) === 1);
-console.assert(Zmod7.isCommutative === true);
+console.assert(Zmod7.isCommutative);
 ```
-
-No error is thrown by the declaration of the group, which means that the group axioms are indeed satisfied. (We implemented this behavior in Part 1.) Also, the group behaves as expected.
 
 There are more conceptual constructions of the group `Z/nZ` (with quotient groups), but the one above is easier to implement in our setup. There is also an infinite cyclic group, `Z`, but as already explained in Part 1, we cannot model it in TypeScript.
 
@@ -106,15 +120,15 @@ For example, `S_2` has exactly two permutations, `[0,1]` and `[1,0]`. The elemen
 We are now able to write a recursive function that generates all permutations of the numbers `0,...,n-1`.
 
 ```typescript
-function listOfPermutations(n: number): number[][] {
-    if (n < 0) throw "Only non-negative numbers are allowed";
-    if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
+function listOfPermutations(n: number): number[][] | undefined {
+    // TODO: error handling
 
     if (n == 0) {
         return [[]];
     }
 
     const list = listOfPermutations(n - 1);
+    if (!list) return undefined;
 
     const result: number[][] = [];
 
@@ -131,15 +145,34 @@ function listOfPermutations(n: number): number[][] {
 }
 ```
 
+Again, we need to add some error handling:
+
+```typescript
+if (n < 0) {
+    console.error(
+        "Error: Only non-negative numbers are allowed for list of permutations",
+    );
+    return undefined;
+}
+if (n != Math.ceil(n)) {
+    console.error(
+        "Error: Only whole numbers are allowed for list of permutations",
+    );
+    return undefined;
+}
+```
+
 Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the function `equalTuples` from Part 1 which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
 
 ```typescript
-function symmetricGroup(n: number): Group<number[]> {
-    if (n < 0) throw "Only non-negative numbers are allowed";
-    if (n != Math.ceil(n)) throw "Only whole numbers are allowed";
+function symmetricGroup(n: number): Group<number[]> | undefined {
+    // TODO: error handling
+
+    const permutations = listOfPermutations(n);
+    if (!permutations) return undefined;
 
     return new Group<number[]>({
-        set: new SetWithEquality(listOfPermutations(n), equalTuples),
+        set: new SetWithEquality(permutations, equalTuples),
         unit: interval(n),
         inverse: (a) =>
             interval(n).map((y) => a.findIndex((_y) => _y === y)),
@@ -159,10 +192,26 @@ The composition `c(a,b)` is defined by `c(a,b)(x) := a(b(x))`. This means that t
 Let us test that `S_3` behaves as we expect.
 
 ```typescript
-const S3 = symmetricGroup(3);
-console.assert(S3.isCommutative === false);
+const S3 = symmetricGroup(3)!;
+console.assert(S3.isGroup);
+console.assert(!S3.isCommutative);
 console.assert(S3.order === 6);
 console.assert(S3.set.equal(S3.inverse([1, 2, 0]), [2, 0, 1]));
+```
+
+Let's not forget the error handling:
+
+```typescript
+if (n < 0) {
+    console.error(
+        "Error: Only non-negative numbers are allowed for S_n",
+    );
+    return undefined;
+}
+if (n != Math.ceil(n)) {
+    console.error("Error: Only whole numbers are allowed for S_n");
+    return undefined;
+}
 ```
 
 ## Klein Four-Group
@@ -196,8 +245,9 @@ Notice that we have to tell TypeScript that the result of the `find` method is n
 Let us test our implementation:
 
 ```typescript
+console.assert(KleinFourGroup.isGroup);
 console.assert(KleinFourGroup.order === 4);
-console.assert(KleinFourGroup.isCommutative === true);
+console.assert(KleinFourGroup.isCommutative);
 console.assert(KleinFourGroup.compose("a", "b") === "c");
 ```
 
@@ -263,11 +313,10 @@ const GL2_F2 = new Group<number[][]>({
 As always, let us test this implementation:
 
 ```typescript
+console.assert(GL2_F2.isGroup);
 console.assert(GL2_F2.order === 6);
-console.assert(GL2_F2.isCommutative === false);
+console.assert(!GL2_F2.isCommutative);
 ```
-
-Since this does not throw an error, this shows in particular that the group axioms are verified.
 
 ### Generalization
 

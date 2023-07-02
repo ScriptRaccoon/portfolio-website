@@ -110,9 +110,7 @@ The interface above is still not finished. Remember that we want to write down t
 We need a more flexible notion of equality of elements of our sets. To achieve this, we extend the generic class `Set<X>` with a new generic class that has such a notion by definition:
 
 ```typescript
-// set.ts
-
-export class SetWithEquality<X> extends Set<X> {
+class SetWithEquality<X> extends Set<X> {
     public equal: (a: X, b: X) => boolean;
 
     constructor(elements: X[], equal?: (a: X, b: X) => boolean) {
@@ -168,8 +166,8 @@ For example:
 
 ```typescript
 const M = new SetWithEquality([[0, 1]], equalTuples);
-console.assert(M.contains([0, 1]) === true);
-console.assert(M.has([0, 1]) === false); // "wrong" equality
+console.assert(M.contains([0, 1]));
+console.assert(!M.has([0, 1])); // "wrong" equality
 ```
 
 Reminder: `console.assert` does only log something when the assertion is not true. In our case, nothing is logged, which means that the assertions are true.
@@ -179,8 +177,6 @@ Reminder: `console.assert` does only log something when the assertion is not tru
 To construct groups and also verify the group axioms, we need to create a generic class that implements the interface from before.
 
 ```typescript
-// group.ts
-
 class Group<X> implements GroupData<X> {
     public set: SetWithEquality<X>;
     public unit: X;
@@ -204,7 +200,7 @@ class Group<X> implements GroupData<X> {
 Before we continue with the group class, let us look at a basic example. This is a subgroup of `Q*` which has just two elements: `1` and `-1`. The group operations are inherited from `Q*`, so for example the composition is just ordinary multiplication.
 
 ```typescript
-const S = new Group<number>({
+const SignGroup = new Group<number>({
     set: new SetWithEquality([-1, 1]),
     unit: 1,
     compose: (a, b) => a * b,
@@ -215,13 +211,13 @@ const S = new Group<number>({
 For example:
 
 ```typescript
-console.assert(S.compose(-1, -1) === 1);
+console.assert(SignGroup.compose(-1, -1) === 1);
 ```
 
-There is a big difference here to the mathematical group `{-1,-1}`, though. This one has composition and inverse defined only for these two elements. The group `S` defined in TypeScript has a function `S.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
+There is a big difference here to the mathematical group `{-1,+1}`, though. This one has composition and inverse defined only for these two elements. The group `SignGroup` defined in TypeScript has a function `SignGroup.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
 
 ```typescript
-console.assert(S.compose(2, 3) === 6);
+console.assert(SignGroup.compose(2, 3) === 6);
 ```
 
 One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple.
@@ -265,7 +261,6 @@ isAssociativeTriple([a, b, c]: [X, X, X]): boolean {
 To test this for all triples and avoid ugly nested for loops, we define a helper function in a separate file:
 
 ```typescript
-// utils.ts
 function cubeOfArray<X>(A: X[]): [X, X, X][] {
     // implementation left to the reader
 }
@@ -280,12 +275,12 @@ get isAssociative(): boolean {
 }
 ```
 
-I ran into issues without the `bind(this)`. I assume this is because the `every` function takes over the meaning of `this` otherwise. Instead, `this` should refer to the group instance.
+I ran into issues without the `bind(this)`. I assume this is because the function `every` takes over the meaning of `this` otherwise. Instead, `this` should refer to the group instance.
 
-We can test this with our example `S`.
+We can test this with our example `SignGroup`.
 
 ```typescript
-console.assert(S.isAssociative === true);
+console.assert(SignGroup.isAssociative);
 ```
 
 ### Unit law
@@ -375,7 +370,10 @@ We have everything together to check the group axioms. We also add this check to
 ```typescript
 constructor(data: GroupData<X>) {
     // ...
-    if (!this.isGroup) throw "Group axioms are not satisfied";
+
+    if (!this.isGroup) {
+        console.error("Error: Group axioms are not satisfied");
+    }
 }
 
 get isGroup(): boolean {
@@ -388,7 +386,13 @@ get isGroup(): boolean {
 }
 ```
 
-The example group `S` from [before](#a-basic-example) does not throw an error, implying that the group axioms are satisfied! Try to mess up the definition of `S.inverse` for example, you will get an error.
+The example group `SignGroup` from [before](#a-basic-example) is indeed a group:
+
+```typescript
+console.assert(SignGroup.isGroup);
+```
+
+Try to mess up the definition of `SignGroup.compose`, you will get an error.
 
 ## Class methods
 
@@ -411,10 +415,10 @@ get isCommutative(): boolean {
 }
 ```
 
-Our example group `S` is commutative:
+Our example group `SignGroup` is commutative:
 
 ```typescript
-console.assert(S.isCommutative === true);
+console.assert(SignGroup.isCommutative);
 ```
 
 ### Order
@@ -430,10 +434,10 @@ get order(): number {
 For example,
 
 ```typescript
-console.assert(S.order === 2);
+console.assert(SignGroup.order === 2);
 ```
 
-confirms that `S` is the [finite simple group of order two](https://www.youtube.com/watch?v=BipvGD-LCjU).
+confirms that `SignGroup` is a [finite simple group of order two](https://www.youtube.com/watch?v=BipvGD-LCjU).
 
 ## Conclusion
 
