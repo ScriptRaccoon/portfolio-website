@@ -41,7 +41,7 @@
 		<ol>
 			{#each toc as item}
 				<li>
-					<a href="#{item.id}">{item.text}</a>
+					<a tabindex="-1" href="#{item.id}">{item.text}</a>
 				</li>
 			{/each}
 		</ol>

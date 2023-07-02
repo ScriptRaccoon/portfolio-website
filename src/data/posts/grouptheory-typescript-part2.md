@@ -29,7 +29,7 @@ The underlying set consists of the numbers `0,1,2,...,n-1`. We take the group op
 
 And it can be simplified even further: If `a + b < n`, then the composition of `a,b` is just `a + b`. Otherwise, it is `a + b - n`. The inverse of `0` is `0`, and for `0 < a < n` the inverse of `a` is `n - a`.
 
-### Implementation
+### Implementation of Z/nZ
 
 The next step is to define the group `Z/nZ`, pronounced _Z modulo n_, with our group class. Let us first define a utility function that produces the list of numbers `0,1,2,...,n-1`.
 
@@ -101,7 +101,7 @@ The idea is to do this recursively. For `n = 0`, there is a unique permutation, 
 
 For example, `S_2` has exactly two permutations, `[0,1]` and `[1,0]`. The elements of `S_3` above result from these by inserting `2` anywhere.
 
-### Implementation
+### Implementation of S_n
 
 We are now able to write a recursive function that generates all permutations of the numbers `0,...,n-1`.
 

@@ -368,7 +368,7 @@ get isClosed(): boolean {
 
 We use a `squareOfArray` utility function, implemented similarly to our `cubeOfArray` function from before.
 
-### Group axioms
+### Finale
 
 We have everything together to check the group axioms. We also add this check to the constructor.
 
