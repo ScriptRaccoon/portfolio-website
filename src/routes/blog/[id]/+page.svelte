@@ -156,8 +156,8 @@
 
 		:global(code:not(pre code)) {
 			font-family: monospace;
-			background-color: var(--inline-code-color);
-			color: var(--inverted-font-color);
+			background-color: var(--inline-code-bg-color);
+			color: var(--inline-code-color);
 			padding-inline: 0.5rem;
 			padding-block: 0.05rem;
 			border-radius: 0.2rem;
