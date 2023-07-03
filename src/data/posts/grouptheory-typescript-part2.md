@@ -120,7 +120,9 @@ For example, `S_2` has exactly two permutations, `[0,1]` and `[1,0]`. The elemen
 We are now able to write a recursive function that generates all permutations of the numbers `0,...,n-1`.
 
 ```typescript
-function listOfPermutations(n: number): number[][] | undefined {
+type permutation = number[];
+
+function listOfPermutations(n: number): permutation[] | undefined {
     // TODO: error handling
 
     if (n == 0) {
@@ -130,7 +132,7 @@ function listOfPermutations(n: number): number[][] | undefined {
     const list = listOfPermutations(n - 1);
     if (!list) return undefined;
 
-    const result: number[][] = [];
+    const result: permutation[] = [];
 
     for (const perm of list) {
         for (let index = 0; index < n; index++) {
@@ -162,16 +164,16 @@ if (n != Math.ceil(n)) {
 }
 ```
 
-Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `number[]`, we will use the corresponding type for our group class. We also use the function `equalTuples` from Part 1 which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
+Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `permutation`, we will use the corresponding type for our group class. We also use the function `equalTuples` from Part 1 which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
 
 ```typescript
-function symmetricGroup(n: number): Group<number[]> | undefined {
+function symmetricGroup(n: number): Group<permutation> | undefined {
     // TODO: error handling
 
     const permutations = listOfPermutations(n);
     if (!permutations) return undefined;
 
-    return new Group<number[]>({
+    return new Group<permutation>({
         set: new SetWithEquality(permutations, equalTuples),
         unit: interval(n),
         inverse: (a) =>
@@ -269,12 +271,14 @@ function mod(a: number, r: number) {
 }
 ```
 
-In JavaScript, matrices can be modeled with two-dimensional arrays. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo `2`). We use the `squareOfArray` utility function from Part 1.
+In JavaScript, matrices can be modeled with two-dimensional arrays. The matrices here have only 0,1 as entries. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo `2`). We use the `squareOfArray` utility function from Part 1.
 
 ```typescript
-const matrices = squareOfArray(squareOfArray(interval(2)));
+type matrix = number[][];
 
-const invertibleMatrices: number[][][] = matrices.filter(
+const matrices: matrix[] = squareOfArray(squareOfArray(interval(2)));
+
+const invertibleMatrices: matrix[] = matrices.filter(
     ([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
 );
 ```
@@ -293,7 +297,7 @@ function equalMatrices<T>(a: T[][], b: T[][]): boolean {
 Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication modulo `2`.
 
 ```typescript
-const GL2_F2 = new Group<number[][]>({
+const GL2_F2 = new Group<matrix>({
     set: new SetWithEquality(invertibleMatrices, equalMatrices),
     unit: [
         [1, 0],
