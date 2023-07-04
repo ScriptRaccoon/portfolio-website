@@ -10,9 +10,9 @@ description: Let's bring group homomorphisms to TypeScript!
 This is Part 3 of a series about modeling [group theory](https://en.wikipedia.org/wiki/Group_theory) within TypeScript.
 In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we developed the basics, in [Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2) we studied more examples.
 
-In contrast to the previous parts, in this part, I will not explain the mathematical background anymore. I assume that you are familiar with group theory already.
+The goal of this part is to add theory and examples of [group homomorphisms](https://en.wikipedia.org/wiki/Group_homomorphism) to our TypeScript code. We also connect them to [orders of group elements](<https://en.wikipedia.org/wiki/Order_(group_theory)>).
 
-The goal of this part is to add theory and examples of group homomorphisms to our TypeScript code. We also connect them to orders of group elements.
+In contrast to the previous parts, in this part, I will not explain the mathematical background anymore. I assume that you are familiar with group theory already.
 
 All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript). _The repository is still in development. This post will be updated accordingly._
 
@@ -54,6 +54,8 @@ class HomomorphismOfGroups<X, Y>
     }
 }
 ```
+
+This means that, when `h` is a homomorphism in our system, `h.source` refers to the source group, `h.target` refers to the target group, and `h.map` refers to the actual map.
 
 The homomorphism property consists of two parts. First, we need to check that the map actually operates between the underlying sets. Remember that our type assertions are not enough for that since the generic types differ from the underlying sets of the groups.
 
@@ -100,7 +102,9 @@ constructor(...) {
 
 ### Types of homomorphisms
 
-There are three special types of homomorphisms: injective, surjective and bijective homomorphisms (i.e. isomorphisms). We can easily add getter methods that check these properties.
+There are three special types of homomorphisms: injective, surjective and bijective homomorphisms. Bijective homomorphisms of groups are exactly the [isomorphisms of groups](https://en.wikipedia.org/wiki/Isomorphism).
+
+We can easily add getter methods to check these properties.
 
 ```typescript
 // this says a != b ==> f(a) != f(b) for all source elements a,b
@@ -156,7 +160,7 @@ I really like the syntax here. A mathematician would say something like: "We def
 
 ### A basic example of an isomorphism
 
-The groups `Z/2Z` and `{-1,+1}`, which were called `Zmod2` and `SignGroup` in our code and which we already introduced in previous parts, are essentially the same: they are _isomorphic_. We can verify this by defining an isomorphism between these two groups, as follows:
+The groups `Z/2Z` and `{-1,+1}`, which were called `Zmod2` and `SignGroup` in our code and which we already introduced in previous parts, are essentially the same: they are [isomorphic](https://en.wikipedia.org/wiki/Isomorphism). We can verify this by defining an isomorphism between these two groups, as follows:
 
 ```typescript
 const Zmod2 = additiveGroupModulo(2)!;
@@ -177,7 +181,9 @@ console.assert(isomZmod2.isIsomorphism);
 
 ### The sign homomorphism
 
-There is a more interesting example of a homomorphism from any finite symmetric group to `{+1,-1}`, called the sign homomorphism. Here, we will only cover the special case `S_3`. This group consists of three 2-cycles, which have the sign 1, and three other permutations, whose sign is -1. The 2-cycles can be distinguished by the fact that they have exactly one fixed point.
+There is an interesting example of a homomorphism from any finite symmetric group to `{+1,-1}`, called the [sign homomorphism](https://en.wikipedia.org/wiki/Parity_of_a_permutation). Here, we will only cover the special case `S_3`.
+
+The group `S_3` consists of three 2-cycles, which have the sign 1, and three other permutations, whose sign is -1. The 2-cycles can be distinguished by the fact that they have exactly one fixed point.
 
 This leads to the following implementation.
 
@@ -299,7 +305,7 @@ get isCyclic(): boolean {
 }
 ```
 
-It turns out that the groups `Z/nZ` are cyclic (the element `1` has order `n`), and every cyclic is isomorphic to such a group (more on that later).
+It turns out that the groups `Z/nZ` are cyclic (the element `1` has order `n`), and every cyclic group is isomorphic to such a group (more on that later).
 
 Let us test the implementation:
 
@@ -314,7 +320,7 @@ console.assert(KleinFourGroup.maximalOrderOfElement === 2);
 
 ### Powers
 
-Inside the `orderOfElement` method, we implicitly implemented the power of a group element by a positive integer. We should extract this logic into its own method. But powers are also available for negative exponents (they just have to be integers): in that case, we multiply the inverse element with itself sufficiently many times.
+Inside the `orderOfElement` method, we implicitly implemented the power of a group element by a positive integer. We should extract this logic into its own method. But powers are also available for negative exponents (they just have to be integers): in that case, we multiply the inverse element with itself many times.
 
 We can implement this by recursion as follows. For positive exponents `n`, we define `a^n` by `a * a^(n-1)`. For negative exponents, we define `a^n` by `i(a)^(-n)`. The base case is `a^0 = e`.
 
@@ -353,7 +359,7 @@ If `G` is a finite group, then
 1. homomorphisms `Z/nZ ---> G` correspond 1:1 to elements `a` of `G` whose order divides `n`,
 2. _injective_ homomorphisms `Z/nZ ---> G` correspond 1:1 to elements of `G` whose order is _equal_ to `n`.
 
-The second statement immediately implies the already mentioned classification of cyclic groups. I will not repeat the proof but would like to make the correspondence more explicit.
+The second statement immediately implies the already mentioned classification of cyclic groups. I will not explain the proof but would like to make the correspondence more explicit.
 
 In one direction, we evaluate a homomorphism at the element `1` of `Z/nZ` (remember that the underlying set was `0,1,...,n-1` in our construction of that group) to get an element of `G`. Conversely, given an element `a` of `G` whose order divides `n` (this just means `a^n = e`), we take the map which maps `k` to the power `a^k`.
 
@@ -392,12 +398,12 @@ console.assert(g?.isHomomorphism);
 console.assert(g?.isInjective);
 ```
 
-Let us point out that these are just example verifications. Our TypeScript code cannot give us general proof that the map `Z/nZ ----> G` that we defined is a homomorphism for every group `G` and every element inside it. For this, a bit of mathematics is necessary.
+Let us point out that these are just example verifications. Our TypeScript code cannot give us general proof that the map `Z/nZ ----> G` that we defined is a homomorphism, for every group `G` and every element inside it. For this, a bit of mathematics is necessary.
 
 ## Conclusion
 
-For me, the highlight of this part was the isomorphism between the symmetric group and the general linear group. It is very cool to see that (a) it can be defined in a very formal and still concrete way, (b) the verification that it is, indeed, an isomorphism can be done by JavaScript.
+For me, the highlight of this part was the isomorphism between the symmetric group `S_3` and the general linear group `GL_2(F_2)`. It is very interesting to see that (a) it can be defined in a very formal and still concrete way, (b) the verification of the isomorphism property can be done by JavaScript.
 
-By now, it should be more or less clear all topics of finite group theory can be carried out within the system presented here. It could eventually become a proper library for group theory.
+By now, it should be more or less clear that all topics of finite group theory can be carried out within the system presented here. It could eventually become a proper library for group theory.
 
-I will not pursue this (as already mentioned in Part 1, there are better alternatives already available) and instead would like to finish this series with the next part, which will cover two very important topics in basic group theory: direct products and subgroups.
+However, I will not pursue this (as already mentioned in Part 1, there are better alternatives already available), and instead would like to finish this series with two very basic albeit important topics in group theory: direct products and subgroups. These will be covered in the next part.
