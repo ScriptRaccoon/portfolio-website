@@ -1,7 +1,7 @@
 ---
 title: Group theory in TypeScript (Part 2)
 published: 2023-06-30
-updated: 2023-07-02
+updated: 2023-07-04
 description: Let's investigate more interesting examples of groups!
 ---
 
@@ -345,4 +345,6 @@ function GL<X>(n: number, R: CommRing<X>): Group<X>;
 
 ## Conclusion
 
-This part was about implementing more concrete examples of finite groups within TypeScript. In the next part, we will investigate how more interesting groups can be constructed from simpler ones, and how groups can be compared with each other.
+This part was about implementing more concrete examples of finite groups within TypeScript. In the next parts, we will investigate how more interesting groups can be constructed from simpler ones, and how groups can be compared with each other.
+
+→ [Link to Part 3](https://scriptraccoon.dev/blog/grouptheory-typescript-part3)
