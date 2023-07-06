@@ -1,4 +1,5 @@
 <script lang="ts">
+	import Controls from "$lib/components/Controls.svelte";
 	import GoBack from "$lib/components/GoBack.svelte";
 
 	export let data;
@@ -12,7 +13,7 @@
 	const is_long_toc = toc.length > 10;
 </script>
 
-<GoBack />
+<Controls variant="top" />
 
 <h1>
 	{title}
@@ -52,9 +53,7 @@
 	{@html html_code}
 </article>
 
-<div class="back">
-	<GoBack />
-</div>
+<Controls variant="bottom" />
 
 <style lang="scss">
 	.dates {
@@ -164,9 +163,5 @@
 			font-size: var(--small-font);
 			white-space: nowrap;
 		}
-	}
-
-	.back {
-		margin-block: 1rem 2rem;
 	}
 </style>

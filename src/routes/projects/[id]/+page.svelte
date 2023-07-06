@@ -1,5 +1,5 @@
 <script lang="ts">
-	import GoBack from "$lib/components/GoBack.svelte";
+	import Controls from "$lib/components/Controls.svelte";
 
 	export let data;
 
@@ -22,7 +22,7 @@
 	).href;
 </script>
 
-<GoBack />
+<Controls variant="top" />
 
 <h1>
 	{name}
