@@ -23,9 +23,3 @@
 		<Fa icon={faRetweet} />
 	{/if}
 </button>
-
-<style>
-	button {
-		color: var(--secondary-font-color);
-	}
-</style>

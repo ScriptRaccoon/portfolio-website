@@ -13,6 +13,7 @@
 	div {
 		display: flex;
 		justify-content: space-between;
+		color: var(--secondary-font-color);
 	}
 	div.bottom {
 		margin-block: 1rem 2rem;
