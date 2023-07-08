@@ -1,7 +1,7 @@
 ---
 title: Group theory in TypeScript (Part 2)
 published: 2023-06-30
-updated: 2023-07-04
+updated: 2023-07-08
 description: Let's investigate more interesting examples of groups!
 ---
 
@@ -15,7 +15,7 @@ In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we alre
 
 In Part 1, we have only seen one specific example of a group in TypeScript. This part will be about implementing further examples of groups. We will look at [cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group), [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group), the [Klein Four-Group](https://en.wikipedia.org/wiki/Klein_four-group) and the [General linear group](https://en.wikipedia.org/wiki/General_linear_group).
 
-All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript). _The repository is still in development. This post will be updated accordingly._
+All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
 
 ## Finite cyclic groups
 

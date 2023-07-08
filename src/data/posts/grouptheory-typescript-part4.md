@@ -11,7 +11,7 @@ This is Part 4 of a series about modeling [group theory](https://en.wikipedia.or
 
 The goal of this part is to show that general constructions of groups can be carried out in our system. Specifically, we will demonstrate this with [direct products of groups](https://en.wikipedia.org/wiki/Direct_product_of_groups) as well as [subgroups](https://en.wikipedia.org/wiki/Subgroup). We will also define the kernel and image of a group homomorphism. I assume that you are familiar with group theory already.
 
-All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript). _The repository is still in development. This post will be updated accordingly._
+All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
 
 ## Direct products
 

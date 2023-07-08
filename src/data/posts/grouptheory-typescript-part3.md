@@ -1,7 +1,7 @@
 ---
 title: Group theory in TypeScript (Part 3)
 published: 2023-07-04
-updated: null
+updated: 2023-07-08
 description: Let's bring group homomorphisms to TypeScript!
 ---
 
@@ -14,7 +14,7 @@ The goal of this part is to add theory and examples of [group homomorphisms](htt
 
 In contrast to the previous parts, in this part, I will not explain the mathematical background anymore. I assume that you are familiar with group theory already.
 
-All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript). _The repository is still in development. This post will be updated accordingly._
+All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
 
 ## Homomorphisms
 
