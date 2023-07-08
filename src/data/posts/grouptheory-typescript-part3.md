@@ -407,3 +407,5 @@ For me, the highlight of this part was the isomorphism between the symmetric gro
 By now, it should be more or less clear that all topics of finite group theory can be carried out within the system presented here. It could eventually become a proper library for group theory.
 
 However, I will not pursue this (as already mentioned in Part 1, there are better alternatives already available), and instead would like to finish this series with two very basic albeit important topics in group theory: direct products and subgroups. These will be covered in the next part.
+
+→ [Link to Part 4](https://scriptraccoon.dev/blog/grouptheory-typescript-part4)
