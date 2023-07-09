@@ -4,7 +4,8 @@ teaser: fully functional, made with Svelte
 repository: https://github.com/ScriptRaccoon/RubiksCubeSvelte
 url: https://rubikscubesvelte.netlify.app
 tutorial: https://www.youtube.com/watch?v=GdlUdnYZnfc
-tags: ["Svelte", "CSS", "Browser game", "3D", "Tutorial"]
+tags:
+    ["Svelte", "CSS", "Browser game", "3D", "Tutorial", "Mathematics"]
 date: 2022-03-05
 ---
 

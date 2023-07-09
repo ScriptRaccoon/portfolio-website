@@ -4,7 +4,14 @@ teaser: with the power of Svelte's tweened stores
 repository: https://github.com/ScriptRaccoon/Abgeordnete
 url: https://abgeordnete.netlify.app/
 tutorial:
-tags: ["Data visualization", "Svelte", "SVG", "TypeScript"]
+tags:
+    [
+        "Data visualization",
+        "Svelte",
+        "SVG",
+        "TypeScript",
+        "Mathematics",
+    ]
 date: 2023-05-04
 ---
 
