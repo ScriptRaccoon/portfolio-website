@@ -459,4 +459,4 @@ Put shorty: in type theory, associativity is part of the _data_, whereas here, a
 
 For me, it was a joy to build a bridge between my old profession (mathematics) and my new one (web development). I hope that you also found the investigation interesting.
 
-→ [Link to Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2)
+→ [Link to Part 2](/blog/grouptheory-typescript-part2)

@@ -7,7 +7,7 @@ description: Let's implement general constructions of groups!
 
 ## Introduction
 
-This is Part 4 of a series about modeling [group theory](https://en.wikipedia.org/wiki/Group_theory) within TypeScript. In previous parts, we already developed the basics of groups and their homomorphisms and looked at several examples. If you haven't checked them out yet, start with [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1).
+This is Part 4 of a series about modeling [group theory](https://en.wikipedia.org/wiki/Group_theory) within TypeScript. In previous parts, we already developed the basics of groups and their homomorphisms and looked at several examples. If you haven't checked them out yet, start with [Part 1](/blog/grouptheory-typescript-part1).
 
 The goal of this part is to show that general constructions of groups can be carried out in our system. Specifically, we will demonstrate this with [direct products of groups](https://en.wikipedia.org/wiki/Direct_product_of_groups) as well as [subgroups](https://en.wikipedia.org/wiki/Subgroup). We will also define the [kernel](<https://en.wikipedia.org/wiki/Kernel_(algebra)>) and [image](<https://en.wikipedia.org/wiki/Image_(mathematics)>) of a group homomorphism. I assume that you are familiar with group theory already.
 
@@ -86,7 +86,7 @@ console.assert(Zmod7_x_S3.order === 42);
 
 ### The Klein Four-Group as a direct product
 
-There is an isomorphism between the Klein Four-Group (from [Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2)) and the direct product of `Z/2Z` with itself. The idea is to send `e` to `[0,0]` (which is forced by the homomorphism property) and map the other three source elements `a`, `b`, `c` randomly\* to the other target elements `[1,0]`, `[0,1]`, `[1,1]`.
+There is an isomorphism between the Klein Four-Group (from [Part 2](/blog/grouptheory-typescript-part2)) and the direct product of `Z/2Z` with itself. The idea is to send `e` to `[0,0]` (which is forced by the homomorphism property) and map the other three source elements `a`, `b`, `c` randomly\* to the other target elements `[1,0]`, `[0,1]`, `[1,1]`.
 
 Let us implement this!
 
@@ -255,7 +255,7 @@ export class HomomorphismOfGroups<X, Y> {
 }
 ```
 
-We can test this implementation with all the homomorphisms from the [previous part](https://scriptraccoon.dev/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from `S3` to `GL_2(F_2)`, then
+We can test this implementation with all the homomorphisms from the [previous part](/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from `S3` to `GL_2(F_2)`, then
 
 ```typescript
 console.assert(isomGL2.kernel.isTrivial);

@@ -11,7 +11,7 @@ description: Let's investigate more interesting examples of groups!
 
 This series of posts is about modeling group theory within TypeScript.
 
-In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we already developed a generic class `Group<X>` which models finite groups whose elements are of type `X`. Their underlying sets are instances of a generic class `SetWithEquality<X>`, which are like sets in TypeScript but with a custom notion of equality of their elements. If you haven't read that post, please check it out first.
+In [Part 1](/blog/grouptheory-typescript-part1) we already developed a generic class `Group<X>` which models finite groups whose elements are of type `X`. Their underlying sets are instances of a generic class `SetWithEquality<X>`, which are like sets in TypeScript but with a custom notion of equality of their elements. If you haven't read that post, please check it out first.
 
 In Part 1, we have only seen one specific example of a group in TypeScript. This part will be about implementing further examples of groups. We will look at [cyclic groups](https://en.wikipedia.org/wiki/Cyclic_group), [symmetric groups](https://en.wikipedia.org/wiki/Symmetric_group), the [Klein Four-Group](https://en.wikipedia.org/wiki/Klein_four-group) and the [General linear group](https://en.wikipedia.org/wiki/General_linear_group).
 
@@ -347,4 +347,4 @@ function GL<X>(n: number, R: CommRing<X>): Group<X>;
 
 This part was about implementing more concrete examples of finite groups within TypeScript. In the next parts, we will investigate how more interesting groups can be constructed from simpler ones, and how groups can be compared with each other.
 
-→ [Link to Part 3](https://scriptraccoon.dev/blog/grouptheory-typescript-part3)
+→ [Link to Part 3](/blog/grouptheory-typescript-part3)

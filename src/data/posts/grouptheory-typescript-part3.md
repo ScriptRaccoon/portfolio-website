@@ -8,7 +8,7 @@ description: Let's bring group homomorphisms to TypeScript!
 ## Introduction
 
 This is Part 3 of a series about modeling [group theory](https://en.wikipedia.org/wiki/Group_theory) within TypeScript.
-In [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1) we developed the basics, in [Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2) we studied more examples.
+In [Part 1](/blog/grouptheory-typescript-part1) we developed the basics, and in [Part 2](/blog/grouptheory-typescript-part2) we studied more examples.
 
 The goal of this part is to add theory and examples of [group homomorphisms](https://en.wikipedia.org/wiki/Group_homomorphism) to our TypeScript code. We also connect them to [orders of group elements](<https://en.wikipedia.org/wiki/Order_(group_theory)>).
 
@@ -408,4 +408,4 @@ By now, it should be more or less clear that all topics of finite group theory c
 
 However, I will not pursue this (as already mentioned in Part 1, there are better alternatives already available), and instead would like to finish this series with two very basic albeit important topics in group theory: direct products and subgroups. These will be covered in the next part.
 
-→ [Link to Part 4](https://scriptraccoon.dev/blog/grouptheory-typescript-part4)
+→ [Link to Part 4](/blog/grouptheory-typescript-part4)

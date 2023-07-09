@@ -181,7 +181,7 @@ TypeScript has no problem with the function, it will only complain about the inv
 
 > Operator '+' cannot be applied to types 'void' and 'number'.
 
-In real world examples, these errors can be anywhere in the codebase, which makes it harder to pin down their actual cause. By writing an explicit return type, the error will be alerted exactly where it comes from, making it easier to be fixed.
+In real-world examples, these errors can be anywhere in the codebase, which makes it harder to pin down their actual cause. By writing an explicit return type, the error will be alerted exactly where it comes from, making it easier to be fixed.
 
 ## Performance
 
