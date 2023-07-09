@@ -48,6 +48,13 @@
 		property="og:image"
 		content="https://scriptraccoon.dev/ScriptRaccoon.png"
 	/>
+
+	<script
+		async
+		defer
+		src="https://your-analytics.org/ya.js"
+		data-domain="scriptraccoon.dev"
+	></script>
 </svelte:head>
 
 <LoadProgress />
