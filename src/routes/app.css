@@ -23,7 +23,6 @@ body[data-theme="light"] {
 	--tag-font-color: var(--secondary-font-color);
 	--code-border-color: transparent;
 	--code-bg-color: #222;
-	--inline-code-color: var(--font-color);
 	--inline-code-bg-color: #eef0f2;
 	--h2-color: var(--accent-color);
 }
@@ -41,7 +40,6 @@ body[data-theme="dark"] {
 	--tag-font-color: var(--inverted-font-color);
 	--code-border-color: var(--border-color);
 	--code-bg-color: #111;
-	--inline-code-color: var(--inverted-font-color);
 	--inline-code-bg-color: #333;
 	--h2-color: skyblue;
 }
