@@ -1,7 +1,7 @@
 ---
 title: Group theory in TypeScript (Part 4)
 published: 2023-07-08
-updated: null
+updated: 2023-07-09
 description: Let's implement general constructions of groups!
 ---
 
@@ -9,7 +9,7 @@ description: Let's implement general constructions of groups!
 
 This is Part 4 of a series about modeling [group theory](https://en.wikipedia.org/wiki/Group_theory) within TypeScript. In previous parts, we already developed the basics of groups and their homomorphisms and looked at several examples. If you haven't checked them out yet, start with [Part 1](https://scriptraccoon.dev/blog/grouptheory-typescript-part1).
 
-The goal of this part is to show that general constructions of groups can be carried out in our system. Specifically, we will demonstrate this with [direct products of groups](https://en.wikipedia.org/wiki/Direct_product_of_groups) as well as [subgroups](https://en.wikipedia.org/wiki/Subgroup). We will also define the kernel and image of a group homomorphism. I assume that you are familiar with group theory already.
+The goal of this part is to show that general constructions of groups can be carried out in our system. Specifically, we will demonstrate this with [direct products of groups](https://en.wikipedia.org/wiki/Direct_product_of_groups) as well as [subgroups](https://en.wikipedia.org/wiki/Subgroup). We will also define the [kernel](<https://en.wikipedia.org/wiki/Kernel_(algebra)>) and [image](<https://en.wikipedia.org/wiki/Image_(mathematics)>) of a group homomorphism. I assume that you are familiar with group theory already.
 
 All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/group-theory-typescript).
 
@@ -86,7 +86,7 @@ console.assert(Zmod7_x_S3.order === 42);
 
 ### The Klein Four-Group as a direct product
 
-There is an isomorphism between the Klein Four-Group (from Part 2) and the direct product of `Z/2Z` with itself. The idea is to send `e` to `[0,0]` (which is forced by the homomorphism property) and map the other three source elements `a`, `b`, `c` randomly\* to the other target elements `[1,0]`, `[0,1]`, `[1,1]`.
+There is an isomorphism between the Klein Four-Group (from [Part 2](https://scriptraccoon.dev/blog/grouptheory-typescript-part2)) and the direct product of `Z/2Z` with itself. The idea is to send `e` to `[0,0]` (which is forced by the homomorphism property) and map the other three source elements `a`, `b`, `c` randomly\* to the other target elements `[1,0]`, `[0,1]`, `[1,1]`.
 
 Let us implement this!
 
@@ -132,9 +132,15 @@ const swap = isomSwap(Zmod7, S3);
 console.assert(swap.isIsomorphism);
 ```
 
-Direct products are characterized by a _universal property_. I will not explain this in full detail, but one part of it is very simple, actually: Given two homomorphisms of groups `f : C ---> A` and `g : C ---> B`, we can construct a homomorphism `(f,g) : C ---> A x B`. We just define `(f,g)(c) := (f(c),g(c))`. The homomorphism property is easy to check.
+Direct products are characterized by a _universal property_. I will not explain this in full detail, but one part of it is very simple, actually: Given two homomorphisms of groups
 
-We can implement this construction as follows.
+`f : C ---> A`, `g : C ---> B`,
+
+we can construct a homomorphism
+
+`(f,g) : C ---> A x B`, `(f,g)(c) := (f(c),g(c))`.
+
+The homomorphism property is easy to check. We can implement this construction as follows.
 
 ```typescript
 function pairHom<X, Y, Z>(
@@ -154,13 +160,13 @@ function pairHom<X, Y, Z>(
 }
 ```
 
-We can also define the projection homomorphisms `A x B ---> A` and `A x B ---> B` and formulate the universal property with these, but as already indicated many times before it is unfortunately not possible to verify anything like this in full generality with our code alone. We still have to rely on mathematics.
+We can also define the projection homomorphisms `A x B ---> A` and `A x B ---> B` and formulate the universal property with these, but as already indicated many times before it is unfortunately not possible to verify anything like this in full generality with our code alone. We still have to rely on mathematics for proof.
 
 At least, the TypeScript compiler helps us to write down _meaningful formulas_. For example, in the code above we cannot replace `g.map(c)` with `f.map(c)` without the TypeScript compiler yelling at us. Indeed, this is a type error.
 
-When there is a type error, the implementation is incorrect for sure. But the converse is also true quite often. I found that oftentimes when I implement a general function like the one above, it will be correct once no type errors are left. This extra confidence during development is the reason why a strongly typed language is suitable for the system developed here.
+When there is a type error, the implementation is incorrect for sure. But the converse is also true quite often. I found that oftentimes when implementing a general function like the one above, it will be correct once no type errors are left. This extra confidence during development is the reason why a strongly typed language is suitable for the system developed here.
 
-TypeScript's autocompletion also helps a lot during development. When I type `this.` (with the dot) inside the group class, I automatically get all the available methods for groups.
+TypeScript's autocompletion also helps a lot during development. When we type `G.` (with the dot) for a group `G`, we automatically get all the available methods for groups.
 
 ## Subgroups
 
@@ -178,6 +184,7 @@ class SetWithEquality<X> extends Set<X> {
         if (list.some((a) => !this.contains(a))) {
             console.error("Error: Subset property is not satisfied");
         }
+
         return new SetWithEquality<X>(list, this.equal);
     }
 }
@@ -202,7 +209,7 @@ class Group<X> {
 }
 ```
 
-We can then check for the subgroup property by using the method `subgroupOfList(...).isGroup`.
+We can then check for the subgroup property with the method `subgroupOfList(...).isGroup`.
 
 ```typescript
 console.assert(Zmod6.subgroupOfList([0]).isGroup);
@@ -228,16 +235,16 @@ To implement these two subgroups, we extend the `HomomorphismOfGroups<X,Y>` clas
 export class HomomorphismOfGroups<X, Y> {
     // ...
 
-    // group of all source elements which map to the unit
     get kernel(): Group<X> {
+        // source elements that map to the unit
         const elements = this.source.elements.filter((a) =>
             this.target.set.equal(this.map(a), this.target.unit),
         );
         return this.source.subgroupOfList(elements);
     }
 
-    // group of all target elements which are mapped to
     get image(): Group<Y> {
+        //  target elements that have a preimage
         const elements = this.target.elements.filter((b) =>
             this.source.elements.some((a) =>
                 this.target.set.equal(this.map(a), b),
@@ -269,9 +276,9 @@ If `S` is any subset of the underlying set of a group `G`, we wish to build the 
 
 The following pseudo-algorithm constructs the elements of this group:
 
-We build the list of elements step by step and start with `[e]` (where `e` is the unit). For every element `s` of `S`, we compute the products `g * s` with all the elements `g` from the list. If no product is new, we are done: we return the list of elements with the inherited group operations. Otherwise, we add all of them to the list (without duplicates). Now, continue with that larger list.
+We build the list of elements step by step and start with `[e]` (where `e` is the unit). For every element `s` of `S`, we compute the products `g * s` with all the elements `g` from the list. If no product is new, we are done: we return the list of elements with the inherited group operations. Otherwise, we add all of them to the list (without duplicates). Now, we continue with that larger list.
 
-In our code, we can do this in the form of a `while` loop which runs as long as new elements have been found. The process of finding new elements will be extracted into its own function\* (`getNewElements`) for better readability.
+In our code, we can do this with a `while` loop which runs as long as new elements have been found. The process of finding new elements will be extracted into its own function\* for better readability.
 
 ```typescript
 class Group<X> {
@@ -338,7 +345,7 @@ console.assert(S3.subgroupGeneratedBy([[1, 0, 2]]).order == 2);
 console.assert(S3.subgroupGeneratedBy([[0, 2, 1]]).order == 2);
 ```
 
-Also, 3-cycles generate the subgroup of order 3:
+Each 3-cycle generates the subgroup of order 3:
 
 ```typescript
 console.assert(S3.subgroupGeneratedBy([[1, 2, 0]]).order == 3);
@@ -357,7 +364,7 @@ console.assert(
 
 ### Center of a group
 
-The center of a group consists of all elements which commute with all other elements. This is a subgroup. In the implementation, we can reuse the `isCommutingPair` method from the first part.
+The center of a group is the subgroup consisting of all elements which commute with all other elements. In the implementation, we can reuse the `isCommutingPair` method from the first part.
 
 ```typescript
 class Group<X> {
@@ -382,10 +389,10 @@ console.assert(S5.center.isTrivial);
 
 ## Conclusion
 
-We have seen that many basic notions and constructions of (finite) group theory can be implemented in our TypeScript system. In fact, it is only a matter of exercise to also add all other constructions: normal subgroups, quotient groups, semi-direct products, automorphism groups, conjugation homomorphisms, conjugacy classes, group actions, and so on.
+We have seen that many basic notions and constructions of (finite) group theory can be implemented in our TypeScript system. It is only a matter of exercise to also add all other constructions: normal subgroups, quotient groups, semi-direct products, automorphism groups, conjugation homomorphisms, conjugacy classes, group actions, and so on.
 
 But let's leave it like that for now. Maybe I will add material to the [repository](https://github.com/ScriptRaccoon/group-theory-typescript) later, but this will not be discussed anymore in this blog.
 
-We have also discussed why the type system helps us during development to write the correct implementation. On the other hand, JavaScript, which all this compiles down to, is not very fast compared to other languages. So the system that we developed here will not be suitable for heavy computations with large groups.
+We have also discussed why the type system helps us during development to write the correct implementation. On the other hand, JavaScript, which all this compiles down to, is not very fast compared to other languages. So the system that we developed here will not be suitable for heavy computations with large finite groups.
 
-This project showcases that an abstract mathematical theory can be modeled quite well with TypeScript, the most important concept being generic classes and their methods. Group theory is just an example, other theories can be implemented as well by using the same pattern.
+This project showcases that an abstract mathematical theory can be modeled quite well with TypeScript, the most important concept being generic classes and their methods. Group theory is just an example, other theories can be implemented as well using the same pattern.
