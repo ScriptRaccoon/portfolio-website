@@ -3,20 +3,22 @@
 
 	export let data;
 
-	const {
-		attributes: { name, url, repository, tutorial, date, tags, id },
-		html_code,
-	} = data;
+	$: html_code = data.html_code;
+	$: name = data.attributes.name;
+	$: url = data.attributes.url;
+	$: repository = data.attributes.repository;
+	$: tutorial = data.attributes.tutorial;
+	$: year = data.attributes.date.getFullYear();
+	$: tags = data.attributes.tags;
+	$: id = data.attributes.id;
 
-	const year = date.getFullYear();
-
-	const links = [
+	$: links = [
 		{ label: "URL", href: url },
 		{ label: "Repository", href: repository },
 		{ label: "Tutorial", href: tutorial },
 	].filter((link) => link.href?.length > 0);
 
-	const image_src = new URL(
+	$: image_src = new URL(
 		`../../../lib/assets/projects/${id}.webp`,
 		import.meta.url,
 	).href;

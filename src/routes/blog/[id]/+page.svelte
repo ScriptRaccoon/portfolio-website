@@ -3,13 +3,11 @@
 
 	export let data;
 
-	const {
-		attributes: { title, updated, published },
-		html_code,
-		toc,
-	} = data;
-
-	const is_long_toc = toc.length > 10;
+	$: toc = data.toc;
+	$: html_code = data.html_code;
+	$: title = data.attributes.title;
+	$: updated = data.attributes.updated?.toLocaleDateString();
+	$: published = data.attributes.published.toLocaleDateString();
 </script>
 
 <Controls variant="top" />
@@ -19,9 +17,9 @@
 </h1>
 
 <div class="dates">
-	<div>Published: {published.toLocaleDateString()}</div>
+	<div>Published: {published}</div>
 	{#if updated}
-		<div>Updated: {updated.toLocaleDateString()}</div>
+		<div>Updated: {updated}</div>
 	{/if}
 </div>
 
@@ -37,7 +35,11 @@
 		</ol>
 	</details>
 
-	<div class="outer-toc" class:long={is_long_toc} aria-hidden="true">
+	<div
+		class="outer-toc"
+		class:long={toc.length > 10}
+		aria-hidden="true"
+	>
 		<ol>
 			{#each toc as item}
 				<li>
