@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Controls from "$lib/components/Controls.svelte";
-	import GoBack from "$lib/components/GoBack.svelte";
 
 	export let data;
 
