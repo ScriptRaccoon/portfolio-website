@@ -9,4 +9,4 @@ Welcome to my blog!
 
 Sometimes the tweet length of 280 characters is not enough to tell a whole story. This is why I have created this blog.
 
-This post here has just been created for testing purposes. I will post real content soon.
+This post here has just been created for testing purposes. I will post [real content](/blog/typescriptlove) soon.
