@@ -19,12 +19,6 @@
 	</li>
 	<li>
 		<a
-			href="https://www.your-analytics.org/scriptraccoon.dev"
-			target="_blank">Your-Analytics</a
-		>
-	</li>
-	<li>
-		<a
 			href="https://app.netlify.com/sites/scriptraccoon/deploys"
 			target="_blank">Deployment</a
 		>
