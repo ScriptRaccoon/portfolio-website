@@ -17,9 +17,21 @@ const highlighter = await shiki.getHighlighter({
 const code_regex =
 	/<pre><code\s+class="language-(\w+)">([\s\S]+?)<\/code><\/pre>/gi;
 
+const style_regex =
+	/<pre([^>]*)style="[^"]*background-color:[^"]*"(.*?)>/g;
+
 export function highlight(htmlContent: string) {
 	return htmlContent.replace(code_regex, (_, lang, code) => {
-		code = he.decode(code);
-		return highlighter.codeToHtml(code.trim(), { lang });
+		const code_decoded = he.decode(code);
+		const code_highlighted = highlighter.codeToHtml(
+			code_decoded.trim(),
+			{ lang },
+		);
+		const code_without_bg = code_highlighted.replace(
+			style_regex,
+			"<pre$1$2>",
+		);
+
+		return code_without_bg;
 	});
 }

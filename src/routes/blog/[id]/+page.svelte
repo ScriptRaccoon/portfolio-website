@@ -142,7 +142,7 @@
 			overflow: auto;
 			max-height: 30rem;
 			border: 0.15rem solid var(--code-border-color);
-			background-color: var(--code-bg-color) !important;
+			background-color: var(--code-bg-color);
 
 			scrollbar-width: thin;
 			&::-webkit-scrollbar {
