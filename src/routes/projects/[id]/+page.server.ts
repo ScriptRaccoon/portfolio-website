@@ -8,6 +8,7 @@ const projects_record = import.meta.glob("/src/data/projects/*.md", {
 });
 
 import markdownit from "markdown-it";
+import { transform_external_links } from "$lib/server/external-links";
 const md = new markdownit();
 
 export const load = async (event) => {
@@ -25,7 +26,8 @@ export const load = async (event) => {
 
 	attributes.tags.sort();
 
-	const html_code = md.render(body);
+	const html_code_raw = md.render(body);
+	const html_code = transform_external_links(html_code_raw);
 
 	const meta = {
 		title: attributes.name,
