@@ -16,4 +16,8 @@ tags:
 date: 2023-03-11
 ---
 
-Google Forms clone made with SvelteKit and Supabase. The forms ('svorms') can be created, answered, and evaluated.
+This app is similar to Google Forms. It lets you create forms - called svorms. Questions can be either simple questions or multiple-choice questions. Once a svorm is created, it can be shared with others who can answer it. The results can also be seen.
+
+This app is made with SvelteKit, and the database is hosted on Supabase.
+
+The app is accessible for keyboard navigation and screen reader usage.
