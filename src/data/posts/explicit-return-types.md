@@ -45,7 +45,7 @@ Above, we had a quite simple example, where this is not a big deal. But with mor
 
 This also comes in handy when working in the editor since you do not need to hover anything to see the return types. You can just read it. The code is better self-documented, which makes it cleaner.
 
-To illustrate this, here is a more complex function from my little [URL shortener](/projects/urlshortener):
+To illustrate this, here is a more complex function from my little [URL shortener](/projects/url-shortener):
 
 ```typescript
 export async function create_redirection(
