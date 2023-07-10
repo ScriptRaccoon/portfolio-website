@@ -27,7 +27,6 @@
 		{ name: "Projects", href: "/projects", icon: faClipboardList },
 		{ name: "Blog", href: "/blog", icon: faPenToSquare },
 		{ name: "About", href: "/about", icon: faCircleQuestion },
-		{ name: "Contact", href: "/contact", icon: faEnvelope },
 	];
 </script>
 
