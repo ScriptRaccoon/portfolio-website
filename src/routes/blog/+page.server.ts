@@ -9,7 +9,7 @@ export const load = async () => {
 		}),
 	);
 
-	const posts = unsorted_posts.sort(
+	const posts = [...unsorted_posts].sort(
 		(p, q) => q.published.getTime() - p.published.getTime(),
 	);
 

@@ -24,7 +24,7 @@ export const load = async (event) => {
 		fm<Omit<project, "id">>(markdown);
 	const attributes: project = { ..._attributes, id };
 
-	attributes.tags.sort();
+	attributes.tags.sort((a, b) => a.localeCompare(b));
 
 	const html_code_raw = md.render(body);
 	const html_code = transform_external_links(html_code_raw);
