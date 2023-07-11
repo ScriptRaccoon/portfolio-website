@@ -16,10 +16,29 @@
 	}
 </script>
 
-<button on:click={copy_url} aria-label="copy URL to clipboard">
+<button
+	on:click={copy_url}
+	aria-label="copy URL to clipboard"
+	aria-live="polite"
+>
+	<Fa icon={faRetweet} />
 	{#if pending}
-		Copied URL
-	{:else}
-		<Fa icon={faRetweet} />
+		<span class="message"> Copied URL </span>
 	{/if}
 </button>
+
+<style>
+	button {
+		position: relative;
+	}
+	.message {
+		background-color: var(--bg-color);
+		border: 1px solid var(--border-color);
+		padding: 0.25rem;
+		border-radius: 0.25rem;
+		white-space: nowrap;
+		position: absolute;
+		top: -0.25rem;
+		right: 0;
+	}
+</style>
