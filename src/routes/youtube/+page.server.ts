@@ -1,9 +1,6 @@
 export const prerender = false;
 
-import { SECRET_REDIS_URL } from "$env/static/private";
-import Redis from "ioredis";
-const redis = new Redis(SECRET_REDIS_URL);
-
+import { redis } from "$lib/server/redis";
 import { redis_cached } from "$lib/server/redis-cache";
 import { get_youtube_stats } from "./stats";
 import { get_latest_video } from "./video";

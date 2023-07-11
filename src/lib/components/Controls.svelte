@@ -1,11 +1,13 @@
 <script lang="ts">
 	import CopyURL from "./CopyURL.svelte";
+	import Like from "./Like.svelte";
 	import GoBack from "./GoBack.svelte";
 	export let variant = "top";
 </script>
 
 <div class={variant}>
 	<GoBack />
+	<Like />
 	<CopyURL />
 </div>
 
