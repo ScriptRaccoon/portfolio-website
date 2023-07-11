@@ -7,6 +7,7 @@ import {
 } from "$lib/server/redis-rate-limit.js";
 
 export const POST = async (event) => {
+	if (dev) return json({ likes: 0 });
 	const pathname = await event.request.text();
 	if (!pathname) throw error(400);
 	const ip = event.getClientAddress();
@@ -18,6 +19,7 @@ export const POST = async (event) => {
 };
 
 export const GET = async (event) => {
+	if (dev) return json({ likes: 0 });
 	const pathname = event.url.searchParams.get("pathname");
 	if (!pathname) throw error(400);
 	const key = get_key(pathname);
@@ -26,6 +28,5 @@ export const GET = async (event) => {
 };
 
 function get_key(pathname: string): string {
-	const prefix = dev ? "dev:" : "";
-	return `${prefix}like${pathname.replaceAll("/", ":")}`;
+	return `$like${pathname.replaceAll("/", ":")}`;
 }
