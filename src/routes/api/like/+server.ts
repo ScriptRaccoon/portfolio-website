@@ -28,5 +28,5 @@ export const GET = async (event) => {
 };
 
 function get_key(pathname: string): string {
-	return `$like${pathname.replaceAll("/", ":")}`;
+	return `like${pathname.replaceAll("/", ":")}`;
 }
