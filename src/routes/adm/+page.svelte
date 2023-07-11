@@ -23,4 +23,12 @@
 			target="_blank">Deployment</a
 		>
 	</li>
+	<li>
+		Image sizes:
+		<p />
+		<ul>
+			<li>576px (large)</li>
+			<li>190px (small)</li>
+		</ul>
+	</li>
 </ul>
