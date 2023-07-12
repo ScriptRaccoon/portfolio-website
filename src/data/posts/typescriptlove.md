@@ -66,7 +66,7 @@ When you use these functions somewhere else in the codebase, you can just hover 
 let tags: string[] = remove_duplicates(["..."]);
 ```
 
-since the return type of the function does not match with the variable type.
+since the return type of the function does not match the variable type.
 
 ## What is this?
 
@@ -79,7 +79,7 @@ const similar_products = [];
 Alright, this will be an array containing all the similar products. But which properties do these objects have? Sometimes, you can already derive from the existing code which properties are present, but
 
 - there could be more properties
-- nothing guarantees us that these properties are _actually_ there before we execute the code
+- nothing guarantees us that these properties are there before we execute the code
 - often I need other properties as well
 
 As a consequence, I need to do a lot of time-consuming console logging.

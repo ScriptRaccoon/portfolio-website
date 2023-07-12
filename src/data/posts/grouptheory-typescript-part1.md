@@ -105,7 +105,7 @@ interface GroupData<X> {
 
 Remember that all sets in JavaScript / TypeScript are finite so we will only be able to model _finite groups_. Infinite groups can only be modeled "partially".
 
-The interface above is still not finished. Remember that we want to write down the group axioms, and these require the equality of pairs of elements. But in JavaScript, the equality of two non-primitive objects is often too strict. For example, `[1,2] === [1,2]` is actually false!
+The interface above is still not finished. Remember that we want to write down the group axioms, and these require the equality of pairs of elements. But in JavaScript, the equality of two non-primitive objects is often too strict. For example, `[1,2] === [1,2]` is false!
 
 We need a more flexible notion of equality of elements of our sets. To achieve this, we extend the generic class `Set<X>` with a new generic class that has such a notion by definition:
 

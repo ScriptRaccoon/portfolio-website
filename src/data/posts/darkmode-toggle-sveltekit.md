@@ -12,7 +12,7 @@ Implementing a basic dark mode toggle is a fairly easy task. One idea might be t
 1. does not remember the user's choice,
 2. does not use the user's theme from the system settings.
 
-To address (1), one might save the preference in the browser's `localStorage`. With every page visit, we check with it if a theme is saved. This works well, but it will cause the website to flash because it takes some time to download and execute the JavaScript.
+To address (1), one might save the preference in the browser's local storage. With every page visit, we check with it if a theme is saved. This works well, but it will cause the website to flash because it takes some time to download and execute the JavaScript.
 
 This is a bad user experience. We need the correct theme to be rendered already on the server. This will be covered in this post, using **cookies** and SvelteKit's **handle hook**. (See the later-added [Bonus](#bonus) section on how to fix this with `localStorage` directly.)
 

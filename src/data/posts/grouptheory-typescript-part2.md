@@ -25,7 +25,7 @@ Before giving the definition, let me tell you that you already know an example o
 
 Let `n` be a positive integer. There is a group `Z/nZ` of order `n` (that means, with `n` elements) constructed as follows:
 
-The underlying set consists of the numbers `0,1,2,...,n-1`. We take the group operations inherited from the additive group `Z`, but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) `n`. This means that the composition of `a` and `b` is the remainder of `a + b` divided by `n`. The inverse of `a` is the remainder of `-a` divided by `n`. This works since the remainder is always in the list `0,1,2,...,n-1`.
+The underlying set consists of the numbers `0,1,2,...,n-1`. We take the group operations inherited from the additive group `Z` but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) `n`. This means that the composition of `a` and `b` is the remainder of `a + b` divided by `n`. The inverse of `a` is the remainder of `-a` divided by `n`. This works since the remainder is always in the list `0,1,2,...,n-1`.
 
 And it can be simplified even further: If `a + b < n`, then the composition of `a,b` is just `a + b`. Otherwise, it is `a + b - n`. The inverse of `0` is `0`, and for `0 < a < n` the inverse of `a` is `n - a`.
 
@@ -35,7 +35,7 @@ The next step is to define the group `Z/nZ`, pronounced _Z modulo n_, with our g
 
 ```typescript
 function interval(n: number): number[] {
-    return new Array(n).fill(0).map((_, i) => i);
+	return new Array(n).fill(0).map((_, i) => i);
 }
 ```
 
@@ -43,14 +43,14 @@ Finally:
 
 ```typescript
 function additiveGroupModulo(n: number): Group<number> | undefined {
-    // TODO: error handling
+	// TODO: error handling
 
-    return new Group<number>({
-        set: new SetWithEquality(interval(n)),
-        unit: 0,
-        inverse: (a) => (a === 0 ? 0 : n - a),
-        compose: (a, b) => (a + b >= n ? a + b - n : a + b),
-    });
+	return new Group<number>({
+		set: new SetWithEquality(interval(n)),
+		unit: 0,
+		inverse: (a) => (a === 0 ? 0 : n - a),
+		compose: (a, b) => (a + b >= n ? a + b - n : a + b),
+	});
 }
 ```
 
@@ -58,15 +58,13 @@ Since invalid arguments may be passed to the function, we need to add some error
 
 ```typescript
 if (n <= 0) {
-    console.error(
-        "Error: Only positive numbers are allowed for Z/nZ",
-    );
-    return undefined;
+	console.error("Error: Only positive numbers are allowed for Z/nZ");
+	return undefined;
 }
 
 if (n != Math.ceil(n)) {
-    console.error("Error: Only whole numbers are allowed for Z/nZ");
-    return undefined;
+	console.error("Error: Only whole numbers are allowed for Z/nZ");
+	return undefined;
 }
 ```
 
@@ -102,12 +100,12 @@ This is the _symmetric group_ on `X`. If `X` is a finite set with `n` elements, 
 
 For example, `S_3` consists of the following six permutations, written as arrays:
 
--   `[2,0,1]`
--   `[0,2,1]`
--   `[0,1,2]`
--   `[2,1,0]`
--   `[1,2,0]`
--   `[1,0,2]`
+- `[2,0,1]`
+- `[0,2,1]`
+- `[0,1,2]`
+- `[2,1,0]`
+- `[1,2,0]`
+- `[1,0,2]`
 
 How do we generate all permutations?
 
@@ -123,27 +121,27 @@ We are now able to write a recursive function that generates all permutations of
 type permutation = number[];
 
 function listOfPermutations(n: number): permutation[] | undefined {
-    // TODO: error handling
+	// TODO: error handling
 
-    if (n == 0) {
-        return [[]];
-    }
+	if (n == 0) {
+		return [[]];
+	}
 
-    const list = listOfPermutations(n - 1);
-    if (!list) return undefined;
+	const list = listOfPermutations(n - 1);
+	if (!list) return undefined;
 
-    const result: permutation[] = [];
+	const result: permutation[] = [];
 
-    for (const perm of list) {
-        for (let index = 0; index < n; index++) {
-            result.push([
-                ...perm.slice(0, index),
-                n - 1,
-                ...perm.slice(index, perm.length),
-            ]);
-        }
-    }
-    return result;
+	for (const perm of list) {
+		for (let index = 0; index < n; index++) {
+			result.push([
+				...perm.slice(0, index),
+				n - 1,
+				...perm.slice(index, perm.length),
+			]);
+		}
+	}
+	return result;
 }
 ```
 
@@ -151,16 +149,16 @@ Again, we need to add some error handling:
 
 ```typescript
 if (n < 0) {
-    console.error(
-        "Error: Only non-negative numbers are allowed for list of permutations",
-    );
-    return undefined;
+	console.error(
+		"Error: Only non-negative numbers are allowed for list of permutations",
+	);
+	return undefined;
 }
 if (n != Math.ceil(n)) {
-    console.error(
-        "Error: Only whole numbers are allowed for list of permutations",
-    );
-    return undefined;
+	console.error(
+		"Error: Only whole numbers are allowed for list of permutations",
+	);
+	return undefined;
 }
 ```
 
@@ -168,18 +166,18 @@ Next, we implement the symmetric group on `n` elements. Since its underlying set
 
 ```typescript
 function symmetricGroup(n: number): Group<permutation> | undefined {
-    // TODO: error handling
+	// TODO: error handling
 
-    const permutations = listOfPermutations(n);
-    if (!permutations) return undefined;
+	const permutations = listOfPermutations(n);
+	if (!permutations) return undefined;
 
-    return new Group<permutation>({
-        set: new SetWithEquality(permutations, equalTuples),
-        unit: interval(n),
-        inverse: (a) =>
-            interval(n).map((y) => a.findIndex((_y) => _y === y)),
-        compose: (a, b) => b.map((y) => a[y]),
-    });
+	return new Group<permutation>({
+		set: new SetWithEquality(permutations, equalTuples),
+		unit: interval(n),
+		inverse: (a) =>
+			interval(n).map((y) => a.findIndex((_y) => _y === y)),
+		compose: (a, b) => b.map((y) => a[y]),
+	});
 }
 ```
 
@@ -205,14 +203,14 @@ Let's not forget the error handling:
 
 ```typescript
 if (n < 0) {
-    console.error(
-        "Error: Only non-negative numbers are allowed for S_n",
-    );
-    return undefined;
+	console.error(
+		"Error: Only non-negative numbers are allowed for S_n",
+	);
+	return undefined;
 }
 if (n != Math.ceil(n)) {
-    console.error("Error: Only whole numbers are allowed for S_n");
-    return undefined;
+	console.error("Error: Only whole numbers are allowed for S_n");
+	return undefined;
 }
 ```
 
@@ -220,9 +218,9 @@ if (n != Math.ceil(n)) {
 
 There is a group that has exactly four elements `e,a,b,c` such that (we write the group composition as multiplication here)
 
--   `e` is the unit
--   every element is inverse to itself (`a * a = e`, etc.)
--   `a * b = b * a = c`, `a * c = c * a =  b`, `b * c = c * b = a`.
+- `e` is the unit
+- every element is inverse to itself (`a * a = e`, etc.)
+- `a * b = b * a = c`, `a * c = c * a =  b`, `b * c = c * b = a`.
 
 So when multiplying two distinct non-units, the result is always the other of the three elements.
 
@@ -230,15 +228,15 @@ This is called the Klein Four-Group, named after the mathematician _Felix Klein_
 
 ```typescript
 const KleinFourGroup = new Group<string>({
-    set: new SetWithEquality(["e", "a", "b", "c"]),
-    unit: "e",
-    inverse: (x) => x,
-    compose: (x, y) => {
-        if (x === "e") return y;
-        if (y === "e") return x;
-        if (x === y) return "e";
-        return ["a", "b", "c"].find((u) => u !== x && u !== y)!;
-    },
+	set: new SetWithEquality(["e", "a", "b", "c"]),
+	unit: "e",
+	inverse: (x) => x,
+	compose: (x, y) => {
+		if (x === "e") return y;
+		if (y === "e") return x;
+		if (x === y) return "e";
+		return ["a", "b", "c"].find((u) => u !== x && u !== y)!;
+	},
 });
 ```
 
@@ -267,7 +265,7 @@ The modulo operator in JavaScript does not behave correctly, since `-1 % 2 = -1`
 
 ```typescript
 function mod(a: number, r: number) {
-    return ((a % r) + r) % r;
+	return ((a % r) + r) % r;
 }
 ```
 
@@ -279,7 +277,7 @@ type matrix = number[][];
 const matrices: matrix[] = squareOfArray(squareOfArray(interval(2)));
 
 const invertibleMatrices: matrix[] = matrices.filter(
-    ([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
+	([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
 );
 ```
 
@@ -287,10 +285,10 @@ Next, we have to define the correct notion of equality for matrices.
 
 ```typescript
 function equalMatrices<T>(a: T[][], b: T[][]): boolean {
-    return (
-        a.length === b.length &&
-        a.every((_, index) => equalTuples(a[index], b[index]))
-    );
+	return (
+		a.length === b.length &&
+		a.every((_, index) => equalTuples(a[index], b[index]))
+	);
 }
 ```
 
@@ -298,19 +296,19 @@ Now we can define the group of invertible matrices. The unit element is the unit
 
 ```typescript
 const GL2_F2 = new Group<matrix>({
-    set: new SetWithEquality(invertibleMatrices, equalMatrices),
-    unit: [
-        [1, 0],
-        [0, 1],
-    ],
-    inverse: ([[a, b], [c, d]]) => [
-        [mod(d, 2), mod(-b, 2)],
-        [mod(-c, 2), mod(a, 2)],
-    ],
-    compose: ([[a, b], [c, d]], [[p, q], [r, s]]) => [
-        [mod(a * p + b * r, 2), mod(a * q + b * s, 2)],
-        [mod(c * p + d * r, 2), mod(c * q + d * s, 2)],
-    ],
+	set: new SetWithEquality(invertibleMatrices, equalMatrices),
+	unit: [
+		[1, 0],
+		[0, 1],
+	],
+	inverse: ([[a, b], [c, d]]) => [
+		[mod(d, 2), mod(-b, 2)],
+		[mod(-c, 2), mod(a, 2)],
+	],
+	compose: ([[a, b], [c, d]], [[p, q], [r, s]]) => [
+		[mod(a * p + b * r, 2), mod(a * q + b * s, 2)],
+		[mod(c * p + d * r, 2), mod(c * q + d * s, 2)],
+	],
 });
 ```
 
@@ -328,12 +326,12 @@ This example can be extended to a much more general construction. It is possible
 
 ```typescript
 interface CommRingData<X> {
-    set: SetWithEquality<X>;
-    zero: X;
-    one: X;
-    addition: (a: X, b: X) => X;
-    inverse: (a: X) => X;
-    multiplication: (a: X, b: X) => X;
+	set: SetWithEquality<X>;
+	zero: X;
+	one: X;
+	addition: (a: X, b: X) => X;
+	inverse: (a: X) => X;
+	multiplication: (a: X, b: X) => X;
 }
 ```
 
