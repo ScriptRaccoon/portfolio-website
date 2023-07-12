@@ -143,6 +143,7 @@
 			max-height: 30rem;
 			border: 0.15rem solid var(--code-border-color);
 			background-color: var(--code-bg-color);
+			tab-size: 4;
 
 			scrollbar-width: thin;
 			&::-webkit-scrollbar {

@@ -21,8 +21,8 @@ The objective of this series of posts is to develop some basic group theory in t
 
 The definition of a group requires the notion of a _set_, which is (roughly) a collection of mathematical things, such as numbers, functions, geometric objects, and other sets. It turns out that sets can be mentally mapped to _types_ in TypeScript. Please check out the following blog posts explaining the analogy between sets and types in detail.
 
--   Vladimir Klepov, [Making sense of TypeScript using set theory](https://blog.thoughtspile.tech/2023/01/23/typescript-sets/)
--   Iván Ovejero, [TypeScript and Set Theory](https://ivov.dev/notes/typescript-and-set-theory)
+- Vladimir Klepov, [Making sense of TypeScript using set theory](https://blog.thoughtspile.tech/2023/01/23/typescript-sets/)
+- Iván Ovejero, [TypeScript and Set Theory](https://ivov.dev/notes/typescript-and-set-theory)
 
 In the following, I will make use of this analogy all the time. Also, functions in mathematics are nothing but [pure functions](https://en.wikipedia.org/wiki/Pure_function) in programming.
 
@@ -32,9 +32,9 @@ All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/
 
 A group consists of a set `X` together with
 
--   an element `e` in `X` ("unit element")
--   a function `c : X x X ---> X` ("composition")
--   a function `i : X ---> X` ("inverse")
+- an element `e` in `X` ("unit element")
+- a function `c : X x X ---> X` ("composition")
+- a function `i : X ---> X` ("inverse")
 
 satisfying some conditions. The notation means that, given any two elements `x,y` in `X`, we get a new element `c(x,y)` in `X`. Also, we have an element `i(x)` of `X`, for every element `x` of `X`. So, `e` is a constant, `c` is a function of two arguments, and `i` is a function of one argument. The group is the tuple `G = (X,e,c,i)` with all the data.
 
@@ -78,10 +78,10 @@ This is what our (preliminary) generic interface looks like:
 // group.ts
 
 interface GroupData<X> {
-    unit: X;
-    inverse: (a: X) => X;
-    compose: (a: X, b: X) => X;
-    // not finished
+	unit: X;
+	inverse: (a: X) => X;
+	compose: (a: X, b: X) => X;
+	// not finished
 }
 ```
 
@@ -95,11 +95,11 @@ In JavaScript, we cannot iterate over types, but over array-like structures. We 
 
 ```typescript
 interface GroupData<X> {
-    set: Set<X>;
-    unit: X;
-    inverse: (a: X) => X;
-    compose: (a: X, b: X) => X;
-    // not finished
+	set: Set<X>;
+	unit: X;
+	inverse: (a: X) => X;
+	compose: (a: X, b: X) => X;
+	// not finished
 }
 ```
 
@@ -111,12 +111,12 @@ We need a more flexible notion of equality of elements of our sets. To achieve t
 
 ```typescript
 class SetWithEquality<X> extends Set<X> {
-    public equal: (a: X, b: X) => boolean;
+	public equal: (a: X, b: X) => boolean;
 
-    constructor(elements: X[], equal?: (a: X, b: X) => boolean) {
-        super(elements);
-        this.equal = equal ?? ((a, b) => a === b);
-    }
+	constructor(elements: X[], equal?: (a: X, b: X) => boolean) {
+		super(elements);
+		this.equal = equal ?? ((a, b) => a === b);
+	}
 }
 ```
 
@@ -130,10 +130,10 @@ declares a set of 5 numbers with the usual notion of equality. For tuples, we de
 
 ```typescript
 function equalTuples<T>(a: T[], b: T[]): boolean {
-    return (
-        a.length === b.length &&
-        a.every((_, index) => a[index] === b[index])
-    );
+	return (
+		a.length === b.length &&
+		a.every((_, index) => a[index] === b[index])
+	);
 }
 ```
 
@@ -147,10 +147,10 @@ This is our finished interface for groups:
 
 ```typescript
 interface GroupData<X> {
-    set: SetWithEquality<X>;
-    unit: X;
-    inverse: (a: X) => X;
-    compose: (a: X, b: X) => X;
+	set: SetWithEquality<X>;
+	unit: X;
+	inverse: (a: X) => X;
+	compose: (a: X, b: X) => X;
 }
 ```
 
@@ -178,20 +178,20 @@ To construct groups and also verify the group axioms, we need to create a generi
 
 ```typescript
 class Group<X> implements GroupData<X> {
-    public set: SetWithEquality<X>;
-    public unit: X;
-    public inverse: (a: X) => X;
-    public compose: (a: X, b: X) => X;
+	public set: SetWithEquality<X>;
+	public unit: X;
+	public inverse: (a: X) => X;
+	public compose: (a: X, b: X) => X;
 
-    constructor(data: GroupData<X>) {
-        const { set, unit, inverse, compose } = data;
-        this.set = set;
-        this.unit = unit;
-        this.inverse = inverse;
-        this.compose = compose;
-        // TODO: check group axioms
-    }
-    // TODO: add methods
+	constructor(data: GroupData<X>) {
+		const { set, unit, inverse, compose } = data;
+		this.set = set;
+		this.unit = unit;
+		this.inverse = inverse;
+		this.compose = compose;
+		// TODO: check group axioms
+	}
+	// TODO: add methods
 }
 ```
 
@@ -201,10 +201,10 @@ Before we continue with the group class, let us look at a basic example. This is
 
 ```typescript
 const SignGroup = new Group<number>({
-    set: new SetWithEquality([-1, 1]),
-    unit: 1,
-    compose: (a, b) => a * b,
-    inverse: (a) => 1 / a,
+	set: new SetWithEquality([-1, 1]),
+	unit: 1,
+	compose: (a, b) => a * b,
+	inverse: (a) => 1 / a,
 });
 ```
 
@@ -244,7 +244,7 @@ Let us check the associativity law for three elements. Instead of writing
 
 ```typescript
 this.compose(this.compose(a, b), c) ===
-    this.compose(a, this.compose(b, c));
+	this.compose(a, this.compose(b, c));
 ```
 
 which would be too strict, we use the notion of equality attached to our underlying set.
@@ -262,7 +262,7 @@ To test this for all triples and avoid ugly nested for loops, we define a helper
 
 ```typescript
 function cubeOfArray<X>(A: X[]): [X, X, X][] {
-    // implementation left to the reader
+	// implementation left to the reader
 }
 ```
 
@@ -327,9 +327,9 @@ get hasInverseElements(): boolean {
 
 We almost forgot something! We need to make sure that the group operations are indeed operating on the underlying set, one says that they are _closed_. This means:
 
--   the unit is contained in the set
--   the composition of two elements in the set is again in the set
--   the inverse of an element in the set is again in the set
+- the unit is contained in the set
+- the composition of two elements in the set is again in the set
+- the inverse of an element in the set is again in the set
 
 It is a bit unfortunate that this is not guaranteed by our type system. After all, we are saying that, for example, the inverse of an element of type `X` is again of type `X`, via the group data interface. But as we have already explained [before](#a-basic-example), these are two different things. Remember that the types are only adding some type-safety to our class, whereas the set says exactly which elements we have and over which elements we can iterate.
 

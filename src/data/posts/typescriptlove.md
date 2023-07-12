@@ -21,8 +21,8 @@ I like this in particular with SvelteKit. Say you are in a `load` function of th
 
 ```typescript
 export const load = async (event) => {
-    const id = event.params.id;
-    // ...
+	const id = event.params.id;
+	// ...
 };
 ```
 
@@ -42,7 +42,7 @@ Consider the following function in JavaScript:
 
 ```javascript
 function remove_duplicates(array) {
-    // ...
+	// ...
 }
 ```
 
@@ -50,11 +50,11 @@ Without looking at the implementation, can you be sure if this function returns 
 
 ```typescript
 function without_duplicates<T>(array: T[]): T[] {
-    // ...
+	// ...
 }
 
 function remove_duplicates<T>(array: T[]): void {
-    // ...
+	// ...
 }
 ```
 
@@ -78,9 +78,9 @@ const similar_products = [];
 
 Alright, this will be an array containing all the similar products. But which properties do these objects have? Sometimes, you can already derive from the existing code which properties are present, but
 
--   there could be more properties
--   nothing guarantees us that these properties are _actually_ there before we execute the code
--   often I need other properties as well
+- there could be more properties
+- nothing guarantees us that these properties are _actually_ there before we execute the code
+- often I need other properties as well
 
 As a consequence, I need to do a lot of time-consuming console logging.
 
@@ -88,14 +88,14 @@ This is so much easier with TypeScript. First, we make a single console log of a
 
 ```typescript
 type product = {
-    id: string;
-    name: string;
-    quantity: string;
-    colors: string[];
-    sizes: string[];
-    price: string;
-    discounted: boolean;
-    brand: string;
+	id: string;
+	name: string;
+	quantity: string;
+	colors: string[];
+	sizes: string[];
+	price: string;
+	discounted: boolean;
+	brand: string;
 };
 ```
 
@@ -110,7 +110,7 @@ to render the products, I know exactly which properties can be accessed.
 
 ```svelte
 {#each similar_products as product (product.id)}
-    <h2>{product.name}</h2>
+	<h2>{product.name}</h2>
 {/each}
 ```
 
@@ -124,7 +124,7 @@ Say, you have a function that draws a circle on a canvas:
 
 ```typescript
 export function draw_circle(x: number, y: number, r: number) {
-    // ...
+	// ...
 }
 ```
 
@@ -138,11 +138,11 @@ At some point, you realize that this function call is not very explicit. The mea
 
 ```typescript
 export function draw_circle(options: {
-    x: number;
-    y: number;
-    r: number;
+	x: number;
+	y: number;
+	r: number;
 }) {
-    // ...
+	// ...
 }
 ```
 

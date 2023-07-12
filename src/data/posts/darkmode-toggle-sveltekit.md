@@ -20,6 +20,7 @@ To address (2), we can use a media query:
 
 ```css
 @media (prefers-color-scheme: dark) {
+	/* ... */
 }
 ```
 
@@ -54,10 +55,10 @@ Theming is achieved via CSS variables (official name: CSS custom properties). In
 
 ```css
 html {
-    --font-color: #222;
-    --bg-color: #fff;
-    --accent-color: steelblue;
-    --nav-color: #eee;
+	--font-color: #222;
+	--bg-color: #fff;
+	--accent-color: steelblue;
+	--nav-color: #eee;
 }
 ```
 
@@ -65,12 +66,12 @@ We can use these colors like so:
 
 ```css
 body {
-    color: var(--font-color);
-    background-color: var(--bg-color);
+	color: var(--font-color);
+	background-color: var(--bg-color);
 }
 
 h1 {
-    color: var(--accent-color);
+	color: var(--accent-color);
 }
 ```
 
@@ -80,10 +81,10 @@ The colors above represent a light mode. When the user switches to dark mode, we
 
 ```css
 html[data-theme="dark"] {
-    --font-color: #fff;
-    --bg-color: #222;
-    --accent-color: #ff0050;
-    --nav-color: #444;
+	--font-color: #fff;
+	--bg-color: #222;
+	--accent-color: #ff0050;
+	--nav-color: #444;
 }
 ```
 
@@ -95,7 +96,7 @@ If you want to make the transition between the two themes more smooth, you can a
 
 ```css
 body {
-    transition: color 200ms linear;
+	transition: color 200ms linear;
 }
 ```
 
@@ -109,19 +110,19 @@ Either there is already a theme set on the `html` element, or we retrieve it fro
 let current_theme: string;
 
 onMount(() => {
-    const saved_theme =
-        document.documentElement.getAttribute("data-theme");
-    if (saved_theme) {
-        current_theme = saved_theme;
-        return;
-    }
+	const saved_theme =
+		document.documentElement.getAttribute("data-theme");
+	if (saved_theme) {
+		current_theme = saved_theme;
+		return;
+	}
 
-    const preference_is_dark = window.matchMedia(
-        "(prefers-color-scheme: dark)",
-    ).matches;
+	const preference_is_dark = window.matchMedia(
+		"(prefers-color-scheme: dark)",
+	).matches;
 
-    const theme = preference_is_dark ? "dark" : "light";
-    set_theme(theme); // TODO
+	const theme = preference_is_dark ? "dark" : "light";
+	set_theme(theme); // TODO
 });
 ```
 
@@ -129,10 +130,10 @@ The function `set_theme` adjusts the `data-theme` attribute of the `html` and al
 
 ```typescript
 function set_theme(theme: string) {
-    const one_year = 60 * 60 * 24 * 365;
-    document.cookie = `theme=${theme}; max-age=${one_year}; path=/`;
-    document.documentElement.setAttribute("data-theme", theme);
-    current_theme = theme;
+	const one_year = 60 * 60 * 24 * 365;
+	document.cookie = `theme=${theme}; max-age=${one_year}; path=/`;
+	document.documentElement.setAttribute("data-theme", theme);
+	current_theme = theme;
 }
 ```
 
@@ -148,7 +149,7 @@ Let us add a toggle button in the markup of our `Nav.svelte`.
 
 ```svelte
 <button aria-label="toggle theme" on:click={toggle_theme}>
-    <Sun />
+	<Sun />
 </button>
 ```
 
@@ -158,8 +159,8 @@ The button triggers a function that toggles the theme:
 
 ```typescript
 function toggle_theme(): void {
-    const theme = current_theme === "light" ? "dark" : "light";
-    set_theme(theme);
+	const theme = current_theme === "light" ? "dark" : "light";
+	set_theme(theme);
 }
 ```
 
@@ -176,7 +177,7 @@ Before we go on, we add an empty theme to the `html` tag in `src/app.html`:
 ```html
 <!DOCTYPE html>
 <html lang="en" data-theme="">
-    ...
+	...
 </html>
 ```
 
@@ -190,18 +191,18 @@ The default handle hook looks like this.
 // src/hooks.server.ts
 
 export const handle = async ({ event, resolve }) => {
-    // before the server handles the request,
-    // you can do stuff here
+	// before the server handles the request,
+	// you can do stuff here
 
-    // the server handles the request
-    // and generates a response
-    const response = await resolve(event);
+	// the server handles the request
+	// and generates a response
+	const response = await resolve(event);
 
-    // after the server handles the request,
-    // you can do stuff here
+	// after the server handles the request,
+	// you can do stuff here
 
-    // the response is sent to the browser
-    return response;
+	// the response is sent to the browser
+	return response;
 };
 ```
 
@@ -211,11 +212,11 @@ Inside the handle hook, we first check if the cookie is not present. This will b
 
 ```typescript
 export const handle = async ({ event, resolve }) => {
-    const theme = event.cookies.get("theme");
-    if (!theme) {
-        return await resolve(event);
-    }
-    // ...
+	const theme = event.cookies.get("theme");
+	if (!theme) {
+		return await resolve(event);
+	}
+	// ...
 };
 ```
 
@@ -225,9 +226,9 @@ The `resolve` function accepts a second parameter with options, including a func
 
 ```typescript
 return await resolve(event, {
-    transformPageChunk: ({ html }) => {
-        return html.replace('data-theme=""', `data-theme="${theme}"`);
-    },
+	transformPageChunk: ({ html }) => {
+		return html.replace('data-theme=""', `data-theme="${theme}"`);
+	},
 });
 ```
 
@@ -249,18 +250,18 @@ Another option would be to just ignore the media query and always initially set 
 
 I have used the following videos as a reference:
 
--   WebJeda, [Dark mode toggle (cookie based) with SSR in Sveltekit](https://www.youtube.com/watch?v=mt56gKUeppk)
--   WebJeda, [Dark mode toggle with prefers-color-scheme in Sveltekit](https://www.youtube.com/watch?v=dORbhEZuKmE)
+- WebJeda, [Dark mode toggle (cookie based) with SSR in Sveltekit](https://www.youtube.com/watch?v=mt56gKUeppk)
+- WebJeda, [Dark mode toggle with prefers-color-scheme in Sveltekit](https://www.youtube.com/watch?v=dORbhEZuKmE)
 
 A different, much more server-side approach is taken here:
 
--   HuntaByte, [SvelteKit Dark Mode Toggle/Theme Selector (with SSR)](https://www.youtube.com/watch?v=3GpZkVBjXfE)
+- HuntaByte, [SvelteKit Dark Mode Toggle/Theme Selector (with SSR)](https://www.youtube.com/watch?v=3GpZkVBjXfE)
 
 This prevents the initial flashing but does not take into account the initial user preference with a media query, as far as I can tell.
 
 A similar cookie-based approach is taken in this video (with the deprecated SvelteKit routing system, though):
 
--   Johnny Magrippis, [How to: SvelteKit SSR Dark Mode 🌒 with cookies!](https://www.youtube.com/watch?v=5A21S5mMijI)
+- Johnny Magrippis, [How to: SvelteKit SSR Dark Mode 🌒 with cookies!](https://www.youtube.com/watch?v=5A21S5mMijI)
 
 ## Bonus
 
@@ -268,8 +269,8 @@ After publishing this post, I was made aware that we can make the `localStorage`
 
 ```html
 <body data-sveltekit-preload-data="hover">
-    <script src="%sveltekit.assets%/darkmode.js"></script>
-    <div style="display: contents">%sveltekit.body%</div>
+	<script src="%sveltekit.assets%/darkmode.js"></script>
+	<div style="display: contents">%sveltekit.body%</div>
 </body>
 ```
 

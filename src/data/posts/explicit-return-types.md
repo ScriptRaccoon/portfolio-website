@@ -13,7 +13,7 @@ Here is a simple example.
 
 ```typescript
 function add_one(a: number) {
-    return a + 1;
+	return a + 1;
 }
 
 const x = add_one(42);
@@ -31,7 +31,7 @@ Still, there is a case for writing down the function return type explicitly like
 
 ```typescript
 function add_one(a: number): number {
-    return a + 1;
+	return a + 1;
 }
 ```
 
@@ -49,32 +49,32 @@ To illustrate this, here is a more complex function from my little [URL shortene
 
 ```typescript
 export async function create_redirection(
-    url: string,
+	url: string,
 ): Promise<{ errors: string[] } | { shortcut: string }> {
-    const connection = await connect_to_db();
-    if (!connection) {
-        return { errors: ["No database connection."] };
-    }
+	const connection = await connect_to_db();
+	if (!connection) {
+		return { errors: ["No database connection."] };
+	}
 
-    const visits = 0;
-    const shortcut = id();
-    const redirection = new Redirection({ shortcut, url, visits });
+	const visits = 0;
+	const shortcut = id();
+	const redirection = new Redirection({ shortcut, url, visits });
 
-    const error = redirection.validateSync();
+	const error = redirection.validateSync();
 
-    if (error) {
-        return {
-            errors: Object.values(error.errors).map((e) => e.message),
-        };
-    }
+	if (error) {
+		return {
+			errors: Object.values(error.errors).map((e) => e.message),
+		};
+	}
 
-    try {
-        await redirection.save();
-        return { shortcut };
-    } catch (e) {
-        console.log(e);
-        return { errors: ["Internal server error."] };
-    }
+	try {
+		await redirection.save();
+		return { shortcut };
+	} catch (e) {
+		console.log(e);
+		return { errors: ["Internal server error."] };
+	}
 }
 ```
 
@@ -121,7 +121,7 @@ Assume we change the implementation of our previous `add_one` function as follow
 
 ```typescript
 function add_one(a: number) {
-    a += 1;
+	a += 1;
 }
 ```
 
@@ -133,7 +133,7 @@ In general, when I start to implement a function, I think about what types of ar
 
 ```typescript
 function add_one(a: number): number {
-    // TODO
+	// TODO
 }
 ```
 
@@ -145,8 +145,8 @@ When the error annoys me too much during the implementation, I return a dummy va
 
 ```typescript
 function add_one(a: number): number {
-    // TODO
-    return 0;
+	// TODO
+	return 0;
 }
 ```
 
@@ -154,8 +154,8 @@ Here is another example of an incorrect implementation:
 
 ```typescript
 function sign(a: number): number {
-    if (a < 0) return -1;
-    if (a > 0) return +1;
+	if (a < 0) return -1;
+	if (a > 0) return +1;
 }
 ```
 
@@ -171,7 +171,7 @@ Consider the following example.
 
 ```typescript
 function add_one(a: number) {
-    a += 1;
+	a += 1;
 }
 
 const x = add_one(42) + 1;
