@@ -1,4 +1,4 @@
-type tech_level = "expert" | "familiar" | "basic";
+type tech_level = "expert" | "familiar" | "basic" | "nogo";
 
 type tech = {
 	name: string;
@@ -10,6 +10,7 @@ export const headings: Record<string, string> = {
 	expert: "Expert knowledge",
 	familiar: "Familiarity",
 	basic: "Basic knowledge",
+	nogo: "I am familiar with it but won't use it since it's a maintainability nightmare"
 };
 
 export const tech_list: tech[] = [
@@ -171,7 +172,7 @@ export const tech_list: tech[] = [
 	{
 		name: "Tailwind",
 		url: "https://tailwindcss.com",
-		level: "familiar",
+		level: "nogo",
 	},
 	{
 		name: "gulp",
