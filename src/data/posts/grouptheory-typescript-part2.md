@@ -1,7 +1,7 @@
 ---
 title: Group theory in TypeScript (Part 2)
 published: 2023-06-30
-updated: 2023-07-08
+updated: 2023-07-19
 description: Let's investigate more interesting examples of groups!
 ---
 
