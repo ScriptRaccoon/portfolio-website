@@ -21,17 +21,19 @@ All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/
 
 ### Modulo arithmetic
 
-Before giving the definition, let me tell you that you already know an example of a finite cyclic group. When it is 11 o'clock, and we wait 3 hours, it is 2 o'clock. This is because `11 + 3 = 14` gives the remainder `2` when divided by `12`. When we calculate with hours, we calculate inside of the group `Z/12Z`, defined below in a more general fashion.
+Before giving the definition, let me tell you that you already know an example of a finite cyclic group. When it is 11 o'clock, and we wait 3 hours, it is 2 o'clock. This is because <math>11 + 3 = 14</math> gives the remainder <math>2</math> when divided by <math>12</math> (in fact, <math>14 = 1 \* 12 + 2</math>). And when it is 2 o'clock, what time was it 5 hours before? The answer is 9 o'clock because <math>2-5 = -3</math> leaves the remainder <math>9</math> when divided by <math>12</math> (in fact, <math>-3 = (-1) \* 12 + 9</math>).
 
-Let `n` be a positive integer. There is a group `Z/nZ` of order `n` (that means, with `n` elements) constructed as follows:
+When we calculate with hours, we calculate inside of the group <math>\mathbb{Z}/12\mathbb{Z}</math>, defined below in a more general fashion.
 
-The underlying set consists of the numbers `0,1,2,...,n-1`. We take the group operations inherited from the additive group `Z` but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) `n`. This means that the composition of `a` and `b` is the remainder of `a + b` divided by `n`. The inverse of `a` is the remainder of `-a` divided by `n`. This works since the remainder is always in the list `0,1,2,...,n-1`.
+Let <math>n</math> be a positive integer. There is a group <math>\mathbb{Z}/n\mathbb{Z}</math> of order <math>n</math> (that means, with <math>n</math> elements) constructed as follows:
 
-And it can be simplified even further: If `a + b < n`, then the composition of `a,b` is just `a + b`. Otherwise, it is `a + b - n`. The inverse of `0` is `0`, and for `0 < a < n` the inverse of `a` is `n - a`.
+The underlying set consists of the numbers <math>0,1,2,...,n-1</math>. We take the group operations inherited from the additive group <math>\mathbb{Z}</math> but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) <math>n</math>. This means that the composition of <math>a</math> and <math>b</math> is the remainder of <math>a + b</math> divided by <math>n</math>. The inverse of <math>a</math> is the remainder of <math>-a</math> divided by <math>n</math>. This works since the remainder is always in the list <math>0,1,2,...,n-1</math>.
 
-### Implementation of Z/nZ
+And it can be simplified even further: If <math>a + b \lt n</math>, then the composition of <math>a,b</math> is just <math>a + b</math>. Otherwise, it is <math>a + b - n</math>. The inverse of <math>0</math> is <math>0</math>, and for <math>0 \lt a \lt n</math> the inverse of <math>a</math> is <math>n - a</math>.
 
-The next step is to define the group `Z/nZ`, pronounced _Z modulo n_, with our group class. Let us first define a utility function that produces the list of numbers `0,1,2,...,n-1`.
+### Implementation of the cyclic group
+
+The next step is to define the group <math>\mathbb{Z}/n\mathbb{Z}</math>, pronounced _Z modulo n_, with our group class. Let us first define a utility function that produces the list of numbers <math>0,1,2,...,n-1</math>.
 
 ```typescript
 function interval(n: number): number[] {
@@ -68,7 +70,7 @@ if (n != Math.ceil(n)) {
 }
 ```
 
-Let us test this by looking at the group `Z/7Z`:
+Let us test this by looking at the group <math>\mathbb{Z}/7\mathbb{Z}</math>:
 
 ```typescript
 const Zmod7 = additiveGroupModulo(7)!;
@@ -78,44 +80,44 @@ console.assert(Zmod7.compose(5, 3) === 1);
 console.assert(Zmod7.isCommutative);
 ```
 
-There are more conceptual constructions of the group `Z/nZ` (with quotient groups), but the one above is easier to implement in our setup. There is also an infinite cyclic group, `Z`, but as already explained in Part 1, we cannot model it in TypeScript.
+There are more conceptual constructions of the group <math>\mathbb{Z}/n\mathbb{Z}</math> (with quotient groups), but the one above is easier to implement in our setup. There is also an infinite cyclic group, <math>\mathbb{Z}</math>, but as already explained in Part 1, we cannot model it in TypeScript.
 
 ## Symmetric groups
 
 ### Permutations
 
-For every set `X`, there is a group that consists of all the bijective functions `f : X ---> X`. A function is _bijective_ if it has an [inverse function](https://en.wikipedia.org/wiki/Inverse_function). This essentially means that `f` just _permutes_ or _reorders_ the elements of `X`.
+For every set <math>X</math>, there is a group that consists of all the bijective functions <math>f : X \to X</math>. A function is _bijective_ if it has an [inverse function](https://en.wikipedia.org/wiki/Inverse_function). This essentially means that <math>f</math> just _permutes_ or _reorders_ the elements of <math>X</math>.
 
-The group composition of two bijective functions `f : X ---> X`, `g : X ---> X` is, well, their composition:
+The group composition of two bijective functions <math>f : X \to X</math>, <math>g : X \to X</math> is, well, their composition:
 
-`X ---f---> X ---g--> X`
+<math>f \circ g : X \to X</math>
 
-(This is why it was called like that in the definition of a group!) And the inverse is the inverse function. The unit is the identity function `id : X ---> X` which maps every element `x` to `x`. It is trivial to check that the group axioms are satisfied.
+This is why it was called like that in the definition of a group! The inverse is, well, the inverse function. The unit is the identity function <math>\mathrm{id}\_X : X \to X</math> which maps every element <math>x</math> to <math>x</math>. It is trivial to check that the group axioms are satisfied.
 
-This is the _symmetric group_ on `X`. If `X` is a finite set with `n` elements, it is usually denoted by `S_n` (S with a subscript of `n`). Since we like to start counting with `0`, it is useful to let
+This is the _symmetric group_ on <math>X</math>. If <math>X</math> is a finite set with <math>n</math> elements, it is usually denoted by <math>S_n</math>. Since we like to start counting with <math>0</math>, it is useful to let
 
-`X = {0,1,...,n-1}`
+<math>X = \\{0,1,\dotsc,n-1\\}</math>
 
-(whereas most mathematicians will use `1,...,n` instead). In this case, a function `f : X ---> X` can just be seen as an array of length `n` which consists of integers smaller than `n`. The condition that `f` is bijective means that all integers smaller than `n` appear exactly once.
+In mathematics, <math>\\{1,\dotsc,n\\}</math> is more common. But in our case, a function <math>f : X \to X</math> can just be seen as an array of length <math>n</math> which consists of integers smaller than <math>n</math>. The condition that <math>f</math> is bijective means that all integers smaller than <math>n</math> appear exactly once.
 
-For example, `S_3` consists of the following six permutations, written as arrays:
+For example, <math>S_3</math> consists of the following six permutations, written as arrays:
 
-- `[2,0,1]`
-- `[0,2,1]`
-- `[0,1,2]`
-- `[2,1,0]`
-- `[1,2,0]`
-- `[1,0,2]`
+- <math>[2,0,1]</math>
+- <math>[0,2,1]</math>
+- <math>[0,1,2]</math>
+- <math>[2,1,0]</math>
+- <math>[1,2,0]</math>
+- <math>[1,0,2]</math>
 
 How do we generate all permutations?
 
-The idea is to do this recursively. For `n = 0`, there is a unique permutation, the empty array. Otherwise, assume that we know all the permutations of the numbers `0,...,n-2`. They are seen as arrays of length `n-1`. Then, take any of the `n` spots and insert `n-1` there. This yields a permutation of the numbers `0,...,n-1`, and they all arise this way.
+The idea is to do this recursively. For <math>n = 0</math>, there is a unique permutation, the empty array. Otherwise, assume that we know all the permutations of the numbers <math>0,...,n-2</math>. They are seen as arrays of length <math>n-1</math>. Then, take any of the <math>n</math> spots and insert <math>n-1</math> there. This yields a permutation of the numbers <math>0,...,n-1</math>, and they all arise this way.
 
-For example, `S_2` has exactly two permutations, `[0,1]` and `[1,0]`. The elements of `S_3` above result from these by inserting `2` anywhere.
+For example, <math>S_2</math> has exactly two permutations, <math>[0,1]</math> and <math>[1,0]</math>. The elements of <math>S_3</math> above result from these by inserting <math>2</math> anywhere.
 
-### Implementation of S_n
+### Implementation of the symmetric group
 
-We are now able to write a recursive function that generates all permutations of the numbers `0,...,n-1`.
+We are now able to write a recursive function that generates all permutations of the numbers <math>0,...,n-1</math>.
 
 ```typescript
 type permutation = number[];
@@ -162,7 +164,7 @@ if (n != Math.ceil(n)) {
 }
 ```
 
-Next, we implement the symmetric group on `n` elements. Since its underlying set consists of elements of type `permutation`, we will use the corresponding type for our group class. We also use the function `equalTuples` from Part 1 which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
+Next, we implement the symmetric group on <math>n</math> elements. Since its underlying set consists of elements of type `permutation`, we will use the corresponding type for our group class. We also use the function `equalTuples` from Part 1 which implements the "correct" notion of equality for tuples. Otherwise, the group axioms would fail.
 
 ```typescript
 function symmetricGroup(n: number): Group<permutation> | undefined {
@@ -183,13 +185,13 @@ function symmetricGroup(n: number): Group<permutation> | undefined {
 
 Let me explain this a bit more:
 
-The unit is the array `[0,...,n-1]`, which is just the interval we implemented before.
+The unit is the array <math>[0,\dotsc,n-1]</math>, which is just the interval we implemented before.
 
-The inverse of a permutation `a` is the permutation that maps a number `y` to the (unique) number `x` with `y = a(x)`. Since we are working with arrays, `x` is just the index of `y` inside of the array `a`.
+The inverse of a permutation <math>a</math> is the permutation that maps a number <math>y</math> to the (unique) number <math>x</math> with <math>y = a(x)</math>. Since we are working with arrays, <math>x</math> is just the index of <math>y</math> inside of the array <math>a</math>.
 
-The composition `c(a,b)` is defined by `c(a,b)(x) := a(b(x))`. This means that the array corresponding to `c(a,b)` results from the array for `b` by applying `a` to all of its entries, i.e., by mapping it via `a`.
+The composition <math>c(a,b)</math> is defined by <math>c(a,b)(x) := a(b(x))</math>. This means that the array corresponding to <math>c(a,b)</math> results from the array for <math>b</math> by applying <math>a</math> to all of its entries, i.e., by mapping it via <math>a</math>.
 
-Let us test that `S_3` behaves as we expect.
+Let us test that <math>S_3</math> behaves as we expect.
 
 ```typescript
 const S3 = symmetricGroup(3)!;
@@ -216,11 +218,13 @@ if (n != Math.ceil(n)) {
 
 ## Klein Four-Group
 
-There is a group that has exactly four elements `e,a,b,c` such that (we write the group composition as multiplication here)
+There is a group that has exactly four elements <math>e,a,b,c</math> such that (we write the group composition as multiplication here)
 
-- `e` is the unit
-- every element is inverse to itself (`a * a = e`, etc.)
-- `a * b = b * a = c`, `a * c = c * a =  b`, `b * c = c * b = a`.
+- <math>e</math> is the unit
+- every element is inverse to itself (<math>a \* a = e</math>, etc.)
+- <math>a \* b = b \* a = c</math>
+- <math>a \* c = c \* a = b</math>
+- <math>b \* c = c \* b = a</math>
 
 So when multiplying two distinct non-units, the result is always the other of the three elements.
 
@@ -255,13 +259,13 @@ console.assert(KleinFourGroup.compose("a", "b") === "c");
 
 This example requires some prior knowledge of matrices and linear algebra.
 
-If `F` is a field (or even just a commutative ring) and `n` is a non-negative integer, there is a group `GL_n(F)` of invertible matrices over `F` of size `n`, called the _general linear group_.
+If <math>F</math> is a field (or even just a commutative ring) and <math>n</math> is a non-negative integer, there is a group <math>\mathrm{GL}\_n(F)</math> of invertible matrices over <math>F</math> of size <math>n</math>, called the _general linear group_.
 
-In this section, we will implement the special case when `n = 2` and `F = F_2` is the field with two elements, and indicate how it can be generalized.
+In this section, we will implement the special case when <math>n = 2</math> and <math>F = \mathbb{F}\_2</math> is the field with two elements, and indicate how it can be generalized.
 
 ### Implementation
 
-The modulo operator in JavaScript does not behave correctly, since `-1 % 2 = -1` &ndash; it should be `1`. We need to redefine it.
+The modulo operator `%` in JavaScript does not behave correctly (from a mathematician's point of view), since `-1 % 2 = -1`. It should be `1`. We need to redefine it.
 
 ```typescript
 function mod(a: number, r: number) {
@@ -269,7 +273,7 @@ function mod(a: number, r: number) {
 }
 ```
 
-In JavaScript, matrices can be modeled with two-dimensional arrays. The matrices here have only 0,1 as entries. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo `2`). We use the `squareOfArray` utility function from Part 1.
+In JavaScript, matrices can be modeled with two-dimensional arrays. The matrices here have only 0,1 as entries. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo 2). We use the `squareOfArray` utility function from Part 1.
 
 ```typescript
 type matrix = number[][];
@@ -292,7 +296,7 @@ function equalMatrices<T>(a: T[][], b: T[][]): boolean {
 }
 ```
 
-Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always `1`. For composition, we use matrix multiplication modulo `2`.
+Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always 1. For composition, we use matrix multiplication modulo 2.
 
 ```typescript
 const GL2_F2 = new Group<matrix>({
