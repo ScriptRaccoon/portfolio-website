@@ -21,19 +21,29 @@ All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/
 
 ### Modulo arithmetic
 
-Before giving the definition, let me tell you that you already know an example of a finite cyclic group. When it is 11 o'clock, and we wait 3 hours, it is 2 o'clock. This is because <math>11 + 3 = 14</math> gives the remainder <math>2</math> when divided by <math>12</math> (in fact, <math>14 = 1 \* 12 + 2</math>). And when it is 2 o'clock, what time was it 5 hours before? The answer is 9 o'clock because <math>2-5 = -3</math> leaves the remainder <math>9</math> when divided by <math>12</math> (in fact, <math>-3 = (-1) \* 12 + 9</math>).
+Before giving the definition, let me tell you that you already know an example of a finite cyclic group. When it is 11 o'clock, and we wait 3 hours, it is 2 o'clock. This is because <math>11 + 3 = 14</math> gives the remainder <math>2</math> when divided by <math>12</math>:
+
+<math>14 = 1 \* 12 + 2</math>
+
+And when it is 2 o'clock, what time was it 5 hours before? The answer is 9 o'clock because <math>2-5 = -3</math> leaves the remainder <math>9</math> when divided by <math>12</math>:
+
+<math>-3 = (-1) \* 12 + 9</math>
 
 When we calculate with hours, we calculate inside of the group <math>\mathbb{Z}/12\mathbb{Z}</math>, defined below in a more general fashion.
 
 Let <math>n</math> be a positive integer. There is a group <math>\mathbb{Z}/n\mathbb{Z}</math> of order <math>n</math> (that means, with <math>n</math> elements) constructed as follows:
 
-The underlying set consists of the numbers <math>0,1,2,...,n-1</math>. We take the group operations inherited from the additive group <math>\mathbb{Z}</math> but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) <math>n</math>. This means that the composition of <math>a</math> and <math>b</math> is the remainder of <math>a + b</math> divided by <math>n</math>. The inverse of <math>a</math> is the remainder of <math>-a</math> divided by <math>n</math>. This works since the remainder is always in the list <math>0,1,2,...,n-1</math>.
+The underlying set consists of the numbers
+
+<math>0,1,2,\dotsc,n-1</math>.
+
+We take the group operations inherited from the additive group <math>\mathbb{Z}</math> but calculate the result [modulo](https://en.wikipedia.org/wiki/Modulo) <math>n</math>. This means that the composition of <math>a</math> and <math>b</math> is the remainder of <math>a + b</math> divided by <math>n</math>. The inverse of <math>a</math> is the remainder of <math>-a</math> divided by <math>n</math>. This works since the remainder is always in the list <math>0,1,2,\dotsc,n-1</math>.
 
 And it can be simplified even further: If <math>a + b \lt n</math>, then the composition of <math>a,b</math> is just <math>a + b</math>. Otherwise, it is <math>a + b - n</math>. The inverse of <math>0</math> is <math>0</math>, and for <math>0 \lt a \lt n</math> the inverse of <math>a</math> is <math>n - a</math>.
 
 ### Implementation of the cyclic group
 
-The next step is to define the group <math>\mathbb{Z}/n\mathbb{Z}</math>, pronounced _Z modulo n_, with our group class. Let us first define a utility function that produces the list of numbers <math>0,1,2,...,n-1</math>.
+The next step is to define the group <math>\mathbb{Z}/n\mathbb{Z}</math> (pronounced _Z modulo n_) with our group class. Let us first define a utility function that produces the list of numbers <math>0,1,2,\dotsc,n-1</math>.
 
 ```typescript
 function interval(n: number): number[] {
@@ -111,13 +121,13 @@ For example, <math>S_3</math> consists of the following six permutations, writte
 
 How do we generate all permutations?
 
-The idea is to do this recursively. For <math>n = 0</math>, there is a unique permutation, the empty array. Otherwise, assume that we know all the permutations of the numbers <math>0,...,n-2</math>. They are seen as arrays of length <math>n-1</math>. Then, take any of the <math>n</math> spots and insert <math>n-1</math> there. This yields a permutation of the numbers <math>0,...,n-1</math>, and they all arise this way.
+The idea is to do this recursively. For <math>n = 0</math>, there is a unique permutation, the empty array. Otherwise, assume that we know all the permutations of the numbers <math>0,\dotsc,n-2</math>. They are seen as arrays of length <math>n-1</math>. Then, take any of the <math>n</math> spots and insert <math>n-1</math> there. This yields a permutation of the numbers <math>0,\dotsc,n-1</math>, and they all arise this way.
 
 For example, <math>S_2</math> has exactly two permutations, <math>[0,1]</math> and <math>[1,0]</math>. The elements of <math>S_3</math> above result from these by inserting <math>2</math> anywhere.
 
 ### Implementation of the symmetric group
 
-We are now able to write a recursive function that generates all permutations of the numbers <math>0,...,n-1</math>.
+We are now able to write a recursive function that generates all permutations of the numbers <math>0,\dotsc,n-1</math>.
 
 ```typescript
 type permutation = number[];
@@ -273,7 +283,7 @@ function mod(a: number, r: number) {
 }
 ```
 
-In JavaScript, matrices can be modeled with two-dimensional arrays. The matrices here have only 0,1 as entries. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo 2). We use the `squareOfArray` utility function from Part 1.
+In JavaScript, matrices can be modeled with two-dimensional arrays. The matrices here have only <math>0,1</math> as entries. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo <math>2</math>). We use the `squareOfArray` utility function from Part 1.
 
 ```typescript
 type matrix = number[][];
@@ -296,7 +306,7 @@ function equalMatrices<T>(a: T[][], b: T[][]): boolean {
 }
 ```
 
-Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always 1. For composition, we use matrix multiplication modulo 2.
+Now we can define the group of invertible matrices. The unit element is the unit matrix. The [formula for the inverse of a matrix](https://en.wikipedia.org/wiki/Invertible_matrix#Inversion_of_2_%C3%97_2_matrices) is a little bit easier since, here, the determinant is always <math>1</math>. For composition, we use matrix multiplication modulo <math>2</math>.
 
 ```typescript
 const GL2_F2 = new Group<matrix>({
