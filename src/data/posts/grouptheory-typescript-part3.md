@@ -20,7 +20,7 @@ All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/
 
 ### Homomorphism class
 
-A homomorphism of groups consists of two groups and a map (=function) between their underlying sets, satisfying the condition that group composition is preserved in an appropriate sense. It turns out that then the unit and inverse operation are also preserved.
+A homomorphism of groups consists of two groups and a map (that is, a function) between their underlying sets, satisfying the condition that group composition is preserved in an appropriate sense. It turns out that then the unit and inverse operation are also preserved.
 
 Since this is a concept on its own, and we certainly want to add methods to study homomorphisms, it makes sense to define a generic class for it.
 
@@ -28,9 +28,9 @@ First, let's define the generic interface.
 
 ```typescript
 interface HomomorphismOfGroupsData<X, Y> {
-    source: Group<X>;
-    target: Group<Y>;
-    map: (x: X) => Y;
+	source: Group<X>;
+	target: Group<Y>;
+	map: (x: X) => Y;
 }
 ```
 
@@ -38,20 +38,20 @@ Now, we define a class that implements this interface.
 
 ```typescript
 class HomomorphismOfGroups<X, Y>
-    implements HomomorphismOfGroupsData<X, Y>
+	implements HomomorphismOfGroupsData<X, Y>
 {
-    public source: Group<X>;
-    public target: Group<Y>;
-    public map: (x: X) => Y;
+	public source: Group<X>;
+	public target: Group<Y>;
+	public map: (x: X) => Y;
 
-    constructor(data: HomomorphismOfGroupsData<X, Y>) {
-        const { source, target, map } = data;
-        this.source = source;
-        this.target = target;
-        this.map = map;
+	constructor(data: HomomorphismOfGroupsData<X, Y>) {
+		const { source, target, map } = data;
+		this.source = source;
+		this.target = target;
+		this.map = map;
 
-        // TODO: check homomorphism property
-    }
+		// TODO: check homomorphism property
+	}
 }
 ```
 
@@ -142,9 +142,9 @@ const Zmod2 = additiveGroupModulo(2)!;
 const Zmod4 = additiveGroupModulo(4)!;
 
 const emb = new HomomorphismOfGroups({
-    source: Zmod2,
-    target: Zmod4,
-    map: (a) => 2 * a,
+	source: Zmod2,
+	target: Zmod4,
+	map: (a) => 2 * a,
 });
 ```
 
@@ -166,9 +166,9 @@ The groups `Z/2Z` and `{-1,+1}`, which were called `Zmod2` and `SignGroup` in ou
 const Zmod2 = additiveGroupModulo(2)!;
 
 const isomZmod2 = new HomomorphismOfGroups({
-    source: Zmod2,
-    target: SignGroup,
-    map: (a) => (a === 0 ? 1 : -1),
+	source: Zmod2,
+	target: SignGroup,
+	map: (a) => (a === 0 ? 1 : -1),
 });
 ```
 
@@ -191,12 +191,12 @@ This leads to the following implementation.
 const S3 = symmetricGroup(3)!;
 
 const signum = new HomomorphismOfGroups({
-    source: S3,
-    target: SignGroup,
-    map: (a) => {
-        const fixedPoints = [0, 1, 2].filter((i) => a[i] === i);
-        return fixedPoints.length === 1 ? -1 : 1;
-    },
+	source: S3,
+	target: SignGroup,
+	map: (a) => {
+		const fixedPoints = [0, 1, 2].filter((i) => a[i] === i);
+		return fixedPoints.length === 1 ? -1 : 1;
+	},
 });
 ```
 
@@ -219,12 +219,12 @@ It is possible to go through this proof and find an explicit formula for the iso
 
 ```typescript
 const isomGL2 = new HomomorphismOfGroups({
-    source: S3,
-    target: GL2_F2,
-    map: (a) => [
-        [Number(a[0] !== 1), Number(a[1] !== 1)],
-        [Number(a[0] > 0), Number(a[1] > 0)],
-    ],
+	source: S3,
+	target: GL2_F2,
+	map: (a) => [
+		[Number(a[0] !== 1), Number(a[1] !== 1)],
+		[Number(a[0] > 0), Number(a[1] > 0)],
+	],
 });
 ```
 
@@ -242,11 +242,11 @@ Between any two groups, there is a very boring example of a homomorphism: the tr
 
 ```typescript
 function trivialHom<X, Y>(G: Group<X>, H: Group<Y>) {
-    return new HomomorphismOfGroups({
-        source: G,
-        target: H,
-        map: (a) => H.unit,
-    });
+	return new HomomorphismOfGroups({
+		source: G,
+		target: H,
+		map: (a) => H.unit,
+	});
 }
 ```
 
@@ -273,17 +273,17 @@ We can implement this as a class method in our group class. We start with the fi
 
 ```typescript
 class Group<X> {
-    // ...
+	// ...
 
-    orderOfElement(a: X): number {
-        let order = 1;
-        let power = a;
-        while (!this.set.equal(power, this.unit)) {
-            order++;
-            power = this.compose(power, a);
-        }
-        return order;
-    }
+	orderOfElement(a: X): number {
+		let order = 1;
+		let power = a;
+		while (!this.set.equal(power, this.unit)) {
+			order++;
+			power = this.compose(power, a);
+		}
+		return order;
+	}
 }
 ```
 
@@ -367,25 +367,25 @@ Let's implement this as a general function, that produces for every triple `a,G,
 
 ```typescript
 function homFromTorsion<X>(
-    a: X,
-    G: Group<X>,
-    n: number,
+	a: X,
+	G: Group<X>,
+	n: number,
 ): HomomorphismOfGroups<number, X> | undefined {
-    // TODO: error handling when n is not a positive integer
-    const Zmodn = additiveGroupModulo(n)!;
+	// TODO: error handling when n is not a positive integer
+	const Zmodn = additiveGroupModulo(n)!;
 
-    const power = G.power(a, n);
+	const power = G.power(a, n);
 
-    if (!G.set.equal(power, G.unit)) {
-        console.error("Error: The element is not n-torsion.");
-        return undefined;
-    }
+	if (!G.set.equal(power, G.unit)) {
+		console.error("Error: The element is not n-torsion.");
+		return undefined;
+	}
 
-    return new HomomorphismOfGroups({
-        source: Zmodn,
-        target: G,
-        map: (k) => G.power(a, k),
-    });
+	return new HomomorphismOfGroups({
+		source: Zmodn,
+		target: G,
+		map: (k) => G.power(a, k),
+	});
 }
 ```
 
