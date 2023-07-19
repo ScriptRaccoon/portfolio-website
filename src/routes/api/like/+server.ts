@@ -4,22 +4,19 @@ import {
 	set_rate_limit,
 } from "$lib/server/redis";
 import { error, json, type RequestHandler } from "@sveltejs/kit";
-import { dev } from "$app/environment";
 
 export const POST: RequestHandler = async (event) => {
-	if (dev) return json({ likes: 0 });
 	const pathname = await event.request.text();
 	if (!pathname) throw error(400);
 	const ip = event.getClientAddress();
-	if (await rate_limited(ip)) throw error(405);
+	if (await rate_limited(redis, ip)) throw error(405);
 	const key = get_key(pathname);
 	const likes = await redis.incr(key);
-	set_rate_limit(ip);
+	set_rate_limit(redis, ip);
 	return json({ likes });
 };
 
 export const GET = async (event) => {
-	if (dev) return json({ likes: 0 });
 	const pathname = event.url.searchParams.get("pathname");
 	if (!pathname) throw error(400);
 	const key = get_key(pathname);
