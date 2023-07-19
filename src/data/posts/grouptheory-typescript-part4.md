@@ -23,39 +23,39 @@ So we have to construct products of sets with equality first. Surely, equality i
 
 ```typescript
 function ProductOfSets<X, Y>(
-    A: SetWithEquality<X>,
-    B: SetWithEquality<Y>,
+	A: SetWithEquality<X>,
+	B: SetWithEquality<Y>,
 ): SetWithEquality<[X, Y]> {
-    const product: [X, Y][] = [];
-    for (const a of A) {
-        for (const b of B) {
-            product.push([a, b]);
-        }
-    }
+	const product: [X, Y][] = [];
+	for (const a of A) {
+		for (const b of B) {
+			product.push([a, b]);
+		}
+	}
 
-    return new SetWithEquality<[X, Y]>(
-        product,
-        ([a1, b1], [a2, b2]) => A.equal(a1, a2) && B.equal(b1, b2),
-    );
+	return new SetWithEquality<[X, Y]>(
+		product,
+		([a1, b1], [a2, b2]) => A.equal(a1, a2) && B.equal(b1, b2),
+	);
 }
 ```
 
-The group operations in a direct product of groups are also defined "component-wise". We can implement them accordingly. The following function yields for every pair of groups `A` and `B` a new group `productOfGroups(A,B)`, which stands for the direct product `A x B`.
+The group operations in a direct product of groups are also defined "component-wise". We can implement them accordingly. The following function yields for every pair of groups `A` and `B` a new group `productOfGroups(A,B)`, which stands for their direct product <math>A \times B</math>.
 
 ```typescript
 function productOfGroups<X, Y>(
-    A: Group<X>,
-    B: Group<Y>,
+	A: Group<X>,
+	B: Group<Y>,
 ): Group<[X, Y]> {
-    return new Group<[X, Y]>({
-        set: ProductOfSets(A.set, B.set),
-        unit: [A.unit, B.unit],
-        inverse: ([a, b]) => [A.inverse(a), B.inverse(b)],
-        compose: ([a1, b1], [a2, b2]) => [
-            A.compose(a1, a2),
-            B.compose(b1, b2),
-        ],
-    });
+	return new Group<[X, Y]>({
+		set: ProductOfSets(A.set, B.set),
+		unit: [A.unit, B.unit],
+		inverse: ([a, b]) => [A.inverse(a), B.inverse(b)],
+		compose: ([a1, b1], [a2, b2]) => [
+			A.compose(a1, a2),
+			B.compose(b1, b2),
+		],
+	});
 }
 ```
 
@@ -86,7 +86,7 @@ console.assert(Zmod7_x_S3.order === 42);
 
 ### The Klein Four-Group as a direct product
 
-There is an isomorphism between the Klein Four-Group (from [Part 2](/blog/grouptheory-typescript-part2)) and the direct product of `Z/2Z` with itself. The idea is to send `e` to `[0,0]` (which is forced by the homomorphism property) and map the other three source elements `a`, `b`, `c` randomly\* to the other target elements `[1,0]`, `[0,1]`, `[1,1]`.
+There is an isomorphism between the Klein Four-Group (from [Part 2](/blog/grouptheory-typescript-part2)) and the direct product of <math>\mathbb{Z}/2\mathbb{Z}</math> with itself. The idea is to send <math>e</math> to <math>[0,0]</math> (which is forced by the homomorphism property) and map the other three source elements <math>a,b,c</math> randomly\* to the other target elements <math>[1,0], [0,1], [1,1]</math>.
 
 Let us implement this!
 
@@ -94,34 +94,34 @@ Let us implement this!
 const Zmod2 = additiveGroupModulo(2)!;
 
 const table: Record<string, [number, number]> = {
-    e: [0, 0],
-    a: [1, 0],
-    b: [0, 1],
-    c: [1, 1],
+	e: [0, 0],
+	a: [1, 0],
+	b: [0, 1],
+	c: [1, 1],
 };
 
 const isomKlein = new HomomorphismOfGroups({
-    source: KleinFourGroup,
-    target: productOfGroups(Zmod2, Zmod2),
-    map: (x) => table[x],
+	source: KleinFourGroup,
+	target: productOfGroups(Zmod2, Zmod2),
+	map: (x) => table[x],
 });
 
 console.assert(isomKlein.isIsomorphism);
 ```
 
-\*Any permutation is allowed since we have seen in the previous part that `GL_2(F_2)` and `S_3` are isomorphic.
+\*Any permutation is allowed since we have seen in the previous part that <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math> and <math>S_3</math> are isomorphic.
 
 ### Properties of the direct product
 
-It is a general fact that the groups `A x B` and `B x A` are isomorphic. We can construct this isomorphism as follows:
+It is a general fact that the groups <math>A \times B</math> and <math>B \times A</math> are isomorphic. We can construct this isomorphism as follows:
 
 ```typescript
 function isomSwap<X, Y>(A: Group<X>, B: Group<Y>) {
-    return new HomomorphismOfGroups<[X, Y], [Y, X]>({
-        source: productOfGroups(A, B),
-        target: productOfGroups(B, A),
-        map: ([a, b]) => [b, a],
-    });
+	return new HomomorphismOfGroups<[X, Y], [Y, X]>({
+		source: productOfGroups(A, B),
+		target: productOfGroups(B, A),
+		map: ([a, b]) => [b, a],
+	});
 }
 ```
 
@@ -134,33 +134,33 @@ console.assert(swap.isIsomorphism);
 
 Direct products are characterized by a _universal property_. I will not explain this in full detail, but one part of it is very simple, actually: Given two homomorphisms of groups
 
-`f : C ---> A`, `g : C ---> B`,
+<math>f : C \to A, ~ g : C \to B</math>,
 
 we can construct a homomorphism
 
-`(f,g) : C ---> A x B`, `(f,g)(c) := (f(c),g(c))`.
+<math>(f,g) : C \to A \times B,~ (f,g)(c) := (f(c),g(c))</math>.
 
 The homomorphism property is easy to check. We can implement this construction as follows.
 
 ```typescript
 function pairHom<X, Y, Z>(
-    f: HomomorphismOfGroups<Z, X>,
-    g: HomomorphismOfGroups<Z, Y>,
+	f: HomomorphismOfGroups<Z, X>,
+	g: HomomorphismOfGroups<Z, Y>,
 ) {
-    if (f.source !== g.source) {
-        console.error("Error: Sources do not match");
-        return undefined;
-    }
+	if (f.source !== g.source) {
+		console.error("Error: Sources do not match");
+		return undefined;
+	}
 
-    return new HomomorphismOfGroups<Z, [X, Y]>({
-        source: f.source,
-        target: productOfGroups(f.target, g.target),
-        map: (c) => [f.map(c), g.map(c)],
-    });
+	return new HomomorphismOfGroups<Z, [X, Y]>({
+		source: f.source,
+		target: productOfGroups(f.target, g.target),
+		map: (c) => [f.map(c), g.map(c)],
+	});
 }
 ```
 
-We can also define the projection homomorphisms `A x B ---> A` and `A x B ---> B` and formulate the universal property with these, but as already indicated many times before it is unfortunately not possible to verify anything like this in full generality with our code alone. We still have to rely on mathematics for proof.
+We can also define the projection homomorphisms <math>A \times B \to A</math> and <math>A \times B \to B</math> and formulate the universal property with these, but as already indicated many times before it is unfortunately not possible to verify anything like this in full generality with our code alone. We still have to rely on mathematics for proof.
 
 At least, the TypeScript compiler helps us to write down _meaningful formulas_. For example, in the code above we cannot replace `g.map(c)` with `f.map(c)` without the TypeScript compiler yelling at us. Indeed, this is a type error.
 
@@ -178,34 +178,34 @@ We add a `subset` method to our `SetWithEquality<X>` class that generates a subs
 
 ```typescript
 class SetWithEquality<X> extends Set<X> {
-    // ...
+	// ...
 
-    subset(list: X[]): SetWithEquality<X> {
-        if (list.some((a) => !this.contains(a))) {
-            console.error("Error: Subset property is not satisfied");
-        }
+	subset(list: X[]): SetWithEquality<X> {
+		if (list.some((a) => !this.contains(a))) {
+			console.error("Error: Subset property is not satisfied");
+		}
 
-        return new SetWithEquality<X>(list, this.equal);
-    }
+		return new SetWithEquality<X>(list, this.equal);
+	}
 }
 ```
 
-For example, `Zmod2.set.subset([0])` declares the subset of the underlying set of `Z/2Z` (which is `{0,1}`) that just consists of the zero.
+For example, `Zmod2.set.subset([0])` declares the subset of the underlying set of <math>\mathbb{Z}/2\mathbb{Z}</math> (which is <math>\\{0,1\\}</math>) that just consists of the zero.
 
 Now, a subgroup of a group consists of a subset of the underlying set with all group operations being inherited from the whole group. Of course, this deserves only the name _subgroup_ when the result is indeed a group. But remember that we already included the check for all group axioms in the `Group<X>` constructor, so we do not need to repeat it here:
 
 ```typescript
 class Group<X> {
-    // ...
+	// ...
 
-    subgroupOfList(list: X[]): Group<X> {
-        return new Group<X>({
-            set: this.set.subset(list),
-            unit: this.unit,
-            compose: this.compose,
-            inverse: this.inverse,
-        });
-    }
+	subgroupOfList(list: X[]): Group<X> {
+		return new Group<X>({
+			set: this.set.subset(list),
+			unit: this.unit,
+			compose: this.compose,
+			inverse: this.inverse,
+		});
+	}
 }
 ```
 
@@ -227,42 +227,42 @@ get isTrivial(): boolean {
 
 ### Kernels and Images
 
-Many examples of subgroups arise from homomorphisms. Every homomorphism `f : A ---> B` yields a [kernel](<https://en.wikipedia.org/wiki/Kernel_(algebra)>), which is a subgroup of `A`, and an [image](<https://en.wikipedia.org/wiki/Image_(mathematics)>), which is a subgroup of `B`.
+Many examples of subgroups arise from homomorphisms. Every homomorphism <math>f : A \to B</math> yields a [kernel](<https://en.wikipedia.org/wiki/Kernel_(algebra)>), which is a subgroup of <math>A</math>, and an [image](<https://en.wikipedia.org/wiki/Image_(mathematics)>), which is a subgroup of <math>B</math>.
 
 To implement these two subgroups, we extend the `HomomorphismOfGroups<X,Y>` class as follows:
 
 ```typescript
 export class HomomorphismOfGroups<X, Y> {
-    // ...
+	// ...
 
-    get kernel(): Group<X> {
-        // source elements that map to the unit
-        const elements = this.source.elements.filter((a) =>
-            this.target.set.equal(this.map(a), this.target.unit),
-        );
-        return this.source.subgroupOfList(elements);
-    }
+	get kernel(): Group<X> {
+		// source elements that map to the unit
+		const elements = this.source.elements.filter((a) =>
+			this.target.set.equal(this.map(a), this.target.unit),
+		);
+		return this.source.subgroupOfList(elements);
+	}
 
-    get image(): Group<Y> {
-        //  target elements that have a preimage
-        const elements = this.target.elements.filter((b) =>
-            this.source.elements.some((a) =>
-                this.target.set.equal(this.map(a), b),
-            ),
-        );
-        return this.target.subgroupOfList(elements);
-    }
+	get image(): Group<Y> {
+		//  target elements that have a preimage
+		const elements = this.target.elements.filter((b) =>
+			this.source.elements.some((a) =>
+				this.target.set.equal(this.map(a), b),
+			),
+		);
+		return this.target.subgroupOfList(elements);
+	}
 }
 ```
 
-We can test this implementation with all the homomorphisms from the [previous part](/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from `S3` to `GL_2(F_2)`, then
+We can test this implementation with all the homomorphisms from the [previous part](/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from <math>S_3 \to \mathrm{GL}\_2(\mathbb{F}\_2)</math>, then
 
 ```typescript
 console.assert(isomGL2.kernel.isTrivial);
 console.assert(isomGL2.image.order === 6);
 ```
 
-When `signum` denotes the sign homomorphism `S_3 ---> {+1,-1}`, we get:
+When `signum` denotes the sign homomorphism <math>S_3 \to \\{+1,-1\\}</math>, we get:
 
 ```typescript
 console.assert(signum.kernel.order === 3);
@@ -272,49 +272,49 @@ console.assert(signum.image.order === 2);
 
 ### Generated subgroups
 
-If `S` is any subset of the underlying set of a group `G`, we wish to build the smallest subgroup of `G` which contains `S`. This is the subgroup [generated by](https://en.wikipedia.org/wiki/Generating_set_of_a_group) `S`.
+If <math>S</math> is any subset of the underlying set of a group <math>G</math>, we wish to build the smallest subgroup of <math>G</math> which contains <math>S</math>. This is the subgroup [generated by](https://en.wikipedia.org/wiki/Generating_set_of_a_group) <math>S</math>.
 
 The following pseudo-algorithm constructs the elements of this group:
 
-We build the list of elements step by step and start with `[e]` (where `e` is the unit). For every element `s` of `S`, we compute the products `g * s` with all the elements `g` from the list. If no product is new, we are done: we return the list of elements with the inherited group operations. Otherwise, we add all of them to the list (without duplicates). Now, we continue with that larger list.
+We build the list of elements step by step and start with <math>[e]</math> (where <math>e</math> is the unit). For every element <math>s \in S</math>, we compute the products <math>g \* s</math> with all the elements <math>g</math> from the list. If no product is new, we are done: we return the list of elements with the inherited group operations. Otherwise, we add all of them to the list (without duplicates). Now, we continue with that larger list.
 
 In our code, we can do this with a `while` loop which runs as long as new elements have been found. The process of finding new elements will be extracted into its own function\* for better readability.
 
 ```typescript
 class Group<X> {
-    // ...
+	// ...
 
-    subgroupGeneratedBy(generators: X[]): Group<X> {
-        let elements = [this.unit];
-        let done = false;
+	subgroupGeneratedBy(generators: X[]): Group<X> {
+		let elements = [this.unit];
+		let done = false;
 
-        const getNewElements = (): X[] => {
-            const newElements = [];
-            for (const element of elements) {
-                for (const generator of generators) {
-                    const product = this.compose(element, generator);
-                    const isOld = elements
-                        .concat(newElements)
-                        .some((s) => this.set.equal(s, product));
-                    if (!isOld) newElements.push(product);
-                }
-            }
-            return newElements;
-        };
+		const getNewElements = (): X[] => {
+			const newElements = [];
+			for (const element of elements) {
+				for (const generator of generators) {
+					const product = this.compose(element, generator);
+					const isOld = elements
+						.concat(newElements)
+						.some((s) => this.set.equal(s, product));
+					if (!isOld) newElements.push(product);
+				}
+			}
+			return newElements;
+		};
 
-        while (!done) {
-            const newElements = getNewElements();
-            done = newElements.length === 0;
-            elements = elements.concat(newElements);
-        }
+		while (!done) {
+			const newElements = getNewElements();
+			done = newElements.length === 0;
+			elements = elements.concat(newElements);
+		}
 
-        return new Group<X>({
-            set: this.set.subset(elements),
-            unit: this.unit,
-            compose: this.compose,
-            inverse: this.inverse,
-        });
-    }
+		return new Group<X>({
+			set: this.set.subset(elements),
+			unit: this.unit,
+			compose: this.compose,
+			inverse: this.inverse,
+		});
+	}
 }
 ```
 
@@ -330,11 +330,11 @@ console.assert(Zmod6.subgroupGeneratedBy([3]).order === 2);
 console.assert(Zmod6.subgroupGeneratedBy([4]).order === 3);
 ```
 
-The Klein Four-Group is generated by `a` and `b`:
+The Klein Four-Group is generated by <math>a</math> and <math>b</math>:
 
 ```typescript
 console.assert(
-    KleinFourGroup.subgroupGeneratedBy(["a", "b"]).order == 4,
+	KleinFourGroup.subgroupGeneratedBy(["a", "b"]).order == 4,
 );
 ```
 
@@ -355,10 +355,10 @@ And two 2-cycles generate the whole group:
 
 ```typescript
 console.assert(
-    S3.subgroupGeneratedBy([
-        [1, 0, 2],
-        [0, 2, 1],
-    ]).order == 6,
+	S3.subgroupGeneratedBy([
+		[1, 0, 2],
+		[0, 2, 1],
+	]).order == 6,
 );
 ```
 
@@ -368,18 +368,18 @@ The center of a group is the subgroup consisting of all elements which commute w
 
 ```typescript
 class Group<X> {
-    // ...
+	// ...
 
-    get center(): Group<X> {
-        const elements = this.elements.filter((a) =>
-            this.elements.every((b) => this.isCommutingPair([a, b])),
-        );
-        return this.subgroupOfList(elements);
-    }
+	get center(): Group<X> {
+		const elements = this.elements.filter((a) =>
+			this.elements.every((b) => this.isCommutingPair([a, b])),
+		);
+		return this.subgroupOfList(elements);
+	}
 }
 ```
 
-The center of all symmetric groups is trivial (except for `S_2`). Let us test this by example:
+The center of all symmetric groups is trivial (except for <math>S_2</math>). Let us test this by example:
 
 ```typescript
 const S5 = symmetricGroup(5)!;
