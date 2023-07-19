@@ -10,6 +10,7 @@ import {
 } from "$lib/server/headings";
 import { transform_external_links } from "$lib/server/external-links";
 import { render_formulas } from "$lib/server/formulas";
+import { compose } from "$lib/shared/utils";
 const md = new markdownit();
 
 const posts_record = import.meta.glob("/src/data/posts/*.md", {
@@ -30,12 +31,16 @@ export const load = async (event) => {
 		fm<Omit<post, "id">>(markdown);
 	const attributes: post = { ..._attributes, id };
 
-	const html_code_raw0 = md.render(body);
-	const toc = get_table_of_contents(html_code_raw0);
-	const html_code_raw1 = render_formulas(html_code_raw0);
-	const html_code_raw2 = transform_external_links(html_code_raw1);
-	const html_code_raw3 = add_ids_to_headings(html_code_raw2);
-	const html_code = highlight(html_code_raw3);
+	const html_raw = md.render(body);
+
+	const html_code = compose([
+		render_formulas,
+		transform_external_links,
+		add_ids_to_headings,
+		highlight,
+	])(html_raw);
+
+	const toc = get_table_of_contents(html_code);
 
 	const { title, description } = attributes;
 	const meta = { title, description };

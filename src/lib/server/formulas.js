@@ -4,6 +4,11 @@ const MathJax = await mathjax.init({
 	loader: { load: ["input/tex", "output/svg"] },
 });
 
+/**
+ * renders a single formula with MathJax
+ * @param {string} formula
+ * @returns {string}
+ */
 function render_formula(formula) {
 	const svg = MathJax.tex2svg(formula, {
 		display: false,
@@ -13,6 +18,11 @@ function render_formula(formula) {
 
 const math_tag_regex = /&lt;math&gt;(.*?)&lt;\/math&gt;/g;
 
+/**
+ * renders all formulas in a HTML string with MathJax
+ * @param {string} htmlContent
+ * @returns {string}
+ */
 export function render_formulas(htmlContent) {
 	const renderedHtml = htmlContent.replace(
 		math_tag_regex,
