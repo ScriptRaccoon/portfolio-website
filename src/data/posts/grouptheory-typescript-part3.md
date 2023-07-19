@@ -135,7 +135,7 @@ get isIsomorphism(): boolean {
 
 ### A basic example of an injective homomorphism
 
-There is a basic example of a homomorphism from `Z/2Z` to `Z/4Z` which maps 0 to 0 and 1 to 2. We can implement this with our class as follows.
+There is a basic example of a homomorphism from <math>\mathbb{Z}/2\mathbb{Z}</math> to <math>\mathbb{Z}/4\mathbb{Z}</math> which maps <math>0 \mapsto 0</math> and <math>1 \mapsto 2</math>. We can implement this with our class as follows.
 
 ```typescript
 const Zmod2 = additiveGroupModulo(2)!;
@@ -160,7 +160,7 @@ I really like the syntax here. A mathematician would say something like: "We def
 
 ### A basic example of an isomorphism
 
-The groups `Z/2Z` and `{-1,+1}`, which were called `Zmod2` and `SignGroup` in our code and which we already introduced in previous parts, are essentially the same: they are [isomorphic](https://en.wikipedia.org/wiki/Isomorphism). We can verify this by defining an isomorphism between these two groups, as follows:
+The groups <math>\mathbb{Z}/2\mathbb{Z}</math> and <math>\\{+1,-1\\}</math>, which were called `Zmod2` and `SignGroup` in previous parts, are essentially the same: they are [isomorphic](https://en.wikipedia.org/wiki/Isomorphism). We can verify this by defining an isomorphism between these two groups, as follows:
 
 ```typescript
 const Zmod2 = additiveGroupModulo(2)!;
@@ -172,7 +172,7 @@ const isomZmod2 = new HomomorphismOfGroups({
 });
 ```
 
-So, we map 0 to 1 and 1 to -1. We can run tests to verify that this is, indeed, an isomorphism.
+So, we map <math>0 \mapsto 1</math> and <math>1 \mapsto -1</math>. We can run tests to verify that this is, indeed, an isomorphism.
 
 ```typescript
 console.assert(isomZmod2.isHomomorphism);
@@ -181,9 +181,9 @@ console.assert(isomZmod2.isIsomorphism);
 
 ### The sign homomorphism
 
-There is an interesting example of a homomorphism from any finite symmetric group to `{+1,-1}`, called the [sign homomorphism](https://en.wikipedia.org/wiki/Parity_of_a_permutation). Here, we will only cover the special case `S_3`.
+There is an interesting example of a homomorphism from any finite symmetric group to <math>\\{+1,-1\\}</math>, called the [sign homomorphism](https://en.wikipedia.org/wiki/Parity_of_a_permutation). Here, we will only cover the special case <math>S_3</math>.
 
-The group `S_3` consists of three 2-cycles, which have the sign 1, and three other permutations, whose sign is -1. The 2-cycles can be distinguished by the fact that they have exactly one fixed point.
+The group <math>S_3</math> consists of three 2-cycles, which have the sign <math>1</math>, and three other permutations, whose sign is <math>-1</math>. The 2-cycles can be distinguished by the fact that they have exactly one fixed point.
 
 This leads to the following implementation.
 
@@ -211,11 +211,15 @@ console.assert(!signum.isIsomorphism);
 
 ### An isomorphism of groups of order 6
 
-In the last part, we saw two non-commutative groups of order 6, namely the symmetric group `S_3` and the group `GL_2(F_2)` of 2x2 matrices over the field with two elements. It turns out that all non-commutative groups of order 6 are isomorphic. Let us verify this in this example.
+In the last part, we saw two non-commutative groups of order 6, namely the symmetric group <math>S_3</math> and the group <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math> of <math>2 \times 2</math> matrices over the field with two elements. It turns out that all non-commutative groups of order 6 are isomorphic. Let us verify this in this example.
 
-The best explanation for this goes as follows. Let `V` be a 2-dimensional vector space over `F_2`. There is an obvious restriction homomorphism from `GL(V)` to `Sym(V \ {0})`, where the latter is the symmetric group on the set of non-zero vectors. It is injective. Both groups have order 6, hence it is an isomorphism. The inverse map is a linear extension. Also, `GL(V)` is isomorphic to `GL_2(F_2)`, and `Sym(V \ {0})` is isomorphic to `S_3`.
+The best explanation for this goes as follows. Let <math>V</math> be a 2-dimensional vector space over <math>\mathbb{F}\_2</math>. There is an obvious restriction homomorphism from
 
-It is possible to go through this proof and find an explicit formula for the isomorphism from `S_3` to `GL_2(F_2)`. This is a good exercise, and the result is implemented below.
+<math>\mathrm{GL}(V) \to \mathrm{Sym}(V \setminus \\{0\\})</math>,
+
+where the latter is the symmetric group on the set of non-zero vectors. It is injective. Both groups have order 6, hence it is an isomorphism. The inverse map is a linear extension. Also, <math>\mathrm{GL}(V)</math> is isomorphic to <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math>, and <math>\mathrm{Sym}(V \setminus \\{0\\})</math> is isomorphic to <math>S_3</math>.
+
+It is possible to go through this proof and find an explicit formula for the isomorphism from <math>S_3</math> to <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math>. This is a good exercise, and the result is implemented below.
 
 ```typescript
 const isomGL2 = new HomomorphismOfGroups({
@@ -263,13 +267,13 @@ console.assert(trivialHomExample.isHomomorphism);
 
 It is time to add some more group theory to our group class.
 
-Consider an element `a` of a finite group, whose composition is written multiplicatively. For every positive integer `n > 0` we can form the _power_
+Consider an element <math>a</math> of a finite group, whose composition is written multiplicatively. For every positive integer <math>n \gt 0</math> we can form the _power_
 
-`a^n := a * a * ... * a`
+<math>a^n := \underbrace{a \* a \* \dotsc \* a}\_{n \text{ factors}}</math>.
 
-(a product with `n` factors). It turns out that there is always an `n` such that `a^n` equals the unit of the group. The smallest `n` with this property is called the _order of `a`_. (This is different from the _order of the group_, which is just the number of all group elements.)
+It turns out that there is always an <math>n</math> such that <math>a^n</math> equals the unit of the group. The smallest <math>n</math> with this property is called the _order of <math>a</math>_. (This is different from the _order of the group_, which is just the number of all group elements.)
 
-We can implement this as a class method in our group class. We start with the first power of `a`, namely `a` itself. Then we multiply `a` to these powers until they have reached the unit of the group.
+We can implement this as a class method in our group class. We start with the first power of <math>a</math>, namely <math>a</math> itself. Then we multiply <math>a</math> to these powers until they have reached the unit of the group.
 
 ```typescript
 class Group<X> {
@@ -305,7 +309,7 @@ get isCyclic(): boolean {
 }
 ```
 
-It turns out that the groups `Z/nZ` are cyclic (the element `1` has order `n`), and every cyclic group is isomorphic to such a group (more on that later).
+It turns out that the groups <math>\mathbb{Z}/n\mathbb{Z}</math> are cyclic (the element <math>1</math> has order <math>n</math>), and every cyclic group is isomorphic to such a group (more on that later).
 
 Let us test the implementation:
 
@@ -322,7 +326,7 @@ console.assert(KleinFourGroup.maximalOrderOfElement === 2);
 
 Inside the `orderOfElement` method, we implicitly implemented the power of a group element by a positive integer. We should extract this logic into its own method. But powers are also available for negative exponents (they just have to be integers): in that case, we multiply the inverse element with itself many times.
 
-We can implement this by recursion as follows. For positive exponents `n`, we define `a^n` by `a * a^(n-1)`. For negative exponents, we define `a^n` by `i(a)^(-n)`. The base case is `a^0 = e`.
+We can implement this by recursion as follows. For positive exponents <math>n</math>, we define <math>a^n</math> by <math>a \* a^{n-1}</math>. For negative exponents, we define <math>a^n</math> by <math>i(a)^{-n}</math>. The base case is <math>a^0 = e</math>.
 
 ```typescript
 power(a: X, n: number): X {
@@ -354,16 +358,16 @@ console.assert(Zmod6.power(2, -1) === 4);
 
 There is a connection between homomorphisms and orders of elements:
 
-If `G` is a finite group, then
+If <math>G</math> is a finite group, then
 
-1. homomorphisms `Z/nZ ---> G` correspond 1:1 to elements `a` of `G` whose order divides `n`,
-2. _injective_ homomorphisms `Z/nZ ---> G` correspond 1:1 to elements of `G` whose order is _equal_ to `n`.
+1. homomorphisms <math>\mathbb{Z}/n\mathbb{Z} \to G</math> correspond 1:1 to elements <math>a</math> of <math>G</math> whose order divides <math>n</math>,
+2. _injective_ homomorphisms <math>\mathbb{Z}/n\mathbb{Z} \hookrightarrow G</math> correspond 1:1 to elements of <math>G</math> whose order is _equal_ to <math>n</math>.
 
 The second statement immediately implies the already mentioned classification of cyclic groups. I will not explain the proof but would like to make the correspondence more explicit.
 
-In one direction, we evaluate a homomorphism at the element `1` of `Z/nZ` (remember that the underlying set was `0,1,...,n-1` in our construction of that group) to get an element of `G`. Conversely, given an element `a` of `G` whose order divides `n` (this just means `a^n = e`), we take the map which maps `k` to the power `a^k`.
+In one direction, we evaluate a homomorphism at the element <math>1</math> of <math>\mathbb{Z}/n\mathbb{Z}</math> (remember that the underlying set was <math>0,1,...,n-1</math> in our construction of that group) to get an element of <math>G</math>. Conversely, given an element <math>a</math> of <math>G</math> whose order divides <math>n</math> (this just means <math>a^n = e</math>), we take the map which maps <math>k</math> to the power <math>a^k</math>.
 
-Let's implement this as a general function, that produces for every triple `a,G,n` as above a homomorphism `Z/nZ ---> G`:
+Let's implement this as a general function, that produces for every triple <math>(a,G,n)</math> as above a homomorphism <math>\mathbb{Z}/n\mathbb{Z} \to G</math>:
 
 ```typescript
 function homFromTorsion<X>(
@@ -389,7 +393,7 @@ function homFromTorsion<X>(
 }
 ```
 
-For example, the permutation `[2,0,1]` has order `3` in `S_3`, and hence gives rise to an injective homomorphism `Z/3Z ---> S_3`:
+For example, the permutation <math>[2,0,1]</math> has order <math>3</math> in <math>S_3</math>, and hence gives rise to an injective homomorphism <math>\mathbb{Z}/3\mathbb{Z} \hookrightarrow S_3</math>:
 
 ```typescript
 const g = homFromTorsion([2, 0, 1], S3, 3);
@@ -398,11 +402,11 @@ console.assert(g?.isHomomorphism);
 console.assert(g?.isInjective);
 ```
 
-Let us point out that these are just example verifications. Our TypeScript code cannot give us general proof that the map `Z/nZ ----> G` that we defined is a homomorphism, for every group `G` and every element inside it. For this, a bit of mathematics is necessary.
+Let us point out that these are just example verifications. Our TypeScript code cannot give us general proof that the map <math>\mathbb{Z}/n\mathbb{Z} \to G</math> that we defined is a homomorphism, for every group <math>G</math> and every element inside it. For this, a bit of mathematics is necessary.
 
 ## Conclusion
 
-For me, the highlight of this part was the isomorphism between the symmetric group `S_3` and the general linear group `GL_2(F_2)`. It is very interesting to see that (a) it can be defined in a very formal and still concrete way, (b) the verification of the isomorphism property can be done by JavaScript.
+For me, the highlight of this part was the isomorphism between the symmetric group <math>S_3</math> and the general linear group <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math>. It is very interesting to see that (a) it can be defined in a very formal and still concrete way, (b) the verification of the isomorphism property can be done by JavaScript.
 
 By now, it should be more or less clear that all topics of finite group theory can be carried out within the system presented here. It could eventually become a proper library for group theory.
 
