@@ -1,17 +1,15 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
 import type { post } from "../types";
-import { highlight } from "$lib/server/highlight";
-
-import markdownit from "markdown-it";
 import {
+	highlight_code,
 	add_ids_to_headings,
 	get_table_of_contents,
-} from "$lib/server/headings";
-import { transform_external_links } from "$lib/server/external-links";
-import { render_formulas } from "$lib/server/formulas";
+	render_formulas,
+	transform_external_links,
+	render_markdown,
+} from "$lib/server/blog-processing";
 import { compose } from "$lib/shared/utils";
-const md = new markdownit();
 
 const posts_record = import.meta.glob("/src/data/posts/*.md", {
 	as: "raw",
@@ -31,16 +29,16 @@ export const load = async (event) => {
 		fm<Omit<post, "id">>(markdown);
 	const attributes: post = { ..._attributes, id };
 
-	const html_raw = md.render(body);
+	const html_raw = render_markdown(body);
 
 	const html_code = compose([
 		render_formulas,
 		transform_external_links,
 		add_ids_to_headings,
-		highlight,
+		highlight_code,
 	])(html_raw);
 
-	const toc = get_table_of_contents(html_code);
+	const toc = get_table_of_contents(html_raw);
 
 	const { title, description } = attributes;
 	const meta = { title, description };

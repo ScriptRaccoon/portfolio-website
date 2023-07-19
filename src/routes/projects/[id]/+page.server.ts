@@ -1,15 +1,15 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
 import type { project } from "../types";
+import {
+	transform_external_links,
+	render_markdown,
+} from "$lib/server/blog-processing";
 
 const projects_record = import.meta.glob("/src/data/projects/*.md", {
 	as: "raw",
 	eager: true,
 });
-
-import markdownit from "markdown-it";
-import { transform_external_links } from "$lib/server/external-links";
-const md = new markdownit();
 
 export const load = async (event) => {
 	const id = event.params.id;
@@ -26,8 +26,8 @@ export const load = async (event) => {
 
 	attributes.tags.sort((a, b) => a.localeCompare(b));
 
-	const html_code_raw = md.render(body);
-	const html_code = transform_external_links(html_code_raw);
+	const html_raw = render_markdown(body);
+	const html_code = transform_external_links(html_raw);
 
 	const meta = {
 		title: attributes.name,

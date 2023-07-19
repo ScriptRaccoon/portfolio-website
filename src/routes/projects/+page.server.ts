@@ -1,5 +1,5 @@
 import type { project } from "./types";
-import { get_frontmatter } from "$lib/server/frontmatter";
+import { get_frontmatter } from "$lib/server/blog-processing";
 
 export const load = async () => {
 	const unsorted_projects = get_frontmatter<project>(

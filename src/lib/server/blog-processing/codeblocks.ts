@@ -20,7 +20,7 @@ const code_regex =
 const style_regex =
 	/<pre([^>]*)style="[^"]*background-color:[^"]*"(.*?)>/g;
 
-export function highlight(htmlContent: string) {
+export function highlight_code(htmlContent: string) {
 	return htmlContent.replace(code_regex, (_, lang, code) => {
 		const code_decoded = he.decode(code);
 		const code_highlighted = highlighter.codeToHtml(

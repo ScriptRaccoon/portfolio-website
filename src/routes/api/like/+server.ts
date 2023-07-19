@@ -1,12 +1,12 @@
-import { redis } from "$lib/server/redis-client.js";
-import { error, json } from "@sveltejs/kit";
-import { dev } from "$app/environment";
 import {
+	redis,
 	rate_limited,
 	set_rate_limit,
-} from "$lib/server/redis-rate-limit.js";
+} from "$lib/server/redis";
+import { error, json, type RequestHandler } from "@sveltejs/kit";
+import { dev } from "$app/environment";
 
-export const POST = async (event) => {
+export const POST: RequestHandler = async (event) => {
 	if (dev) return json({ likes: 0 });
 	const pathname = await event.request.text();
 	if (!pathname) throw error(400);

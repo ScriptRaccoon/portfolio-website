@@ -1,7 +1,6 @@
 export const prerender = false;
 
-import { redis } from "$lib/server/redis-client";
-import { redis_cached } from "$lib/server/redis-cache";
+import { redis, redis_cached } from "$lib/server/redis";
 import { get_youtube_stats } from "./stats";
 import { get_latest_video } from "./video";
 
