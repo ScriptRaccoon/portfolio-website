@@ -11,6 +11,7 @@ const highlighter = await shiki.getHighlighter({
 		"scss",
 		"git-commit",
 		"bash",
+		"json",
 	],
 });
 

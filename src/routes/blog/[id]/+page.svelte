@@ -37,7 +37,7 @@
 
 	<div
 		class="outer-toc"
-		class:long={toc.length > 10}
+		class:long={toc.length > 15}
 		aria-hidden="true"
 	>
 		<ol>
