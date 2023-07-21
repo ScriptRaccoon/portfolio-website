@@ -1,7 +1,7 @@
 ---
 title: User authentication in SvelteKit from scratch
 published: 2023-07-22
-updated:
+updated: 2023-07-22
 description: with MongoDB, JWTs and cookies
 ---
 
@@ -67,18 +67,18 @@ We will store our users in a MongoDB database. We will use [MongoDB Atlas](https
 Open your MongoDB dashboard and create a cluster (if you are unsure how that works, check out their [tutorial](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup)). By clicking "Connect", you will get an URL of the form
 
 ```bash
-mongodb+srv://{USER_NAME}:{USER_PASSWORD}@sveltekit-cluster.zqvqepe.mongodb.net/?retryWrites=true&w=majority`;
+mongodb+srv://{USER_NAME}:{USER_PASSWORD}@{CLUSTER_NAME}.mongodb.net/?retryWrites=true&w=majority`;
 ```
 
 Save this as an environment variable `SECRET_MONGODB_URL` in the `.env` file (located at the root of the project).
 
-To connect with MongoDB, we will use the [mongoose package](https://mongoosejs.com/). Install it:
+To connect with MongoDB, we will use the [mongoose package](https://mongoosejs.com/):
 
 ```bash
 npm i mongoose
 ```
 
-Create a file `lib/server/db.ts` (or `db.js` if you are using JavaScript) and create the following function to get the database connection.
+We create a file `lib/server/db.ts` (or `db.js` if you are using JavaScript) and declare the following function to get the database connection.
 
 ```typescript
 // lib/server/db.ts
@@ -111,7 +111,7 @@ export const load = async (event) => {
 
 ## User model
 
-Every user in the database should have an email, password and name. Moreover, the email should be unique. We need to create a model reflecting this choice. This is done in a new file `lib/server/models.ts` as follows. With mongoose, we first define a schema and then derive a model from it.
+Every user in the database will have an email, password and name. Moreover, the email must be unique. We need to create a model reflecting this choice. This is done in a new file `lib/server/models.ts` as follows. With mongoose, we first define a schema and then derive a model from it.
 
 ```typescript
 // lib/server/models.ts
@@ -127,7 +127,7 @@ const User_Schema = new mongoose.Schema({
 export const User_Model = mongoose.model("User", User_Schema);
 ```
 
-Notice that `unique: true` does not verify the uniqueness of emails before we save users to the database, but it creates an index for the emails so that users will be faster to find by email. We will check the uniqueness later.
+Notice that `unique: true` does not verify the uniqueness of emails before we save users to the database, but it creates an [index](https://www.mongodb.com/docs/manual/indexes/) for the emails so that users will be faster to find by email. We will check the uniqueness later.
 
 Of course, we will not save the real passwords in the database. We will hash them. A convenient way to do this is via the [bcrypt package](https://www.npmjs.com/package/bcrypt). Let us install it right away. If you use TypeScript, you will also want to install the types as a dev dependency.
 
@@ -147,7 +147,7 @@ The registration of users is done in four steps:
 
 ### Get the form data
 
-Let us create an [action handler](https://kit.svelte.dev/docs/form-actions) for the register page, and read the form data. We normalize email and name.
+Let us create an [action handler](https://kit.svelte.dev/docs/form-actions) for the register page and retrieve the form data. We normalize email and name.
 
 ```typescript
 // /register/+page.server.ts
@@ -285,7 +285,7 @@ export const actions = {
 };
 ```
 
-On the register page, we register the prop containing the action data that we have just defined. It is called `form`. (This is a really unfortunate name choice of SvelteKit, since `form` is not what we entered into the form, and something like `actionData` would be more appropriate.)
+On the register page, we declare the prop containing the action data that we have just defined. It is called `form`. (In my opinion, this is an unfortunate name choice of SvelteKit, since `form` is not what we entered into the form, and something like `actionData` seems to be more appropriate.)
 
 ```svelte
 <!-- /register/+page.svelte -->
@@ -295,7 +295,7 @@ On the register page, we register the prop containing the action data that we ha
 </script>
 ```
 
-In the email field, we pass the email from the action data as a value, in case they are present. We use optional chaining and an empty string as a fallback to prevent any errors.
+In the email field, we pass the email from the action data as a value, in case it's present. We use optional chaining and an empty string as a fallback to prevent any errors.
 
 ```svelte
 <input
@@ -334,12 +334,12 @@ It's time to test!
 
 1. Try to register with no email. You will get an error.
 2. Try to register with a non-valid email (but which is still validated by the native input field), such as `test@o.k`. You will get an error.
-3. Try to register with a password that is too short, etc.
+3. Try to register with a password that is too short.
 4. Try to register with valid data. You will get a success message.
 
 ![registration successful](/media/register.jpg)
 
-5. Also, check your MongoDB Atlas instance, you will see the generated user! It will look something like this:
+5. Also, check your MongoDB Atlas instance, you will see the generated user. It will look something like this:
 
 ```json
 {
@@ -353,9 +353,9 @@ It's time to test!
 
 ## Progressive Enhancement
 
-When submitting the registration form, the page reloads. This is just how POST requests work since day 1. But when JavaScript is available, we can improve the user experience and make it more seamless by removing the page reload and letting SvelteKit update the current page to its new state. This is an instance of _progressive enhancement_.
+When submitting the registration form, the page reloads. This is just how POST requests work since the dawn of mankind. But when JavaScript is available, we can improve the user experience and make it more seamless by removing the page reload and letting SvelteKit update the current page to its new state.
 
-This is actually very easy to do! Just import SvelteKit's `enhance` action in the script tag.
+This is an instance of _progressive enhancement_ and very easy to do in SvelteKit! Just import the `enhance` action in the script tag.
 
 ```svelte
 <script lang="ts">
@@ -370,22 +370,22 @@ We need to attach this action to the form and are done.
 <form method="POST" autocomplete="off" use:enhance>
 ```
 
-And while we are at it, let us do the same for all the other forms as well, on `/login` and `/account`.
+And while we are at it, let us do the same for the forms on the `/login` and `/account` pages.
 
-## Login
+## Login process
 
-After registering a user, they should be able to log in. The procedure can be divided into the following steps.
+The login process can be divided into the following steps.
 
 1. On the server, get the form data (email, password) from the login page.
 2. Validate the data.
-3. If the data are valid, return a session cookie. Otherwise, return an error message.
+3. If the data are valid, generate a session cookie. Otherwise, define an error message.
 4. Send the error or the success message back to the login page.
 
-This is somewhat similar to the registration process, but the biggest difference is the generation of the session cookie, as explained below.
+This is somewhat similar to the registration process. The main difference is the generation of the session cookie.
 
 ### Get login data
 
-The first step is exactly as before. We create an action handler in the login server file and read the form values.
+The first step is exactly as before. We create an action handler in the login server file and retrieve the form values.
 
 ```typescript
 // /login/+page.server.ts
@@ -406,7 +406,7 @@ export const actions = {
 
 ### Types
 
-Before we continue, we need to add a type for the users. We will need it in several places, so let us define a global type. This can be done by adding the following to `app.d.ts`:
+Before we continue, we need to add a type for the users (without the password). We will need it in several places, so let us define a global type. This can be done by adding the following to `app.d.ts`:
 
 ```typescript
 // app.d.ts
@@ -453,7 +453,7 @@ Let us start by adding some basic validation for the email. We want to reuse the
 export const email_regexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
 ```
 
-Back to our function `get_user`, we now can validate the email:
+Back to our function `get_user`, we now can validate the email.
 
 ```typescript
 if (!email) {
@@ -465,7 +465,9 @@ if (!email.match(email_regexp)) {
 }
 ```
 
-We need to check if a user exists at all with that email (make sure to import `User_Model`):
+Notice that we cannot reuse the `verify_email` function from `register.ts` since there we also checked if the email is already present, which does not apply here.
+
+Next, we need to check if a user exists at all with that email (make sure to import `User_Model`):
 
 ```typescript
 const user = await User_Model.findOne({ email });
@@ -518,13 +520,13 @@ export async function login_user(email: string, password: string) {
 }
 ```
 
-We have covered the error case and are left to implement the happy case. We will do this with JWT in the next section.
+We have covered the error case and are left to implement the happy case.
 
 ### Generate a JWT
 
-A JWT (JSON web token) is nothing but an encrypted form of some user data that is used to authenticate users. Imagine this like a concert ticket: you are only allowed to get inside the venue when the ticket is valid. In our case, we will only store the user ID inside the JWT.
+A JWT (JSON web token) is nothing but an encrypted version of some user data that is used to authenticate users. Imagine this like a concert ticket: you are only allowed to get inside the venue when the ticket is valid. In our case, we will only store the user ID inside the JWT.
 
-The encryption is done via some secret key that should be stored as an environment variable. Generate some random token, let's call it `SECRET_JWT_KEY`, and add it to the `.env` file.
+The encryption is done via some secret key that must be stored as an environment variable. Generate some random token, let's call it `SECRET_JWT_KEY`, and add it to the `.env` file.
 
 To use JWT, we have to install the [jsonwebtoken package](https://www.npmjs.com/package/jsonwebtoken) (and its types):
 
@@ -549,7 +551,7 @@ export async function login_user(email: string, password: string) {
 
 ### Send the result back to the login page
 
-Using the `login_user` function, we can now complete the login action handler as follows. In case of an error, we return the error and the email. Otherwise, the function returns a token and a user object, in which case we will set some cookies later. We also return both the email and the user object to the client.
+Using the `login_user` function, we can now complete the login action handler. In case of an error, we return the error and the email. Otherwise, the function returns a token and a user object, in which case we will set some cookies later. We also return both the email and the user object to the client.
 
 ```typescript
 // /login/+page.server.ts
@@ -559,7 +561,7 @@ import { login_user } from "$lib/server/login";
 
 export const actions = {
 	default: async (event) => {
-		// ... (get email, password as above)
+		// get email, password (as above)
 
 		const user_data = await login_user(email, password);
 
@@ -624,7 +626,7 @@ So far, we have registered and logged in users. Our goal is to protect the pages
 
 ### Cookies
 
-The `event` object inside of an action handler (and also server load functions) includes a `cookies` object which can be used to easily manage cookies: we can read cookies with `event.cookies.get`, and we can set them with `event.cookies.set`.
+The `event` object inside of an action handler (or a server load function) includes a `cookies` object which can be used to easily manage cookies: we can read cookies with `event.cookies.get`, and we can set them with `event.cookies.set`.
 
 In our login action handler, we add the following:
 
@@ -654,7 +656,7 @@ This sets a cookie with the name `"auth-token"` and the value `token`, which is 
 - affects all routes (`path`)
 - lasts one day (`maxAge`)
 
-It should be pointed out that the first two are set by default in SvelteKit, so you can omit them if you want to. Except for the necessary `page` option, all these options are security measures.
+The first two are set by default in SvelteKit, so you can omit them if you want to. Except for the necessary `page` option, all these options are security measures.
 
 To authenticate users, we write a helper function in a new file (which always has the advantage of better reusability). We extract the auth token (if it is present) and decode it with `jwt.verify`. If successful, we get the object of type `auth` containing the user ID. Otherwise, we return `undefined`.
 
@@ -684,7 +686,7 @@ We are now able to protect the routes `/dashboard` and `/account`, or more gener
 
 We do this inside of the handle hook on the server. This is a function that runs with every server request. The default handle hook just takes the `event` object and returns `await resolve(event)`. We can intercept its behavior as we like. Check out the excellent article [Learn SvelteKit Hooks Through Example](https://joyofcode.xyz/sveltekit-hooks) by Joy of Code to learn more about hooks in SvelteKit.
 
-If the route is protected and the authentication is not successful (using the `authenticate` function from before), we redirect the user to the login page. Otherwise, we do the default behavior.
+If the route is protected and the authentication is not successful (using the `authenticate` function from before), we redirect the user to the login page. Otherwise, we implement the default behavior.
 
 ```typescript
 // hooks.server.ts
@@ -775,6 +777,10 @@ The advantage of doing this in the _layout_ is that these data are available on 
 <p>This is your dashboard, {data.name}.</p>
 ```
 
+It might look like so:
+
+![Dashboard page](/media/dashboard.jpg)
+
 ### Improve navigation
 
 In the layout itself, we can also check if the user is authenticated and pass the corresponding boolean `authenticated` as a prop to the navigation component.
@@ -787,10 +793,10 @@ In the layout itself, we can also check if the user is authenticated and pass th
 	export let data;
 </script>
 
-<Nav authenticated={!!data.name.length && !!data.email} />
+<Nav authenticated={!!data.name && !!data.email} />
 ```
 
-We can use this to hide the pages from the navigation which are not available to non-authenticated users anyway. Also, the pages which are irrelevant to authenticated users should not be shown. To make this systematic, we use a list of links, each having a `protected` flag.
+We can use this to hide the pages from the navigation which are not available to non-authenticated users anyway. Also, the pages which are irrelevant to authenticated users will not be shown. To make this systematic, we use a list of links, each having a `protected` flag.
 
 ```svelte
 <!-- lib/components/Nav.svelte -->
@@ -848,15 +854,19 @@ We can use this to hide the pages from the navigation which are not available to
 </nav>
 ```
 
-This means that authenticated users see `/`, `/dashboard`, `/account`, whereas non-authenticated users see `/`, `/login`, `/register`. Of course, this is just a client-side solution that should only be used in conjunction with the server-side protection we implemented before in the handle hook. Even non-authenticated users can just enter `{the domain}/dashboard` in the URL. The handle hook takes care of redirecting them to the login page.
+This means that authenticated users see `/`, `/dashboard`, `/account`, whereas non-authenticated users see `/`, `/login`, `/register`.
+
+Of course, this is just a client-side solution that should only be used in conjunction with the server-side protection we implemented before in the handle hook. Even non-authenticated users can just open the URL `{domain}/dashboard` in the browser. The handle hook is what takes care of redirecting them to the login page.
 
 ## Account page
 
-On the account page, we display the name of the user (using page data as explained before) and also offer the option to change the name. The same for email. This means that on this page we have _two_ forms with corresponding action handlers, which makes it necessary to name them.
+On the account page, we display the name of the user (using page data as explained before) and also offer the option to change the name. The same for email. This means that on this page we have _two_ forms with corresponding action handlers, which makes it necessary to name the handlers.
+
+![Account page](/media/account.jpg)
 
 ### Update name
 
-In this post, I will only explain the update of the name, since the one for email works the same. The form looks as follows.
+I will only explain the update of the name since the one for email works the same. The form looks as follows.
 
 ```svelte
 <!-- /account/+page.svelte -->
@@ -915,7 +925,7 @@ export const actions = {
 
 I will not explain how to display error and success messages on the account page, since this is analogous to what we did on the login and register pages.
 
-Let us instead look at the `change_name` function, which of course has to interact with our database, specifically by using the `User_Model` model. It takes the cookies as an argument to extract the JWT and hence the user ID. If some error occurs, we return it. To verify the name, we reuse the function `verify_name` that we already implemented for the registration process. If a user with the ID can be found, we simply update the name writing `user.name = name` followed by `await user.save()`.
+Let us instead look at the `change_name` function, which of course has to interact with our database, specifically by using the `User_Model` model. It takes the cookies as an argument to extract the JWT and hence the user ID. If some error occurs, we return it. To verify the name, we reuse the function `verify_name` that we already implemented for the registration process. If a user with the ID can be found, we simply update the name by writing `user.name = name` followed by `await user.save()`.
 
 ```typescript
 // lib/server/account.ts
