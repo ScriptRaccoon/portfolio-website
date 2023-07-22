@@ -32,7 +32,7 @@ The finished code of this post is available on [GitHub](https://github.com/Scrip
 
 I assume that you are familiar with the basics of SvelteKit. We start with a simple SvelteKit application with the following structure:
 
-```bash
+```markdown
 -- src/
 ---- lib/
 ------ components/

@@ -20,7 +20,7 @@ The code of this post can be found on [GitHub](https://github.com/ScriptRaccoon/
 
 We start with a basic SvelteKit application with the following page structure. The code can be found in the branch `starter-code` of the mentioned [repository](https://github.com/ScriptRaccoon/sveltekit-mongodb-auth).
 
-```bash
+```markdown
 -- routes/
 ---- account/
 ------ +page.svelte
@@ -66,7 +66,7 @@ We will store our users in a MongoDB database. We will use [MongoDB Atlas](https
 
 Open your MongoDB dashboard and create a cluster (if you are unsure how that works, check out their [tutorial](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup)). By clicking "Connect", you will get an URL of the form
 
-```bash
+```markdown
 mongodb+srv://{USER_NAME}:{USER_PASSWORD}@{CLUSTER_NAME}.mongodb.net/?retryWrites=true&w=majority`;
 ```
 
@@ -74,7 +74,7 @@ Save this as an environment variable `SECRET_MONGODB_URL` in the `.env` file (lo
 
 To connect with MongoDB, we will use the [mongoose package](https://mongoosejs.com/):
 
-```bash
+```markdown
 npm i mongoose
 ```
 
@@ -131,7 +131,7 @@ Notice that `unique: true` does not verify the uniqueness of emails before we sa
 
 Of course, we will not save the real passwords in the database. We will hash them. A convenient way to do this is via the [bcrypt package](https://www.npmjs.com/package/bcrypt). Let us install it right away. If you use TypeScript, you will also want to install the types as a dev dependency.
 
-```bash
+```markdown
 npm i bcrypt
 npm i -D @types/bcrypt
 ```
@@ -530,7 +530,7 @@ The encryption is done via some secret key that must be stored as an environment
 
 To use JWT, we have to install the [jsonwebtoken package](https://www.npmjs.com/package/jsonwebtoken) (and its types):
 
-```bash
+```markdown
 npm i jsonwebtoken
 npm i -D @types/jsonwebtoken
 ```

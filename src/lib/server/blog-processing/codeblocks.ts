@@ -10,7 +10,7 @@ const highlighter = await shiki.getHighlighter({
 		"svelte",
 		"scss",
 		"git-commit",
-		"bash",
+		"markdown",
 		"json",
 	],
 });
