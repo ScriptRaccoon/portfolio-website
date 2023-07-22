@@ -19,6 +19,8 @@
 
 <h1>Projects</h1>
 
+<p>This is a selection of my personal projects in web development.</p>
+
 <Filter {tags} {years} />
 
 {#if filtered_projects.length > 0}
