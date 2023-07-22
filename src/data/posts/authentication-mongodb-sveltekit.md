@@ -9,10 +9,9 @@ description: with MongoDB, JWTs and cookies
 
 This post explains how to add user authentication to a SvelteKit application from scratch, without using any authentication libraries. Users can register with their email, name and password, and they can log in with their email and password. Certain pages are protected from non-authenticated users. Check out the [demo](https://sveltekit-auth.netlify.app/).
 
-To authenticate users, we generate JWT (JSON web tokens) and save these as HTTP-only cookies. The users are stored in a MongoDB Atlas database, but you can take any database, for that matter. The procedure is basically the same as for Express apps (explained for example in [Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=2jqok-WgelI) by Dev Ed), but with SvelteKit it is even a bit easier.
+To authenticate users, we generate JWTs (JSON web tokens) and save these as HTTP-only cookies. The users are stored in a MongoDB Atlas database, but you can take any database, for that matter.
 
-I have heard several times that implementing user authentication by hand in a proper and secure way is very hard.
-Developers are discouraged from implementing this without external libraries. I am not sure why. I would only recommend libraries when you want to include multiple OAuth providers (Google, GitHub, Discord, etc.). Also, implementing it by hand is a very valuable learning experience.
+The procedure is basically the same as for Express apps (explained for example in [Build A Node.js API Authentication With JWT Tutorial](https://www.youtube.com/watch?v=2jqok-WgelI) by Dev Ed), but with SvelteKit it is even a bit easier.
 
 The code of this post can be found on [GitHub](https://github.com/ScriptRaccoon/sveltekit-mongodb-auth). I also published a [tutorial](https://youtu.be/gNOzCaOCxBU) on my YouTube channel (in German).
 
@@ -111,7 +110,7 @@ export const load = async (event) => {
 
 ## User model
 
-Every user in the database will have an email, password and name. Moreover, the email must be unique. We need to create a model reflecting this choice. This is done in a new file `lib/server/models.ts` as follows. With mongoose, we first define a schema and then derive a model from it.
+Every user in the database will have an email, password and name. Moreover, the email must be unique. We need to create a model reflecting this choice. With mongoose, we first define a schema and then derive a model from it. This is done in a new file `lib/server/models.ts` as follows.
 
 ```typescript
 // lib/server/models.ts
@@ -1009,6 +1008,8 @@ And that's it!
 
 ## Conclusion
 
-We have learned how to build user authentication from scratch in SvelteKit. What seems to be very complicated, maybe even daunting at first sight turns out to be very simple once you have done it once. The whole process can be divided into several steps, each one being quite simple and easy to grasp. At least, this is my personal experience from this project.
+We have learned how to build user authentication from scratch in SvelteKit. What seems to be very complicated, maybe even daunting at first sight turns out to be rather simple after you have done it once. The whole process can be divided into several small steps, each one being quite simple and easy to grasp. At least, this is my personal experience from this project.
+
+I have heard several times that implementing user authentication by hand in a proper and secure way is very hard. Developers are discouraged from implementing this without external libraries. I am not sure why. I would only recommend libraries when you want to include multiple OAuth providers (Google, GitHub, Discord, etc.). Also, implementing it by hand is a very valuable learning experience.
 
 If you liked this blog post, feel free to smash that like button and share the post on Twitter.
