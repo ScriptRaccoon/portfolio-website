@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
-	import Filter from "./Filter.svelte";
-	import { active_filter } from "./stores";
+	import Filter, { active_filter } from "./Filter.svelte";
 	import ProjectPreview from "./ProjectPreview.svelte";
 
 	export let data;

@@ -1,14 +1,28 @@
+<script lang="ts" context="module">
+	import { writable } from "svelte/store";
+
+	type filter = {
+		tags: string[];
+		years: number[];
+	};
+
+	export const active_filter = writable<filter>({
+		tags: [],
+		years: [],
+	});
+</script>
+
 <script lang="ts">
-	import { active_filter, filters_expanded } from "./stores";
 	export let tags: string[];
 	export let years: number[];
 	let focussed_tag: string | null = null;
 	let focussed_year: number | null = null;
+	let open = false;
 </script>
 
 <section aria-label="Filters">
-	<details bind:open={$filters_expanded}>
-		<summary>Filters</summary>
+	<details bind:open>
+		<summary class:open>Filters</summary>
 		<div class="filter-list">
 			{#each tags as tag}
 				<label
@@ -49,12 +63,21 @@
 </section>
 
 <style lang="scss">
+	summary {
+		color: var(--secondary-font-color);
+		width: fit-content;
+		&.open {
+			color: var(--font-color);
+		}
+	}
+
 	.filter-list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
 		margin-block: 1rem;
 	}
+
 	label {
 		cursor: pointer;
 		&.selected {
