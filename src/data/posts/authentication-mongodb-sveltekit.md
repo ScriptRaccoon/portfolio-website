@@ -1,7 +1,7 @@
 ---
 title: User authentication in SvelteKit from scratch
 published: 2023-07-22
-updated: 2023-07-22
+updated: 2023-07-25
 description: with MongoDB, JWTs and cookies
 ---
 
@@ -63,13 +63,15 @@ The login page has a very similar form, just without the name field. The dashboa
 
 We will store our users in a MongoDB database. We will use [MongoDB Atlas](https://mongodb.com/atlas), which is their cloud-based solution.
 
-Open your MongoDB dashboard and create a cluster (if you are unsure how that works, check out their [tutorial](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup)). By clicking "Connect", you will get an URL of the form
+Open your MongoDB dashboard and create a cluster (if you are unsure how that works, check out their [tutorial](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup)). By clicking "Connect", you will get a URI of the form
 
 ```markdown
-mongodb+srv://{USER_NAME}:{USER_PASSWORD}@{CLUSTER_NAME}.mongodb.net/?retryWrites=true&w=majority`;
+mongodb+srv://{USER_NAME}:{USER_PASSWORD}@{CLUSTER_NAME}.mongodb.net/data?retryWrites=true&w=majority`;
 ```
 
-Save this as an environment variable `SECRET_MONGODB_URL` in the `.env` file (located at the root of the project).
+Notice that I have added `data` before the question mark. This will be the name of the database under which the user collection will be created. Otherwise, MongoDB will call it `test` by default.
+
+Save the URI as an environment variable `SECRET_MONGODB_URI` in the `.env` file (located at the root of the project).
 
 To connect with MongoDB, we will use the [mongoose package](https://mongoosejs.com/):
 
@@ -83,13 +85,13 @@ We create a file `lib/server/db.ts` (or `db.js` if you are using JavaScript) and
 // lib/server/db.ts
 
 import mongoose from "mongoose";
-import { SECRET_MONGODB_URL } from "$env/static/private";
+import { SECRET_MONGODB_URI } from "$env/static/private";
 
 export async function connect_to_db() {
 	try {
-		return await mongoose.connect(SECRET_MONGODB_URL);
-	} catch (e) {
-		console.log(e);
+		return await mongoose.connect(SECRET_MONGODB_URI);
+	} catch (err) {
+		console.log(err);
 	}
 }
 ```
@@ -126,7 +128,7 @@ const User_Schema = new mongoose.Schema({
 export const User_Model = mongoose.model("User", User_Schema);
 ```
 
-Notice that `unique: true` does not verify the uniqueness of emails before we save users to the database, but it creates an [index](https://www.mongodb.com/docs/manual/indexes/) for the emails so that users will be faster to find by email. We will check the uniqueness later.
+Notice that the restraint `unique: true` in the email field will throw an error when we want to save a user with a duplicate email to the database. But to differentiate this error better from other errors, we will implement this check by hand. The restraint also creates an [index](https://www.mongodb.com/docs/manual/indexes/) for the emails so that users will be faster to find by email. A gotcha is that the validation method [`validateSync`](https://mongoosejs.com/docs/validation.html) does _not_ return an error when the email is not unique. Hence we will not use it here.
 
 Of course, we will not save the real passwords in the database. We will hash them. A convenient way to do this is via the [bcrypt package](https://www.npmjs.com/package/bcrypt). Let us install it right away. If you use TypeScript, you will also want to install the types as a dev dependency.
 
@@ -249,7 +251,7 @@ export async function register_user(
 		await user.save();
 		return { error: "" };
 	} catch (err) {
-		return { error: err as string };
+		return { error: err?.toString() as string };
 	}
 }
 ```
@@ -639,7 +641,6 @@ export const actions = {
 		event.cookies.set("auth-token", token, {
 			httpOnly: true,
 			secure: true,
-			sameSite: "strict",
 			path: "/",
 			maxAge: 60 * 60 * 24,
 		});
@@ -650,8 +651,7 @@ export const actions = {
 This sets a cookie with the name `"auth-token"` and the value `token`, which is our JWT. The options object specifies that the cookie
 
 - cannot be read or changed with client-side JavaScript (`httpOnly`)
-- can only be transmitted via HTTPS (`secure`)
-- can not be used in iframes (`sameSite`)
+- can only be transmitted via HTTPS (`secure`), except on `http://localhost`, where `secure` is false
 - affects all routes (`path`)
 - lasts one day (`maxAge`)
 
@@ -671,7 +671,7 @@ export function authenticate(cookies: Cookies): auth | undefined {
 	if (!token) return undefined;
 	try {
 		const auth = jwt.verify(token, SECRET_JWT_KEY);
-		if (!auth) throw "";
+		if (!auth) return undefined;
 		return auth as auth;
 	} catch {
 		return undefined;
@@ -968,7 +968,7 @@ export async function change_name(
 		await user.save();
 		return { name };
 	} catch (err) {
-		return { error: err as string };
+		return { error: err?.toString() as string };
 	}
 }
 ```
