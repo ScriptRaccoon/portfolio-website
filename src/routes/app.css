@@ -58,7 +58,11 @@ body {
 a {
 	color: inherit;
 	text-underline-offset: 0.1rem;
-	outline-color: var(--accent-color);
+}
+
+:is(a, button):focus-visible {
+	outline: 1px solid var(--accent-color);
+	outline-offset: 0.2rem;
 }
 
 p {
@@ -109,7 +113,6 @@ button {
 	border: none;
 	background: none;
 	cursor: pointer;
-	outline-color: var(--accent-color);
 }
 
 img {
