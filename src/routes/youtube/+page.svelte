@@ -1,4 +1,7 @@
 <script lang="ts">
+	import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+	import Fa from "svelte-fa";
+
 	export let data;
 	const { stats, video } = data;
 </script>
@@ -22,12 +25,15 @@
 
 {#if video}
 	<p>My latest video (in German):</p>
-	<a href={video.url} target="_blank">
+	<a class="videolink" href={video.url} target="_blank">
 		<img
 			class="thumbnail"
 			src={video.thumbnail_url}
 			alt="thumbnail of latest video: {video.title}"
 		/>
+		<div class="logo" aria-hidden="true">
+			<Fa icon={faYoutube} />
+		</div>
 	</a>
 {/if}
 
@@ -81,8 +87,42 @@
 	the README also often includes some pieces of explanation.
 </p>
 
-<style>
+<style lang="scss">
+	.videolink {
+		position: relative;
+		display: inline-block;
+
+		&:hover,
+		&:focus-visible {
+			.thumbnail {
+				opacity: 0.5;
+			}
+			.logo {
+				opacity: 1;
+				scale: 1;
+			}
+		}
+	}
+
+	.thumbnail,
+	.logo {
+		transition: all 200ms ease;
+	}
+
 	.thumbnail {
-		width: 16rem;
+		width: min(100%, 320px);
+		border-radius: 0.4rem;
+	}
+
+	.logo {
+		font-size: 4rem;
+		color: var(--font-color);
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		transform-origin: top left;
+		opacity: 0;
+		scale: 0.9;
 	}
 </style>
