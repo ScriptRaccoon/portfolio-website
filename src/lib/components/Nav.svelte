@@ -7,19 +7,19 @@
 	import Fa from "svelte-fa";
 	import {
 		faYoutube,
-		type IconDefinition,
+		type IconDefinition as IconDefinitionBrand,
 	} from "@fortawesome/free-brands-svg-icons";
 	import {
 		faCircleQuestion,
 		faClipboardList,
-		faEnvelope,
 		faPenToSquare,
+		type IconDefinition as IconDefinitionSolid,
 	} from "@fortawesome/free-solid-svg-icons";
 
 	type link = {
 		name: string;
 		href: string;
-		icon: IconDefinition;
+		icon: IconDefinitionSolid | IconDefinitionBrand;
 	};
 
 	const links: link[] = [
