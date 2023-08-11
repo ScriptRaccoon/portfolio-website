@@ -1,6 +1,6 @@
 import type { Redis } from "ioredis";
 
-export async function is_rate_limited(
+export async function rate_limited(
 	redis: Redis,
 	ip: string,
 ): Promise<boolean> {
