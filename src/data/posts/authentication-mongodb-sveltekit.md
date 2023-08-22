@@ -338,7 +338,7 @@ It's time to test!
 3. Try to register with a password that is too short.
 4. Try to register with valid data. You will get a success message.
 
-![registration successful](/media/register.jpg)
+![registration successful](/media/auth-register.jpg)
 
 5. Also, check your MongoDB Atlas instance, you will see the generated user. It will look something like this:
 
@@ -778,7 +778,7 @@ The advantage of doing this in the _layout_ is that these data are available on 
 
 It might look like so:
 
-![Dashboard page](/media/dashboard.jpg)
+![Dashboard page](/media/auth-dashboard.jpg)
 
 ### Improve navigation
 
@@ -861,7 +861,7 @@ Of course, this is just a client-side solution that should only be used in conju
 
 On the account page, we display the name of the user (using page data as explained before) and also offer the option to change the name. The same for email. This means that on this page we have _two_ forms with corresponding action handlers, which makes it necessary to name the handlers.
 
-![Account page](/media/account.jpg)
+![Account page](/media/auth-account.jpg)
 
 ### Update name
 
