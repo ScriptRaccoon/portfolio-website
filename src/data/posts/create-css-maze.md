@@ -1,5 +1,5 @@
 ---
-title: How to create a pure CSS maze
+title: How to create a pure CSS maze game
 published: 2023-08-23
 updated:
 description: without any JavaScript
@@ -13,21 +13,23 @@ Apart from making websites look awesome, CSS is capable of building complex brow
 
 I have also created a few CSS games before, a [pure CSS Rock, Paper, Scissors game](/projects/rock-paper-scissors) as well as a [pure CSS Lights Out Game](https://github.com/ScriptRaccoon/lights-out-css).
 
-In this blog post, we will create a maze with pure CSS, step by step.
+In this blog post, we will learn how to create a maze game with pure CSS, step by step. The player can be controlled with the arrow "buttons", and a win modal is shown when the player reaches the goal.
 
 ![Demo of Maze](/media/maze-demo-final.gif)
 
-The final code can be found in the Codepen [Pure CSS Maze](https://codepen.io/scriptraccoon/pen/poqvRrM). It is not as complex as Ben Evans' [Pure CSS 3D Maze](https://codepen.io/ivorjetski/pen/poQpveN), but this post will explain the method underlying many CSS games. The main idea is:
+The final code can be found in the Codepen [Pure CSS Maze](https://codepen.io/scriptraccoon/pen/poqvRrM). It is not as complex as Ben Evans' [Pure CSS 3D Maze](https://codepen.io/ivorjetski/pen/poQpveN), but this post will explain the method underlying many CSS games.
+
+The main ideas are:
 
 1. Each possible game state is a radio button.
 2. All radio buttons are hidden, but their labels are not.
-3. To react upon a state change, use the `:checked` pseudo-class and general sibling selectors.
+3. To react upon a state change, use the `:checked` pseudo-class and the general sibling selector `~`.
 
 We will make of use the CSS preprocessor [Sass](https://sass-lang.com), so strictly speaking we do not write CSS. But Sass and its variant SCSS compile down to CSS, so in the end it _is_ just CSS, but written a bit more conveniently. In particular, we will use loops and mixins to structure our code better.
 
 The same goes for the HTML, which is a bit cumbersome to write manually. We will use the preprocessor [Pug](https://pugjs.org) to simplify this.
 
-Using Sass and Pug is very simple on [Codepen](https://codepen.io), just select these as preprocessors in the settings of the CSS resp. HTML window. There you can also choose to see the compiled code, which is useful for debugging purposes.
+Using SCSS and Pug is very simple on [Codepen](https://codepen.io), just select these as preprocessors in the settings of the CSS resp. HTML window. There you can also choose to see the compiled code, which is useful for debugging purposes.
 
 ## HTML
 
@@ -866,3 +868,5 @@ I find it very fascinating that fully functional and good-looking browser games 
 Creating games with pure CSS is nothing only a few "CSS wizards" can do. With the techniques presented in this blog post, you should be able to create your own pure CSS games as well.
 
 However, it should be noted that the game here is not accessible. In particular, keyboard navigation is not possible, and the arrows have no descriptive labels. You will most likely need JavaScript to accommodate this, and the same holds for other CSS games as well. Hence, these games are not production-ready. At least, they showcase the power of HTML and CSS.
+
+Also, the bundle size would be smaller when using JavaScript instead. The (uncompressed) compiled CSS code of our game is over 1000 lines long. The JavaScript version would be much smaller. This is mainly because CSS does not understand loops (yet).
