@@ -12,6 +12,7 @@ const highlighter = await shiki.getHighlighter({
 		"git-commit",
 		"markdown",
 		"json",
+		"pug",
 	],
 });
 

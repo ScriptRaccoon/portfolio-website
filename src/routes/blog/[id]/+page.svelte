@@ -57,6 +57,11 @@
 <Controls variant="bottom" />
 
 <style lang="scss">
+	@mixin bordered() {
+		border-radius: 0.4rem;
+		border: 0.15rem solid var(--code-border-color);
+	}
+
 	.dates {
 		margin-top: -0.5rem;
 		font-size: var(--small-font);
@@ -135,13 +140,12 @@
 		}
 
 		:global(pre) {
-			border-radius: 0.4rem;
+			@include bordered();
 			font-size: var(--small-font);
 			padding: 1rem;
 			margin-block: 1rem;
 			overflow: auto;
 			max-height: 30rem;
-			border: 0.15rem solid var(--code-border-color);
 			background-color: var(--code-bg-color);
 			tab-size: 4;
 
@@ -163,6 +167,11 @@
 			border-radius: 0.2rem;
 			font-size: var(--small-font);
 			white-space: nowrap;
+		}
+
+		:global(img) {
+			@include bordered();
+			margin-inline: auto;
 		}
 	}
 </style>
