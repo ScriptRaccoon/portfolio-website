@@ -287,7 +287,7 @@ Now, by clicking the label of a radio button, the player will move to the corres
 
 ```scss
 .player {
-  ...
+  // ...
   transition: transform 180ms ease-out;
 }
 ```
@@ -441,7 +441,7 @@ Now it is time to remove the text content from the labels in the HTML.
 label(for=id(i, j))
 ```
 
-Several methods are available to make the labels look like an arrow. In this post, we use a [polygon-shaped clip-path](https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/polygon) to cut out the arrow shape. This way, we do not need to add anything to the HTML.
+Several methods are available to make the labels look like arrows. In this post, we use a [polygon-shaped clip-path](https://developer.mozilla.org/en-US/docs/Web/CSS/basic-shape/polygon) to cut out the arrow shape. This way, we do not need to add anything to the HTML.
 
 But we do not apply the clip-path to the label itself, since this would reduce the clickable area, which is not good for the UX. Instead, we apply it to one of its pseudo-elements.
 
