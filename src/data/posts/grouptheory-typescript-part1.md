@@ -445,7 +445,7 @@ Because this post is already quite long, I have decided to split the topic into 
 
 Of course, when you want to do some serious _computations_ with groups, you will most likely want to use a different, more performant programming language or even computer algebra system, tailored towards group theory in particular (GAP, Magma, Sage, ...).
 
-For developing the _theory_ of groups with the help of types, [Martin-Löw type theory](https://en.wikipedia.org/wiki/Intuitionistic_type_theory) is a very powerful choice, which also experienced a renaissance within the mathematics community via the introduction of [homotopy type theory](https://en.wikipedia.org/wiki/Homotopy_type_theory).
+For developing the _theory_ of groups with the help of types, [Martin-Löf type theory](https://en.wikipedia.org/wiki/Intuitionistic_type_theory) is a very powerful choice, which also experienced a renaissance within the mathematics community via the introduction of [homotopy type theory](https://en.wikipedia.org/wiki/Homotopy_type_theory).
 
 Type theory puts a different perspective on the group axioms. For example, instead of saying that `a + (b + c) = (a + b) + c` is a true statement, this statement becomes a _type_, and a member of this type
 
