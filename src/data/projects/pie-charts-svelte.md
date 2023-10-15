@@ -3,7 +3,7 @@ name: Animated pie charts in Svelte
 teaser: with the power of Svelte's tweened stores
 repository: https://github.com/ScriptRaccoon/Abgeordnete
 url: https://abgeordnete.netlify.app/
-tutorial:
+tutorial: https://youtu.be/gcK8pw7w12M
 tags:
     [
         "Data visualization",
