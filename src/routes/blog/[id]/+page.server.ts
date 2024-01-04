@@ -21,7 +21,7 @@ export const load = async (event) => {
 	const path = `/src/data/posts/${id}.md`;
 
 	if (!(path in posts_record)) {
-		throw error(404, "There is no post with this ID");
+		error(404, "There is no post with this ID");
 	}
 
 	const markdown = posts_record[path];

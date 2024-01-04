@@ -5,5 +5,5 @@ import { dev } from "$app/environment";
 export const prerender = false;
 
 export const load = () => {
-	if (!dev) throw error(404, "Not Found");
+	if (!dev) error(404, "Not Found");
 };
