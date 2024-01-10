@@ -80,7 +80,7 @@
 		opacity: 0;
 		pointer-events: none;
 
-		@media (min-width: 68rem) {
+		@media (min-width: 90rem) {
 			opacity: 1;
 			pointer-events: initial;
 		}
@@ -89,7 +89,7 @@
 		position: fixed;
 		top: 0;
 		height: 100vh;
-		transform: translateX(38rem);
+		transform: translateX(52rem);
 		overflow-y: auto;
 
 		display: flex;

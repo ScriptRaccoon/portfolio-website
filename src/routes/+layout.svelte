@@ -63,7 +63,7 @@
 
 <style>
 	.wrapper {
-		max-width: 38rem;
+		max-width: 52rem;
 		margin-inline: auto;
 		padding-inline: 1rem;
 	}

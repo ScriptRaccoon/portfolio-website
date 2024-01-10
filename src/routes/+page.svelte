@@ -68,17 +68,19 @@
 		margin-block: 2rem;
 		display: flex;
 		justify-content: center;
+
 		img {
 			width: min(70vw, 8rem);
 			border-radius: 50%;
 			box-shadow: 0rem 0rem 1rem var(--shadow-color);
 		}
 	}
+
 	.socials {
 		display: flex;
 		justify-content: center;
 		flex-wrap: wrap;
 		gap: 1.5rem;
-		font-size: 1.5rem;
+		font-size: var(--large-font);
 	}
 </style>

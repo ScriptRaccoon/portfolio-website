@@ -5,9 +5,19 @@
 }
 
 :root {
+	--tiny-font: 0.8rem;
 	--small-font: 1rem;
 	--medium-font: 1.125rem;
-	--tiny-font: 0.8rem;
+	--large-font: 1.5rem;
+}
+
+@media (min-width: 52rem) {
+	:root {
+		--tiny-font: 1rem;
+		--small-font: 1.125rem;
+		--medium-font: 1.3rem;
+		--large-font: 1.75rem;
+	}
 }
 
 body[data-theme="light"] {
