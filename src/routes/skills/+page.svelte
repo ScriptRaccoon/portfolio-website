@@ -1,7 +1,7 @@
 <script lang="ts">
 	import { strengths } from "./strengths";
-	import { headings, tech_list } from "./tech";
-	const levels = Object.keys(headings);
+	import { headings, tech_list, type tech_level } from "./tech";
+	const levels = Object.keys(headings) as tech_level[];
 </script>
 
 <h1>Skills</h1>

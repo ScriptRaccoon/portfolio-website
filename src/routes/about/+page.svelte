@@ -4,10 +4,9 @@
 	Before coming to web development, I devoted most years of my life to <strong
 		>pure mathematics</strong
 	>, which is one of my biggest passions and strongest skills. I
-	worked at the university and completed my Ph.D. about ten years ago.
-	Afterward, I left academia, but I still publish research articles
-	from time to time. I also published a textbook on the field of my
-	expertise. 📚
+	worked at the university and completed my Ph.D. in 2014. Afterward,
+	I left academia, but I still publish research articles from time to
+	time. I also published a textbook on the field of my expertise. 📚
 </p>
 
 <p>
@@ -23,7 +22,8 @@
 
 <p>
 	I got my first job as a full stack <strong>web developer</strong> in
-	late 2022. I work for a company in the sports retail industry. See
+	late 2022. I work for a company in the sports retail industry. If
+	you are interested, see
 	<a href="/skills">Skills</a> for a more complete list of my web development
 	skills. 🧪
 </p>

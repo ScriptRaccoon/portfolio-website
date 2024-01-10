@@ -1,4 +1,5 @@
 export const strengths = [
+	"Learn quickly",
 	"Clean code",
 	"Creative coding",
 	"Teaching",

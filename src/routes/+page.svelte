@@ -16,7 +16,13 @@
 
 <p>
 	Here you can find out more <a href="/about">about myself</a> and my
-	<a href="/projects">personal projects</a>. I also write
+	<a href="/projects">personal projects</a>.
+</p>
+
+<p>
+	I run a
+	<a href="/youtube">Youtube channel</a>
+	and also write
 	<a href="/blog">blog posts</a>.
 </p>
 

@@ -1,4 +1,4 @@
-type tech_level = "expert" | "familiar" | "basic" | "nogo";
+export type tech_level = "expert" | "familiar" | "basic" | "nogo";
 
 type tech = {
 	name: string;
@@ -6,11 +6,11 @@ type tech = {
 	level: tech_level;
 };
 
-export const headings: Record<string, string> = {
+export const headings: Record<tech_level, string> = {
 	expert: "Expert knowledge",
 	familiar: "Familiarity",
 	basic: "Basic knowledge",
-	nogo: "I am familiar with it but won't use it since it's a maintainability nightmare"
+	nogo: "I am familiar with it but won't use it since it's a maintainability nightmare",
 };
 
 export const tech_list: tech[] = [
@@ -117,6 +117,11 @@ export const tech_list: tech[] = [
 	{
 		name: "React",
 		url: "https://reactjs.org/",
+		level: "familiar",
+	},
+	{
+		name: "Next.js",
+		url: "https://nextjs.org/",
 		level: "familiar",
 	},
 	{
