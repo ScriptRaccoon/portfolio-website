@@ -2,9 +2,14 @@
 	import { fade } from "svelte/transition";
 	import Filter, { active_filter } from "./Filter.svelte";
 	import ProjectPreview from "./ProjectPreview.svelte";
+	import { allow_animation } from "$lib/shared/stores";
 
 	export let data;
 	const { projects, tags, years } = data;
+
+	const animation_options = $allow_animation
+		? { duration: 200, delay: 200 }
+		: { duration: 0, delay: 0 };
 
 	$: filtered_projects = projects.filter(
 		(project) =>
@@ -29,9 +34,7 @@
 		{/each}
 	</ol>
 {:else}
-	<p in:fade={{ duration: 200, delay: 200 }}>
-		No projects within this filter
-	</p>
+	<p in:fade={animation_options}>No projects within this filter</p>
 {/if}
 
 <style>

@@ -85,7 +85,10 @@
 			pointer-events: initial;
 		}
 
-		transition: opacity 250ms linear;
+		@media (prefers-reduced-motion: no-preference) {
+			transition: opacity 250ms linear;
+		}
+
 		position: fixed;
 		top: 0;
 		height: 100vh;

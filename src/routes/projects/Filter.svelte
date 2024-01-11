@@ -13,69 +13,87 @@
 </script>
 
 <script lang="ts">
+	import { allow_animation } from "$lib/shared/stores";
+	import { slide } from "svelte/transition";
+
 	export let tags: string[];
 	export let years: number[];
+
 	let focussed_tag: string | null = null;
 	let focussed_year: number | null = null;
 	let open = false;
+
+	const duration = $allow_animation ? 200 : 0;
+
+	function toggle_filters() {
+		open = !open;
+	}
+
+	$: button_txt = open ? "Hide Filters" : "Show Filters";
 </script>
 
 <section aria-label="Filters">
-	<details bind:open>
-		<summary class:open>Filters</summary>
-		<div class="filter-list">
-			{#each tags as tag}
-				<label
-					class="tag"
-					class:selected={$active_filter.tags.includes(tag)}
-					class:focus={focussed_tag === tag}
-					on:focusin={() => (focussed_tag = tag)}
-					on:focusout={() => (focussed_tag = null)}
-				>
-					<input
-						type="checkbox"
-						value={tag}
-						bind:group={$active_filter.tags}
-						class="visually-hidden"
-					/>
-					{tag}
-				</label>
-			{/each}
-			{#each years as year}
-				<label
-					class="tag"
-					class:selected={$active_filter.years.includes(year)}
-					class:focus={focussed_year === year}
-					on:focusin={() => (focussed_year = year)}
-					on:focusout={() => (focussed_year = null)}
-				>
-					<input
-						type="checkbox"
-						value={year}
-						bind:group={$active_filter.years}
-						class="visually-hidden"
-					/>
-					{year}
-				</label>
-			{/each}
-		</div>
-	</details>
+	<button
+		class:open
+		id="filter_btn"
+		aria-expanded={open}
+		aria-controls="filters"
+		on:click={toggle_filters}
+	>
+		{button_txt}</button
+	>
+	<div id="filters" aria-labelledby="filter_btn">
+		{#if open}
+			<div transition:slide={{ duration }} class="filter-list">
+				{#each tags as tag}
+					<label
+						class="tag"
+						class:selected={$active_filter.tags.includes(tag)}
+						class:focus={focussed_tag === tag}
+						on:focusin={() => (focussed_tag = tag)}
+						on:focusout={() => (focussed_tag = null)}
+					>
+						<input
+							type="checkbox"
+							value={tag}
+							bind:group={$active_filter.tags}
+							class="visually-hidden"
+						/>
+						{tag}
+					</label>
+				{/each}
+				{#each years as year}
+					<label
+						class="tag"
+						class:selected={$active_filter.years.includes(year)}
+						class:focus={focussed_year === year}
+						on:focusin={() => (focussed_year = year)}
+						on:focusout={() => (focussed_year = null)}
+					>
+						<input
+							type="checkbox"
+							value={year}
+							bind:group={$active_filter.years}
+							class="visually-hidden"
+						/>
+						{year}
+					</label>
+				{/each}
+			</div>
+		{/if}
+	</div>
 </section>
 
 <style lang="scss">
-	summary {
+	button {
 		color: var(--secondary-font-color);
-		width: fit-content;
-		&.open {
-			color: var(--font-color);
-		}
 	}
 
 	.filter-list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-		margin-block: 1rem;
+		padding-block: 1rem;
 	}
 
 	label {

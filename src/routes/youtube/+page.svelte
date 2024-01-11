@@ -104,9 +104,11 @@
 		}
 	}
 
-	.thumbnail,
-	.logo {
-		transition: all 200ms ease;
+	@media (prefers-reduced-motion: no-preference) {
+		.thumbnail,
+		.logo {
+			transition: all 200ms ease;
+		}
 	}
 
 	.thumbnail {

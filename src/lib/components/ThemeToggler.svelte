@@ -23,7 +23,7 @@
 	<Fa icon={faSun} class="sun" />
 </button>
 
-<style>
+<style lang="scss">
 	button {
 		width: 1.5rem;
 		height: 1.5rem;
@@ -36,7 +36,10 @@
 
 	button :global(svg) {
 		position: absolute;
-		transition: opacity 250ms linear, rotate 250ms linear;
+
+		@media (prefers-reduced-motion: no-preference) {
+			transition: opacity 250ms linear, rotate 250ms linear;
+		}
 	}
 
 	:global(body[data-theme="dark"] .sun),

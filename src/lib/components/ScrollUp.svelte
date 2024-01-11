@@ -4,10 +4,13 @@
 	import { browser } from "$app/environment";
 	import Fa from "svelte-fa";
 	import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+	import { allow_animation } from "$lib/shared/stores";
 
 	let show = false;
 	let timer: number | null = null;
 	let scroll_position = 0;
+
+	const duration = $allow_animation ? 150 : 0;
 
 	onMount(() => {
 		scroll_position = window.scrollY;
@@ -40,7 +43,7 @@
 	<button
 		on:click={scroll_to_top}
 		aria-label="scroll up"
-		transition:fade={{ duration: 150 }}
+		transition:fade={{ duration }}
 	>
 		<Fa icon={faAngleUp} />
 	</button>

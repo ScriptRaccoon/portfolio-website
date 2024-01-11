@@ -2,7 +2,6 @@
 	import logo from "$lib/assets/ScriptRaccoon.png";
 	import {
 		faCodepen,
-		faGit,
 		faGithub,
 		faTwitter,
 	} from "@fortawesome/free-brands-svg-icons";

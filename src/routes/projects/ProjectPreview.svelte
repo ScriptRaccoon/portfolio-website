@@ -2,8 +2,11 @@
 	import { fade } from "svelte/transition";
 	import type { project } from "./types";
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
+	import { allow_animation } from "$lib/shared/stores";
 
 	export let project: project;
+
+	const duration = $allow_animation ? 200 : 0;
 
 	const image_src = new URL(
 		`../../lib/assets/projects/${project.id}_thumb.webp`,
@@ -11,7 +14,7 @@
 	).href;
 </script>
 
-<li transition:fade|local={{ duration: 200 }}>
+<li transition:fade={{ duration }}>
 	<PreviewCard href="/projects/{project.id}">
 		<div class="grid">
 			<div>
