@@ -70,6 +70,14 @@ body {
 	padding-bottom: var(--large-font);
 }
 
+@media (prefers-reduced-motion: no-preference) {
+	html,
+	body {
+		scroll-behavior: smooth;
+		scroll-padding-top: 2rem;
+	}
+}
+
 a {
 	color: inherit;
 	text-underline-offset: 0.1rem;
