@@ -29,7 +29,7 @@ First of all, we should imagine that TypeScript is a whole new language. We don'
 
 In the real world as it is now, the code will perhaps not crash, and browsers don't understand TypeScript without the compilation step in between, but the picture is helpful nonetheless, in particular, because code that is not type-safe will have a much higher chance to crash.
 
-Assuming that we already decided to work with TypeScript, we should take this plan seriously and read what the TypeScript compiler has to say. Otherwise, we will end up with a lot of errors such as `cannot read property x of undefined` during runtime which can easily be avoided.
+Assuming that we already decided to work with TypeScript, we should take this plan seriously and read what the TypeScript compiler has to say. Otherwise, we will end up with a lot of errors such as "cannot read property x of undefined" during runtime which can easily be avoided.
 
 ## The compiler is our companion
 
