@@ -1,4 +1,4 @@
-import type { post } from "./types";
+import type { post } from "$lib/shared/types";
 import { get_frontmatter } from "$lib/server/blog-processing";
 
 export const load = async () => {

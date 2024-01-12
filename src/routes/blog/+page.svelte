@@ -1,5 +1,5 @@
 <script lang="ts">
-	import PostPreview from "./PostPreview.svelte";
+	import PostPreview from "$lib/components/PostPreview.svelte";
 
 	export let data;
 	const { posts } = data;

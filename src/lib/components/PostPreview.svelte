@@ -1,6 +1,6 @@
 <script lang="ts">
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
-	import type { post } from "./types";
+	import type { post } from "$lib/shared/types";
 
 	export let post: post;
 

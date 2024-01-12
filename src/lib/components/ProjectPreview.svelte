@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
-	import type { project } from "./types";
+	import type { project } from "$lib/shared/types";
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
 	import { allow_animation } from "$lib/shared/stores";
 
@@ -9,7 +9,7 @@
 	const duration = $allow_animation ? 200 : 0;
 
 	const image_src = new URL(
-		`../../lib/assets/projects/${project.id}_thumb.webp`,
+		`../assets/projects/${project.id}_thumb.webp`,
 		import.meta.url,
 	).href;
 </script>

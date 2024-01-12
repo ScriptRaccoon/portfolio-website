@@ -1,6 +1,6 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
-import type { project } from "../types";
+import type { project } from "$lib/shared/types";
 import {
 	transform_external_links,
 	render_markdown,

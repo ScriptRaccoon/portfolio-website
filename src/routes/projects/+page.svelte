@@ -1,7 +1,9 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
-	import Filter, { active_filter } from "./Filter.svelte";
-	import ProjectPreview from "./ProjectPreview.svelte";
+	import Filter, {
+		active_filter,
+	} from "$lib/components/Filter.svelte";
+	import ProjectPreview from "$lib/components/ProjectPreview.svelte";
 	import { allow_animation } from "$lib/shared/stores";
 
 	export let data;

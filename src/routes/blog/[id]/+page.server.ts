@@ -1,6 +1,6 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
-import type { post } from "../types";
+import type { post } from "$lib/shared/types";
 import {
 	highlight_code,
 	add_ids_to_headings,
