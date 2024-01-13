@@ -1,16 +1,16 @@
 <script lang="ts">
 	import { onDestroy, onMount } from "svelte";
 	import { fade } from "svelte/transition";
+	import { getContext } from "svelte";
 	import { browser } from "$app/environment";
 	import Fa from "svelte-fa";
 	import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
-	import { allow_animation } from "$lib/shared/stores";
 
 	let show = false;
 	let timer: number | null = null;
 	let scroll_position = 0;
 
-	const duration = $allow_animation ? 150 : 0;
+	const duration = getContext("allow_animation") ? 150 : 0;
 
 	onMount(() => {
 		scroll_position = window.scrollY;

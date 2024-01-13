@@ -13,7 +13,7 @@
 </script>
 
 <script lang="ts">
-	import { allow_animation } from "$lib/shared/stores";
+	import { getContext } from "svelte";
 	import { slide } from "svelte/transition";
 
 	export let tags: string[];
@@ -23,7 +23,7 @@
 	let focussed_year: number | null = null;
 	let open = false;
 
-	const duration = $allow_animation ? 200 : 0;
+	const duration = getContext("allow_animation") ? 200 : 0;
 
 	function toggle_filters() {
 		open = !open;

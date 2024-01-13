@@ -1,12 +1,13 @@
 <script lang="ts">
+	import { getContext } from "svelte";
 	import { fade } from "svelte/transition";
+
 	import type { project } from "$lib/shared/types";
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
-	import { allow_animation } from "$lib/shared/stores";
 
 	export let project: project;
 
-	const duration = $allow_animation ? 200 : 0;
+	const duration = getContext("allow_animation") ? 200 : 0;
 
 	const image_src = new URL(
 		`../assets/projects/${project.id}_thumb.webp`,

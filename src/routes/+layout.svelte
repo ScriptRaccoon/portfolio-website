@@ -1,9 +1,18 @@
 <script>
+	import { setContext } from "svelte";
+
 	import "./app.css";
 	import Nav from "$lib/components/Nav.svelte";
 	import LoadProgress from "$lib/components/LoadProgress.svelte";
 	import { page } from "$app/stores";
 	import ScrollUp from "$lib/components/ScrollUp.svelte";
+
+	const allow_animation =
+		typeof window !== "undefined" &&
+		window.matchMedia("(prefers-reduced-motion: no-preference)")
+			.matches;
+
+	setContext("allow_animation", allow_animation);
 </script>
 
 <svelte:head>

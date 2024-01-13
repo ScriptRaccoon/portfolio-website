@@ -1,15 +1,16 @@
 <script lang="ts">
 	import { fade } from "svelte/transition";
+	import { getContext } from "svelte";
+
 	import Filter, {
 		active_filter,
 	} from "$lib/components/Filter.svelte";
 	import ProjectPreview from "$lib/components/ProjectPreview.svelte";
-	import { allow_animation } from "$lib/shared/stores";
 
 	export let data;
 	const { projects, tags, years } = data;
 
-	const animation_options = $allow_animation
+	const animation_options = getContext("allow_animation")
 		? { duration: 200, delay: 200 }
 		: { duration: 0, delay: 0 };
 
