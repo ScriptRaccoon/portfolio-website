@@ -42,7 +42,7 @@
 	>
 		{button_txt}</button
 	>
-	<div id="filters" aria-labelledby="filter_btn">
+	<div id="filters" aria-labelledby="filter_btn" role="group">
 		{#if open}
 			<div transition:slide={{ duration }} class="filter-list">
 				{#each tags as tag}
