@@ -1,12 +1,13 @@
 <script lang="ts">
-	import CopyURL from "./CopyURL.svelte";
+	import { page } from "$app/stores";
+	import CopyText from "./CopyText.svelte";
 	import GoBack from "./GoBack.svelte";
 	export let variant: "top" | "bottom";
 </script>
 
 <div class={variant}>
 	<GoBack />
-	<CopyURL />
+	<CopyText text={$page.url.href} name="URL" />
 </div>
 
 <style>
