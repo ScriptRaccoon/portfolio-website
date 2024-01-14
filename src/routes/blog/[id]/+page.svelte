@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Controls from "$lib/components/Controls.svelte";
 	import Expand from "$lib/components/Expand.svelte";
+	import OuterToc from "$lib/components/OuterToc.svelte";
 
 	export let data;
 
@@ -35,19 +36,7 @@
 		</ol>
 	</Expand>
 
-	<div
-		class="outer-toc"
-		class:long={toc.length > 15}
-		aria-hidden="true"
-	>
-		<ol>
-			{#each toc as item}
-				<li>
-					<a tabindex="-1" href="#{item.id}">{item.text}</a>
-				</li>
-			{/each}
-		</ol>
-	</div>
+	<OuterToc {toc} />
 {/if}
 
 <article>
@@ -74,56 +63,6 @@
 
 		a {
 			text-decoration-color: var(--secondary-font-color);
-		}
-	}
-
-	.outer-toc {
-		opacity: 0;
-		pointer-events: none;
-
-		@media (min-width: 90rem) {
-			opacity: 1;
-			pointer-events: initial;
-		}
-
-		@media (prefers-reduced-motion: no-preference) {
-			transition: opacity 250ms linear;
-		}
-
-		position: fixed;
-		top: 0;
-		height: 100vh;
-		transform: translateX(52rem);
-		overflow-y: auto;
-
-		display: flex;
-		align-items: center;
-		color: var(--secondary-font-color);
-
-		ol {
-			margin-left: 0;
-			padding-left: 2rem;
-			border-left: 1px solid var(--border-color);
-		}
-
-		a:hover {
-			color: var(--font-color);
-		}
-
-		&.long {
-			align-items: start;
-
-			li + li {
-				margin-block: 0;
-			}
-
-			ol {
-				padding-block: 1rem;
-				height: 100vh;
-				display: flex;
-				flex-direction: column;
-				justify-content: space-between;
-			}
 		}
 	}
 
