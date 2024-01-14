@@ -3,17 +3,10 @@ function generate_id(text: string): string {
 }
 
 export function add_ids_to_headings(html_content: string): string {
-	const modifiedHtmlCode = html_content
-		.replace(/<h2>(.*?)<\/h2>/gi, (_, heading) => {
-			const id = generate_id(heading);
-			return `<h2 id="${id}">${heading}</h2>`;
-		})
-		.replace(/<h3>(.*?)<\/h3>/gi, (_, heading) => {
-			const id = generate_id(heading);
-			return `<h3 id="${id}">${heading}</h3>`;
-		});
-
-	return modifiedHtmlCode;
+	return html_content.replace(/<h2>(.*?)<\/h2>/gi, (_, heading) => {
+		const id = generate_id(heading);
+		return `<h2 id="${id}">${heading}</h2>`;
+	});
 }
 
 export function get_table_of_contents(
