@@ -81,6 +81,7 @@ body {
 a {
 	color: inherit;
 	text-underline-offset: 0.1rem;
+	text-decoration-color: var(--secondary-font-color);
 }
 
 :is(a, button):focus-visible {
