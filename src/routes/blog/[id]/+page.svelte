@@ -1,5 +1,6 @@
 <script lang="ts">
 	import Controls from "$lib/components/Controls.svelte";
+	import Expand from "$lib/components/Expand.svelte";
 
 	export let data;
 
@@ -24,16 +25,15 @@
 </div>
 
 {#if toc.length > 0}
-	<details class="toc">
-		<summary>Table of Contents</summary>
-		<ol>
+	<Expand summary="Table of Contents" role="navigation">
+		<ol class="toc">
 			{#each toc as item}
 				<li>
 					<a href="#{item.id}">{item.text}</a>
 				</li>
 			{/each}
 		</ol>
-	</details>
+	</Expand>
 
 	<div
 		class="outer-toc"
@@ -64,15 +64,16 @@
 
 	.dates {
 		margin-top: -0.5rem;
+		margin-bottom: 1rem;
 		font-size: var(--small-font);
 		color: var(--secondary-font-color);
 	}
 
 	.toc {
-		margin-top: 1rem;
+		padding-top: 1rem;
 
-		ol {
-			margin-top: 0.5rem;
+		a {
+			text-decoration-color: var(--secondary-font-color);
 		}
 	}
 
