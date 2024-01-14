@@ -64,7 +64,6 @@
 
 <div class="wrapper">
 	<Nav />
-
 	<main>
 		<slot />
 	</main>
@@ -74,9 +73,9 @@
 	.wrapper {
 		max-width: 52rem;
 		margin-inline: auto;
-		padding-inline: 1rem;
 	}
 	main {
-		padding-block: 1rem 2rem;
+		padding-inline: 0.75rem;
+		padding-top: 1rem;
 	}
 </style>
