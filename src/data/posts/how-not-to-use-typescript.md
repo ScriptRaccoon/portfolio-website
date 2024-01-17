@@ -1,7 +1,7 @@
 ---
 title: How not to use TypeScript
 published: 2024-01-10
-updated:
+updated: 2024-01-17
 description: and common misconceptions about TypeScript
 ---
 
@@ -48,6 +48,8 @@ We should get into the habit of writing type-safe code in the first place (thus,
 For example, when we write a function that expects some argument `x` of which we don't know the type yet, we _don't implement the function_ and write something like `myFun(x) {...}`. It's too early. The first job is to find out the type of that argument `x`. The same goes for the return type of that function (I have written about [return types](/blog/explicit-return-types) before). When we don't know it, maybe it is best to sit back and think about how to define the return type first.
 
 Also, when we get annoyed that TypeScript tells us that an object might be `null` so that accessing some of its properties is not secure: we should not just ignore this hint or even use `!` or any other workaround to mute the TypeScript compiler. Instead, we create an `if`-clause to check if that object is not `null`. Alternatively, we can introduce an early return if it is `null`.
+
+Similarly, when we are writing a component in Svelte, Vue or React, which expects some props, we should immediately type these props before actually working with them.
 
 ## Thinking in types
 
