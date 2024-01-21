@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Controls from "$lib/components/Controls.svelte";
 	import Expand from "$lib/components/Expand.svelte";
-	import OuterToc from "$lib/components/OuterToc.svelte";
 
 	export let data;
 
@@ -35,8 +34,6 @@
 			{/each}
 		</ol>
 	</Expand>
-
-	<OuterToc {toc} />
 {/if}
 
 <article>
