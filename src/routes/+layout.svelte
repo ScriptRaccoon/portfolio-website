@@ -50,6 +50,10 @@
 		property="og:description"
 		content={$page.data.meta?.description ?? ""}
 	/>
+	<meta
+		name="description"
+		content={$page.data.meta?.description ?? ""}
+	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://scriptraccoon.dev" />
 	<meta property="og:site_name" content="Script Raccoon" />
