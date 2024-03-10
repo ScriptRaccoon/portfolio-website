@@ -23,4 +23,4 @@ There is no login, users are only required to enter their name. When a player le
 
 The application uses a separately hosted express server with socket.io for the whole game logic and communication between the players. This guarantees that players cannot cheat.
 
-Back in 2020 I already made a much more basic [Single-player Chess program](/projects/chess-program).
+I also made a [single-player version](https://github.com/ScriptRaccoon/chessvelte-singleplayer) with Svelte. Back in 2020 I already made a [much more basic chess program](https://github.com/ScriptRaccoon/chess-singleplayer) with Vanilla JS.
