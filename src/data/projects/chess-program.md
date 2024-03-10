@@ -1,5 +1,5 @@
 ---
-name: Chess program
+name: Single-player Chess program
 teaser: fully featured, made with Vanilla JS
 repository: https://github.com/ScriptRaccoon/chess-singleplayer
 url: https://chess-singleplayer.netlify.app/
@@ -18,10 +18,10 @@ In the notation panel on the right (or top on mobile devices), you can see the p
 
 Apart from a stalemate, there are three situations in which the game automatically draws:
 
--   There is insufficient material.
--   For 75 moves no pawn has been moved and no piece has been captured.
--   The same position has been on the board 5 times for the same player.
+- There is insufficient material.
+- For 75 moves no pawn has been moved and no piece has been captured.
+- The same position has been on the board 5 times for the same player.
 
-Chess is played with two players, but currently, this program only works in one window in which both players have to alternate making moves.
+Chess is played with two players, but this program only works in one window in which both players have to alternate making moves. (I have implemented this later in [Multi-player Chess program](/projects/chess-multiplayer-svelte).)
 
 The game design is responsive so that it changes when you resize the window or use a mobile device.
