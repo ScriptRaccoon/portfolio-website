@@ -5,14 +5,15 @@ repository: https://github.com/ScriptRaccoon/svt.ink
 url: https://svt.ink/
 tutorial: https://youtu.be/9Bs8dACEzwg
 tags:
-    [
-        "SvelteKit",
-        "Tool",
-        "Full Stack",
-        "MongoDB",
-        "TypeScript",
-        "Tailwind",
-    ]
+  [
+    "SvelteKit",
+    "Tool",
+    "Full Stack",
+    "MongoDB",
+    "TypeScript",
+    "Tailwind",
+    "Tutorial",
+  ]
 date: 2023-05-27
 ---
 

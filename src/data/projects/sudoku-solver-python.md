@@ -4,7 +4,7 @@ teaser: made with Python and constraint programming
 repository: https://github.com/ScriptRaccoon/sudoku-solver-python
 url:
 tutorial: https://www.youtube.com/watch?v=5PRzPNoSWEs
-tags: ["Algorithms", "Python"]
+tags: ["Algorithms", "Python", "Tutorial"]
 date: 2023-11-27
 ---
 

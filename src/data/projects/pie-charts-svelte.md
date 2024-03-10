@@ -5,13 +5,14 @@ repository: https://github.com/ScriptRaccoon/Abgeordnete
 url: https://abgeordnete.netlify.app/
 tutorial: https://youtu.be/gcK8pw7w12M
 tags:
-    [
-        "Data visualization",
-        "Svelte",
-        "SVG",
-        "TypeScript",
-        "Mathematics",
-    ]
+  [
+    "Data visualization",
+    "Svelte",
+    "SVG",
+    "TypeScript",
+    "Mathematics",
+    "Tutorial",
+  ]
 date: 2023-05-04
 ---
 

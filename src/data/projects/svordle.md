@@ -4,8 +4,7 @@ teaser: made with Svelte and serverless functions
 repository: https://github.com/ScriptRaccoon/Svordle
 url: https://svordle.netlify.app
 tutorial: https://youtu.be/CMIwJLS0dns
-tags:
-    ["Svelte", "Browser game", "Full Stack", "Tutorial", "Serverless"]
+tags: ["Svelte", "Browser game", "Full Stack", "Tutorial"]
 date: 2022-02-10
 ---
 
