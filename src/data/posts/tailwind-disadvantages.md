@@ -1,15 +1,15 @@
 ---
 title: Disadvantages of Tailwind
 published: 2024-03-23
-updated:
+updated: 2024-03-25
 description: Why the popular CSS framework is not maintainable
 ---
 
 ## Introduction
 
-This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/). I share my (rather frustrating) experience of working with Tailwind in a large codebase at my job but also attempt to give a summary of the numerous posts and articles that have covered the subject, in particular with regards to maintainability concerns.
+This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/). I share my (rather frustrating) experience of working with Tailwind in a large codebase at my job but also attempt to give a summary of the numerous posts and articles that have covered the subject, in particular concerning maintainability concerns.
 
-As you can probably tell from the length of this blog post, I have tried to cover as many topics as possible and to explore them in depth. I also reflect on the common responses to criticism against Tailwind and explain their shortcomings.
+As you can probably tell from the length of this blog post, I have tried to cover as many topics as possible and explore them in depth. I also reflect on the common responses to criticism against Tailwind and explain their shortcomings.
 
 I understand that many people enjoy working with Tailwind. Many developers have reported being more productive with Tailwind. And that's fine. I also enjoyed working with Tailwind on a small personal project. But maybe you will find something in this post that makes you reconsider your choice.
 
@@ -1098,13 +1098,13 @@ Perhaps you remember that 1000 years ago HTML had elements for styling content, 
 
 Separating markup from styling had (and still has) many advantages:
 
-- When you want to change the styling, you know exactly where to go: to the CSS file. When you want to change the markup or content, you know exactly where to go: to the HTML file. Since each file is smaller as compared to a file combined of HTML and CSS, you will find the relevant code faster.
+- When you want to change the styling, you know exactly where to go: to the CSS file. When you want to change the markup or content, you know exactly where to go: to the HTML file. Since each file is smaller as compared to a file combined with HTML and CSS, you will find the relevant code faster.
 
 - By using CSS classes for reoccurring elements (such as buttons or headings) you do not have to repeat the same styles again and again. See also [code duplication](#code-duplication).
 
 Some Tailwind users have suggested that the 'separation of concerns' principle is simply not working. I highly disagree and still have not seen any proof of why this principle does not work in practice.
 
-While Adam Wathan's blog post [CSS Utility Classes and "Separation of Concerns"](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) back from 2017 (around the time he created Tailwind) makes a good point that the usual way of writing CSS does not fully separate concerns and that utility classes solve some of the problems imposed by that, I do not agree with Adam's conclusion to only use utility classes.
+While Adam Wathan's blog post [CSS Utility Classes and "Separation of Concerns"](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) back in 2017 (around the time he created Tailwind) makes a good point that the usual way of writing CSS does not fully separate concerns and that utility classes solve some of the problems imposed by that, I do not agree with Adam's conclusion to only use utility classes.
 
 ## Inline styles
 
