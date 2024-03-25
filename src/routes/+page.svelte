@@ -33,6 +33,7 @@
 	<li>
 		<a
 			aria-label="Email"
+			class="plain"
 			href="mai&#108;t&#111;&#58;s&#99;r%69pt%72%61cc%6F&#111;%6E%40&#103;mail&#46;c%6&#70;m"
 		>
 			<Fa icon={faEnvelope} />
@@ -41,6 +42,7 @@
 	<li>
 		<a
 			aria-label="Twitter"
+			class="plain"
 			href="https://twitter.com/scriptraccoon"
 			target="_blank"
 		>
@@ -51,6 +53,7 @@
 	<li>
 		<a
 			aria-label="GitHub"
+			class="plain"
 			href="https://github.com/scriptraccoon"
 			target="_blank"
 		>
@@ -60,6 +63,7 @@
 	<li>
 		<a
 			aria-label="Codepen"
+			class="plain"
 			href="https://codepen.com/scriptraccoon"
 			target="_blank"
 		>

@@ -57,10 +57,6 @@
 
 	.toc {
 		padding-top: 1rem;
-
-		a {
-			text-decoration-color: var(--secondary-font-color);
-		}
 	}
 
 	article {

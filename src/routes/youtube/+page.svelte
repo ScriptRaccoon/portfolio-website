@@ -25,7 +25,7 @@
 
 {#if video}
 	<p>My latest* video:</p>
-	<a class="videolink" href={video.url} target="_blank">
+	<a class="videolink plain" href={video.url} target="_blank">
 		<img
 			class="thumbnail"
 			src={video.thumbnail_url}

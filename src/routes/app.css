@@ -80,8 +80,25 @@ body {
 
 a {
 	color: inherit;
-	text-underline-offset: 0.1rem;
-	text-decoration-color: var(--secondary-font-color);
+	text-decoration: none;
+	position: relative;
+}
+
+a:not(.plain)::before {
+	content: "";
+	position: absolute;
+	left: 0;
+	right: 0;
+	top: 95%;
+	height: 2px;
+	border-radius: 100vw;
+	background: linear-gradient(
+		to right,
+		var(--secondary-font-color),
+		var(--secondary-font-color) 40%,
+		var(--bg-color)
+	);
+	z-index: -1;
 }
 
 :is(a, button, pre):focus-visible {
