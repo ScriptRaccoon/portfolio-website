@@ -7,7 +7,7 @@ description: Why the popular CSS framework is not maintainable
 
 ## Introduction
 
-This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/). I share my (rather frustrating) experience of working with Tailwind in a large codebase at my job but also attempt to give a summary of the numerous posts and articles that have covered the subject, in particular concerning maintainability concerns.
+This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/). I share my (rather frustrating) experience of working with Tailwind in a large codebase at my job but also attempt to give a summary of the numerous posts and articles that have covered the subject, in particular concerning maintainability.
 
 As you can probably tell from the length of this blog post, I have tried to cover as many topics as possible and explore them in depth. I also reflect on the common responses to criticism against Tailwind and explain their shortcomings.
 
