@@ -13,7 +13,7 @@
 	<a href="https://www.youtube.com/scriptraccoon" target="_blank">
 		YouTube channel
 	</a>
-	on web development.
+	on web development (in German).
 	{#if stats}
 		Today, the channel has
 		<strong>{stats.subscriber_count}</strong>
@@ -24,7 +24,7 @@
 </p>
 
 {#if video}
-	<p>My latest video (in German):</p>
+	<p>My latest* video:</p>
 	<a class="videolink" href={video.url} target="_blank">
 		<img
 			class="thumbnail"
@@ -46,6 +46,7 @@
 	started my journey in web development, which is also why I like to
 	produce these.
 </p>
+
 <p>
 	I also choose a rather slow-paced approach, explaining everything
 	<strong>step by step</strong>, so that also newbies should be able
@@ -81,10 +82,16 @@
 		>The Net Ninja</a
 	>, for example.
 </p>
+
 <p>
 	You can always check out the <strong>code</strong> which I link in the
 	video description. Of course, the code has English variable names, and
 	the README also often includes some pieces of explanation.
+</p>
+
+<p>
+	*It is also the last video for now. Starting from April 2024, I will
+	take a break from the channel.
 </p>
 
 <style lang="scss">
