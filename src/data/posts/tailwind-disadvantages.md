@@ -7,13 +7,13 @@ description: Why the popular CSS framework is not maintainable
 
 ## Introduction
 
-This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/).
+This post explains the disadvantages of using [TailwindCSS](https://tailwindcss.com/). I share my (rather frustrating) experience of working with Tailwind in a large codebase at my job but also attempt to give a summary of the numerous posts and articles that have covered the subject, in particular with regards to maintainability concerns.
 
-Numerous blog posts, articles, and tweets have been written on the subject. Here I will give a summary of them. I also include my own concerns with Tailwind and write about my frustrating experience of working with Tailwind within the codebase at my job which has thousands of components.
+As you can probably tell from the length of this blog post, I have tried to cover as many topics as possible and to explore them in depth. I also reflect on the common responses to criticism against Tailwind and explain their shortcomings.
 
-I understand that many people enjoy working with Tailwind. Many developers have reported being more productive with Tailwind. And that's fine. I also enjoyed working with Tailwind on a small personal project. But maybe you will find something here that makes you reconsider your choice. By the way, many of the issues presented here apply to every utility-based CSS framework.
+I understand that many people enjoy working with Tailwind. Many developers have reported being more productive with Tailwind. And that's fine. I also enjoyed working with Tailwind on a small personal project. But maybe you will find something in this post that makes you reconsider your choice.
 
-Notice that this blog post is based on Tailwind 3, and there might be changes in the already announced version 4.
+Many of the issues presented here apply to every utility-based CSS framework. Notice that this blog post is based on Tailwind 3, and there might be changes in the already announced version 4.
 
 ## What is Tailwind
 
