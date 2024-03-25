@@ -175,18 +175,13 @@ export const tech_list: tech[] = [
 		level: "familiar",
 	},
 	{
-		name: "Tailwind",
-		url: "https://tailwindcss.com",
-		level: "nogo",
+		name: "esbuild",
+		url: "https://esbuild.github.io/",
+		level: "familiar",
 	},
 	{
 		name: "gulp",
 		url: "https://gulpjs.com/",
-		level: "familiar",
-	},
-	{
-		name: "esbuild",
-		url: "https://esbuild.github.io/",
 		level: "familiar",
 	},
 	{
@@ -219,5 +214,10 @@ export const tech_list: tech[] = [
 		name: "Pug",
 		url: "https://pugjs.org/",
 		level: "basic",
+	},
+	{
+		name: "Tailwind",
+		url: "blog/tailwind-disadvantages",
+		level: "nogo",
 	},
 ];

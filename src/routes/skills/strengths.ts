@@ -1,10 +1,10 @@
 export const strengths = [
 	"Learn quickly",
-	"Clean code",
-	"Creative coding",
+	"Code quality",
 	"Teaching",
-	"Accessibility",
-	"Semantic HTML",
 	"Responsive Webdesign",
+	"Accessibility",
 	"Abstract thinking",
+	"Ability to dive deep into every topic",
+	"Creative coding",
 ];
