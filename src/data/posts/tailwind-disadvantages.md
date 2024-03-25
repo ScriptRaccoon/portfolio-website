@@ -15,6 +15,8 @@ I understand that many people enjoy working with Tailwind. Many developers have 
 
 Many of the issues presented here apply to every utility-based CSS framework. Notice that this blog post is based on Tailwind 3, and there might be changes in the already announced version 4.
 
+If you want to comment on this blog post, you can do so below the [tweet](https://x.com/scriptraccoon/status/1772199809648062881).
+
 ## What is Tailwind
 
 Skip this section if you are already familiar with Tailwind.
