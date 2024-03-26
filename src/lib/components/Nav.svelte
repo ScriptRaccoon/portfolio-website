@@ -68,13 +68,13 @@
 <nav>
 	<ul class="no-bullets" style:--items-count={items_count}>
 		<li class:current={current_path === "/"}>
-			<a href="/" class="plain">
+			<a href="/">
 				<img src={logo} alt="Home" class="logo" />
 			</a>
 		</li>
 		{#each links.slice(1) as { name, path, icon }}
 			<li class:current={current_path.startsWith(path)}>
-				<a href={path} class="plain">
+				<a href={path}>
 					<Fa {icon} />
 					<span class="name">{name}</span>
 				</a>
@@ -114,6 +114,10 @@
 		width: 1.75rem;
 		border-radius: 50%;
 		outline: 0.1rem solid var(--border-color);
+	}
+
+	a {
+		text-decoration: none;
 	}
 
 	li {
