@@ -1,31 +1,51 @@
 <script lang="ts">
-	import { strengths } from "./strengths";
-	import { headings, tech_list, type tech_level } from "./tech";
-	const levels = Object.keys(headings) as tech_level[];
+	import {
+		soft_skills,
+		hard_skills,
+		tool_data,
+	} from "./skills.config";
 </script>
 
 <h1>Skills</h1>
 
+<p>
+	This page lists some of my skills with a focus on web development.
+</p>
+
 <section>
-	<h2>Strengths</h2>
+	<h2>Hard skills</h2>
 	<ul>
-		{#each strengths as strength}
+		{#each hard_skills as skill}
 			<li>
-				<span>{strength}</span>
+				<span>{skill}</span>
 			</li>
 		{/each}
 	</ul>
 </section>
 
-{#each levels as level}
-	{@const list = tech_list.filter((tech) => tech.level === level)}
+<section>
+	<h2>Soft skills</h2>
+	<ul>
+		{#each soft_skills as soft_skill}
+			<li>
+				<span>{soft_skill}</span>
+			</li>
+		{/each}
+	</ul>
+</section>
+
+<section>
+	<h2>Tools and languages</h2>
+</section>
+
+{#each tool_data as tool_list}
 	<section>
-		<h2>{headings[level]}</h2>
+		<h3>{tool_list.level}</h3>
 		<ul>
-			{#each list as tech}
+			{#each tool_list.data as tool}
 				<li>
-					<a href={tech.url} target="_blank">
-						{tech.name}
+					<a href={tool.url} target="_blank">
+						{tool.name}
 					</a>
 				</li>
 			{/each}
@@ -35,6 +55,6 @@
 
 <style>
 	section {
-		margin-block: 1rem 1.75rem;
+		margin-block: 1.5rem 1.75rem;
 	}
 </style>
