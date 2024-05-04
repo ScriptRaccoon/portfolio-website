@@ -2,7 +2,7 @@
 name: URL shortener "svt.ink"
 teaser: made with SvelteKit and MongoDB
 repository: https://github.com/ScriptRaccoon/svt.ink
-url: https://svt.ink/
+url: https://svtink.netlify.app
 tutorial: https://youtu.be/9Bs8dACEzwg
 tags:
   [
