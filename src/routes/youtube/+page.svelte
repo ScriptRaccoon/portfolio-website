@@ -24,7 +24,7 @@
 </p>
 
 {#if video}
-	<p>My latest* video:</p>
+	<p>My latest video:</p>
 	<a class="videolink" href={video.url} target="_blank">
 		<img
 			class="thumbnail"
@@ -90,8 +90,10 @@
 </p>
 
 <p>
-	*It is also the last video for now. Starting from April 2024, I will
-	take a break from the channel.
+	Since March 2024, I also create videos for the channel
+	<a href="https://www.youtube.com/@cuberaccoon" target="_blank"
+		>Cube Raccoon</a
+	> which is dedicated to twisty puzzles.
 </p>
 
 <style lang="scss">
