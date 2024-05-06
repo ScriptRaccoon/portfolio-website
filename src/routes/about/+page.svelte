@@ -52,10 +52,10 @@
 </p>
 
 <p>
-	Since 2022 I work as a full stack <strong>web developer</strong>
+	Since 2022 I work as a <strong>full stack web developer</strong>
 	for a company in the sports retail industry. If you are interested, see
-	<a href="/skills">Skills</a> for a more complete list of my web development
-	skills. 🧪
+	<a href="/tools">Tools</a> for the list of tools I am familiar with.
+	🧪
 </p>
 
 <p>

@@ -8,31 +8,6 @@ type tool_list = {
 	data: tool[];
 };
 
-type skill = string;
-
-export const hard_skills: skill[] = [
-	"Code quality",
-	"Technical documentation",
-	"Responsive webdesign",
-	"Accessibility",
-	"Creative coding",
-	"Test-driven development",
-];
-
-export const soft_skills: skill[] = [
-	"Learn quickly",
-	"Ability to dive deep into every topic",
-	"Ability to conceptualize complex ideas",
-	"Effective communicator of complex topics",
-	"Innovative problem solver",
-	"Attention to detail",
-	"Curious and proactive",
-	"Thinking outside the box",
-	"Dedicated and enthusiastic about my work",
-	"Eager to share knowledge with the team",
-	"Team player",
-];
-
 export const tool_data: tool_list[] = [
 	{
 		level: "Expert knowledge",
