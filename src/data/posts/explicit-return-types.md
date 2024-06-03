@@ -106,7 +106,7 @@ class Ball {
 
 We can argue that the choice of the method name should already make clear if data is returned or not. But in some cases, the name is not clear enough.
 
-## Wrongly inferred types
+## Unintended inferred types
 
 Sometimes, the inferred return type by the TypeScript compiler is not the one intended or unnecessarily complex. Then you need to specify the intended return type anyway.
 
@@ -127,14 +127,16 @@ type return_type = Promise<
 >;
 ```
 
-Maybe it doesn't make a big difference, but this return type is much more confusing than
-
+But you might have intended to get this return type:
+ 
 ```typescript
 type return_type = Promise<
 	{ errors: string[] } | { shortcut: string }
 >;
 ```
-
+ 
+TypeScript is not wrong here, it just resolves the types in a very explicit way, something we do not always want.
+ 
 ### Example 2
 
 Here is a similar example:
@@ -198,9 +200,9 @@ function generate_coord(row: number, col: number): Coord {
 	return [row, col];
 }
 ```
-
-also provides, again, better documentation of this function.
-
+ 
+also provides, again, better documentation of this function. By the way, writing `[row, col] as const` also enables TypeScript to infer the "correct" type.
+ 
 ### Example 4
 
 TypeScript has no problems with the following code, even though it is not type-safe.
