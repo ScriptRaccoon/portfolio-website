@@ -1,23 +1,23 @@
 ---
 title: Google script development with TypeScript and bundling
 published: 2024-06-30
-updated:
-description: A nice setup for a Google Apps Script project
+updated: 2024-07-04
+description: A setup for developing Google scripts with all the good stuff
 ---
 
 ## Introduction
 
-Google Apps Script is a powerful platform which makes it easy to automate and connect several Google services like Gmail, Google Drive, Google Forms, etc. with JavaScript. Triggers can execute scripts on a time-based schedule or events like form submissions. Consult the [documentation](https://www.google.com/script/start/) for more.
+Google Apps Script is a powerful platform which makes it easy to automate and connect several Google services like Gmail, Google Drive, Google Forms, etc. with JavaScript. Triggers can execute scripts on a time-based schedule or events like form submissions. Consult the [documentation](https://www.google.com/script/start/) for more information.
 
 In this blog post, I will explain how to set up a Google Apps Script project with TypeScript support, multiple files, and bundling in your editor of choice.
 
 ## Issues with Google's editor
 
-The usual way of coding a Google script is via the editor on [script.google.com](https://script.google.com). This editor is easy to use and offers many of the features we want, but it has some drawbacks as well.
+The usual way of coding a Google script is via the editor on [script.google.com](https://script.google.com). Here, click on "New Project" and start coding in Google's editor. This editor is easy to use and offers many of the features we want, but it has some drawbacks as well.
 
-1. There is no TypeScript support, which is [bad](/blog/typescriptlove).
-2. You can write types with JSDocs and get autocompletion from it. Also, Google's classes like DocumentApp, etc. are properly documented and typed with JSDocs. However, there is no way to tell if there is a type error. Also, not every type construction is possible in JSDocs.
-3. To modularize the code, several files are possible. When you define a constant in, say, `config.gs` as `const answer = 42`, you can also just use it in, say, `main.gs`, without ever importing it. Google itself writes [here](https://developers.google.com/apps-script/guides/import-export#features_and_limitations) that "All of the server files are loaded into the same global namespace". The issue, however, is that there are no _explicit_ import/export statements in the code you see. In fact, you are not allowed to use import/export in a Google script.
+1. There is no TypeScript support, which is kind of [bad](/blog/typescriptlove).
+2. You can write [types with JSDocs](https://www.typescriptlang.org/docs/handbook/jsdoc-supported-types.html) and get autocompletion from it. Also, Google's classes like `DocumentApp`, etc. are properly documented and typed with JSDocs. However, there is no way to tell if there is a type error, the JSDocs don't have proper syntax highlighting, and not every type construction is possible in JSDocs.
+3. To modularize the code, several files are possible. When you define the constant `const answer = 42` in a file `config.gs`, you can just use it another file `main.gs`. Google itself writes [here](https://developers.google.com/apps-script/guides/import-export#features_and_limitations) that "All of the server files are loaded into the same global namespace". The issue, however, is that there are no _explicit_ import/export statements in the code you see. In fact, you are not allowed to use import/export in a Google script.
 4. This makes the code also more error-prone, since your editor will not tell you that something like `console.log(answr)` is wrong. It will error only during runtime.
 5. There is no version control with Git.
 6. There is no automatic formatting of the code. For example, when you are in team semicolon, you might forget to add some semicolons in the code, and the editor will not tell you, let alone just add them for you. You also need to fix the indentation manually, which sucks.
@@ -25,13 +25,15 @@ The usual way of coding a Google script is via the editor on [script.google.com]
 
 ## Limitations of clasp
 
-Some of these issues can be solved with clasp. This is a tool that lets you develop a Google script locally within your preferred editor (VS Code, Vim, Webstorm, ...) and then sync it with the script hosted by Google. It is very easy to use, more on that later. See also the [documentation](https://developers.google.com/apps-script/guides/clasp).
+Some of these issues can be solved with **clasp**. This is a tool that lets you develop a Google script locally within your preferred editor (VS Code, Vim, Webstorm, ...) and then sync it with the script hosted on Google's platform. It is very easy to use, more on that later. See also the [documentation](https://developers.google.com/apps-script/guides/clasp).
 
-But even with clasp you will still run into linting errors when using multiple files. The variables created in other files are not known. You cannot use import/export either. Clasp supports TypeScript and converts it to JavaScript for you, but its features are [limited](https://github.com/google/clasp/blob/master/docs/typescript.md), in particular, because only an old version of TypeScript is supported (as of writing this post). It is also awkward that this conversion is only done when the code is pushed to Google.
+Some of the issues mentioned above will perhaps be fixed in future iterations on Google's editor. But we don't have to wait for that to happen and may work directly in our editor of choice.
 
-So what to do instead? My suggestion is rather simple: set up a local TypeScript project as you like, then bundle and transpile the files together with a bundler like `esbuild`, and then only push the single output file to Google. This way, all the issues mentioned above are gone. The developer experience is superb.
+But even with clasp you will still run into linting errors when using multiple files. The variables created in other files are not known. You cannot use import/export either. Clasp supports TypeScript and converts it to JavaScript for you, but its features are [limited](https://github.com/google/clasp/blob/master/docs/typescript.md), in particular, because currently only an old version of TypeScript is supported. It is also awkward that this conversion is only done when the code is pushed to Google.
 
-In the next sections, I will explain step by step how this setup works. I will use the package manager `pnpm`, with `npm` and `yarn` the commands are similar.
+So what to do instead? My suggestion is to set up a local TypeScript project as you like, then bundle and transpile the files together with a bundler like `esbuild`, and then push just the single output file to Google. This way, all the issues mentioned above are gone. The developer experience is superb.
+
+In the next sections, I will explain step by step how this setup works. I will use the [package manager `pnpm`](https://pnpm.io/), with `npm` and `yarn` the commands are similar.
 
 ## First steps with clasp
 
@@ -56,7 +58,7 @@ mkdir clasp-typescript-sample
 cd clasp-typescript-sample
 ```
 
-Create a new [standalone](https://developers.google.com/apps-script/guides/standalone) Google script with clasp.
+Create a new [standalone Google script](https://developers.google.com/apps-script/guides/standalone) with clasp.
 
 ```bash
 clasp create --type standalone --title "choose some nice title"
@@ -79,7 +81,7 @@ Now let us push this code to Google with the following command.
 clasp push
 ```
 
-When you open your Google script (or refresh the page if you already had it open), it will show the file `main.gs` (notice the extension for Google scripts is `gs`).
+When you open your Google script (or refresh the page if you already had it open), it will show the file `main.gs`. Notice the extension for Google scripts is `.gs`. But locally you can use the extension `.js` (or `.ts` later).
 
 Sometimes you may also want to edit your script directly in Google's editor in the browser. In this case, you can pull this to your local editor with `clasp pull`. But with the setup of this blog post, I would not recommend doing that. The local folder should be the single source of truth.
 
@@ -140,7 +142,7 @@ Generate a [TypeScript configuration file](https://www.typescriptlang.org/docs/h
 }
 ```
 
-We will not use TypeScript to generate output files, this will be done in the next step with esbuild. We only use TypeScript to get autocompletion and to ensure type safety and thus avoid runtime errors.
+We will not use TypeScript to generate JavaScript output files, this will be done in the next step with esbuild. We only use TypeScript to get autocompletion and to ensure type safety and thus avoid runtime errors.
 
 ## Bundling with esbuild
 
@@ -187,8 +189,6 @@ var answer = 42;
 console.log("The answer is", answer);
 ```
 
-In this case, you should not use the `--minify` option by esbuild. The reason is that you want to access the functions in Google's editor by their original names to set up triggers later.
-
 Unfortunately, I did not find a way to configure esbuild to avoid having the outdated `var` keyword in the output. But it does not matter that much if we keep the TypeScript source files as our single source of truth.
 
 Add the output file `dist/code.js` to the `.gitignore` file.
@@ -204,6 +204,25 @@ You may also want to create a dev script that creates the output file as soon as
 ```
 
 But since we are not running the code here in any way, this might not be necessary, except for debugging purposes as for the bundling process itself.
+
+For the build script, you should not use the `--minify` option by esbuild. The reason is that you want to access the functions in Google's editor by their original names to set up triggers later. (And to my surprise the esbuild option `--keep-names` does not do that.) However, you may use `--minify-whitespace` and/or `--minify-syntax`.
+
+```json
+{
+	"scripts": {
+		"push": "clasp push",
+		"build": "tsc --noEmit && esbuild src/main.ts --bundle --minify-whitespace --minify-syntax --platform=node --outfile=dist/code.js"
+	}
+}
+```
+
+Applying both yields the much shorter output
+
+```text
+"use strict";console.log("The answer is",42);
+```
+
+Minification of your code will probably not be necessary, but once pushed, it will make quite clear that the code in Google's editor should not be touched.
 
 ## Adjust clasp
 
@@ -236,7 +255,7 @@ You can set up the formatting in this project to your needs and let the editor d
 
 To not (automatically) format the output file, add `dist/code.js` in the file `.prettierignore`.
 
-This alone is an argument for using clasp, even when you mainly developing in Google's editor and do not follow the setup here. From time to time, do `clasp pull`, format locally, do `clasp push`, and the formatting is done.
+This alone is an argument for using clasp, even when you are mainly developing in Google's editor and do not follow the setup here. From time to time, do `clasp pull`, format locally, do `clasp push`, and the formatting is done.
 
 ## Google services
 
@@ -252,7 +271,7 @@ For example, if you are dealing with a script that is [bound to a spreadsheet](h
 const sheet = SpreadsheetApp.getActiveSpreadsheet();
 ```
 
-When writing `sheet.` you will get a very convenient list of all the available methods on the sheet. Notice that this is also true for Google's editor in the browser, and it is even better there since JSDocs provide comprehensive documentation. In my experience, these JSDocs often make it unnecessary to consult the documentation pages by Google. Unfortunately, they are not present in our local editor. This is the only drawback of this whole approach.
+When writing `sheet.` you will get a very convenient list of all the available methods on the sheet. Notice that this is also true for Google's editor in the browser, and it is even better there since JSDocs provide comprehensive documentation. In my experience, these JSDocs often make it unnecessary to consult the documentation pages by Google. Unfortunately, they are not present in our local editor.
 
 ## Triggers
 
@@ -282,20 +301,28 @@ to the code. However, this is not what we want. Whenever any function in the scr
 
 I tried to find a clean solution to this problem and convince esbuild to include unexecuted functions, but I did not succeed. There is a workaround, though.
 
-We add this to our code.
+The trick is to somehow use the function without executing it. For example:
 
 ```ts
 // src/main.ts
-if (1 < 0) {
-	console.log(typeof sync_calendar_events);
-}
+if (1 < 0) console.log(typeof sync_calendar_events);
 ```
 
-You are probably ...triggered by this piece of code. And I am too. It is stupid. It will never run and has no meaning. But at least, it does the job. When you now run `pnpm build`, the function (and the stupid code) _will_ be in the output. In particular, you will be able to add a trigger for the function.
+Alternative:
+
+```ts
+// src/main.ts
+const isOK = typeof sync_calendar_events === "function";
+if (!isOK) console.warn("function is not defined!");
+```
+
+You are probably ...triggered by this piece of code. And I am too. It is stupid. The if-condition is always false, so the code in the if-block is not run. But at least, it does the job.
+
+When you now run `pnpm build`, the function (and the stupid code) _will_ be in the output. In particular, you will be able to add a trigger for the function.
 
 The problem can also not be solved by executing the function in some other file, since remember that in the end there will be just one output file, either explicitly via our build process, or implicitly via Google's internal bundling.
 
-Also, the problem remains when implementing triggers by code. Here, function names are references via their names as strings.
+Also, the problem remains when implementing triggers by code, since here functions are just referenced by their names, which are strings.
 
 ```ts
 ScriptApp.newTrigger("sync_calendar_events")
@@ -306,7 +333,7 @@ ScriptApp.newTrigger("sync_calendar_events")
 
 In other words, even with this piece of code neither your editor nor esbuild will know that the function is being used.
 
-If you really want to get rid of the stupid code, a post-build script can do this for you automatically. So, write some cleanup logic in `cleanup.js` for `dist/code.js` using Node's `fs` module, and then execute it like so:
+If you really want to get rid of the stupid code, a post-build script can do this for you automatically. That is, write some cleanup logic in `cleanup.js` for `dist/code.js`, and then execute it like so:
 
 ```json
 {
@@ -318,3 +345,11 @@ If you really want to get rid of the stupid code, a post-build script can do thi
 ```
 
 If you know better approaches, please let me know.
+
+## Execution
+
+You also need to actually run the functions in the script to manually test them. As soon as you access Google services, as far as I know, this can only be done in Google's editor. To do this, just select the function from the dropdown and click "Run". This means that we have to switch editors during development.
+
+## What about web apps?
+
+Google scripts can also be deployed as [web applications](https://developers.google.com/apps-script/guides/web). These are usually written in Vanilla JavaScript. It seems plausible that the setup here can be extended in such a way that also web frameworks such as my beloved [Svelte](https://svelte.dev) can be used for Google web apps. A quick search brought up two repositories ([gas-svelte-app](https://github.com/mikedownesdev/gas-svelte-app), [Google-Apps-Script-Svelte-Starter](https://github.com/thinkle/Google-Apps-Script-Svelte-Starter)) doing exactly this. Maybe this is the topic for another blog post then.
