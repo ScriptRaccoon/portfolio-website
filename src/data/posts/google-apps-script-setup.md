@@ -346,10 +346,6 @@ If you really want to get rid of the stupid code, a post-build script can do thi
 
 If you know better approaches, please let me know.
 
-## Execution
-
-You also need to actually run the functions in the script to manually test them. As soon as you access Google services, as far as I know, this can only be done in Google's editor. To do this, just select the function from the dropdown and click "Run". This means that we have to switch editors during development.
-
 ## What about web apps?
 
 Google scripts can also be deployed as [web applications](https://developers.google.com/apps-script/guides/web). These are usually written in Vanilla JavaScript. It seems plausible that the setup here can be extended in such a way that also web frameworks such as my beloved [Svelte](https://svelte.dev) can be used for Google web apps. A quick search brought up two repositories ([gas-svelte-app](https://github.com/mikedownesdev/gas-svelte-app), [Google-Apps-Script-Svelte-Starter](https://github.com/thinkle/Google-Apps-Script-Svelte-Starter)) doing exactly this. Maybe this is the topic for another blog post then.
