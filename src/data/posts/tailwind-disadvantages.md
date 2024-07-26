@@ -1,7 +1,7 @@
 ---
 title: Disadvantages of Tailwind
 published: 2024-03-23
-updated: 2024-03-25
+updated: 2024-07-26
 description: Why the popular CSS framework is not maintainable
 ---
 
@@ -14,8 +14,6 @@ As you can probably tell from the length of this blog post, I have tried to cove
 I understand that many people enjoy working with Tailwind. Many developers have reported being more productive with Tailwind. And that's fine. I also enjoyed working with Tailwind on a small personal project. But maybe you will find something in this post that makes you reconsider your choice.
 
 Many of the issues presented here apply to every utility-based CSS framework. Notice that this blog post is based on Tailwind 3, and there might be changes in the already announced version 4.
-
-If you want to comment on this blog post, you can do so below the [tweet](https://x.com/scriptraccoon/status/1772199809648062881).
 
 ## What is Tailwind
 
