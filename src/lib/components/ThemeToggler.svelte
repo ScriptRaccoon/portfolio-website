@@ -2,19 +2,17 @@
 	import Fa from "svelte-fa";
 	import { faMoon } from "@fortawesome/free-solid-svg-icons";
 	import { faSun } from "@fortawesome/free-regular-svg-icons";
-	import { THEMES } from "$lib/shared/config";
-
-	function set_theme(theme: string) {
-		if (!Object.values(THEMES).includes(theme)) return;
-		localStorage.setItem("theme", theme);
-		document.body.setAttribute("data-theme", theme);
-	}
+	import { current_theme } from "$lib/shared/stores";
 
 	function toggle_theme(): void {
-		const current_theme = document.body.getAttribute("data-theme");
-		const theme =
-			current_theme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT;
-		set_theme(theme);
+		const new_theme = $current_theme === "dark" ? "light" : "dark";
+		set_theme(new_theme);
+	}
+
+	function set_theme(theme: "light" | "dark") {
+		$current_theme = theme;
+		localStorage.setItem("theme", theme);
+		document.body.setAttribute("data-theme", theme);
 	}
 </script>
 

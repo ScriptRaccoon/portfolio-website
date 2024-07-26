@@ -1,4 +1,5 @@
 const saved_theme = localStorage.getItem("theme");
+
 if (saved_theme) {
 	document.body.setAttribute("data-theme", saved_theme);
 } else {

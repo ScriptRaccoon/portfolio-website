@@ -1,6 +1,7 @@
 <script lang="ts">
 	import Controls from "$lib/components/Controls.svelte";
 	import Expand from "$lib/components/Expand.svelte";
+	import Comments from "$lib/components/Comments.svelte";
 
 	export let data;
 
@@ -41,6 +42,8 @@
 </article>
 
 <Controls variant="bottom" />
+
+<Comments />
 
 <style lang="scss">
 	@mixin bordered() {
