@@ -1,7 +1,7 @@
 <h1>About me</h1>
 
 <div class="intro">
-	<img src="portrait.webp" alt="Martin portrait" />
+	<img src="/media/general/portrait.webp" alt="Martin portrait" />
 	<p class="subtitle">
 		Mathematician | Web developer | Content creator
 	</p>

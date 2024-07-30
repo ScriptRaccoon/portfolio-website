@@ -25,7 +25,7 @@
 </p>
 
 <p class="logo-container">
-	<img src="/media/ScriptRaccoon.png" alt="raccoon logo" />
+	<img src="/media/general/ScriptRaccoon.png" alt="raccoon logo" />
 </p>
 
 <ul class="no-bullets socials">

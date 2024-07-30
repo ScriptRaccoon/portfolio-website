@@ -15,7 +15,7 @@ I have also created a few CSS games before, a [pure CSS Rock, Paper, Scissors ga
 
 In this blog post, we will learn how to create a maze game with pure CSS, step by step. The player can be controlled with the arrow "buttons", and a win modal is shown when the player reaches the goal.
 
-![Demo of Maze](/media/maze-demo-final.gif)
+![Demo of Maze](/media/blog/maze-demo-final.gif)
 
 The final code can be found in the Codepen [Pure CSS Maze](https://codepen.io/scriptraccoon/pen/poqvRrM). It is not as complex as Ben Evans' [Pure CSS 3D Maze](https://codepen.io/ivorjetski/pen/poQpveN), but this post will explain the method underlying many CSS games.
 
@@ -103,7 +103,7 @@ button(type="reset") Restart
 
 You will notice that when activating any radio button and clicking the reset button, the first radio button will be active again. In case it does not work, check again if you put the button inside the form.
 
-![HTML elements](/media/maze-screen-01.jpg)
+![HTML elements](/media/blog/maze-screen-01.jpg)
 
 ## Global styles
 
@@ -235,7 +235,7 @@ The player is a bit too big, so let us scale it down:
 
 It starts to look like something. For now, you can move the player manually by updating the CSS variables `--x` and `--y`.
 
-![Maze and player](/media/maze-screen-02.jpg)
+![Maze and player](/media/blog/maze-screen-02.jpg)
 
 ## Player control
 
@@ -287,8 +287,8 @@ Now, by clicking the label of a radio button, the player will move to the corres
 
 ```scss
 .player {
-  // ...
-  transition: transform 180ms ease-out;
+	// ...
+	transition: transform 180ms ease-out;
 }
 ```
 
@@ -373,7 +373,7 @@ Again, we need to define this mixin somewhere at the top of the file, _before_ u
 
 Now, only those labels for the allowed neighbors are shown, and hence the player can only walk one step at a time.
 
-![Only three directions are allowed](/media/maze-screen-03.jpg)
+![Only three directions are allowed](/media/blog/maze-screen-03.jpg)
 
 ## Arrows
 
@@ -433,7 +433,7 @@ label {
 
 This is how it looks.
 
-![The labels are aligned on a circle](/media/maze-screen-04.jpg)
+![The labels are aligned on a circle](/media/blog/maze-screen-04.jpg)
 
 Now it is time to remove the text content from the labels in the HTML.
 
@@ -474,7 +474,7 @@ label {
 
 Looks much better!
 
-![Labels styled as arrows](/media/maze-screen-05.jpg)
+![Labels styled as arrows](/media/blog/maze-screen-05.jpg)
 
 ## Reset button
 
@@ -533,7 +533,7 @@ button {
 
 This is how the game looks right now.
 
-![Moving around with the arrows](/media/maze-demo-arrows.gif)
+![Moving around with the arrows](/media/blog/maze-demo-arrows.gif)
 
 ## Win
 
@@ -614,7 +614,7 @@ Let us also highlight the goal. We do this with a pseudo-element of the maze. Fo
 }
 ```
 
-![Win modal](/media/maze-screen-06.jpg)
+![Win modal](/media/blog/maze-screen-06.jpg)
 
 Alright, we can move around the player, reach the goal, and reset the game, but this game is a bit too simple, right? We need to add walls to make it a maze. This will be covered next.
 
@@ -670,7 +670,7 @@ To draw both walls at the same time, we just concatenate the values:
 }
 ```
 
-![Two walls](/media/maze-screen-07.jpg)
+![Two walls](/media/blog/maze-screen-07.jpg)
 
 If you understand how this is done, continue reading. If not, try adding a horizontal wall at `(4,6)`, for example.
 
@@ -745,13 +745,13 @@ Finally, we use these lists to define the composite background.
 
 This draws all 4 example walls.
 
-![Four walls](/media/maze-screen-08.jpg)
+![Four walls](/media/blog/maze-screen-08.jpg)
 
 Try to expand the lists of horizontal and vertical walls as you like to draw a complete maze. You can find an example in my [Codepen](https://codepen.io/scriptraccoon/pen/poqvRrM).
 
 There is a problem with the intersections of vertical and horizontal walls, though. They do not line up nicely. Also, the distance of the player to the walls is not consistent. And the goal is too big.
 
-![Problems with the drawing](/media/maze-screen-09.jpg)
+![Problems with the drawing](/media/blog/maze-screen-09.jpg)
 
 This is because we have to move the walls a bit, to be precise `0.5 * $thick` to the top in case of horizontal walls and to the left in case of vertical walls. This way, the walls are attached to the middle of the (imaginary) grid lines. Also, we have to make the walls a bit longer resp. higher.
 
@@ -818,7 +818,7 @@ The goal also has to be made a bit smaller and moved a bit.
 
 Now, it looks fine.
 
-![Complete maze](/media/maze-screen-10.jpg)
+![Complete maze](/media/blog/maze-screen-10.jpg)
 
 ## Collision detection
 
@@ -859,7 +859,7 @@ In Sass, we can check the containment of an element in a list with the `index` m
 
 It is really nice that nothing else has to be adjusted. The collision detection works now, i.e. the player cannot walk through a wall and the corresponding arrow is also not shown in the menu. This is because the `show_controls` mixin was using the `neighbors` function.
 
-![Collision detection works](/media/maze-demo-collision.gif)
+![Collision detection works](/media/blog/maze-demo-collision.gif)
 
 ## Conclusion
 

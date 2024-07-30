@@ -15,7 +15,7 @@ Even if you haven't heard of groups (in mathematics) yet, you use them all the t
 
 equipped with the common arithmetical operations <math>+</math> and <math>-</math> of adding and subtracting integers. (A more precise definition is explained below.)
 
-Ever wondered why, when performing the same set of moves to a solved Rubik's cube again and again (for example: front, top, front, top, ...), you [eventually get back to its original position](/media/rubikscuberotations.mp4)? Well, this is a consequence of Lagrange's theorem in group theory. The beauty of mathematics, and group theory in particular, is that it allows us to understand these "happy accidents" on a much more conceptual level.
+Ever wondered why, when performing the same set of moves to a solved Rubik's cube again and again (for example: front, top, front, top, ...), you [eventually get back to its original position](/media/blog/rubikscuberotations.mp4)? Well, this is a consequence of Lagrange's theorem in group theory. The beauty of mathematics, and group theory in particular, is that it allows us to understand these "happy accidents" on a much more conceptual level.
 
 The objective of this series of posts is to develop some basic group theory in the context of **TypeScript**. We will make heavy use of [generics](https://typescriptlang.org/docs/handbook/2/generics.html) and [generic classes](https://www.typescriptlang.org/docs/handbook/2/generics.html#generic-classes) in particular. It turns out that they fit quite well to model mathematical structures.
 

@@ -8,11 +8,6 @@
 	export let project: project;
 
 	const duration = getContext("allow_animation") ? 200 : 0;
-
-	const image_src = new URL(
-		`../assets/projects/${project.id}_thumb.webp`,
-		import.meta.url,
-	).href;
 </script>
 
 <li transition:fade={{ duration }}>
@@ -29,7 +24,7 @@
 			</div>
 			<div class="image-container">
 				<img
-					src={image_src}
+					src={`/media/projects/${project.id}_thumb.webp`}
 					alt="screenshot of the project"
 					loading="lazy"
 				/>

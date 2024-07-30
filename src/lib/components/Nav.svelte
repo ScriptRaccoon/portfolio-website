@@ -68,7 +68,11 @@
 	<ul class="no-bullets" style:--items-count={items_count}>
 		<li class:current={current_path === "/"}>
 			<a href="/">
-				<img src="/media/ScriptRaccoon.png" alt="Home" class="logo" />
+				<img
+					src="/media/general/ScriptRaccoon.png"
+					alt="Home"
+					class="logo"
+				/>
 			</a>
 		</li>
 		{#each links.slice(1) as { name, path, icon }}

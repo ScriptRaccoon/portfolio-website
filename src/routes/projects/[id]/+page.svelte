@@ -17,11 +17,6 @@
 		{ label: "Repository", href: repository },
 		{ label: "Tutorial", href: tutorial },
 	].filter((link) => link.href?.length > 0);
-
-	$: image_src = new URL(
-		`../../../lib/assets/projects/${id}.webp`,
-		import.meta.url,
-	).href;
 </script>
 
 <Controls variant="top" />
@@ -44,7 +39,7 @@
 	{@html html_code}
 </article>
 
-<img src={image_src} alt="screenshot" />
+<img src={`/media/projects/${id}.webp`} alt="screenshot" />
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
 	{#each tags as tag}
