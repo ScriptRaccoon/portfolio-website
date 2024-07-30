@@ -4,6 +4,7 @@ import {
 	PUBLIC_YOUTUBE_CHANNEL_ID,
 	PUBLIC_YOUTUBE_SHORT_URL,
 } from "$env/static/public";
+import { redis_cached } from "$lib/server/redis/cache";
 
 export type video = {
 	title: string;
@@ -11,7 +12,7 @@ export type video = {
 	thumbnail_url: string;
 };
 
-export async function get_latest_video(): Promise<video | null> {
+async function get_latest_video(): Promise<video | null> {
 	const param_data = {
 		part: "snippet",
 		type: "video",
@@ -34,9 +35,15 @@ export async function get_latest_video(): Promise<video | null> {
 		const title = item?.snippet.title;
 		const thumbnail_url = item?.snippet?.thumbnails?.medium?.url;
 		return { url, title, thumbnail_url };
-	} else {
-		console.log("Request failed for ", url);
-		console.log(data?.error?.message);
-		return null;
 	}
+
+	console.error("Request failed for ", url);
+	console.error(data?.error?.message);
+	return null;
 }
+
+export const get_cached_latest_video = redis_cached(
+	"video",
+	get_latest_video,
+	24 * 60 * 60, // one day
+);

@@ -4,6 +4,9 @@
 
 	export let data;
 	const { stats, video } = data;
+
+	if (!stats) console.warn("Could not retrieve YouTube statistics.");
+	if (!video) console.warn("Could not retrieve latest video.");
 </script>
 
 <h1>YouTube</h1>

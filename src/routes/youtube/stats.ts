@@ -3,13 +3,14 @@ import {
 	PUBLIC_YOUTUBE_API_URL,
 	PUBLIC_YOUTUBE_CHANNEL_ID,
 } from "$env/static/public";
+import { redis_cached } from "$lib/server/redis/cache";
 
 export type stats = {
 	subscriber_count: number;
 	video_count: number;
 };
 
-export async function get_youtube_stats(): Promise<stats | null> {
+async function get_youtube_stats(): Promise<stats | null> {
 	const param_data = {
 		part: "statistics",
 		id: PUBLIC_YOUTUBE_CHANNEL_ID,
@@ -27,9 +28,15 @@ export async function get_youtube_stats(): Promise<stats | null> {
 		const subscriber_count = parseInt(statistics.subscriberCount);
 		const video_count = parseInt(statistics.videoCount);
 		return { subscriber_count, video_count };
-	} else {
-		console.log("Request failed for ", url);
-		console.log(data?.error?.message);
-		return null;
 	}
+
+	console.error("Request failed for ", url);
+	console.error(data?.error?.message);
+	return null;
 }
+
+export const get_cached_youtube_stats = redis_cached(
+	"stats",
+	get_youtube_stats,
+	24 * 60 * 60, // one day
+);
