@@ -59,7 +59,7 @@
 	<meta property="og:site_name" content="Script Raccoon" />
 	<meta
 		property="og:image"
-		content="https://scriptraccoon.dev/ScriptRaccoon.png"
+		content="https://scriptraccoon.dev/media/ScriptRaccoon.png"
 	/>
 </svelte:head>
 

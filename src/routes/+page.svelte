@@ -1,5 +1,4 @@
 <script lang="ts">
-	import logo from "$lib/assets/ScriptRaccoon.png";
 	import {
 		faCodepen,
 		faGithub,
@@ -26,7 +25,7 @@
 </p>
 
 <p class="logo-container">
-	<img src={logo} alt="raccoon logo" />
+	<img src="/media/ScriptRaccoon.png" alt="raccoon logo" />
 </p>
 
 <ul class="no-bullets socials">

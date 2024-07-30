@@ -2,7 +2,6 @@
 	import { page } from "$app/stores";
 	import { getContext } from "svelte";
 
-	import logo from "$lib/assets/ScriptRaccoon.png";
 	import ThemeToggler from "./ThemeToggler.svelte";
 
 	import Fa from "svelte-fa";
@@ -69,7 +68,7 @@
 	<ul class="no-bullets" style:--items-count={items_count}>
 		<li class:current={current_path === "/"}>
 			<a href="/">
-				<img src={logo} alt="Home" class="logo" />
+				<img src="/media/ScriptRaccoon.png" alt="Home" class="logo" />
 			</a>
 		</li>
 		{#each links.slice(1) as { name, path, icon }}
