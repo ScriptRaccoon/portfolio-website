@@ -11,29 +11,15 @@
 </div>
 
 <p>
-	Before coming to web development, I devoted most years of my life to
-	<strong>pure mathematics</strong>, which is one of my biggest
-	passions and strongest skills. I worked at the university and
-	completed my Ph.D. in 2014. 🎓
-</p>
-
-<p>
-	My mathematical publications are listed at
+	At university I studied <strong>pure mathematics</strong>, which is
+	one of my biggest passions and strongest skills. My main expertise
+	is category theory and algebraic geometry, and I completed my Ph.D.
+	in 2014. My mathematical publications are listed at
 	<a
 		href="https://ncatlab.org/nlab/show/Martin+Brandenburg"
 		target="_blank">my nLab page</a
-	>, but I have also written thousands of posts in discussion forums,
-	notably on
-	<a
-		href="https://mathoverflow.net/users/2841/martin-brandenburg"
-		target="_blank">mathoverflow</a
-	>
-	and
-	<a
-		href="https://math.stackexchange.com/users/1650/martin-brandenburg"
-		target="_blank">math.stackexchange</a
-	>. In 2014 I left academia, but I still publish research articles
-	from time to time. I also published a
+	>. In 2014 I left academia, but I still publish and review research
+	articles from time to time. I also published a
 	<a
 		href="https://link.springer.com/book/10.1007/978-3-662-53521-9"
 		target="_blank">textbook on category theory</a
@@ -41,14 +27,13 @@
 </p>
 
 <p>
-	After leaving university, I worked as an IT admin in a non-profit
-	organization for animal welfare. In this context, I learned the
-	basics of web development and devoted most of my free time on it
-	since 2019. I also observed many parallels between mathematics and
-	web development, and my problem-solving skills helped me a lot.
-	Around that time I also created my
-	<a href="/youtube"><strong>YouTube channel</strong></a> on web development.
-	💻
+	After leaving university, I worked as an IT admin in a <a
+		href="https://albert-schweitzer-stiftung.de/"
+		target="_blank">non-profit organization for animal welfare</a
+	>. In this context, I learned the basics of
+	<strong>web development</strong> and devoted most of my free time on
+	it since 2019. I also observed many parallels between mathematics and
+	web development, and my problem-solving skills helped me a lot. 💻
 </p>
 
 <p>
@@ -59,15 +44,33 @@
 </p>
 
 <p>
-	In the context of web development, on YouTube and Twitter I go by
-	the name
-	<strong>Script Raccoon</strong>. And yes, raccoons are my favorite
-	animals! 🦝
+	I am also actively involved in several online communities. I have
+	written thousands of posts in mathematical discussion forums,
+	notably on
+	<a
+		href="https://mathoverflow.net/users/2841/martin-brandenburg"
+		target="_blank">mathoverflow</a
+	>,
+	<a
+		href="https://math.stackexchange.com/users/1650/martin-brandenburg"
+		target="_blank">math.stackexchange</a
+	>
+	and
+	<a
+		href="https://matheplanet.de/matheplanet/nuke/html/user.php?uname=Triceratops"
+		target="_blank">Matheplanet</a
+	>. For the latter I also wrote many expository articles. 📝
 </p>
+
 <p>
-	When I am not sitting at my laptop coding SvelteKit apps, you can
-	probably find me in the rehearsal room
-	<strong>playing the drums</strong>. 🥁
+	In 2019 I created my
+	<a href="/youtube">YouTube channel</a> on web development, in which
+	context I go by the name
+	<strong>Script Raccoon</strong>. In 2024 I also started a
+	<a href="https://www.youtube.com/@cuberaccoon" target="_blank"
+		>second YouTube channel</a
+	>
+	on twisty puzzles under the name <strong>Cube Raccoon</strong>. 🦝
 </p>
 
 <style>
