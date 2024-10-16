@@ -57,7 +57,7 @@
 	>
 	and
 	<a
-		href="https://matheplanet.de/matheplanet/nuke/html/user.php?uname=Triceratops"
+		href="https://matheplanet.de/matheplanet/nuke/html/user.php?op=userinfo&uname=Triceratops"
 		target="_blank">Matheplanet</a
 	>. For the latter I also wrote many expository articles. 📝
 </p>
