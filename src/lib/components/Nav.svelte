@@ -47,7 +47,7 @@
 			name: "About",
 			path: "/about",
 			icon: faCircleQuestion,
-			nested: false,
+			nested: true,
 		},
 	];
 
