@@ -45,5 +45,5 @@ async function get_latest_video(): Promise<video | null> {
 export const get_cached_latest_video = redis_cached(
 	"video",
 	get_latest_video,
-	24 * 60 * 60, // one day
+	30 * 24 * 60 * 60, // thirty days (currently I don't publish any new videos)
 );
