@@ -18,8 +18,8 @@
 	<a
 		href="https://ncatlab.org/nlab/show/Martin+Brandenburg"
 		target="_blank">my nLab page</a
-	>. In 2014 I left academia, but I still publish and review research
-	articles from time to time. I also published a
+	>. In 2014 I left university, but I still publish and review
+	research articles from time to time. I also published a
 	<a
 		href="https://link.springer.com/book/10.1007/978-3-662-53521-9"
 		target="_blank">textbook on category theory</a
@@ -30,10 +30,10 @@
 	After leaving university, I worked as an IT admin in a <a
 		href="https://albert-schweitzer-stiftung.de/"
 		target="_blank">non-profit organization for animal welfare</a
-	>. In this context, I learned the basics of
+	>. In this context, I learned
 	<strong>web development</strong> and devoted most of my free time on
-	it since 2019. I also observed many parallels between mathematics and
-	web development, and my problem-solving skills helped me a lot. 💻
+	it. I also observed many parallels between mathematics and web development,
+	and my problem-solving skills helped me a lot. 💻
 </p>
 
 <p>
@@ -72,6 +72,8 @@
 	>
 	on twisty puzzles under the name <strong>Cube Raccoon</strong>. 🦝
 </p>
+
+<p>I am also a passionate drummer. 🥁</p>
 
 <style>
 	img {
