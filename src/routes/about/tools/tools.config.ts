@@ -159,7 +159,7 @@ export const tool_data: tool_list[] = [
 			},
 			{
 				name: "Tailwind",
-				url: "blog/tailwind-disadvantages",
+				url: "blog/tailwind-disadvantages", // 🙄
 			},
 		],
 	},
