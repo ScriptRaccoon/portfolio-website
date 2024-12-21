@@ -16,7 +16,7 @@
 	}
 </script>
 
-<button on:click={toggle_theme} aria-label="Toggle theme">
+<button onclick={toggle_theme} aria-label="Toggle theme">
 	<Fa icon={faMoon} class="moon" />
 	<Fa icon={faSun} class="sun" />
 </button>

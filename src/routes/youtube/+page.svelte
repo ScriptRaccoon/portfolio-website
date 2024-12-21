@@ -2,7 +2,7 @@
 	import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 	import Fa from "svelte-fa";
 
-	export let data;
+	let { data } = $props();
 	const { stats, video } = data;
 
 	if (!stats) console.warn("Could not retrieve YouTube statistics.");

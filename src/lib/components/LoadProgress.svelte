@@ -3,7 +3,7 @@
 </script>
 
 {#if $navigating}
-	<div />
+	<div></div>
 {/if}
 
 <style>

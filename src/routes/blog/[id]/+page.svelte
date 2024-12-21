@@ -3,13 +3,13 @@
 	import Expand from "$lib/components/Expand.svelte";
 	import Comments from "$lib/components/Comments.svelte";
 
-	export let data;
+	let { data } = $props();
 
-	$: toc = data.toc;
-	$: html_code = data.html_code;
-	$: title = data.attributes.title;
-	$: updated = data.attributes.updated?.toLocaleDateString();
-	$: published = data.attributes.published.toLocaleDateString();
+	let toc = data.toc;
+	let html_code = data.html_code;
+	let title = data.attributes.title;
+	let updated = data.attributes.updated?.toLocaleDateString();
+	let published = data.attributes.published.toLocaleDateString();
 </script>
 
 <Controls variant="top" />

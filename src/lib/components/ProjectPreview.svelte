@@ -2,10 +2,14 @@
 	import { getContext } from "svelte";
 	import { fade } from "svelte/transition";
 
-	import type { project } from "$lib/shared/types";
+	import type { project as project_type } from "$lib/shared/types";
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
 
-	export let project: project;
+	interface Props {
+		project: project_type;
+	}
+
+	let { project }: Props = $props();
 
 	const duration = getContext("allow_animation") ? 200 : 0;
 </script>

@@ -7,20 +7,22 @@
 	} from "$lib/components/Filter.svelte";
 	import ProjectPreview from "$lib/components/ProjectPreview.svelte";
 
-	export let data;
+	let { data } = $props();
 	const { projects, tags, years } = data;
 
 	const animation_options = getContext("allow_animation")
 		? { duration: 200, delay: 200 }
 		: { duration: 0, delay: 0 };
 
-	$: filtered_projects = projects.filter(
-		(project) =>
-			$active_filter.tags.every((tag) =>
-				project.tags.includes(tag),
-			) &&
-			($active_filter.years.length == 0 ||
-				$active_filter.years.includes(project.date.getFullYear())),
+	let filtered_projects = $derived(
+		projects.filter(
+			(project) =>
+				$active_filter.tags.every((tag) =>
+					project.tags.includes(tag),
+				) &&
+				($active_filter.years.length == 0 ||
+					$active_filter.years.includes(project.date.getFullYear())),
+		),
 	);
 </script>
 

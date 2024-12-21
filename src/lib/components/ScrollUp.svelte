@@ -6,7 +6,7 @@
 	import Fa from "svelte-fa";
 	import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
-	let show = false;
+	let show = $state(false);
 	let timer: number | null = null;
 	let scroll_position = 0;
 
@@ -41,7 +41,7 @@
 
 {#if show}
 	<button
-		on:click={scroll_to_top}
+		onclick={scroll_to_top}
 		aria-label="scroll up"
 		transition:fade={{ duration }}
 	>

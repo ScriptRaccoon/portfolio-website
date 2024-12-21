@@ -2,7 +2,12 @@
 	import { page } from "$app/stores";
 	import CopyText from "./CopyText.svelte";
 	import GoBack from "./GoBack.svelte";
-	export let variant: "top" | "bottom";
+
+	interface Props {
+		variant: "top" | "bottom";
+	}
+
+	let { variant }: Props = $props();
 </script>
 
 <div class={variant}>

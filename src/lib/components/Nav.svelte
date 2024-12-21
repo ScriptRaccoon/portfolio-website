@@ -51,12 +51,14 @@
 		},
 	];
 
-	$: current_path = $page.url.pathname;
+	let current_path = $derived($page.url.pathname);
 
-	$: page_pos = links.findIndex(
-		(link) =>
-			link.path === current_path ||
-			(link.nested && current_path.startsWith(link.path)),
+	let page_pos = $derived(
+		links.findIndex(
+			(link) =>
+				link.path === current_path ||
+				(link.nested && current_path.startsWith(link.path)),
+		),
 	);
 
 	const items_count = links.length + 1;
@@ -92,7 +94,7 @@
 			style:--pos={page_pos}
 			class:invisible={page_pos < 0}
 			class:animated={allow_animation}
-		/>
+		></div>
 	</ul>
 </nav>
 
@@ -146,7 +148,9 @@
 	}
 
 	.underline.animated {
-		transition: transform 200ms ease, opacity 200ms ease;
+		transition:
+			transform 200ms ease,
+			opacity 200ms ease;
 	}
 
 	.underline.invisible {

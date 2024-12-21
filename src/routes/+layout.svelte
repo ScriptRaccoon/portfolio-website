@@ -1,11 +1,17 @@
-<script>
-	import { setContext } from "svelte";
+<script lang="ts">
+	import { setContext, type Snippet } from "svelte";
 
 	import "./app.css";
 	import Nav from "$lib/components/Nav.svelte";
 	import LoadProgress from "$lib/components/LoadProgress.svelte";
 	import { page } from "$app/stores";
 	import ScrollUp from "$lib/components/ScrollUp.svelte";
+
+	interface Props {
+		children?: Snippet;
+	}
+
+	let { children }: Props = $props();
 
 	const allow_animation =
 		typeof window !== "undefined" &&
@@ -69,7 +75,7 @@
 <div class="wrapper">
 	<Nav />
 	<main>
-		<slot />
+		{@render children?.()}
 	</main>
 </div>
 

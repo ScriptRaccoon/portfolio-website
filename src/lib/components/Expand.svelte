@@ -1,11 +1,23 @@
 <script lang="ts">
 	import { getContext } from "svelte";
 	import { slide } from "svelte/transition";
+	import type {Snippet} from "svelte";
 
-	export let open: boolean = false;
-	export let summary: string = "Toggle";
-	export let animated: boolean = true;
-	export let role: string;
+	interface Props {
+		open?: boolean;
+		summary?: string;
+		animated?: boolean;
+		role: string;
+		children?: Snippet;
+	}
+
+	let {
+		open = $bindable(false),
+		summary = "Toggle",
+		animated = true,
+		role,
+		children
+	}: Props = $props();
 
 	const duration =
 		getContext("allow_animation") && animated ? 200 : 0;
@@ -21,7 +33,7 @@
 	id={button_id}
 	aria-expanded={open}
 	aria-controls={contents_id}
-	on:click={toggle_open}
+	onclick={toggle_open}
 	class:closed={!open}
 >
 	{summary}
@@ -30,7 +42,7 @@
 <div id={contents_id} aria-labelledby={button_id} {role}>
 	{#if open}
 		<div transition:slide={{ duration }}>
-			<slot />
+			{@render children?.()}
 		</div>
 	{/if}
 </div>

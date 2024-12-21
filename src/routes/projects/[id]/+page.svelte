@@ -1,18 +1,18 @@
 <script lang="ts">
 	import Controls from "$lib/components/Controls.svelte";
 
-	export let data;
+	let { data } = $props();
 
-	$: html_code = data.html_code;
-	$: name = data.attributes.name;
-	$: url = data.attributes.url;
-	$: repository = data.attributes.repository;
-	$: tutorial = data.attributes.tutorial;
-	$: year = data.attributes.date.getFullYear();
-	$: tags = data.attributes.tags;
-	$: id = data.attributes.id;
+	let html_code = data.html_code;
+	let name = data.attributes.name;
+	let url = data.attributes.url;
+	let repository = data.attributes.repository;
+	let tutorial = data.attributes.tutorial;
+	let year = data.attributes.date.getFullYear();
+	let tags = data.attributes.tags;
+	let id = data.attributes.id;
 
-	$: links = [
+	let links = [
 		{ label: "URL", href: url },
 		{ label: "Repository", href: repository },
 		{ label: "Tutorial", href: tutorial },

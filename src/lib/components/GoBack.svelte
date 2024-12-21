@@ -7,6 +7,6 @@
 	}
 </script>
 
-<button on:click={go_back} aria-label="Go back">
+<button onclick={go_back} aria-label="Go back">
 	<Fa icon={faLeftLong} />
 </button>

@@ -1,4 +1,4 @@
-<script lang="ts" context="module">
+<script lang="ts" module>
 	import { writable } from "svelte/store";
 
 	type filter = {
@@ -15,11 +15,15 @@
 <script lang="ts">
 	import Expand from "./Expand.svelte";
 
-	export let tags: string[];
-	export let years: number[];
+	interface Props {
+		tags: string[];
+		years: number[];
+	}
 
-	let focussed_tag: string | null = null;
-	let focussed_year: number | null = null;
+	let { tags, years }: Props = $props();
+
+	let focussed_tag: string | null = $state(null);
+	let focussed_year: number | null = $state(null);
 </script>
 
 <section aria-label="Filters">
@@ -30,8 +34,8 @@
 					class="tag"
 					class:selected={$active_filter.tags.includes(tag)}
 					class:focus={focussed_tag === tag}
-					on:focusin={() => (focussed_tag = tag)}
-					on:focusout={() => (focussed_tag = null)}
+					onfocusin={() => (focussed_tag = tag)}
+					onfocusout={() => (focussed_tag = null)}
 				>
 					<input
 						type="checkbox"
@@ -47,8 +51,8 @@
 					class="tag"
 					class:selected={$active_filter.years.includes(year)}
 					class:focus={focussed_year === year}
-					on:focusin={() => (focussed_year = year)}
-					on:focusout={() => (focussed_year = null)}
+					onfocusin={() => (focussed_year = year)}
+					onfocusout={() => (focussed_year = null)}
 				>
 					<input
 						type="checkbox"

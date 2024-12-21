@@ -1,15 +1,17 @@
 <script lang="ts">
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
-	import type { post } from "$lib/shared/types";
+	import type { post as post_type } from "$lib/shared/types";
 
-	export let post: post;
+	interface Props {
+		post: post_type;
+	}
 
-	$: draft = post.id.startsWith("_draft");
+	let { post }: Props = $props();
 </script>
 
 <li>
 	<PreviewCard href="/blog/{post.id}">
-		<h2 class:draft>
+		<h2 class:draft={post.id.startsWith("_draft")}>
 			{post.title}
 		</h2>
 		<div class="date">

@@ -4,10 +4,14 @@
 	import Fa from "svelte-fa";
 	import { faRetweet } from "@fortawesome/free-solid-svg-icons";
 
-	let pending = false;
+	let pending = $state(false);
 
-	export let text: string = "";
-	export let name: string = "";
+	interface Props {
+		text?: string;
+		name?: string;
+	}
+
+	let { text = "", name = "" }: Props = $props();
 
 	async function copy_text() {
 		if (pending) return;
@@ -21,7 +25,7 @@
 </script>
 
 <button
-	on:click={copy_text}
+	onclick={copy_text}
 	aria-label="copy {name} to clipboard"
 	aria-live="polite"
 >
