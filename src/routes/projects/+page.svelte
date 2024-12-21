@@ -2,10 +2,9 @@
 	import { fade } from "svelte/transition";
 	import { getContext } from "svelte";
 
-	import Filter, {
-		active_filter,
-	} from "$lib/components/Filter.svelte";
+	import ProjectsFilter from "$lib/components/ProjectFilter.svelte";
 	import ProjectPreview from "$lib/components/ProjectPreview.svelte";
+	import { project_filter } from "$lib/shared/stores.js";
 
 	let { data } = $props();
 	const { projects, tags, years } = data;
@@ -17,11 +16,11 @@
 	let filtered_projects = $derived(
 		projects.filter(
 			(project) =>
-				$active_filter.tags.every((tag) =>
+				$project_filter.tags.every((tag) =>
 					project.tags.includes(tag),
 				) &&
-				($active_filter.years.length == 0 ||
-					$active_filter.years.includes(project.date.getFullYear())),
+				($project_filter.years.length == 0 ||
+					$project_filter.years.includes(project.date.getFullYear())),
 		),
 	);
 </script>
@@ -30,7 +29,7 @@
 
 <p>This is a selection of my personal projects in web development.</p>
 
-<Filter {tags} {years} />
+<ProjectsFilter {tags} {years} />
 
 {#if filtered_projects.length > 0}
 	<ol class="no-bullets">

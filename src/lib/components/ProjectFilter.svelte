@@ -1,18 +1,5 @@
-<script lang="ts" module>
-	import { writable } from "svelte/store";
-
-	type filter = {
-		tags: string[];
-		years: number[];
-	};
-
-	export const active_filter = writable<filter>({
-		tags: [],
-		years: [],
-	});
-</script>
-
 <script lang="ts">
+	import { project_filter } from "$lib/shared/stores";
 	import Expand from "./Expand.svelte";
 
 	interface Props {
@@ -26,13 +13,13 @@
 	let focussed_year: number | null = $state(null);
 </script>
 
-<section aria-label="Filters">
+<section aria-label="Project Filters">
 	<Expand summary="Toggle filters" role="group">
 		<div class="filter-list">
 			{#each tags as tag}
 				<label
 					class="tag"
-					class:selected={$active_filter.tags.includes(tag)}
+					class:selected={$project_filter.tags.includes(tag)}
 					class:focus={focussed_tag === tag}
 					onfocusin={() => (focussed_tag = tag)}
 					onfocusout={() => (focussed_tag = null)}
@@ -40,7 +27,7 @@
 					<input
 						type="checkbox"
 						value={tag}
-						bind:group={$active_filter.tags}
+						bind:group={$project_filter.tags}
 						class="visually-hidden"
 					/>
 					{tag}
@@ -49,7 +36,7 @@
 			{#each years as year}
 				<label
 					class="tag"
-					class:selected={$active_filter.years.includes(year)}
+					class:selected={$project_filter.years.includes(year)}
 					class:focus={focussed_year === year}
 					onfocusin={() => (focussed_year = year)}
 					onfocusout={() => (focussed_year = null)}
@@ -57,7 +44,7 @@
 					<input
 						type="checkbox"
 						value={year}
-						bind:group={$active_filter.years}
+						bind:group={$project_filter.years}
 						class="visually-hidden"
 					/>
 					{year}

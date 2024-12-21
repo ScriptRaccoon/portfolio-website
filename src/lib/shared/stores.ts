@@ -6,3 +6,11 @@ export const current_theme = writable<"light" | "dark">(
 		? "dark"
 		: "light",
 );
+
+export const project_filter = writable<{
+	tags: string[];
+	years: number[];
+}>({
+	tags: [],
+	years: [],
+});
