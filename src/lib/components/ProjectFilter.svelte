@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { project_filter } from "$lib/shared/stores";
+	import { project_filter } from "$lib/shared/state.svelte";
 	import Expand from "./Expand.svelte";
 
 	interface Props {
@@ -19,7 +19,7 @@
 			{#each tags as tag}
 				<label
 					class="tag"
-					class:selected={$project_filter.tags.includes(tag)}
+					class:selected={project_filter.value.tags.includes(tag)}
 					class:focus={focussed_tag === tag}
 					onfocusin={() => (focussed_tag = tag)}
 					onfocusout={() => (focussed_tag = null)}
@@ -27,7 +27,7 @@
 					<input
 						type="checkbox"
 						value={tag}
-						bind:group={$project_filter.tags}
+						bind:group={project_filter.value.tags}
 						class="visually-hidden"
 					/>
 					{tag}
@@ -36,7 +36,7 @@
 			{#each years as year}
 				<label
 					class="tag"
-					class:selected={$project_filter.years.includes(year)}
+					class:selected={project_filter.value.years.includes(year)}
 					class:focus={focussed_year === year}
 					onfocusin={() => (focussed_year = year)}
 					onfocusout={() => (focussed_year = null)}
@@ -44,7 +44,7 @@
 					<input
 						type="checkbox"
 						value={year}
-						bind:group={$project_filter.years}
+						bind:group={project_filter.value.years}
 						class="visually-hidden"
 					/>
 					{year}

@@ -2,21 +2,10 @@
 	import Fa from "svelte-fa";
 	import { faMoon } from "@fortawesome/free-solid-svg-icons";
 	import { faSun } from "@fortawesome/free-regular-svg-icons";
-	import { current_theme } from "$lib/shared/stores";
-
-	function toggle_theme(): void {
-		const new_theme = $current_theme === "dark" ? "light" : "dark";
-		set_theme(new_theme);
-	}
-
-	function set_theme(theme: "light" | "dark") {
-		$current_theme = theme;
-		localStorage.setItem("theme", theme);
-		document.body.setAttribute("data-theme", theme);
-	}
+	import { current_theme } from "$lib/shared/state.svelte";
 </script>
 
-<button onclick={toggle_theme} aria-label="Toggle theme">
+<button onclick={current_theme.toggle} aria-label="Toggle theme">
 	<Fa icon={faMoon} class="moon" />
 	<Fa icon={faSun} class="sun" />
 </button>
@@ -36,7 +25,9 @@
 		position: absolute;
 
 		@media (prefers-reduced-motion: no-preference) {
-			transition: opacity 250ms linear, rotate 250ms linear;
+			transition:
+				opacity 250ms linear,
+				rotate 250ms linear;
 		}
 	}
 

@@ -4,7 +4,7 @@
 
 	import ProjectsFilter from "$lib/components/ProjectFilter.svelte";
 	import ProjectPreview from "$lib/components/ProjectPreview.svelte";
-	import { project_filter } from "$lib/shared/stores.js";
+	import { project_filter } from "$lib/shared/state.svelte.js";
 
 	let { data } = $props();
 	const { projects, tags, years } = data;
@@ -16,11 +16,13 @@
 	let filtered_projects = $derived(
 		projects.filter(
 			(project) =>
-				$project_filter.tags.every((tag) =>
+				project_filter.value.tags.every((tag) =>
 					project.tags.includes(tag),
 				) &&
-				($project_filter.years.length == 0 ||
-					$project_filter.years.includes(project.date.getFullYear())),
+				(project_filter.value.years.length == 0 ||
+					project_filter.value.years.includes(
+						project.date.getFullYear(),
+					)),
 		),
 	);
 </script>
