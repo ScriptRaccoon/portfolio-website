@@ -43,5 +43,5 @@ export const load = async (event) => {
 	const { title, description } = attributes;
 	const meta = { title, description };
 
-	return { meta, attributes, html_code, toc };
+	return { meta, attributes, html_code, toc, id };
 };

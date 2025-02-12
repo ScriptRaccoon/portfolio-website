@@ -39,7 +39,11 @@
 	{@html html_code}
 </article>
 
-<img src={`/media/projects/${id}.webp`} alt="screenshot" />
+<img
+	style="view-transition-name: image_{id}"
+	src={`/media/projects/${id}.webp`}
+	alt="screenshot"
+/>
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
 	{#each tags as tag}

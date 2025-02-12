@@ -28,6 +28,7 @@
 			</div>
 			<div class="image-container">
 				<img
+					style="view-transition-name: image_{project.id}"
 					src={`/media/projects/${project.id}_thumb.webp`}
 					alt="screenshot of the project"
 					loading="lazy"

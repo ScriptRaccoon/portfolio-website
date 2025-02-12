@@ -6,6 +6,7 @@
 	import LoadProgress from "$lib/components/LoadProgress.svelte";
 	import { page } from "$app/stores";
 	import ScrollUp from "$lib/components/ScrollUp.svelte";
+	import { onNavigate } from "$app/navigation";
 
 	interface Props {
 		children?: Snippet;
@@ -19,6 +20,17 @@
 			.matches;
 
 	setContext("allow_animation", allow_animation);
+
+	onNavigate((navigation) => {
+		if (!document.startViewTransition || !allow_animation) return;
+
+		return new Promise((resolve) => {
+			document.startViewTransition(async () => {
+				resolve();
+				await navigation.complete;
+			});
+		});
+	});
 </script>
 
 <svelte:head>
