@@ -229,16 +229,16 @@ const GADGETS_INDEX = [
 
 However, this approach has some drawbacks:
 
-1. **The data is no longer normalized.** Relationships are embedded within the gadget definitions rather than stored separately.
-2. **The array becomes difficult to manage** as the number of gadgets grows.
-3. **No autocompletion for related gadgets.** Since `related` is part of an `as const` array, TypeScript won't validate its entries immediately — it only checks for correctness when the `GADGETS` array is assigned.
+1. The data is no longer normalized. Relationships are embedded within the gadget definitions rather than stored separately.
+2. The array becomes difficult to manage as the number of gadgets grows.
+3. No autocompletion for related gadgets. Since `related` is part of an `as const` array, TypeScript won't validate its entries immediately — it only checks for correctness when the `GADGETS` array is assigned.
 
 In a database, we would typically store relationships in a separate table. We can follow the same principle in TypeScript by defining a separate array for gadget relationships.
 
 ```ts
-type GadgetRelation = Record<GadgetID, GadgetID[]>;
+type GadgetRelations = Record<GadgetID, GadgetID[]>;
 
-const GADGET_RELATIONS: GadgetRelation = {
+const GADGET_RELATIONS: GadgetRelations = {
 	spoon: ["fork", "knife"],
 	fork: ["spoon", "knife"],
 	knife: ["spoon", "fork"],
@@ -250,7 +250,7 @@ With this approach, TypeScript enforces that only valid IDs are used. Moreover, 
 By default, the `GadgetRelation` type requires every gadget to have an entry. This is useful because even gadgets with no relationships will explicitly map to an empty array. However, if you prefer to omit gadgets without relations, you can modify the type:
 
 ```ts
-type GadgetRelation = Partial<Record<GadgetID, GadgetID[]>>;
+type GadgetRelations = Partial<Record<GadgetID, GadgetID[]>>;
 ```
 
 ## Final code
@@ -321,16 +321,14 @@ export const DRAWERS: Drawer[] = [
 
 ```ts
 // Define a mapping of gadgets to their related gadgets
-export type GadgetRelation = Record<GadgetID, GadgetID[]>;
+export type GadgetRelations = Record<GadgetID, GadgetID[]>;
 
 // Example relationships between gadgets
-export const GADGET_RELATIONS: GadgetRelation[] = [
-	{
-		spoon: ["fork", "knife"],
-		fork: ["spoon", "knife"],
-		knife: ["spoon", "fork"],
-	},
-];
+export const GADGET_RELATIONS: GadgetRelations = {
+	spoon: ["fork", "knife"],
+	fork: ["spoon", "knife"],
+	knife: ["spoon", "fork"],
+};
 ```
 
 ## Querying data
