@@ -1,9 +1,6 @@
-import { SECRET_YOUTUBE_API_KEY } from "$env/static/private";
-import {
-	PUBLIC_YOUTUBE_API_URL,
-	PUBLIC_YOUTUBE_CHANNEL_ID,
-} from "$env/static/public";
+import { PUBLIC_YOUTUBE_CHANNEL_ID } from "$env/static/public";
 import { redis_cached } from "$lib/server/redis/cache";
+import { youtube } from "./youtube";
 
 export type stats = {
 	subscriber_count: number;
@@ -11,30 +8,27 @@ export type stats = {
 };
 
 async function get_youtube_stats(): Promise<stats | null> {
-	const param_data = {
-		part: "statistics",
-		id: PUBLIC_YOUTUBE_CHANNEL_ID,
-		key: SECRET_YOUTUBE_API_KEY,
-	};
+	try {
+		// https://developers.google.com/youtube/v3/docs/channels/list
+		const response = await youtube.channels.list({
+			part: ["statistics"],
+			id: [PUBLIC_YOUTUBE_CHANNEL_ID],
+		});
 
-	const params = new URLSearchParams(param_data);
+		const statistics = response.data?.items?.[0].statistics;
+		if (!statistics) {
+			throw new Error("No statistics found in item");
+		}
 
-	const url = `${PUBLIC_YOUTUBE_API_URL}/channels?${params.toString()}`;
-	const response = await fetch(url);
-	const data = await response.json();
+		const subscriber_count = Number(statistics.subscriberCount ?? 0);
+		const video_count = Number(statistics.videoCount ?? 0);
 
-	if (response.ok) {
-		const statistics = data?.items?.[0]?.statistics;
-		const subscriber_count = parseInt(statistics.subscriberCount);
-		const video_count = parseInt(statistics.videoCount);
 		return { subscriber_count, video_count };
+	} catch (err) {
+		console.error(err);
+		return null;
 	}
-
-	console.error("Request failed for ", url);
-	console.error(data?.error?.message);
-	return null;
 }
-
 export const get_cached_youtube_stats = redis_cached(
 	"stats",
 	get_youtube_stats,

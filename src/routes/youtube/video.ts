@@ -1,10 +1,9 @@
-import { SECRET_YOUTUBE_API_KEY } from "$env/static/private";
 import {
-	PUBLIC_YOUTUBE_API_URL,
 	PUBLIC_YOUTUBE_CHANNEL_ID,
 	PUBLIC_YOUTUBE_SHORT_URL,
 } from "$env/static/public";
 import { redis_cached } from "$lib/server/redis/cache";
+import { youtube } from "./youtube";
 
 export type video = {
 	title: string;
@@ -13,33 +12,42 @@ export type video = {
 };
 
 async function get_latest_video(): Promise<video | null> {
-	const param_data = {
-		part: "snippet",
-		type: "video",
-		channelId: PUBLIC_YOUTUBE_CHANNEL_ID,
-		key: SECRET_YOUTUBE_API_KEY,
-		maxResults: "1",
-		order: "date",
-	};
+	try {
+		// https://developers.google.com/youtube/v3/docs/search/list
+		const response = await youtube.search.list({
+			part: ["id", "snippet"],
+			type: ["video"],
+			channelId: PUBLIC_YOUTUBE_CHANNEL_ID,
+			maxResults: 1,
+			order: "date",
+		});
 
-	const params = new URLSearchParams(param_data);
+		const videos = response.data.items;
+		if (!videos?.length) {
+			throw new Error("No videos found in response");
+		}
 
-	const url = `${PUBLIC_YOUTUBE_API_URL}/search?${params.toString()}`;
-	const response = await fetch(url);
-	const data = await response.json();
+		const video = videos[0];
 
-	if (response.ok) {
-		const item = data?.items?.[0];
-		const id = item?.id?.videoId;
+		if (!video.snippet) {
+			throw new Error("No snippet found in video");
+		}
+
+		const id = video?.id?.videoId;
+
+		if (!id) {
+			throw new Error("No videoId found in video");
+		}
+
 		const url = `${PUBLIC_YOUTUBE_SHORT_URL}/${id}`;
-		const title = item?.snippet.title;
-		const thumbnail_url = item?.snippet?.thumbnails?.medium?.url;
-		return { url, title, thumbnail_url };
-	}
+		const title = video.snippet.title ?? "";
+		const thumbnail_url = video.snippet.thumbnails?.medium?.url ?? "";
 
-	console.error("Request failed for ", url);
-	console.error(data?.error?.message);
-	return null;
+		return { url, title, thumbnail_url };
+	} catch (err) {
+		console.error(err);
+		return null;
+	}
 }
 
 export const get_cached_latest_video = redis_cached(
