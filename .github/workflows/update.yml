@@ -1,8 +1,8 @@
 name: Update YouTube Data
 
 on:
-  # schedule:
-  #   - cron: "0 0 * * *" # runs every day at midnight
+  schedule:
+    - cron: "0 18 * * *"
   workflow_dispatch:
 
 jobs:
