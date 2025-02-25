@@ -40,7 +40,6 @@
 		"front-matter": "^4.0.2",
 		"googleapis": "^144.0.0",
 		"he": "^1.2.0",
-		"ioredis": "^5.4.2",
 		"markdown-it": "^13.0.2",
 		"mathjax": "^3.2.2",
 		"shiki": "^0.14.7",
