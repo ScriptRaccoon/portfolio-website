@@ -81,7 +81,12 @@ async function get_latest_video() {
 	}
 }
 
+// prettier-ignore
+const file_path = path.resolve("src", "data", "youtube", "youtube.json");
+
 async function update_static_youtube_data() {
+	const old_json = fs.readFileSync(file_path, "utf-8");
+
 	console.info("fetching youtube data...");
 
 	const [stats, video] = await Promise.all([
@@ -98,13 +103,14 @@ async function update_static_youtube_data() {
 
 	const json = JSON.stringify({ stats, video });
 
+	if (json === old_json) {
+		console.info("no changes detected, aborting");
+		return;
+	}
+
 	console.info("save data to JSON file ...");
 
-	fs.writeFileSync(
-		path.resolve("src", "data", "youtube", "youtube.json"),
-		json,
-		"utf-8",
-	);
+	fs.writeFileSync(file_path, json, "utf-8");
 
 	console.info("done");
 }
