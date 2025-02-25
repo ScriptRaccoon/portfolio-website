@@ -93,10 +93,13 @@ async function update_static_youtube_data() {
 		console.error("failed to fetch data, aborting");
 		return;
 	}
+	console.info("fetched data:");
+	console.info({ stats, video });
 
 	const json = JSON.stringify({ stats, video });
 
-	console.info("save data to static JSON file ...");
+	console.info("save data to JSON file ...");
+
 	fs.writeFileSync(
 		path.resolve("src", "data", "youtube", "data.json"),
 		json,
