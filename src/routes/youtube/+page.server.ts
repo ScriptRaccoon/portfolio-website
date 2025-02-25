@@ -1,13 +1,7 @@
-export const prerender = false;
-
-import { get_cached_youtube_stats } from "./stats";
-import { get_cached_latest_video } from "./video";
+import data from "../../data/youtube/data.json";
 
 export const load = async () => {
-	const [stats, video] = await Promise.all([
-		get_cached_youtube_stats(),
-		get_cached_latest_video(),
-	]);
+	const { stats, video } = data;
 
 	const meta = {
 		title: "Script Raccoon - YouTube",
