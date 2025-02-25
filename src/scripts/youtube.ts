@@ -101,7 +101,7 @@ async function update_static_youtube_data() {
 	console.info("save data to JSON file ...");
 
 	fs.writeFileSync(
-		path.resolve("src", "data", "youtube", "data.json"),
+		path.resolve("src", "data", "youtube", "youtube.json"),
 		json,
 		"utf-8",
 	);
