@@ -3,8 +3,8 @@ import path from "path";
 
 import { google } from "googleapis";
 import {
-	PUBLIC_YOUTUBE_CHANNEL_ID,
-	PUBLIC_YOUTUBE_SHORT_URL,
+	YOUTUBE_CHANNEL_ID,
+	YOUTUBE_SHORT_URL,
 	SECRET_YOUTUBE_API_KEY,
 } from "./env";
 
@@ -18,7 +18,7 @@ async function get_youtube_stats() {
 		// https://developers.google.com/youtube/v3/docs/channels/list
 		const response = await youtube.channels.list({
 			part: ["statistics"],
-			id: [PUBLIC_YOUTUBE_CHANNEL_ID!],
+			id: [YOUTUBE_CHANNEL_ID!],
 		});
 
 		const statistics = response.data?.items?.[0].statistics;
@@ -48,7 +48,7 @@ async function get_latest_video() {
 		const response = await youtube.search.list({
 			part: ["id", "snippet"],
 			type: ["video"],
-			channelId: PUBLIC_YOUTUBE_CHANNEL_ID!,
+			channelId: YOUTUBE_CHANNEL_ID!,
 			maxResults: 1,
 			order: "date",
 		});
@@ -70,7 +70,7 @@ async function get_latest_video() {
 			throw new Error("No videoId found in video");
 		}
 
-		const url = `${PUBLIC_YOUTUBE_SHORT_URL!}/${id}`;
+		const url = `${YOUTUBE_SHORT_URL!}/${id}`;
 		const title = video.snippet.title ?? "";
 		const thumbnail_url = video.snippet.thumbnails?.medium?.url ?? "";
 
