@@ -23,9 +23,6 @@ importers:
       front-matter:
         specifier: ^4.0.2
         version: 4.0.2
-      googleapis:
-        specifier: ^144.0.0
-        version: 144.0.0
       he:
         specifier: ^1.2.0
         version: 1.2.0
@@ -69,6 +66,9 @@ importers:
       dotenv:
         specifier: ^16.4.7
         version: 16.4.7
+      googleapis:
+        specifier: ^144.0.0
+        version: 144.0.0
       prettier:
         specifier: ^3.1.0
         version: 3.4.2
