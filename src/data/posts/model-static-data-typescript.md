@@ -7,7 +7,7 @@ description: How to create a type-safe, read-only "database" in TypeScript
 
 ## Introduction
 
-I'm currently working on a [large project](/projects/catdat) that is primarily written in TypeScript. For this project, I need a kind of database where the data remains unchanged at runtime. Using TypeScript to define such a "static database" offers several advantages — most notably, improved application performance and easier development. The interesting part is translating database concepts into TypeScript. The challenge begins right away with defining the types for the data, which is exactly what I'll explore in this blog post.
+I'm currently working on a large project that is primarily written in TypeScript. For this project, I need a kind of database where the data remains unchanged at runtime. Using TypeScript to define such a "static database" offers several advantages — most notably, improved application performance and easier development. The interesting part is translating database concepts into TypeScript. The challenge begins right away with defining the types for the data, which is exactly what I'll explore in this blog post.
 
 ## What we want to achieve
 
