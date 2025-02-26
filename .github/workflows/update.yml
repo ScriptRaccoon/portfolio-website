@@ -24,14 +24,15 @@ jobs:
 
       - name: Install dependencies
         run: pnpm install
+        working-directory: scripts
 
       - name: Run update script
         run: pnpm run update:youtube
         env:
           SECRET_YOUTUBE_API_KEY: ${{ secrets.SECRET_YOUTUBE_API_KEY }}
+        working-directory: scripts
 
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: Update of YouTube data
-          file_pattern: "src/data/**/*.json"

@@ -82,7 +82,7 @@ async function get_latest_video() {
 }
 
 // prettier-ignore
-const file_path = path.resolve("src", "data", "youtube", "youtube.json");
+const file_path = path.resolve("..", "src", "data", "youtube", "youtube.json");
 
 async function update_static_youtube_data() {
 	const old_json = fs.readFileSync(file_path, "utf-8");
