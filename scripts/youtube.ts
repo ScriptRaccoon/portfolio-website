@@ -13,12 +13,17 @@ const youtube = google.youtube({
 	auth: SECRET_YOUTUBE_API_KEY!,
 });
 
+/**
+ * https://developers.google.com/youtube/v3/docs/channels/list
+ */
 async function get_youtube_stats() {
 	try {
-		// https://developers.google.com/youtube/v3/docs/channels/list
+		const fields = "items/statistics(subscriberCount,videoCount)";
+
 		const response = await youtube.channels.list({
 			part: ["statistics"],
 			id: [YOUTUBE_CHANNEL_ID!],
+			fields,
 		});
 
 		const statistics = response.data?.items?.[0].statistics;
@@ -42,15 +47,21 @@ export type video = {
 	thumbnail_url: string;
 };
 
+/**
+ * https://developers.google.com/youtube/v3/docs/search/list
+ */
 async function get_latest_video() {
 	try {
-		// https://developers.google.com/youtube/v3/docs/search/list
+		const fields =
+			"items(id/videoId,snippet(title,thumbnails/medium/url))";
+
 		const response = await youtube.search.list({
-			part: ["id", "snippet"],
+			part: ["snippet"],
 			type: ["video"],
 			channelId: YOUTUBE_CHANNEL_ID!,
 			maxResults: 1,
 			order: "date",
+			fields,
 		});
 
 		const videos = response.data.items;
@@ -70,7 +81,7 @@ async function get_latest_video() {
 			throw new Error("No videoId found in video");
 		}
 
-		const url = `${YOUTUBE_SHORT_URL!}/${id}`;
+		const url = `${YOUTUBE_SHORT_URL}/${id}`;
 		const title = video.snippet.title ?? "";
 		const thumbnail_url = video.snippet.thumbnails?.medium?.url ?? "";
 
