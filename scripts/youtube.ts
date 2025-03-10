@@ -41,12 +41,6 @@ async function get_youtube_stats() {
 	}
 }
 
-export type video = {
-	title: string;
-	url: string;
-	thumbnail_url: string;
-};
-
 /**
  * https://developers.google.com/youtube/v3/docs/search/list
  */
