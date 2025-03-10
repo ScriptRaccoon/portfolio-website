@@ -26,7 +26,7 @@ jobs:
         run: pnpm install
         working-directory: scripts
 
-      - name: Run update script
+      - name: Run update YouTube script
         run: pnpm run update:youtube
         env:
           SECRET_YOUTUBE_API_KEY: ${{ secrets.SECRET_YOUTUBE_API_KEY }}
