@@ -419,6 +419,6 @@ Recursive Svelte components open up endless possibilities for creative and pract
 
 For further reading, here are some additional articles on recursive Svelte components. Note that they may reference `<svelte:self>`, which is no longer necessary, as explained earlier.
 
-- <https://geoffrich.net/posts/svelte-tower-of-hanoi/>
-- <https://app.studyraid.com/en/read/6598/151194/svelteself-for-recursive-components>
-- <https://dev.to/flodev/recursive-components-4jp5>
+- [Solving the Tower of Hanoi with recursive Svelte templates](https://geoffrich.net/posts/svelte-tower-of-hanoi/)
+- [svelte:self for recursive components](https://app.studyraid.com/en/read/6598/151194/svelteself-for-recursive-components)
+- [Recursive components](https://dev.to/flodev/recursive-components-4jp5)
