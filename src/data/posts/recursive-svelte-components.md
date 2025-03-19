@@ -9,7 +9,7 @@ description: Svelte components can render themselves. This post demonstrates pra
 
 A Svelte component can render itself. This pattern has several practical applications, including the visualization of fractals. In this blog post, we will explore these applications in detail.
 
-![Pythagoras tree](/media/blog/recursive-tree.png)
+![Pythagoras tree](/media/blog/recursive-tree-deep.png)
 
 The code for this blog post is available on [GitHub](https://github.com/ScriptRaccoon/recursive-svelte-components). You can also find an interactive visualization of various recursive Svelte components [here](https://recursive-svelte-components.netlify.app/).
 
@@ -274,8 +274,6 @@ You can style the `block` however you like. For example, `<Fibonacci index={8} /
 
 The [Pythagoras tree](<https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)>) is another fascinating fractal that can be generated using recursive Svelte components. You can view and interact with it [here](https://recursive-svelte-components.netlify.app/tree).
 
-![Pythagoras tree](/media/blog/recursive-tree.png)
-
 The recursion logic is straightforward: starting with a square, we create a right triangle at a specific angle on top of it (or rather below it, since we draw from top to bottom). The two open sides of the triangle form the base for two additional squares, and the process repeats.
 
 We begin by defining the script for `Tree.svelte`, where we declare three props: the maximum recursion depth, the angle (which remains constant throughout the recursion), and the size of the current square.
@@ -393,7 +391,13 @@ In the CSS, we shift the right part to the right, adjust its position based on i
 }
 ```
 
-The final result looks as shown above.
+The final result looks as follows (angle = 30, maximal depth = 12).
+
+![Pythagoras tree](/media/blog/recursive-tree.png)
+
+Notice that in some branches, the recursion ends "too early." To address this, you can replace the condition `{#if maxDepth >= 0}` in the Svelte component with `{#if size >= 1}`. This ensures that all leaves of the tree are as small as possible. The result is more visually impressive.
+
+![Pythagoras tree](/media/blog/recursive-tree-deep.png)
 
 ## Conclusion
 
