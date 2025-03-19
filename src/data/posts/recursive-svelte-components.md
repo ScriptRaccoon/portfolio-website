@@ -1,7 +1,7 @@
 ---
 title: Recursive Svelte Components
 published: 2025-03-19
-updated:
+updated: 2025-03-19
 description: Svelte components can render themselves. This post demonstrates practical applications and visualizations of fractals using this technique.
 ---
 
@@ -395,9 +395,19 @@ The final result looks as follows (angle = 30, maximal depth = 12).
 
 ![Pythagoras tree](/media/blog/recursive-tree.png)
 
+### Variations
+
 Notice that in some branches, the recursion ends "too early." To address this, you can replace the condition `{#if maxDepth >= 0}` in the Svelte component with `{#if size >= 1}`. This ensures that all leaves of the tree are as small as possible. The result is more visually impressive.
 
 ![Pythagoras tree](/media/blog/recursive-tree-deep.png)
+
+With CSS we may also play around with the colors, shadows, and shapes:
+
+![Pythagoras tree](/media/blog/recursive-tree-deep-green.png)
+
+![Pythagoras tree](/media/blog/recursive-tree-deep-shadow.png)
+
+![Pythagoras tree](/media/blog/recursive-tree-deep-round.png)
 
 ## Conclusion
 
