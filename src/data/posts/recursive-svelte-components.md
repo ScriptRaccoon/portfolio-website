@@ -7,9 +7,9 @@ description: Svelte components may render themselves. We demonstrate this with p
 
 ## Preliminaries
 
-A Svelte component may render itself. This pattern has several practical applications, but it also makes it possible to visualize fractals in Svelte. In this blog, post we will have a closer look at these.
+A Svelte component may render itself. This pattern has several practical applications, but it also allows to visualize fractals in Svelte. In this blog post, we will have a closer look at these.
 
-![Pythagorean Tree Visualization](/media/blog/recursive-tree.png)
+![Pythagoras tree](/media/blog/recursive-tree.png)
 
 Notice that the code for this blog post can be found at [GitHub](https://github.com/ScriptRaccoon/recursive-svelte-components). An interactive visualization of a collection of recursive Svelte components is available [on this site](https://recursive-svelte-components.netlify.app/).
 
@@ -17,7 +17,7 @@ Notice that the code for this blog post can be found at [GitHub](https://github.
 
 When a component is supposed to render itself, one has to prevent infinite loops. One way of doing this is to have a prop called `depth` which increases with every call and has a maximum `MAX_DEPTH`. Another way is using a prop called `maxDepth` which decreases with every call and has `0` as the minimum. We take the latter approach, since it involves less code.
 
-So the basic structure of a recursive component `A.svelte` looks as follows.
+The basic structure of a recursive component `A.svelte` looks as follows.
 
 ```svelte
 <!-- A.svelte -->
@@ -57,15 +57,11 @@ The idea is to have a grid of size 3x3, fill the inner square, and apply recursi
 <script lang="ts">
 	import Carpet from "./Carpet.svelte";
 
-	type Props = {
-		maxDepth: number;
-	};
-
-	let { maxDepth }: Props = $props();
+	let { maxDepth }: { maxDepth: number } = $props();
 </script>
 ```
 
-The markup has the grid of size 3x3. In each cell we render a div. It will be filled in the center, and otherwise inside of that div we render the component itself, decreasing the maximal depth. The whole block is guarded by a check for `maxDepth >= 0` to prevent an infinite loop.
+The markup below has the grid of size 3x3. In each cell we render a div. The div in the center is filled, and in every other div we render the component itself, decreasing the maximal depth. The whole block is guarded by a check for `maxDepth >= 0` to prevent an infinite loop.
 
 ```svelte
 {#if maxDepth >= 0}
@@ -98,7 +94,7 @@ Here are the styles:
 	}
 
 	.filled {
-		/* choose any color you like: */
+		/* choose any color (or gradient) you like: */
 		background: white;
 	}
 </style>
@@ -110,7 +106,7 @@ Then, anywhere in our application, we may render the carpet like so:
 <Carpet maxDepth={4} />
 ```
 
-In the [visualization here](https://recursive-svelte-components.netlify.app/carpet) I also added a range input that allows you to change the maximal depth. It makes sense to limit that number since already for a maximal depth of 5 the browser has too muck work to do.
+In the [visualization here](https://recursive-svelte-components.netlify.app/carpet) I also added a range input that allows you to change the maximal depth. It makes sense to limit that number since already for a maximal depth of 5 the browser has issues with the rendering and becomes very slow.
 
 ## Folders and Files
 
@@ -141,7 +137,7 @@ First, we create a component to render a file. This is not recursive and quite s
 <!-- File.svelte -->
 
 <script lang="ts">
-	import Fa from "svelte-fa";
+	import Fa from "svelte-fa"; // icon library
 	import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
 
 	import type { FileData } from "./types";
@@ -158,8 +154,10 @@ First, we create a component to render a file. This is not recursive and quite s
 The folder component is recursive. Besides from the folder data, we also save the information if the component is open or closed, and make the necessary imports for later.
 
 ```svelte
+<!-- Folder.svelte -->
+
 <script lang="ts">
-	import Fa from "svelte-fa";
+	import Fa from "svelte-fa"; // icon library
 	import {
 		faFolderClosed,
 		faFolderOpen,
@@ -216,7 +214,7 @@ Notice that this recursion will end automatically after finitely many
 steps since for our initial `folder` object we cannot have infinitely many
 nested `.subolders` inside.
 
-Some styles are necessary to make this look good, in particular to indent the list. Thanks to Svelte's scoped styles, we may style via element selectors.
+Some styles are necessary to make this look good. In particular we want to indent the list. Thanks to Svelte's scoped styles, we may use element selectors.
 
 ```svelte
 <style>
@@ -258,11 +256,11 @@ by saying that the component `Fibonacci.svelte` calls itself twice, once with a 
 <script lang="ts">
 	import Fibonacci from "./Fibonacci.svelte";
 
-	let { index }: {index: number }; = $props();
+	let { index }: { index: number }; = $props();
 </script>
 
 {#if index === 1}
-	<div class="block"></div>
+	<div class="block" />
 {:else if index >= 2}
 	<!-- The component renders itself! -->
 	<Fibonacci index={index - 1} />
@@ -270,19 +268,19 @@ by saying that the component `Fibonacci.svelte` calls itself twice, once with a 
 {/if}
 ```
 
-Style the `block` in any way you like. Then, for example `<Fibonacci index={8} />` renders 21 blocks since <math>F_8 = 21</math>. The consumer of that component may also count the blocks with some Vanilla JS and inscribe their number (as is done [here](https://recursive-svelte-components.netlify.app/fibonacci)) and play around with the controls.
+Style the `block` in any way you like. Then, for example `<Fibonacci index={8} />` renders 21 blocks since <math>F_8 = 21</math>. The consumer of that component may also count the blocks with some Vanilla JS and inscribe their number (as is done [here](https://recursive-svelte-components.netlify.app/fibonacci)).
 
 ![21 Blocks counting the 8th Fibonacci number](/media/blog/recursive-fibonacci.png)
 
-## Pythagorean Tree
+## Pythagoras tree
 
-The [Pythgorean tree](<https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)>) is a fascinating fractal that we may generate with recursive Svelte components as well. You can see it [here](https://recursive-svelte-components.netlify.app/tree).
+The [Pythagoras tree](<https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)>) is a fascinating fractal that we may also generate with recursive Svelte components. You can see and interact with it [here](https://recursive-svelte-components.netlify.app/tree).
 
-![Pythagorean Tree Visualization](/media/blog/recursive-tree.png)
+![Pythagoras tree](/media/blog/recursive-tree.png)
 
-The idea of the recursion is quite simple: on top of a square (or rather the bottom, since we draw from top to bottom here), we create a right triangle at a certain angle. The two open sides of that triangle form the base of a another square, etc. The implementation involves some math which I will explain below.
+The idea of the recursion is quite simple: on top of a square (or rather the bottom, since we draw from top to bottom here), we create a right triangle at a certain angle. The two open sides of that triangle form the base of a another square, etc.
 
-We start with the script tag of our `Tree.svelte`, where we declare the maximal depth, the angle (which remains constant through all iterations), and the current size of the square as props.
+We start with the script tag of our `Tree.svelte`, where we declare three props: the maximal depth, the angle (which remains constant through all iterations), and the current size of the square.
 
 ```svelte
 <!-- Tree.svelte -->
@@ -336,7 +334,7 @@ To give the div `.square` the appearance of an actual square with the correct si
 ```css
 .square {
 	position: absolute;
-	background-image: white; /* or any color you like */
+	background: white; /* or any color you like */
 	width: var(--size);
 	aspect-ratio: 1;
 }
@@ -387,7 +385,7 @@ We have to do this instead: First, pass the size of the right side as a CSS vari
 </div>
 ```
 
-In the CSS, we shift it to the right, shift it back according to its size (so that now, its right hande is at the right hand side of the outer square), and then rotate it in the other direction.
+In the CSS, we shift it to the right, shift it back according to its size (so that now, its right hand side is at the right hand side of the outer square), and then rotate it accordingly (so that the sum of the inner angles is 180 degrees).
 
 ```css
 .right {
@@ -401,16 +399,14 @@ The end result will look as shown above.
 
 ## Conclusion
 
-You can do many more things with recursive Svelte components. See [here](https://recursive-svelte-components.netlify.app/).
+You can do [many more things](https://recursive-svelte-components.netlify.app/) with recursive Svelte components.
 
 ![Recursive Tiling](/media/blog/recursive-tiling.png)
 
 ![Inscribed Squares](/media/blog/recursive-inscribed.png)
 
-Other articles have been written on recursive Svelte components as well.
+Other articles have been written on recursive Svelte components as well. As explained, you may ignore their mentioning of `<svelte:self>`.
 
 - <https://geoffrich.net/posts/svelte-tower-of-hanoi/>
 - <https://app.studyraid.com/en/read/6598/151194/svelteself-for-recursive-components>
 - <https://dev.to/flodev/recursive-components-4jp5>
-
-As explained, you may ignore their mentioning of `<svelte:self>`, but the rest works as before.
