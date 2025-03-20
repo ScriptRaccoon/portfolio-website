@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { getContext } from "svelte";
-	import { slide } from "svelte/transition";
+	import { fade } from "svelte/transition";
 	import Fa from "svelte-fa";
 	import { faRetweet } from "@fortawesome/free-solid-svg-icons";
 
@@ -32,7 +32,7 @@
 	<Fa icon={faRetweet} />
 
 	{#if pending}
-		<span transition:slide={{ duration: animation_speed }}>
+		<span transition:fade={{ duration: animation_speed }}>
 			Copied {name}
 		</span>
 	{/if}
@@ -45,9 +45,13 @@
 	span {
 		font-size: var(--small-font);
 		border-radius: 0.25rem;
+		padding: 0.4rem 0.8rem;
+		border: 1px solid var(--border-color);
+		background-color: var(--bg-color);
 		white-space: nowrap;
 		position: absolute;
-		top: 100%;
+		top: calc(100% + 0.25rem);
 		right: 0;
+		z-index: 1;
 	}
 </style>
