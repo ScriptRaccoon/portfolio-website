@@ -8,8 +8,8 @@
 	let toc = data.toc;
 	let html_code = data.html_code;
 	let title = data.attributes.title;
-	let updated = data.attributes.updated?.toLocaleDateString();
 	let published = data.attributes.published.toLocaleDateString();
+	let updated = data.attributes.updated?.toLocaleDateString();
 </script>
 
 <Controls variant="top" />

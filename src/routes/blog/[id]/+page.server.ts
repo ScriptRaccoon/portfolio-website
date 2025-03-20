@@ -1,6 +1,6 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
-import type { post } from "$lib/shared/types";
+import { type post, type published_post } from "$lib/shared/types";
 import {
 	highlight_code,
 	add_ids_to_headings,
@@ -9,7 +9,7 @@ import {
 	transform_external_links,
 	render_markdown,
 } from "$lib/server/blog-processing";
-import { compose } from "$lib/shared/utils";
+import { compose, is_published } from "$lib/shared/utils";
 
 const posts_record = import.meta.glob("/src/data/posts/*.md", {
 	as: "raw",
@@ -28,6 +28,12 @@ export const load = async (event) => {
 	const { attributes: _attributes, body } =
 		fm<Omit<post, "id">>(markdown);
 	const attributes: post = { ..._attributes, id };
+
+	if (!is_published(attributes)) {
+		error(404, "This post is not published");
+	}
+
+	attributes satisfies published_post;
 
 	const html_raw = render_markdown(body);
 

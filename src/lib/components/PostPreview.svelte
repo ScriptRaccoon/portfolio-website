@@ -1,9 +1,9 @@
 <script lang="ts">
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
-	import type { post as post_type } from "$lib/shared/types";
+	import type { published_post } from "$lib/shared/types";
 
 	interface Props {
-		post: post_type;
+		post: published_post;
 	}
 
 	let { post }: Props = $props();

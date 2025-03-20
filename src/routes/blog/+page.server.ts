@@ -1,5 +1,6 @@
 import type { post } from "$lib/shared/types";
 import { get_frontmatter } from "$lib/server/blog-processing";
+import { is_published } from "$lib/shared/utils";
 
 export const load = async () => {
 	const unsorted_posts = get_frontmatter<post>(
@@ -9,7 +10,9 @@ export const load = async () => {
 		}),
 	);
 
-	const posts = [...unsorted_posts].sort(
+	const published_posts = unsorted_posts.filter(is_published);
+
+	const posts = published_posts.sort(
 		(p, q) => q.published.getTime() - p.published.getTime(),
 	);
 
