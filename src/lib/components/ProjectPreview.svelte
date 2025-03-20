@@ -2,11 +2,11 @@
 	import { getContext } from "svelte";
 	import { fade } from "svelte/transition";
 
-	import type { project as project_type } from "$lib/shared/types";
+	import type { ProjectMetaData } from "$lib/shared/types";
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
 
 	interface Props {
-		project: project_type;
+		project: ProjectMetaData;
 	}
 
 	let { project }: Props = $props();

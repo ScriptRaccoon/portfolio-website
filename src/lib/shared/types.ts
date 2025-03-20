@@ -1,4 +1,4 @@
-export type post = {
+export type PostMetaData = {
 	id: string;
 	title: string;
 	published: Date | null;
@@ -6,11 +6,11 @@ export type post = {
 	description: string;
 };
 
-export type published_post = post & {
+export type PublishedPostMetaData = PostMetaData & {
 	published: Date;
 };
 
-export type project = {
+export type ProjectMetaData = {
 	id: string;
 	name: string;
 	repository: string;

@@ -1,6 +1,6 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
-import type { project } from "$lib/shared/types";
+import type { ProjectMetaData } from "$lib/shared/types";
 import {
 	transform_external_links,
 	render_markdown,
@@ -21,8 +21,8 @@ export const load = async (event) => {
 
 	const markdown = projects_record[path];
 	const { attributes: _attributes, body } =
-		fm<Omit<project, "id">>(markdown);
-	const attributes: project = { ..._attributes, id };
+		fm<Omit<ProjectMetaData, "id">>(markdown);
+	const attributes: ProjectMetaData = { ..._attributes, id };
 
 	attributes.tags.sort((a, b) => a.localeCompare(b));
 

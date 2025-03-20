@@ -1,6 +1,9 @@
 import fm from "front-matter";
 import { error } from "@sveltejs/kit";
-import { type post, type published_post } from "$lib/shared/types";
+import {
+	type PostMetaData,
+	type PublishedPostMetaData,
+} from "$lib/shared/types";
 import {
 	highlight_code,
 	add_ids_to_headings,
@@ -25,15 +28,17 @@ export const load = async (event) => {
 	}
 
 	const markdown = posts_record[path];
+
 	const { attributes: _attributes, body } =
-		fm<Omit<post, "id">>(markdown);
-	const attributes: post = { ..._attributes, id };
+		fm<Omit<PostMetaData, "id">>(markdown);
+
+	const attributes: PostMetaData = { ..._attributes, id };
 
 	if (!is_published(attributes)) {
 		error(404, "This post is not published");
 	}
 
-	attributes satisfies published_post;
+	attributes satisfies PublishedPostMetaData;
 
 	const html_raw = render_markdown(body);
 

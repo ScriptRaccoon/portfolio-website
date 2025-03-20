@@ -1,8 +1,8 @@
-import type { project } from "$lib/shared/types";
+import type { ProjectMetaData } from "$lib/shared/types";
 import { get_frontmatter } from "$lib/server/blog-processing";
 
 export const load = async () => {
-	const unsorted_projects = get_frontmatter<project>(
+	const unsorted_projects = get_frontmatter<ProjectMetaData>(
 		import.meta.glob("/src/data/projects/*.md", {
 			as: "raw",
 			eager: true,
