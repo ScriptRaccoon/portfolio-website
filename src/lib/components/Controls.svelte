@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import CopyText from "./CopyText.svelte";
 	import GoBack from "./GoBack.svelte";
 
@@ -12,7 +12,7 @@
 
 <div class={variant}>
 	<GoBack />
-	<CopyText text={$page.url.href} name="URL" />
+	<CopyText text={page.url.href} name="URL" />
 </div>
 
 <style>

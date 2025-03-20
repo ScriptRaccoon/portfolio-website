@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import { getContext } from "svelte";
 
 	import ThemeToggler from "./ThemeToggler.svelte";
@@ -51,7 +51,7 @@
 		},
 	];
 
-	let current_path = $derived($page.url.pathname);
+	let current_path = $derived(page.url.pathname);
 
 	let page_pos = $derived(
 		links.findIndex(

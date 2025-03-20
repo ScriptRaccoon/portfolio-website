@@ -3,7 +3,7 @@
 
 	import "./app.css";
 	import Nav from "$lib/components/Nav.svelte";
-	import { page } from "$app/stores";
+	import { page } from "$app/state";
 	import ScrollUp from "$lib/components/ScrollUp.svelte";
 	import { onNavigate } from "$app/navigation";
 
@@ -61,15 +61,15 @@
 	<meta name="theme-color" content="#ffffff" />
 
 	<!-- meta tags -->
-	<title>{$page.data.meta?.title ?? ""}</title>
-	<meta property="og:title" content={$page.data.meta?.title ?? ""} />
+	<title>{page.data.meta?.title ?? ""}</title>
+	<meta property="og:title" content={page.data.meta?.title ?? ""} />
 	<meta
 		property="og:description"
-		content={$page.data.meta?.description ?? ""}
+		content={page.data.meta?.description ?? ""}
 	/>
 	<meta
 		name="description"
-		content={$page.data.meta?.description ?? ""}
+		content={page.data.meta?.description ?? ""}
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://scriptraccoon.dev" />
