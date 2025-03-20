@@ -417,6 +417,10 @@ Recursive Svelte components open up endless possibilities for creative and pract
 
 ![Inscribed Squares](/media/blog/recursive-inscribed.png)
 
+![Binary Tree](/media/blog/recursive-binary-tree.png)
+
+![Koch snowflake](/media/blog/recursive-snowflake.png)
+
 For further reading, here are some additional articles on recursive Svelte components. Note that they may reference `<svelte:self>`, which is no longer necessary, as explained earlier.
 
 - [Solving the Tower of Hanoi with recursive Svelte templates](https://geoffrich.net/posts/svelte-tower-of-hanoi/)
