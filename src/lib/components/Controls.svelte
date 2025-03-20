@@ -3,9 +3,9 @@
 	import CopyText from "./CopyText.svelte";
 	import GoBack from "./GoBack.svelte";
 
-	interface Props {
+	type Props = {
 		variant: "top" | "bottom";
-	}
+	};
 
 	let { variant }: Props = $props();
 </script>

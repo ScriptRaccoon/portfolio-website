@@ -2,10 +2,10 @@
 	import { project_filter } from "$lib/shared/state.svelte";
 	import Expand from "./Expand.svelte";
 
-	interface Props {
+	type Props = {
 		tags: string[];
 		years: number[];
-	}
+	};
 
 	let { tags, years }: Props = $props();
 

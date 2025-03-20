@@ -2,9 +2,9 @@
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
 	import type { PublishedPostMetaData } from "$lib/shared/types";
 
-	interface Props {
+	type Props = {
 		post: PublishedPostMetaData;
-	}
+	};
 
 	let { post }: Props = $props();
 </script>

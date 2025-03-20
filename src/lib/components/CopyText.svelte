@@ -6,10 +6,10 @@
 
 	let pending = $state(false);
 
-	interface Props {
+	type Props = {
 		text?: string;
 		name?: string;
-	}
+	};
 
 	let { text = "", name = "" }: Props = $props();
 

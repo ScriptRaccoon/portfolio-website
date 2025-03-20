@@ -7,9 +7,9 @@
 	import ScrollUp from "$lib/components/ScrollUp.svelte";
 	import { onNavigate } from "$app/navigation";
 
-	interface Props {
+	type Props = {
 		children?: Snippet;
-	}
+	};
 
 	let { children }: Props = $props();
 

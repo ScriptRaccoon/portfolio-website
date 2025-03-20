@@ -1,22 +1,22 @@
 <script lang="ts">
 	import { getContext } from "svelte";
 	import { slide } from "svelte/transition";
-	import type {Snippet} from "svelte";
+	import type { Snippet } from "svelte";
 
-	interface Props {
+	type Props = {
 		open?: boolean;
 		summary?: string;
 		animated?: boolean;
 		role: string;
 		children?: Snippet;
-	}
+	};
 
 	let {
 		open = $bindable(false),
 		summary = "Toggle",
 		animated = true,
 		role,
-		children
+		children,
 	}: Props = $props();
 
 	const duration =

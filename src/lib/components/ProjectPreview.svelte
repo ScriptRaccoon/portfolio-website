@@ -5,9 +5,9 @@
 	import type { ProjectMetaData } from "$lib/shared/types";
 	import PreviewCard from "$lib/components/PreviewCard.svelte";
 
-	interface Props {
+	type Props = {
 		project: ProjectMetaData;
-	}
+	};
 
 	let { project }: Props = $props();
 
