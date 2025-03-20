@@ -403,23 +403,18 @@ Notice that in some branches, the recursion ends "too early." To address this, y
 
 With CSS we may also play around with the colors, shadows, and shapes:
 
-![Pythagoras tree](/media/blog/recursive-tree-deep-green.png)
-
-![Pythagoras tree](/media/blog/recursive-tree-deep-shadow.png)
-
-![Pythagoras tree](/media/blog/recursive-tree-deep-round.png)
+|                                                                |                                                               |
+| -------------------------------------------------------------- | ------------------------------------------------------------- |
+| ![Pythagoras tree](/media/blog/recursive-tree-deep-shadow.png) | ![Pythagoras tree](/media/blog/recursive-tree-deep-round.png) |
 
 ## Conclusion
 
 Recursive Svelte components open up endless possibilities for creative and practical applications. You can explore [more examples](https://recursive-svelte-components.netlify.app/) of recursive components.
 
-![Recursive Tiling](/media/blog/recursive-tiling.png)
-
-![Inscribed Squares](/media/blog/recursive-inscribed.png)
-
-![Binary Tree](/media/blog/recursive-binary-tree.png)
-
-![Koch snowflake](/media/blog/recursive-snowflake.png)
+|                                                       |                                                           |
+| ----------------------------------------------------- | --------------------------------------------------------- |
+| ![Recursive Tiling](/media/blog/recursive-tiling.png) | ![Inscribed Squares](/media/blog/recursive-inscribed.png) |
+| ![Binary Tree](/media/blog/recursive-binary-tree.png) | ![Koch snowflake](/media/blog/recursive-snowflake.png)    |
 
 For further reading, here are some additional articles on recursive Svelte components. Note that they may reference `<svelte:self>`, which is no longer necessary, as explained earlier.
 

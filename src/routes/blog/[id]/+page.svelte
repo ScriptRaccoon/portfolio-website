@@ -121,5 +121,14 @@
 			@include bordered();
 			margin-inline: auto;
 		}
+
+		:global(table) {
+			border-collapse: collapse;
+
+			:global(td) {
+				width: 50%;
+				padding: 0.25rem;
+			}
+		}
 	}
 </style>
