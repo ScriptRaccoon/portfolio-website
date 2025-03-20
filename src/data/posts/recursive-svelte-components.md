@@ -272,7 +272,7 @@ You can style the `block` however you like. For example, `<Fibonacci index={8} /
 
 ## Pythagoras Tree
 
-The [Pythagoras tree](<https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)>) is another fascinating fractal that can be generated using recursive Svelte components. You can view and interact with it [here](https://recursive-svelte-components.netlify.app/tree).
+The [Pythagoras tree](<https://en.wikipedia.org/wiki/Pythagoras_tree_(fractal)>) is another fascinating fractal that can be generated using recursive Svelte components. You can view and interact with it [here](https://recursive-svelte-components.netlify.app/pythagoras-tree).
 
 The recursion logic is straightforward: starting with a square, we create a right triangle at a specific angle on top of it (or rather below it, since we draw from top to bottom). The two open sides of the triangle form the base for two additional squares, and the process repeats.
 
