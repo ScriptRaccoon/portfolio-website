@@ -1,15 +1,8 @@
 import { browser } from "$app/environment";
+import type { ProjectFilterData } from "./types";
 
-export const project_filter = $state<{
-	value: {
-		tags: string[];
-		years: number[];
-	};
-}>({
-	value: {
-		tags: [],
-		years: [],
-	},
+export const project_filter = $state<{ value: ProjectFilterData }>({
+	value: { tags: [], years: [] },
 });
 
 const initial_theme =

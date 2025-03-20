@@ -20,3 +20,8 @@ export type ProjectMetaData = {
 	teaser: string;
 	date: Date;
 };
+
+export type ProjectFilterData = {
+	tags: string[];
+	years: number[];
+};
