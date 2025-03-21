@@ -1,37 +1,37 @@
 <script lang="ts">
-	import { fade } from "svelte/transition";
-	import { getContext } from "svelte";
-	import Fa from "svelte-fa";
-	import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
+	import { fade } from 'svelte/transition'
+	import { getContext } from 'svelte'
+	import Fa from 'svelte-fa'
+	import { faAngleUp } from '@fortawesome/free-solid-svg-icons'
 
-	let show = $state(false);
-	let timer: number | null = null;
-	let scroll_position = 0;
+	let show = $state(false)
+	let timer: number | null = null
+	let scroll_position = 0
 
-	const duration = getContext<boolean>("allow_animation") ? 150 : 0;
+	const duration = getContext<boolean>('allow_animation') ? 150 : 0
 
 	$effect(() => {
-		scroll_position = window.scrollY;
-		window.addEventListener("scroll", handle_scroll);
-		() => {
-			window.removeEventListener("scroll", handle_scroll);
-		};
-	});
+		scroll_position = window.scrollY
+		window.addEventListener('scroll', handle_scroll)
+		;() => {
+			window.removeEventListener('scroll', handle_scroll)
+		}
+	})
 
 	function handle_scroll() {
 		if (window.scrollY === 0) {
-			show = false;
+			show = false
 		} else if (window.scrollY < scroll_position) {
-			show = true;
-			scroll_position = window.scrollY;
-			if (timer) clearTimeout(timer);
-			timer = window.setTimeout(() => (show = false), 3000);
+			show = true
+			scroll_position = window.scrollY
+			if (timer) clearTimeout(timer)
+			timer = window.setTimeout(() => (show = false), 3000)
 		}
-		scroll_position = window.scrollY;
+		scroll_position = window.scrollY
 	}
 
 	function scroll_to_top() {
-		window.scrollTo(0, 0);
+		window.scrollTo(0, 0)
 	}
 </script>
 

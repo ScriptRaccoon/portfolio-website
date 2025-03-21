@@ -4,7 +4,7 @@ teaser: made with Svelte and SVGs
 repository: https://github.com/ScriptRaccoon/graph-editor-svg
 url: https://graph-editor-svg.netlify.app/
 tutorial: https://www.youtube.com/watch?v=ot4pcN_IQn8
-tags: ["Svelte", "Tool", "Tutorial", "SVG"]
+tags: ['Svelte', 'Tool', 'Tutorial', 'SVG']
 date: 2022-09-30
 ---
 

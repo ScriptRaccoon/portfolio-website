@@ -73,16 +73,16 @@ Let's say we want to create a quiz app. For rendering the questions, we probably
 
 ```typescript
 type Question = {
-	text: string;
-	answers: string[];
-	correct_answer_index: number;
-};
+	text: string
+	answers: string[]
+	correct_answer_index: number
+}
 ```
 
 and only now we can create the list of questions, fill it in later and render it with our [favorite web framework](https://svelte.dev).
 
 ```typescript
-const questions: Question[] = [];
+const questions: Question[] = []
 ```
 
 At some point, we will need to evaluate the user's answer to a given question. So we implement for example a function with the signature
@@ -99,11 +99,11 @@ Now let's imagine we have implemented the whole quiz app, but we want to add a n
 
 ```typescript
 type Question = {
-	text: string;
-	answers: string[];
-	correct_answer_index: number;
-	difficulty: number;
-};
+	text: string
+	answers: string[]
+	correct_answer_index: number
+	difficulty: number
+}
 ```
 
 Immediately we get some errors, for example when we create a question from some sample data or API, probably it will not have the difficulty set. But this is _not_ an annoying error. It is just the TypeScript compiler helping us to do the next step of the implementation, namely adding the difficulty to each question we create.

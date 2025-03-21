@@ -1,11 +1,11 @@
 <script lang="ts">
-	import { project_filter } from "$lib/shared/state.svelte";
-	import type { ProjectFilterData } from "$lib/shared/types";
-	import Expand from "./Expand.svelte";
+	import { project_filter } from '$lib/shared/state.svelte'
+	import type { ProjectFilterData } from '$lib/shared/types'
+	import Expand from './Expand.svelte'
 
-	type Props = ProjectFilterData;
+	type Props = ProjectFilterData
 
-	let { tags, years }: Props = $props();
+	let { tags, years }: Props = $props()
 </script>
 
 <section aria-label="Project Filters">

@@ -4,7 +4,7 @@ teaser: made with Svelte and D3
 repository: https://github.com/ScriptRaccoon/diets-europe
 url: https://diets-europe.netlify.app
 tutorial:
-tags: ["Data visualization", "Svelte", "SVG", "D3"]
+tags: ['Data visualization', 'Svelte', 'SVG', 'D3']
 date: 2024-05-06
 ---
 

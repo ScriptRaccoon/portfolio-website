@@ -13,16 +13,16 @@ Here is a simple example.
 
 ```typescript
 function add_one(a: number) {
-	return a + 1;
+	return a + 1
 }
 
-const x = add_one(42);
+const x = add_one(42)
 ```
 
 When hovering over the function in Visual Studio Code, the tooltip reads
 
 ```typescript
-function add_one(a: number): number;
+function add_one(a: number): number
 ```
 
 so that the return type is inferred correctly. Also, the type of `x` is inferred correctly. It is of type `number`.
@@ -31,7 +31,7 @@ Still, there is a case for writing down the function return type explicitly like
 
 ```typescript
 function add_one(a: number): number {
-	return a + 1;
+	return a + 1
 }
 ```
 
@@ -55,29 +55,29 @@ To illustrate this, here is a function from my little [URL shortener](/projects/
 export async function create_redirection(
 	url: string,
 ): Promise<{ errors: string[] } | { shortcut: string }> {
-	const connection = await connect_to_db();
+	const connection = await connect_to_db()
 	if (!connection) {
-		return { errors: ["No database connection."] };
+		return { errors: ['No database connection.'] }
 	}
 
-	const visits = 0;
-	const shortcut = id();
-	const redirection = new Redirection({ shortcut, url, visits });
+	const visits = 0
+	const shortcut = id()
+	const redirection = new Redirection({ shortcut, url, visits })
 
-	const error = redirection.validateSync();
+	const error = redirection.validateSync()
 
 	if (error) {
 		return {
 			errors: Object.values(error.errors).map((e) => e.message),
-		};
+		}
 	}
 
 	try {
-		await redirection.save();
-		return { shortcut };
+		await redirection.save()
+		return { shortcut }
 	} catch (e) {
-		console.log(e);
-		return { errors: ["Internal server error."] };
+		console.log(e)
+		return { errors: ['Internal server error.'] }
 	}
 }
 ```
@@ -98,8 +98,8 @@ class Ball {
 	) {}
 
 	update_position(): void {
-		this.x += this.vx;
-		this.y += this.vy;
+		this.x += this.vx
+		this.y += this.vy
 	}
 }
 ```
@@ -117,26 +117,24 @@ For the function `create_redirection` above, TypeScript infers:
 ```typescript
 type return_type = Promise<
 	| {
-			errors: string[];
-			shortcut?: undefined;
+			errors: string[]
+			shortcut?: undefined
 	  }
 	| {
-			shortcut: string;
-			errors?: undefined;
+			shortcut: string
+			errors?: undefined
 	  }
->;
+>
 ```
 
 But you might have intended to get this return type:
- 
+
 ```typescript
-type return_type = Promise<
-	{ errors: string[] } | { shortcut: string }
->;
+type return_type = Promise<{ errors: string[] } | { shortcut: string }>
 ```
- 
+
 TypeScript is not wrong here, it just resolves the types in a very explicit way, something we do not always want.
- 
+
 ### Example 2
 
 Here is a similar example:
@@ -145,14 +143,14 @@ Here is a similar example:
 function return_something(condition: boolean) {
 	if (condition) {
 		return {
-			message: "ok",
+			message: 'ok',
 			status_code: 200,
-		};
+		}
 	} else {
 		return {
-			error: "not ok",
+			error: 'not ok',
 			status_code: 400,
-		};
+		}
 	}
 }
 ```
@@ -162,7 +160,7 @@ The inferred return type is
 ```typescript
 type return_type =
 	| { message: string; status_code: number; error?: undefined }
-	| { error: string; status_code: number; message?: undefined };
+	| { error: string; status_code: number; message?: undefined }
 ```
 
 which is much more complex and repetitive than
@@ -171,7 +169,7 @@ which is much more complex and repetitive than
 type return_type = { status_code: number } & (
 	| { message: string }
 	| { error: string }
-);
+)
 ```
 
 ### Example 3
@@ -179,43 +177,43 @@ type return_type = { status_code: number } & (
 Consider the following TypeScript code.
 
 ```typescript
-type Coord = [number, number];
+type Coord = [number, number]
 
 function generate_coord(row: number, col: number) {
-	return [row, col];
+	return [row, col]
 }
 
 function swap_coord(coord: Coord) {
-	return [coord[1], coord[0]];
+	return [coord[1], coord[0]]
 }
 
-const coord = generate_coord(1, 2);
-const swapped = swap_coord(coord);
+const coord = generate_coord(1, 2)
+const swapped = swap_coord(coord)
 ```
 
 The TypeScript compiler will tell you that the last line does not work since `coord` is of type `number[]`, which is not the input type of `swap_coord`. It could not automatically infer `Coord` as the return type of `generate_coord` (same for `swap_coord`). We should better manually type it. Writing
 
 ```typescript
 function generate_coord(row: number, col: number): Coord {
-	return [row, col];
+	return [row, col]
 }
 ```
- 
+
 also provides, again, better documentation of this function. By the way, writing `[row, col] as const` also enables TypeScript to infer the "correct" type.
- 
+
 ### Example 4
 
 TypeScript has no problems with the following code, even though it is not type-safe.
 
 ```typescript
 async function get_api_response() {
-	const response = await fetch("/some/api");
-	return await response.json();
+	const response = await fetch('/some/api')
+	return await response.json()
 }
 
 async function process_api_response() {
-	const data = await get_api_response();
-	console.log(data.message);
+	const data = await get_api_response()
+	console.log(data.message)
 }
 ```
 
@@ -225,19 +223,15 @@ We can do this by providing the explicit return type `Promise<unknown>`. With th
 
 ```typescript
 async function get_api_response(): Promise<unknown> {
-	const response = await fetch("/some/api");
-	const data = await response.json();
-	return data;
+	const response = await fetch('/some/api')
+	const data = await response.json()
+	return data
 }
 
 async function process_api_response(): Promise<void> {
-	const data = await get_api_response();
-	if (
-		typeof data === "object" &&
-		data !== null &&
-		"message" in data
-	) {
-		console.log(data.message);
+	const data = await get_api_response()
+	if (typeof data === 'object' && data !== null && 'message' in data) {
+		console.log(data.message)
 	}
 }
 ```
@@ -252,7 +246,7 @@ Assume we change the implementation of our previous `add_one` function as follow
 
 ```typescript
 function add_one(a: number) {
-	a += 1;
+	a += 1
 }
 ```
 
@@ -277,14 +271,14 @@ When the error annoys me too much during the implementation, I return a dummy va
 ```typescript
 function add_one(a: number): number {
 	// TODO
-	return 0;
+	return 0
 }
 ```
 
 Continuing this example, with the incorrect implementation of `add_one` TypeScript will not have a problem with it, but for example,
 
 ```typescript
-const x = add_one(42) + 1;
+const x = add_one(42) + 1
 ```
 
 will let it complain about the invalid definition of `x`:
@@ -299,8 +293,8 @@ Here is another example of an incorrect implementation:
 
 ```typescript
 function sign(a: number): number {
-	if (a < 0) return -1;
-	if (a > 0) return +1;
+	if (a < 0) return -1
+	if (a > 0) return +1
 }
 ```
 
@@ -318,7 +312,7 @@ Consider the following function that reverses a string.
 
 ```typescript
 function reverse_string(str: string) {
-	return str.split("").reverse().join("");
+	return str.split('').reverse().join('')
 }
 ```
 
@@ -326,9 +320,9 @@ Let's refactor it:
 
 ```typescript
 function reverse_string(str: string) {
-	let reversed = "";
+	let reversed = ''
 	for (let i = str.length - 1; i >= 0; i--) {
-		reversed += str[i];
+		reversed += str[i]
 	}
 }
 ```
@@ -340,20 +334,20 @@ Did you immediately recognize the error? Of course, we need to add `return rever
 Explicit return types also help to refactor on a large scale, not just single functions. Imagine we want to change the type of coordinates
 
 ```typescript
-type Coord = [number, number];
+type Coord = [number, number]
 ```
 
 from above to
 
 ```typescript
-type Coord = { x: number; y: number };
+type Coord = { x: number; y: number }
 ```
 
 This invalidates the implementation of the function `generate_coord` from above, but TypeScript does _not_ tell us when we don't specify the return type (it will report some errors, but elsewhere). Instead, when we write
 
 ```typescript
 function generate_coord_1(row: number, col: number): Coord {
-	return [row, col];
+	return [row, col]
 }
 ```
 

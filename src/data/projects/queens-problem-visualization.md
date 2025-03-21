@@ -4,7 +4,7 @@ teaser: made with Svelte for any board size
 repository: https://github.com/ScriptRaccoon/queens-problem-svelte
 url: https://queens-problem.netlify.app/
 tutorial:
-tags: ["Svelte", "Algorithms", "TypeScript"]
+tags: ['Svelte', 'Algorithms', 'TypeScript']
 date: 2023-11-03
 ---
 

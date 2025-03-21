@@ -1,13 +1,13 @@
 <script lang="ts">
-	import type { ProjectMetaData } from "$lib/shared/types";
-	import PreviewCard from "$lib/components/PreviewCard.svelte";
-	import More from "./More.svelte";
+	import type { ProjectMetaData } from '$lib/shared/types'
+	import PreviewCard from '$lib/components/PreviewCard.svelte'
+	import More from './More.svelte'
 
 	type Props = {
-		project: ProjectMetaData;
-	};
+		project: ProjectMetaData
+	}
 
-	let { project }: Props = $props();
+	let { project }: Props = $props()
 </script>
 
 <PreviewCard href="/projects/{project.id}">

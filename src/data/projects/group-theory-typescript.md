@@ -4,7 +4,7 @@ teaser: Developing abstract mathematics with generic classes
 repository: https://github.com/ScriptRaccoon/group-theory-typescript
 url:
 tutorial:
-tags: ["TypeScript", "Mathematics"]
+tags: ['TypeScript', 'Mathematics']
 date: 2023-07-08
 ---
 

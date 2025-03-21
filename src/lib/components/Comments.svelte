@@ -1,6 +1,6 @@
 <script lang="ts">
-	import { current_theme } from "$lib/shared/state.svelte";
-	import Giscus from "@giscus/svelte";
+	import { current_theme } from '$lib/shared/state.svelte'
+	import Giscus from '@giscus/svelte'
 </script>
 
 <Giscus

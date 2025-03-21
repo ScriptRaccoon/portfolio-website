@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Controls from "$lib/components/Controls.svelte";
-	import Expand from "$lib/components/Expand.svelte";
-	import Comments from "$lib/components/Comments.svelte";
+	import Controls from '$lib/components/Controls.svelte'
+	import Expand from '$lib/components/Expand.svelte'
+	import Comments from '$lib/components/Comments.svelte'
 
-	let { data } = $props();
+	let { data } = $props()
 
-	let { title, published, updated } = $derived(data.attributes);
+	let { title, published, updated } = $derived(data.attributes)
 </script>
 
 <Controls />
@@ -100,8 +100,7 @@
 				height: 0.4rem;
 			}
 
-			scrollbar-color: var(--secondary-font-color)
-				var(--code-bg-color);
+			scrollbar-color: var(--secondary-font-color) var(--code-bg-color);
 
 			&::-webkit-scrollbar-thumb {
 				background-color: var(--secondary-font-color);

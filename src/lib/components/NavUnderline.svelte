@@ -1,11 +1,11 @@
 <script lang="ts">
 	type Props = {
-		pos: number;
-		animated: boolean;
-		cols: number;
-	};
+		pos: number
+		animated: boolean
+		cols: number
+	}
 
-	let { pos, animated, cols }: Props = $props();
+	let { pos, animated, cols }: Props = $props()
 </script>
 
 <div
@@ -38,7 +38,7 @@
 	}
 
 	.underline::before {
-		content: "";
+		content: '';
 		position: absolute;
 		left: 10%;
 		width: 80%;

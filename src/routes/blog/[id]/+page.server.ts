@@ -1,9 +1,9 @@
-import fm from "front-matter";
-import { error } from "@sveltejs/kit";
+import fm from 'front-matter'
+import { error } from '@sveltejs/kit'
 import {
 	type PostMetaData,
 	type PublishedPostMetaData,
-} from "$lib/shared/types";
+} from '$lib/shared/types'
 import {
 	highlight_code,
 	add_ids_to_headings,
@@ -11,48 +11,48 @@ import {
 	render_formulas,
 	transform_external_links,
 	render_markdown,
-} from "$lib/server/blog-processing";
-import { compose, is_published } from "$lib/shared/utils";
+} from '$lib/server/blog-processing'
+import { compose, is_published } from '$lib/shared/utils'
 
-const posts_record = import.meta.glob("/src/data/posts/*.md", {
-	as: "raw",
+const posts_record = import.meta.glob('/src/data/posts/*.md', {
+	as: 'raw',
 	eager: true,
-});
+})
 
 export const load = async (event) => {
-	const id = event.params.id;
-	const path = `/src/data/posts/${id}.md`;
+	const id = event.params.id
+	const path = `/src/data/posts/${id}.md`
 
 	if (!(path in posts_record)) {
-		error(404, "There is no post with this ID");
+		error(404, 'There is no post with this ID')
 	}
 
-	const markdown = posts_record[path];
+	const markdown = posts_record[path]
 
 	const { attributes: _attributes, body } =
-		fm<Omit<PostMetaData, "id">>(markdown);
+		fm<Omit<PostMetaData, 'id'>>(markdown)
 
-	const attributes: PostMetaData = { ..._attributes, id };
+	const attributes: PostMetaData = { ..._attributes, id }
 
 	if (!is_published(attributes)) {
-		error(404, "This post is not published");
+		error(404, 'This post is not published')
 	}
 
-	attributes satisfies PublishedPostMetaData;
+	attributes satisfies PublishedPostMetaData
 
-	const html_raw = render_markdown(body);
+	const html_raw = render_markdown(body)
 
 	const html_code = compose([
 		render_formulas,
 		transform_external_links,
 		add_ids_to_headings,
 		highlight_code,
-	])(html_raw);
+	])(html_raw)
 
-	const toc = get_table_of_contents(html_raw);
+	const toc = get_table_of_contents(html_raw)
 
-	const { title, description } = attributes;
-	const meta = { title, description };
+	const { title, description } = attributes
+	const meta = { title, description }
 
-	return { meta, attributes, html_code, toc, id };
-};
+	return { meta, attributes, html_code, toc, id }
+}

@@ -84,14 +84,14 @@ We create a file `lib/server/db.ts` (or `db.js` if you are using JavaScript) and
 ```typescript
 // lib/server/db.ts
 
-import mongoose from "mongoose";
-import { SECRET_MONGODB_URI } from "$env/static/private";
+import mongoose from 'mongoose'
+import { SECRET_MONGODB_URI } from '$env/static/private'
 
 export async function connect_to_db() {
 	try {
-		return await mongoose.connect(SECRET_MONGODB_URI);
+		return await mongoose.connect(SECRET_MONGODB_URI)
 	} catch (err) {
-		console.log(err);
+		console.log(err)
 	}
 }
 ```
@@ -101,13 +101,13 @@ We use this function in the layout server load function. If the connection faile
 ```typescript
 // +layout.server.ts
 
-import { error } from "@sveltejs/kit";
-import { connect_to_db } from "$lib/server/db";
+import { error } from '@sveltejs/kit'
+import { connect_to_db } from '$lib/server/db'
 
 export const load = async (event) => {
-	const connection = await connect_to_db();
-	if (!connection) throw error(500, "Database connection failed");
-};
+	const connection = await connect_to_db()
+	if (!connection) throw error(500, 'Database connection failed')
+}
 ```
 
 ## User model
@@ -117,15 +117,15 @@ Every user in the database will have an email, password and name. Moreover, the 
 ```typescript
 // lib/server/models.ts
 
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const User_Schema = new mongoose.Schema({
 	email: { type: String, required: true, unique: true },
 	password: { type: String, required: true },
 	name: { type: String, required: true },
-});
+})
 
-export const User_Model = mongoose.model("User", User_Schema);
+export const User_Model = mongoose.model('User', User_Schema)
 ```
 
 Notice that the restraint `unique: true` in the email field will throw an error when we want to save a user with a duplicate email to the database. But to differentiate this error better from other errors, we will implement this check by hand. The restraint also creates an [index](https://www.mongodb.com/docs/manual/indexes/) for the emails so that users will be faster to find by email. A gotcha is that the validation method [`validateSync`](https://mongoosejs.com/docs/validation.html) does _not_ return an error when the email is not unique. Hence we will not use it here.
@@ -155,19 +155,17 @@ Let us create an [action handler](https://kit.svelte.dev/docs/form-actions) for 
 
 export const actions = {
 	default: async (event) => {
-		const data = await event.request.formData();
+		const data = await event.request.formData()
 
-		const email = (data.get("email") as string)
-			?.toLowerCase()
-			?.trim();
-		const password = data.get("password") as string;
-		const name = (data.get("name") as string)?.trim();
+		const email = (data.get('email') as string)?.toLowerCase()?.trim()
+		const password = data.get('password') as string
+		const name = (data.get('name') as string)?.trim()
 
-		const user = { email, name };
+		const user = { email, name }
 
 		// TODO: register user
 	},
-};
+}
 ```
 
 ### Validation
@@ -177,41 +175,38 @@ The registration process will be done in a separate file, `lib/server/register.t
 ```typescript
 // lib/server/register.ts
 
-import { User_Model } from "./models";
+import { User_Model } from './models'
 
-const email_regexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+const email_regexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
 
 export async function verify_email(email: string): Promise<string> {
-	if (!email) return "Email is required.";
+	if (!email) return 'Email is required.'
 
-	if (!email.match(email_regexp))
-		return "Please enter a valid email.";
+	if (!email.match(email_regexp)) return 'Please enter a valid email.'
 
-	const previous_user = await User_Model.findOne({ email });
+	const previous_user = await User_Model.findOne({ email })
 
-	if (previous_user) "There is already an account with this email.";
+	if (previous_user) 'There is already an account with this email.'
 
-	return "";
+	return ''
 }
 
 function verify_password(password: string): string {
-	if (!password) return "Password is required.";
+	if (!password) return 'Password is required.'
 
-	if (password.length < 8)
-		return "Password must be at least 8 characters.";
+	if (password.length < 8) return 'Password must be at least 8 characters.'
 
 	// check for symbols etc. if you wish
 
-	return "";
+	return ''
 }
 
 export function verify_name(name: string): string {
-	if (!name) return "Name is required.";
+	if (!name) return 'Name is required.'
 
-	if (name.length <= 1)
-		return "Name has to be at least 2 characters.";
+	if (name.length <= 1) return 'Name has to be at least 2 characters.'
 
-	return "";
+	return ''
 }
 ```
 
@@ -229,29 +224,29 @@ export async function register_user(
 	password: string,
 	name: string,
 ): Promise<{ error: string }> {
-	const email_error = await verify_email(email);
-	if (email_error) return { error: email_error };
+	const email_error = await verify_email(email)
+	if (email_error) return { error: email_error }
 
-	const password_error = verify_password(password);
-	if (password_error) return { error: password_error };
+	const password_error = verify_password(password)
+	if (password_error) return { error: password_error }
 
-	const name_error = verify_name(name);
-	if (name_error) return { error: name_error };
+	const name_error = verify_name(name)
+	if (name_error) return { error: name_error }
 
-	const salt_rounds = 10;
-	const hashed_password = await bcrypt.hash(password, salt_rounds);
+	const salt_rounds = 10
+	const hashed_password = await bcrypt.hash(password, salt_rounds)
 
 	const user = new User_Model({
 		email,
 		password: hashed_password,
 		name,
-	});
+	})
 
 	try {
-		await user.save();
-		return { error: "" };
+		await user.save()
+		return { error: '' }
 	} catch (err) {
-		return { error: err?.toString() as string };
+		return { error: err?.toString() as string }
 	}
 }
 ```
@@ -265,25 +260,25 @@ Now we can complete the action handler. In case of an error, we send a response 
 ```typescript
 // /register/+page.server.ts
 
-import { register_user } from "$lib/server/register";
-import { fail } from "@sveltejs/kit";
+import { register_user } from '$lib/server/register'
+import { fail } from '@sveltejs/kit'
 
 export const actions = {
 	default: async (event) => {
 		// get email, name, password (see above)
 
-		const user = { email, name };
+		const user = { email, name }
 
-		const { error } = await register_user(email, password, name);
+		const { error } = await register_user(email, password, name)
 
 		if (error) {
-			return fail(400, { user, error });
+			return fail(400, { user, error })
 		} else {
-			const message = "Registration successful! You can now login.";
-			return { user, message };
+			const message = 'Registration successful! You can now login.'
+			return { user, message }
 		}
 	},
-};
+}
 ```
 
 On the register page, we declare the prop containing the action data that we have just defined. It is called `form`. (In my opinion, this is an unfortunate name choice of SvelteKit, since `form` is not what we entered into the form, and something like `actionData` seems to be more appropriate.)
@@ -292,7 +287,7 @@ On the register page, we declare the prop containing the action data that we hav
 <!-- /register/+page.svelte -->
 
 <script lang="ts">
-	export let form;
+	export let form
 </script>
 ```
 
@@ -303,7 +298,7 @@ In the email field, we pass the email from the action data as a value, in case i
 	type="email"
 	id="email_input"
 	name="email"
-	value={form?.user?.email ?? ""}
+	value={form?.user?.email ?? ''}
 />
 ```
 
@@ -360,7 +355,7 @@ This is an instance of _progressive enhancement_ and very easy to do in SvelteKi
 
 ```svelte
 <script lang="ts">
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms'
 	// ...
 </script>
 ```
@@ -393,16 +388,14 @@ The first step is exactly as before. We create an action handler in the login se
 
 export const actions = {
 	default: async (event) => {
-		const data = await event.request.formData();
+		const data = await event.request.formData()
 
-		const email = (data.get("email") as string)
-			?.toLowerCase()
-			?.trim();
-		const password = data.get("password") as string;
+		const email = (data.get('email') as string)?.toLowerCase()?.trim()
+		const password = data.get('password') as string
 
 		// TODO: login user
 	},
-};
+}
 ```
 
 ### Types
@@ -414,10 +407,10 @@ Before we continue, we need to add a type for the users (without the password). 
 
 declare global {
 	type user = {
-		id: string;
-		email: string;
-		name: string;
-	};
+		id: string
+		email: string
+		name: string
+	}
 }
 ```
 
@@ -425,8 +418,8 @@ In the same block, let us also add a type just for the ID part of a user. This w
 
 ```typescript
 type auth = {
-	id: string;
-};
+	id: string
+}
 ```
 
 ### Login validation
@@ -451,18 +444,18 @@ Let us start by adding some basic validation for the email. We want to reuse the
 ```typescript
 // lib/server/utils.ts
 
-export const email_regexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/;
+export const email_regexp = /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$/
 ```
 
 Back to our function `get_user`, we now can validate the email.
 
 ```typescript
 if (!email) {
-	return { error: "Email is required." };
+	return { error: 'Email is required.' }
 }
 
 if (!email.match(email_regexp)) {
-	return { error: "Please enter a valid email." };
+	return { error: 'Please enter a valid email.' }
 }
 ```
 
@@ -471,10 +464,10 @@ Notice that we cannot reuse the `verify_email` function from `register.ts` since
 Next, we need to check if a user exists at all with that email (make sure to import `User_Model`):
 
 ```typescript
-const user = await User_Model.findOne({ email });
+const user = await User_Model.findOne({ email })
 
 if (!user) {
-	return { error: "Email could not be found." };
+	return { error: 'Email could not be found.' }
 }
 ```
 
@@ -482,25 +475,22 @@ At this stage, we have a user. Next, we need to check if the password is present
 
 ```typescript
 if (!password) {
-	return { error: "Password is required." };
+	return { error: 'Password is required.' }
 }
 
-const password_is_correct = await bcrypt.compare(
-	password,
-	user.password,
-);
+const password_is_correct = await bcrypt.compare(password, user.password)
 
 if (!password_is_correct) {
-	return { error: "Password is not correct." };
+	return { error: 'Password is not correct.' }
 }
 ```
 
 We are now in the happy case. Next, we want to return the ID of the user. We already saw before that the ID is stored under the key `_id` and that it is actually an object. (This can also be seen using TypeScript.) We need to use `.toString()` to convert it to a string to process it further.
 
 ```typescript
-const id = user._id.toString();
-const name = user.name;
-return { id, email, name };
+const id = user._id.toString()
+const name = user.name
+return { id, email, name }
 ```
 
 Notice that we have returned indeed an object of type `user`.
@@ -511,10 +501,10 @@ We have completed the `get_user` function. Its result will be used in the `login
 // lib/server/login.ts
 
 export async function login_user(email: string, password: string) {
-	const user = await get_user(email, password);
+	const user = await get_user(email, password)
 
-	if ("error" in user) {
-		return { error: user.error };
+	if ('error' in user) {
+		return { error: user.error }
 	}
 
 	// TODO: generate token
@@ -539,14 +529,14 @@ npm i -D @types/jsonwebtoken
 We import the package and use the `jwt.sign()` method to encrypt the secret. Then we return the generated token (which is a string).
 
 ```typescript
-import jwt from "jsonwebtoken";
-import { SECRET_JWT_KEY } from "$env/static/private";
+import jwt from 'jsonwebtoken'
+import { SECRET_JWT_KEY } from '$env/static/private'
 
 export async function login_user(email: string, password: string) {
 	// ...
 	// happy case:
-	const token = jwt.sign({ id: user.id }, SECRET_JWT_KEY);
-	return { token, user };
+	const token = jwt.sign({ id: user.id }, SECRET_JWT_KEY)
+	return { token, user }
 }
 ```
 
@@ -557,26 +547,26 @@ Using the `login_user` function, we can now complete the login action handler. I
 ```typescript
 // /login/+page.server.ts
 
-import { fail } from "@sveltejs/kit";
-import { login_user } from "$lib/server/login";
+import { fail } from '@sveltejs/kit'
+import { login_user } from '$lib/server/login'
 
 export const actions = {
 	default: async (event) => {
 		// get email, password (as above)
 
-		const user_data = await login_user(email, password);
+		const user_data = await login_user(email, password)
 
-		if ("error" in user_data) {
-			return fail(400, { email, error: user_data.error });
+		if ('error' in user_data) {
+			return fail(400, { email, error: user_data.error })
 		} else {
-			const { token, user } = user_data;
+			const { token, user } = user_data
 
 			// TODO: set cookies
 
-			return { email, user };
+			return { email, user }
 		}
 	},
-};
+}
 ```
 
 On the login page, we can use the returned action data to either show an error or a success message. We also prefill the email field (as on the register page).
@@ -584,9 +574,9 @@ On the login page, we can use the returned action data to either show an error o
 ```svelte
 <!-- /login/+page.svelte -->
 <script lang="ts">
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms'
 
-	export let form;
+	export let form
 </script>
 
 <h1>Login</h1>
@@ -598,7 +588,7 @@ On the login page, we can use the returned action data to either show an error o
 			type="email"
 			id="email_input"
 			name="email"
-			value={form?.email ?? ""}
+			value={form?.email ?? ''}
 		/>
 	</div>
 	<div>
@@ -638,14 +628,14 @@ export const actions = {
 	default: async (event) => {
 		// login process (as above)
 
-		event.cookies.set("auth-token", token, {
+		event.cookies.set('auth-token', token, {
 			httpOnly: true,
 			secure: true,
-			path: "/",
+			path: '/',
 			maxAge: 60 * 60 * 24,
-		});
+		})
 	},
-};
+}
 ```
 
 This sets a cookie with the name `"auth-token"` and the value `token`, which is our JWT. The options object specifies that the cookie
@@ -662,19 +652,19 @@ To authenticate users, we write a helper function in a new file (which always ha
 ```typescript
 // lib/server/authenticate.ts
 
-import jwt from "jsonwebtoken";
-import { SECRET_JWT_KEY } from "$env/static/private";
-import type { Cookies } from "@sveltejs/kit";
+import jwt from 'jsonwebtoken'
+import { SECRET_JWT_KEY } from '$env/static/private'
+import type { Cookies } from '@sveltejs/kit'
 
 export function authenticate(cookies: Cookies): auth | undefined {
-	let token = cookies.get("auth-token");
-	if (!token) return undefined;
+	let token = cookies.get('auth-token')
+	if (!token) return undefined
 	try {
-		const auth = jwt.verify(token, SECRET_JWT_KEY);
-		if (!auth) return undefined;
-		return auth as auth;
+		const auth = jwt.verify(token, SECRET_JWT_KEY)
+		if (!auth) return undefined
+		return auth as auth
 	} catch {
-		return undefined;
+		return undefined
 	}
 }
 ```
@@ -690,23 +680,23 @@ If the route is protected and the authentication is not successful (using the `a
 ```typescript
 // hooks.server.ts
 
-import { authenticate } from "$lib/server/authenticate";
-import { redirect } from "@sveltejs/kit";
+import { authenticate } from '$lib/server/authenticate'
+import { redirect } from '@sveltejs/kit'
 
 export const handle = async ({ event, resolve }) => {
 	const is_protected =
-		event.url.pathname.startsWith("/dashboard") ||
-		event.url.pathname.startsWith("/account");
+		event.url.pathname.startsWith('/dashboard') ||
+		event.url.pathname.startsWith('/account')
 
-	const auth = authenticate(event.cookies);
+	const auth = authenticate(event.cookies)
 
 	if (is_protected && !auth) {
-		throw redirect(307, "/login");
+		throw redirect(307, '/login')
 	}
 
-	const response = await resolve(event);
-	return response;
-};
+	const response = await resolve(event)
+	return response
+}
 ```
 
 However, you will notice that the dashboard can be opened nevertheless. This is because, right now, no server request is necessary to open that page. The solution is quite simple: create an empty `/dashboard/+page.server.ts` file, optionally with a comment about why you have created it.
@@ -724,15 +714,15 @@ Well, when we set the `auth-token` cookie to save the JWT, we can do the same fo
 ```typescript
 // lib/server/utils.ts
 
-const one_day = 60 * 60 * 24;
+const one_day = 60 * 60 * 24
 
 export const cookie_options = {
 	httpOnly: true,
 	secure: true,
-	sameSite: "strict",
-	path: "/",
+	sameSite: 'strict',
+	path: '/',
 	maxAge: one_day,
-} as const;
+} as const
 ```
 
 The `as const` is necessary to make TypeScript happy in the following.
@@ -742,9 +732,9 @@ Import this object in the server file for the login page and replace the hard-co
 ```typescript
 // /login/+page.server.ts
 
-event.cookies.set("auth-token", token, cookie_options);
-event.cookies.set("email", user.email, cookie_options);
-event.cookies.set("name", user.name, cookie_options);
+event.cookies.set('auth-token', token, cookie_options)
+event.cookies.set('email', user.email, cookie_options)
+event.cookies.set('name', user.name, cookie_options)
 ```
 
 We read these cookies in the layout server load (where we already established the database connection) and return them as page data. For non-authenticated users, we choose empty strings.
@@ -755,11 +745,11 @@ We read these cookies in the layout server load (where we already established th
 export const load = async (event) => {
 	// ...
 
-	const name = event.cookies.get("name") ?? "";
-	const email = event.cookies.get("email") ?? "";
+	const name = event.cookies.get('name') ?? ''
+	const email = event.cookies.get('email') ?? ''
 
-	return { name, email };
-};
+	return { name, email }
+}
 ```
 
 The advantage of doing this in the _layout_ is that these data are available on every page. In particular, on the dashboard, we can display the user name as follows.
@@ -768,7 +758,7 @@ The advantage of doing this in the _layout_ is that these data are available on 
 <!-- /dashboard/+page.svelte -->
 
 <script lang="ts">
-	export let data;
+	export let data
 </script>
 
 <h1>Dashboard</h1>
@@ -788,8 +778,8 @@ In the layout itself, we can also check if the user is authenticated and pass th
 <!-- +layout.svelte -->
 
 <script lang="ts">
-	import Nav from "$lib/components/Nav.svelte";
-	export let data;
+	import Nav from '$lib/components/Nav.svelte'
+	export let data
 </script>
 
 <Nav authenticated={!!data.name && !!data.email} />
@@ -801,47 +791,47 @@ We can use this to hide the pages from the navigation which are not available to
 <!-- lib/components/Nav.svelte -->
 
 <script lang="ts">
-	export let authenticated = false;
+	export let authenticated = false
 
 	type link = {
-		path: string;
-		text: string;
-		protected: boolean;
-	};
+		path: string
+		text: string
+		protected: boolean
+	}
 
 	const links: link[] = [
 		{
-			path: "/",
-			text: "Home",
+			path: '/',
+			text: 'Home',
 			protected: false,
 		},
 		{
-			path: "/dashboard",
-			text: "Dashboard",
+			path: '/dashboard',
+			text: 'Dashboard',
 			protected: true,
 		},
 		{
-			path: "/account",
-			text: "Account",
+			path: '/account',
+			text: 'Account',
 			protected: true,
 		},
 		{
-			path: "/register",
-			text: "Register",
+			path: '/register',
+			text: 'Register',
 			protected: false,
 		},
 		{
-			path: "/login",
-			text: "Login",
+			path: '/login',
+			text: 'Login',
 			protected: false,
 		},
-	];
+	]
 </script>
 
 <nav>
 	<ul>
 		{#each links as link}
-			{#if link.path === "/" || authenticated === link.protected}
+			{#if link.path === '/' || authenticated === link.protected}
 				<li>
 					<a href={link.path}>
 						{link.text}
@@ -871,10 +861,10 @@ I will only explain the update of the name since the one for email works the sam
 <!-- /account/+page.svelte -->
 
 <script lang="ts">
-	import { enhance } from "$app/forms";
+	import { enhance } from '$app/forms'
 
-	export let form;
-	export let data;
+	export let form
+	export let data
 </script>
 
 <h1>Account</h1>
@@ -882,12 +872,7 @@ I will only explain the update of the name since the one for email works the sam
 <form action="?/name" method="POST" autocomplete="off" use:enhance>
 	<div>
 		<label for="name_input">Name</label>
-		<input
-			type="text"
-			id="name_input"
-			name="name"
-			value={data.name}
-		/>
+		<input type="text" id="name_input" name="name" value={data.name} />
 	</div>
 	<button>Update</button>
 </form>
@@ -898,28 +883,28 @@ In the corresponding server file, we create a handler for the action called `nam
 ```typescript
 // /account/+page.server.ts
 
-import { fail } from "@sveltejs/kit";
-import { cookie_options } from "$lib/server/utils";
-import { change_name } from "$lib/server/account";
+import { fail } from '@sveltejs/kit'
+import { cookie_options } from '$lib/server/utils'
+import { change_name } from '$lib/server/account'
 
 export const actions = {
 	name: async (event) => {
-		const data = await event.request.formData();
-		const name = (data.get("name") as string)?.trim();
+		const data = await event.request.formData()
+		const name = (data.get('name') as string)?.trim()
 
-		const update = await change_name(event.cookies, name);
+		const update = await change_name(event.cookies, name)
 
-		if ("error" in update) {
-			return fail(400, { error: update.error });
+		if ('error' in update) {
+			return fail(400, { error: update.error })
 		}
 
-		event.cookies.set("name", name, cookie_options);
+		event.cookies.set('name', name, cookie_options)
 
-		const message = `Your new name is ${name}.`;
+		const message = `Your new name is ${name}.`
 
-		return { name, message };
+		return { name, message }
 	},
-};
+}
 ```
 
 I will not explain how to display error and success messages on the account page, since this is analogous to what we did on the login and register pages.
@@ -929,46 +914,46 @@ Let us instead look at the `change_name` function, which of course has to intera
 ```typescript
 // lib/server/account.ts
 
-import type { Cookies } from "@sveltejs/kit";
-import { User_Model } from "./models";
-import { authenticate } from "./authenticate";
-import { verify_name } from "./register";
+import type { Cookies } from '@sveltejs/kit'
+import { User_Model } from './models'
+import { authenticate } from './authenticate'
+import { verify_name } from './register'
 
 export async function change_name(
 	cookies: Cookies,
 	name: string,
 ): Promise<{ error: string } | { name: string }> {
-	const auth = authenticate(cookies);
+	const auth = authenticate(cookies)
 
 	if (!auth) {
-		return { error: "You are not authorized." };
+		return { error: 'You are not authorized.' }
 	}
 
-	const { id } = auth;
+	const { id } = auth
 
-	const name_error = verify_name(name);
+	const name_error = verify_name(name)
 
 	if (name_error) {
-		return { error: name_error };
+		return { error: name_error }
 	}
 
-	const user = await User_Model.findOne({ _id: id });
+	const user = await User_Model.findOne({ _id: id })
 
 	if (!user) {
-		return { error: "User could not be found" };
+		return { error: 'User could not be found' }
 	}
 
 	if (user.name === name) {
-		return { error: "You already have this name." };
+		return { error: 'You already have this name.' }
 	}
 
-	user.name = name;
+	user.name = name
 
 	try {
-		await user.save();
-		return { name };
+		await user.save()
+		return { name }
 	} catch (err) {
-		return { error: err?.toString() as string };
+		return { error: err?.toString() as string }
 	}
 }
 ```
@@ -992,16 +977,16 @@ This sends a POST request to the `/logout` page. Actually, there is no page, jus
 ```typescript
 // /logout/+page.server.ts
 
-import { redirect } from "@sveltejs/kit";
+import { redirect } from '@sveltejs/kit'
 
 export const actions = {
 	default: async (event) => {
-		event.cookies.delete("auth-token");
-		event.cookies.delete("email");
-		event.cookies.delete("name");
-		throw redirect(301, "/");
+		event.cookies.delete('auth-token')
+		event.cookies.delete('email')
+		event.cookies.delete('name')
+		throw redirect(301, '/')
 	},
-};
+}
 ```
 
 And that's it!

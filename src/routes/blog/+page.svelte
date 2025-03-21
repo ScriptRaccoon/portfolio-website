@@ -1,7 +1,7 @@
 <script lang="ts">
-	import PostPreview from "$lib/components/PostPreview.svelte";
+	import PostPreview from '$lib/components/PostPreview.svelte'
 
-	let { data } = $props();
+	let { data } = $props()
 </script>
 
 <h1>Blog</h1>

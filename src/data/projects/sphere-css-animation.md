@@ -4,7 +4,7 @@ teaser: without any JavaScript!
 repository: https://github.com/ScriptRaccoon/css-sphere
 url: https://css-sphere.netlify.app
 tutorial:
-tags: ["3D", "CSS", "Creative Coding", "Mathematics"]
+tags: ['3D', 'CSS', 'Creative Coding', 'Mathematics']
 date: 2022-02-20
 ---
 

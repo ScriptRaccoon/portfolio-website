@@ -1,8 +1,8 @@
 <script lang="ts">
-	import Fa from "svelte-fa";
-	import { faMoon } from "@fortawesome/free-solid-svg-icons";
-	import { faSun } from "@fortawesome/free-regular-svg-icons";
-	import { current_theme } from "$lib/shared/state.svelte";
+	import Fa from 'svelte-fa'
+	import { faMoon } from '@fortawesome/free-solid-svg-icons'
+	import { faSun } from '@fortawesome/free-regular-svg-icons'
+	import { current_theme } from '$lib/shared/state.svelte'
 </script>
 
 <button

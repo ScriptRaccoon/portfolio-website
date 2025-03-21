@@ -110,7 +110,7 @@ You will notice that when activating any radio button and clicking the reset but
 We now work with the CSS resp. SCSS file. We start by importing all functions from the [list module in Sass](https://sass-lang.com/documentation/values/lists/).
 
 ```scss
-@use "sass:list" as *;
+@use 'sass:list' as *;
 ```
 
 Then we define some constants that define the shape of the maze.
@@ -181,7 +181,7 @@ form {
 The radio buttons now pile up in a long column, so let us remove them. We can still activate them through their labels.
 
 ```scss
-input[type="radio"] {
+input[type='radio'] {
 	display: none;
 }
 ```
@@ -215,10 +215,7 @@ The player is a red circle inside the maze. Its position is defined by CSS varia
 	height: $u;
 	border-radius: 50%;
 	background: red;
-	transform: translate(
-		calc(var(--x) * #{$u}),
-		calc(var(--y) * #{$u})
-	);
+	transform: translate(calc(var(--x) * #{$u}), calc(var(--y) * #{$u}));
 }
 ```
 
@@ -250,7 +247,7 @@ As in the Pug code, we first need a function that computes the ID of a radio but
 @function id($coordinate) {
 	$x: nth($coordinate, 1);
 	$y: nth($coordinate, 2);
-	@return "r" + $x + "-" + $y;
+	@return 'r' + $x + '-' + $y;
 }
 ```
 
@@ -351,7 +348,7 @@ We only show those labels whose coordinates are the allowed neighbors:
 	$id: id(($i, $j));
 	@each $x, $y in neighbors($i, $j) {
 		$id_n: id(($x, $y));
-		input##{$id}:checked ~ .menu > label[for="#{$id_n}"] {
+		input##{$id}:checked ~ .menu > label[for='#{$id_n}'] {
 			display: inline-block;
 			// ... rest will come later
 		}
@@ -451,7 +448,7 @@ label {
 	// ... see above
 
 	&::after {
-		content: "";
+		content: '';
 		position: absolute;
 		inset: 0rem;
 		background-color: $color;
@@ -507,7 +504,7 @@ Notice that it still works as before. It resets the player's position to the ini
 
 ```scss
 // hide reset button when player is at start
-input##{id($start)}:checked ~ button[type="reset"] {
+input##{id($start)}:checked ~ button[type='reset'] {
 	pointer-events: none;
 	opacity: 0;
 }
@@ -584,7 +581,7 @@ When the game is won, it looks a bit better when we also hide the menu and the m
 input##{id($goal)}:checked {
 	// ... see above
 
-	& ~ :is(.menu, button[type="reset"]) {
+	& ~ :is(.menu, button[type='reset']) {
 		opacity: 0;
 	}
 }
@@ -598,7 +595,7 @@ Let us also highlight the goal. We do this with a pseudo-element of the maze. Fo
 // mixin displaying the goal
 @mixin show_goal() {
 	&::before {
-		content: "";
+		content: '';
 		position: absolute;
 		width: $u;
 		height: $u;
@@ -662,10 +659,14 @@ To draw both walls at the same time, we just concatenate the values:
 ```scss
 .maze {
 	// ... see above
-	background-image: linear-gradient($color 0% 100%), linear-gradient($color
-				0% 100%);
-	background-size: 2.5rem 0.25rem, 0.25rem 2.5rem;
-	background-position: 0rem 2.5rem, 5rem 0rem;
+	background-image: linear-gradient($color 0% 100%),
+		linear-gradient($color 0% 100%);
+	background-size:
+		2.5rem 0.25rem,
+		0.25rem 2.5rem;
+	background-position:
+		0rem 2.5rem,
+		5rem 0rem;
 	background-repeat: no-repeat;
 }
 ```
@@ -805,7 +806,7 @@ The goal also has to be made a bit smaller and moved a bit.
 // mixin displaying the goal
 @mixin show_goal() {
 	&::before {
-		content: "";
+		content: '';
 		position: absolute;
 		width: $u - $thick;
 		height: $u - $thick;

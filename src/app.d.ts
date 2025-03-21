@@ -8,11 +8,11 @@ declare global {
 
 		interface PageData {
 			meta: {
-				title: string;
-				description: string;
-			};
+				title: string
+				description: string
+			}
 		}
 	}
 }
 
-export {};
+export {}

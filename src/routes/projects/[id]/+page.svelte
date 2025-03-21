@@ -1,19 +1,19 @@
 <script lang="ts">
-	import Controls from "$lib/components/Controls.svelte";
+	import Controls from '$lib/components/Controls.svelte'
 
-	let { data } = $props();
+	let { data } = $props()
 
 	let { id, name, url, repository, tutorial, tags, date } = $derived(
 		data.attributes,
-	);
+	)
 
 	let links = $derived(
 		[
-			{ label: "URL", href: url },
-			{ label: "Repository", href: repository },
-			{ label: "Tutorial", href: tutorial },
+			{ label: 'URL', href: url },
+			{ label: 'Repository', href: repository },
+			{ label: 'Tutorial', href: tutorial },
 		].filter((link) => link.href),
-	);
+	)
 </script>
 
 <Controls />

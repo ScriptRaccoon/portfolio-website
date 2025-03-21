@@ -4,7 +4,7 @@ teaser: made with Svelte and Python
 repository: https://github.com/ScriptRaccoon/pentomino-tilings
 url: https://pentomino-tilings.netlify.app/
 tutorial:
-tags: ["Svelte", "Algorithms", "TypeScript", "Python"]
+tags: ['Svelte', 'Algorithms', 'TypeScript', 'Python']
 date: 2023-11-12
 ---
 

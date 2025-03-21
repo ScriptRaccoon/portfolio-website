@@ -1,54 +1,52 @@
 <script lang="ts">
-	import { page } from "$app/state";
-	import { getContext } from "svelte";
+	import { page } from '$app/state'
+	import { getContext } from 'svelte'
 
-	import ThemeToggler from "./ThemeToggler.svelte";
+	import ThemeToggler from './ThemeToggler.svelte'
 
-	import { faYoutube } from "@fortawesome/free-brands-svg-icons";
+	import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 	import {
 		faCircleQuestion,
 		faClipboardList,
 		faPenToSquare,
-	} from "@fortawesome/free-solid-svg-icons";
-	import IconLink from "./IconLink.svelte";
-	import HomeLink from "./HomeLink.svelte";
-	import NavUnderline from "./NavUnderline.svelte";
+	} from '@fortawesome/free-solid-svg-icons'
+	import IconLink from './IconLink.svelte'
+	import HomeLink from './HomeLink.svelte'
+	import NavUnderline from './NavUnderline.svelte'
 
 	const links = [
 		{
-			name: "YouTube",
-			path: "/youtube",
+			name: 'YouTube',
+			path: '/youtube',
 			icon: faYoutube,
 		},
 		{
-			name: "Projects",
-			path: "/projects",
+			name: 'Projects',
+			path: '/projects',
 			icon: faClipboardList,
 		},
 		{
-			name: "Blog",
-			path: "/blog",
+			name: 'Blog',
+			path: '/blog',
 			icon: faPenToSquare,
 		},
 		{
-			name: "About",
-			path: "/about",
+			name: 'About',
+			path: '/about',
 			icon: faCircleQuestion,
 		},
-	] as const;
+	] as const
 
-	let current_path = $derived(page.url.pathname);
+	let current_path = $derived(page.url.pathname)
 
 	let page_pos = $derived.by(() => {
-		if (current_path === "/") return 0;
-		return (
-			1 + links.findIndex(({ path }) => current_path.startsWith(path))
-		);
-	});
+		if (current_path === '/') return 0
+		return 1 + links.findIndex(({ path }) => current_path.startsWith(path))
+	})
 
-	const animated = getContext<boolean>("allow_animation");
+	const animated = getContext<boolean>('allow_animation')
 
-	const items = links.length + 2;
+	const items = links.length + 2
 </script>
 
 <nav>

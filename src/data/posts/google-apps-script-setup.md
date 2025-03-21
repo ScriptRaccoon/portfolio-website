@@ -70,7 +70,7 @@ Open your preferred editor and create `main.js` in the root of the project.
 
 ```js
 // main.js
-console.log("hi mom!");
+console.log('hi mom!')
 ```
 
 Also notice that the folder already has two files created by `clasp`, namely `.clasp.json` which has the ID of the script, and the so-called manifest file `appscript.json`. Don't worry about these for now.
@@ -123,7 +123,7 @@ Rename the file `main.js` to `main.ts` and move it to a new folder `src`.
 
 ```ts
 // src/main.ts
-console.log("hi mom!");
+console.log('hi mom!')
 ```
 
 Generate a [TypeScript configuration file](https://www.typescriptlang.org/docs/handbook/tsconfig-json.html) `tsconfig.json` in the root of the project and adjust it to your needs.
@@ -150,16 +150,16 @@ We can now also use several files and bundle them together. For illustration, cr
 
 ```ts
 // src/answer.ts
-export const answer = 42;
+export const answer = 42
 ```
 
 Import it in the main file and do something with it.
 
 ```ts
 // src/main.ts
-import { answer } from "./answer";
+import { answer } from './answer'
 
-console.log("The answer is", answer);
+console.log('The answer is', answer)
 ```
 
 We now create a build script that uses esbuild to bundle the files together into one output file, `dist/code.js`. We also run a type check before.
@@ -180,13 +180,13 @@ After running `pnpm build`, the output file will look like this.
 ```js
 // dist/code.js
 
-"use strict";
+'use strict'
 
 // src/answer.ts
-var answer = 42;
+var answer = 42
 
 // src/main.ts
-console.log("The answer is", answer);
+console.log('The answer is', answer)
 ```
 
 Unfortunately, I did not find a way to configure esbuild to avoid having the outdated `var` keyword in the output. But it does not matter that much if we keep the TypeScript source files as our single source of truth.
@@ -268,7 +268,7 @@ pnpm add -D @types/google-apps-script
 For example, if you are dealing with a script that is [bound to a spreadsheet](https://developers.google.com/apps-script/guides/bound), you can now safely access that spreadsheet with
 
 ```ts
-const sheet = SpreadsheetApp.getActiveSpreadsheet();
+const sheet = SpreadsheetApp.getActiveSpreadsheet()
 ```
 
 When writing `sheet.` you will get a very convenient list of all the available methods on the sheet. Notice that this is also true for Google's editor in the browser, and it is even better there since JSDocs provide comprehensive documentation. In my experience, these JSDocs often make it unnecessary to consult the documentation pages by Google. Unfortunately, they are not present in our local editor.
@@ -294,7 +294,7 @@ The function will be there when you add
 
 ```ts
 // src/main.ts
-sync_calendar_events();
+sync_calendar_events()
 ```
 
 to the code. However, this is not what we want. Whenever any function in the script is run via a trigger, the rest of the code is run as well. This means that the function `sync_calendar_events` will always be executed, even if you don't want that. In particular, in the trigger for `sync_calendar_events` itself, the function will be run twice.
@@ -305,15 +305,15 @@ The trick is to somehow use the function without executing it. For example:
 
 ```ts
 // src/main.ts
-if (1 < 0) console.log(typeof sync_calendar_events);
+if (1 < 0) console.log(typeof sync_calendar_events)
 ```
 
 Alternative:
 
 ```ts
 // src/main.ts
-const isOK = typeof sync_calendar_events === "function";
-if (!isOK) console.warn("function is not defined!");
+const isOK = typeof sync_calendar_events === 'function'
+if (!isOK) console.warn('function is not defined!')
 ```
 
 You are probably ...triggered by this piece of code. And I am too. It is stupid. The if-condition is always false, so the code in the if-block is not run. But at least, it does the job.
@@ -325,10 +325,7 @@ The problem can also not be solved by executing the function in some other file,
 Also, the problem remains when implementing triggers by code, since here functions are just referenced by their names, which are strings.
 
 ```ts
-ScriptApp.newTrigger("sync_calendar_events")
-	.timeBased()
-	.everyHours(1)
-	.create();
+ScriptApp.newTrigger('sync_calendar_events').timeBased().everyHours(1).create()
 ```
 
 In other words, even with this piece of code neither your editor nor esbuild will know that the function is being used.

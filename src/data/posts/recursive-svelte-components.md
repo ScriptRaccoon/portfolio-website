@@ -24,9 +24,9 @@ The basic structure of a recursive component, `A.svelte`, is as follows:
 
 <script lang="ts">
 	// Self-import:
-	import A from "./A.svelte";
+	import A from './A.svelte'
 
-	let { maxDepth }: { maxDepth: number } = $props();
+	let { maxDepth }: { maxDepth: number } = $props()
 </script>
 
 {#if maxDepth >= 0}
@@ -55,9 +55,9 @@ This involves creating a 3x3 grid, filling the center square, and applying recur
 
 ```svelte
 <script lang="ts">
-	import Carpet from "./Carpet.svelte";
+	import Carpet from './Carpet.svelte'
 
-	let { maxDepth }: { maxDepth: number } = $props();
+	let { maxDepth }: { maxDepth: number } = $props()
 </script>
 ```
 
@@ -120,15 +120,15 @@ Here are the types we'll use:
 // types.ts
 
 export type FileData = {
-	name: string;
-	extension: string;
-};
+	name: string
+	extension: string
+}
 
 export type FolderData = {
-	name: string;
-	files: FileData[];
-	subfolders: FolderData[];
-};
+	name: string
+	files: FileData[]
+	subfolders: FolderData[]
+}
 ```
 
 First, we create a component to render a file. This component is not recursive and is relatively simple. We also use an icon to make it visually clear that it represents a file.
@@ -137,12 +137,12 @@ First, we create a component to render a file. This component is not recursive a
 <!-- File.svelte -->
 
 <script lang="ts">
-	import Fa from "svelte-fa"; // icon library
-	import { faFileAlt } from "@fortawesome/free-regular-svg-icons";
+	import Fa from 'svelte-fa' // icon library
+	import { faFileAlt } from '@fortawesome/free-regular-svg-icons'
 
-	import type { FileData } from "./types";
+	import type { FileData } from './types'
 
-	let { file }: { file: FileData } = $props();
+	let { file }: { file: FileData } = $props()
 </script>
 
 <div>
@@ -157,22 +157,22 @@ Next, we create the folder component, which is recursive. In addition to the fol
 <!-- Folder.svelte -->
 
 <script lang="ts">
-	import Fa from "svelte-fa"; // icon library
+	import Fa from 'svelte-fa' // icon library
 	import {
 		faFolderClosed,
 		faFolderOpen,
-	} from "@fortawesome/free-regular-svg-icons";
+	} from '@fortawesome/free-regular-svg-icons'
 
-	import File from "./File.svelte";
-	import Folder from "./Folder.svelte";
-	import type { FolderData } from "./types";
+	import File from './File.svelte'
+	import Folder from './Folder.svelte'
+	import type { FolderData } from './types'
 
 	type Props = {
-		folder: FolderData;
-		open?: boolean;
-	};
+		folder: FolderData
+		open?: boolean
+	}
 
-	let { folder, open = false }: Props = $props();
+	let { folder, open = false }: Props = $props()
 </script>
 ```
 
@@ -282,17 +282,17 @@ We begin by defining the script for `Tree.svelte`, where we declare three props:
 <!-- Tree.svelte -->
 
 <script lang="ts">
-	import Tree from "./Tree.svelte";
+	import Tree from './Tree.svelte'
 
 	type Props = {
-		maxDepth: number;
-		angle: number;
-		size: number;
-	};
+		maxDepth: number
+		angle: number
+		size: number
+	}
 
-	const unit = Math.PI / 180; // Converts degrees to radians
+	const unit = Math.PI / 180 // Converts degrees to radians
 
-	let { maxDepth, size, angle }: Props = $props();
+	let { maxDepth, size, angle }: Props = $props()
 </script>
 ```
 
@@ -339,13 +339,7 @@ To give the `.square` element the appearance of a square with the correct size, 
 The angle is also required for styling, so we add another CSS variable:
 
 ```svelte
-<div
-	class="square"
-	style:--size="{size}px"
-	style:--angle="{angle}deg"
->
-	...
-</div>
+<div class="square" style:--size="{size}px" style:--angle="{angle}deg">...</div>
 ```
 
 In the CSS, both the left and right parts are positioned below the square. The left part is rotated according to the angle:
@@ -373,10 +367,7 @@ The right part is slightly more complex. Simply mirroring the left part's styles
 To fix this, we pass the size of the right side as a CSS variable:
 
 ```svelte
-<div
-	class="right"
-	style:--smaller-size="{size * Math.sin(unit * angle)}px"
->
+<div class="right" style:--smaller-size="{size * Math.sin(unit * angle)}px">
 	...
 </div>
 ```

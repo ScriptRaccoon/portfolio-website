@@ -2,24 +2,21 @@
 
 <div class="intro">
 	<img src="/media/general/portrait.webp" alt="Martin portrait" />
-	<p class="subtitle">
-		Mathematician | Web developer | Content creator
-	</p>
+	<p class="subtitle">Mathematician | Web developer | Content creator</p>
 	<p class="me">
 		My name is Martin Brandenburg. I live in Berlin, Germany. 🏡
 	</p>
 </div>
 
 <p>
-	At university I studied <strong>pure mathematics</strong>, which is
-	one of my biggest passions and strongest skills. My main expertise
-	is category theory and algebraic geometry, and I completed my Ph.D.
-	in 2014. My mathematical publications are listed at
-	<a
-		href="https://ncatlab.org/nlab/show/Martin+Brandenburg"
-		target="_blank">my nLab page</a
-	>. In 2014 I left university, but I still publish and review
-	research articles from time to time. I also published a
+	At university I studied <strong>pure mathematics</strong>, which is one of
+	my biggest passions and strongest skills. My main expertise is category
+	theory and algebraic geometry, and I completed my Ph.D. in 2014. My
+	mathematical publications are listed at
+	<a href="https://ncatlab.org/nlab/show/Martin+Brandenburg" target="_blank"
+		>my nLab page</a
+	>. In 2014 I left university, but I still publish and review research
+	articles from time to time. I also published a
 	<a
 		href="https://link.springer.com/book/10.1007/978-3-662-53521-9"
 		target="_blank">textbook on category theory</a
@@ -31,22 +28,20 @@
 		href="https://albert-schweitzer-stiftung.de/"
 		target="_blank">non-profit organization for animal welfare</a
 	>. In this context, I learned
-	<strong>web development</strong> and devoted most of my free time on
-	it. I also observed many parallels between mathematics and web development,
-	and my problem-solving skills helped me a lot. 💻
+	<strong>web development</strong> and devoted most of my free time on it. I also
+	observed many parallels between mathematics and web development, and my problem-solving
+	skills helped me a lot. 💻
 </p>
 
 <p>
 	Since 2022 I work as a <strong>full stack web developer</strong>
 	for a company in the sports retail industry. If you are interested, see
-	<a href="/about/tools">Tools</a> for the list of tools I am familiar
-	with. 🧪
+	<a href="/about/tools">Tools</a> for the list of tools I am familiar with. 🧪
 </p>
 
 <p>
-	I am also actively involved in several online communities. I have
-	written thousands of posts in mathematical discussion forums,
-	notably on
+	I am also actively involved in several online communities. I have written
+	thousands of posts in mathematical discussion forums, notably on
 	<a
 		href="https://mathoverflow.net/users/2841/martin-brandenburg"
 		target="_blank">mathoverflow</a
@@ -64,8 +59,8 @@
 
 <p>
 	In 2019 I created my
-	<a href="/youtube">YouTube channel</a> on web development, in which
-	context I go by the name
+	<a href="/youtube">YouTube channel</a> on web development, in which context
+	I go by the name
 	<strong>Script Raccoon</strong>. In 2024 I also started a
 	<a href="https://www.youtube.com/@cuberaccoon" target="_blank"
 		>second YouTube channel</a

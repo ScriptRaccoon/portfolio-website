@@ -4,7 +4,7 @@ teaser: using page server loads and environment variables
 repository: https://github.com/ScriptRaccoon/sveltekit-password
 url: https://sveltekit-password.netlify.app/
 tutorial: https://youtu.be/Gf5cOJCAh4U
-tags: ["Authentication", "SvelteKit", "Tutorial", "TypeScript"]
+tags: ['Authentication', 'SvelteKit', 'Tutorial', 'TypeScript']
 date: 2023-03-16
 ---
 

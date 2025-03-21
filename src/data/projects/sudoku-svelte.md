@@ -4,7 +4,7 @@ teaser: made with SvelteKit
 repository: https://github.com/ScriptRaccoon/svudoku
 url: https://svudoku.netlify.app/
 tutorial:
-tags: ["Browser game", "SvelteKit", "Mathematics"]
+tags: ['Browser game', 'SvelteKit', 'Mathematics']
 date: 2023-12-01
 ---
 

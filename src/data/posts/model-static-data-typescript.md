@@ -15,10 +15,10 @@ Let's say we want to define certain "gadgets" in our application, each with the 
 
 ```ts
 type Gadget = {
-	id: string;
-	name: string;
-	description: string;
-};
+	id: string
+	name: string
+	description: string
+}
 ```
 
 We can represent a "table" of gadgets as an array of `Gadget` objects:
@@ -26,25 +26,25 @@ We can represent a "table" of gadgets as an array of `Gadget` objects:
 ```ts
 const GADGETS: Gadget[] = [
 	{
-		id: "spoon",
-		name: "Spoon",
+		id: 'spoon',
+		name: 'Spoon',
 		description:
-			"A spoon is a utensil consisting of a small shallow bowl (also known as a head), oval or round, at the end of a handle.",
+			'A spoon is a utensil consisting of a small shallow bowl (also known as a head), oval or round, at the end of a handle.',
 	},
 	{
-		id: "fork",
-		name: "Fork",
+		id: 'fork',
+		name: 'Fork',
 		description:
-			"A fork is a tool consisting of a handle with several narrow tines on one end.",
+			'A fork is a tool consisting of a handle with several narrow tines on one end.',
 	},
 	{
-		id: "knife",
-		name: "Knife",
+		id: 'knife',
+		name: 'Knife',
 		description:
-			"A knife is a tool with a cutting edge or blade attached to a handle.",
+			'A knife is a tool with a cutting edge or blade attached to a handle.',
 	},
 	// ...
-];
+]
 ```
 
 For this example, we'll stick to three gadgets, but in a real application, there could be hundreds. Whatever approach we take should scale accordingly.
@@ -53,19 +53,19 @@ Now, let's say another "table" needs to reference these gadgets:
 
 ```ts
 type Drawer = {
-	id: string;
-	gadgets: GadgetID[];
-	description: string;
-};
+	id: string
+	gadgets: GadgetID[]
+	description: string
+}
 
 const DRAWERS: Drawer[] = [
 	{
-		id: "1",
-		gadgets: ["fork", "spoon"],
-		description: "...",
+		id: '1',
+		gadgets: ['fork', 'spoon'],
+		description: '...',
 	},
 	// ...
-];
+]
 ```
 
 Naturally, we don't want to duplicate gadgets in our "table" — we want to reference them by their ID, mimicking the concept of a foreign key. This means we need a way to define the `GadgetID` type. Simply typing the `gadgets` array as `string[]` isn't sufficient: TypeScript won't warn us about invalid or deleted IDs, nor will it provide autocompletion.
@@ -77,16 +77,16 @@ Here's an initial solution. While it works, it introduces code duplication, so I
 We start by defining an array of all possible gadget IDs. By declaring it `as const`, we can derive the `GadgetID` type as a union of its values:
 
 ```ts
-const GADGET_IDS = ["spoon", "fork", "knife"] as const;
+const GADGET_IDS = ['spoon', 'fork', 'knife'] as const
 
 // Union type: 'spoon' | 'fork' | 'knife'
-type GadgetID = (typeof GADGET_IDS)[number];
+type GadgetID = (typeof GADGET_IDS)[number]
 
 type Gadget = {
-	id: GadgetID;
-	name: string;
-	description: string;
-};
+	id: GadgetID
+	name: string
+	description: string
+}
 ```
 
 The `GADGETS` array remains unchanged, and the type-checking issue is resolved.
@@ -100,15 +100,15 @@ A better approach is to declare the `GADGETS` array `as const` and define the ty
 ```ts
 const GADGETS = [
 	{
-		id: "spoon",
-		name: "Spoon",
-		description: "...",
+		id: 'spoon',
+		name: 'Spoon',
+		description: '...',
 	},
 	// ...
-] as const;
+] as const
 
 // Union type: 'spoon' | 'fork' | 'knife'
-type GadgetID = (typeof GADGETS_INDEX)[number]["id"];
+type GadgetID = (typeof GADGETS_INDEX)[number]['id']
 ```
 
 This solution is much better since we now have a single source of truth for gadget IDs. As in the first solution, we also get autocompletion and validation when referencing gadgets in a drawer.
@@ -123,19 +123,19 @@ One way to restore type validation is to explicitly define the `Gadget` type, th
 
 ```ts
 type Gadget = {
-	id: string;
-	name: string;
-	description: string;
-};
+	id: string
+	name: string
+	description: string
+}
 
 const GADGETS = [
 	{
-		id: "spoon",
-		name: "Spoon",
-		description: "...",
+		id: 'spoon',
+		name: 'Spoon',
+		description: '...',
 	},
 	// ...
-] as const satisfies Gadget[];
+] as const satisfies Gadget[]
 ```
 
 With this, if a gadget is missing a required property — such as `name` — TypeScript will immediately report an error:
@@ -153,9 +153,9 @@ To solve this, we create a separate reference that explicitly uses `Gadget[]`, w
 ```ts
 const GADGETS_INDEX = [
 	// ...
-] as const;
+] as const
 
-const GADGETS: Gadget[] = GADGETS_INDEX;
+const GADGETS: Gadget[] = GADGETS_INDEX
 ```
 
 This way, `GADGETS_INDEX` still provides a source of truth for the ID union type, while `GADGETS` remains a more usable `Gadget[]`.
@@ -165,17 +165,17 @@ This way, `GADGETS_INDEX` still provides a source of truth for the ID union type
 There's still one minor issue: if we extract an ID from `GADGETS`, it is inferred as `string` instead of `GadgetID`.
 
 ```ts
-const spoonID = GADGETS[0].id; // Type: string (but we want GadgetID)
+const spoonID = GADGETS[0].id // Type: string (but we want GadgetID)
 ```
 
 To fix this, we modify our `Gadget` type so that `id` is explicitly of type `GadgetID`:
 
 ```ts
 type Gadget = {
-	id: GadgetID;
-	name: string;
-	description: string;
-};
+	id: GadgetID
+	name: string
+	description: string
+}
 ```
 
 However, this alone causes a circular reference error:
@@ -193,13 +193,13 @@ This happens because:
 To break this cycle, we remove the `satisfies` keyword from `GADGETS_INDEX` and keep it `as const`. We then validate the final `GADGETS` array by explicitly typing it:
 
 ```ts
-const GADGETS: readonly Gadget[] = GADGETS_INDEX;
+const GADGETS: readonly Gadget[] = GADGETS_INDEX
 ```
 
 Adding `readonly` ensures TypeScript accepts this conversion. If you prefer, you can also use:
 
 ```ts
-const GADGETS: Gadget[] = Array.from(GADGETS_INDEX);
+const GADGETS: Gadget[] = Array.from(GADGETS_INDEX)
 ```
 
 The only minor drawback of this approach is that TypeScript will report validation errors on the `GADGETS` declaration rather than the individual gadget entries. However, the error messages are still clear and specific, making this the most practical and robust solution.
@@ -210,21 +210,21 @@ So far, we've seen that drawer objects can reference gadgets. But what if gadget
 
 ```ts
 type Gadget = {
-	id: GadgetID;
-	name: string;
-	description: string;
-	related?: readonly GadgetID[];
-};
+	id: GadgetID
+	name: string
+	description: string
+	related?: readonly GadgetID[]
+}
 
 const GADGETS_INDEX = [
 	{
-		id: "spoon",
-		name: "Spoon",
-		description: "...",
-		related: ["fork", "knife"],
+		id: 'spoon',
+		name: 'Spoon',
+		description: '...',
+		related: ['fork', 'knife'],
 	},
 	// ...
-] as const;
+] as const
 ```
 
 However, this approach has some drawbacks:
@@ -236,13 +236,13 @@ However, this approach has some drawbacks:
 In a database, we would typically store relationships in a separate table. We can follow the same principle in TypeScript by defining a separate array for gadget relationships.
 
 ```ts
-type GadgetRelations = Record<GadgetID, GadgetID[]>;
+type GadgetRelations = Record<GadgetID, GadgetID[]>
 
 const GADGET_RELATIONS: GadgetRelations = {
-	spoon: ["fork", "knife"],
-	fork: ["spoon", "knife"],
-	knife: ["spoon", "fork"],
-};
+	spoon: ['fork', 'knife'],
+	fork: ['spoon', 'knife'],
+	knife: ['spoon', 'fork'],
+}
 ```
 
 With this approach, TypeScript enforces that only valid IDs are used. Moreover, the relationship data is now distinct from gadget definitions, making both easier to manage. In particular, with hundreds of gadgets, maintaining relationships separately avoids cluttering the main `GADGETS` array.
@@ -250,7 +250,7 @@ With this approach, TypeScript enforces that only valid IDs are used. Moreover, 
 By default, the `GadgetRelation` type requires every gadget to have an entry. This is useful because even gadgets with no relationships will explicitly map to an empty array. However, if you prefer to omit gadgets without relations, you can modify the type:
 
 ```ts
-type GadgetRelations = Partial<Record<GadgetID, GadgetID[]>>;
+type GadgetRelations = Partial<Record<GadgetID, GadgetID[]>>
 ```
 
 ## Final code
@@ -261,39 +261,39 @@ Now, let's bring everything together. Notice that we declare types at the top of
 
 ```ts
 // Define the type for valid gadget IDs, derived from GADGETS_INDEX
-export type GadgetID = (typeof GADGETS_INDEX)[number]["id"];
+export type GadgetID = (typeof GADGETS_INDEX)[number]['id']
 
 // Define the structure of a gadget
 export type Gadget = {
-	id: GadgetID;
-	name: string;
-	description: string;
-};
+	id: GadgetID
+	name: string
+	description: string
+}
 
 // Define the actual gadget data, marked as `as const` for type inference
 const GADGETS_INDEX = [
 	{
-		id: "spoon",
-		name: "Spoon",
+		id: 'spoon',
+		name: 'Spoon',
 		description:
-			"A spoon is a utensil consisting of a small shallow bowl (also known as a head), oval or round, at the end of a handle.",
+			'A spoon is a utensil consisting of a small shallow bowl (also known as a head), oval or round, at the end of a handle.',
 	},
 	{
-		id: "fork",
-		name: "Fork",
+		id: 'fork',
+		name: 'Fork',
 		description:
-			"A fork is a tool consisting of a handle with several narrow tines on one end.",
+			'A fork is a tool consisting of a handle with several narrow tines on one end.',
 	},
 	{
-		id: "knife",
-		name: "Knife",
+		id: 'knife',
+		name: 'Knife',
 		description:
-			"A knife is a tool with a cutting edge or blade attached to a handle.",
+			'A knife is a tool with a cutting edge or blade attached to a handle.',
 	},
-] as const;
+] as const
 
 // The final gadgets array, properly typed as `readonly Gadget[]`
-export const GADGETS: readonly Gadget[] = GADGETS_INDEX;
+export const GADGETS: readonly Gadget[] = GADGETS_INDEX
 ```
 
 ### `drawers.ts`
@@ -301,34 +301,34 @@ export const GADGETS: readonly Gadget[] = GADGETS_INDEX;
 ```ts
 // Define the structure of a drawer, which contains references to gadgets
 export type Drawer = {
-	id: string;
-	gadgets: GadgetID[]; // Ensures only valid gadget IDs can be used
-	description: string;
-};
+	id: string
+	gadgets: GadgetID[] // Ensures only valid gadget IDs can be used
+	description: string
+}
 
 // Example drawer data, referencing gadgets by ID
 export const DRAWERS: Drawer[] = [
 	{
-		id: "1",
-		gadgets: ["fork", "knife"], // TypeScript enforces correct IDs here
-		description: "...",
+		id: '1',
+		gadgets: ['fork', 'knife'], // TypeScript enforces correct IDs here
+		description: '...',
 	},
 	// ...
-];
+]
 ```
 
 ### `gadget-relations.ts`
 
 ```ts
 // Define a mapping of gadgets to their related gadgets
-export type GadgetRelations = Record<GadgetID, GadgetID[]>;
+export type GadgetRelations = Record<GadgetID, GadgetID[]>
 
 // Example relationships between gadgets
 export const GADGET_RELATIONS: GadgetRelations = {
-	spoon: ["fork", "knife"],
-	fork: ["spoon", "knife"],
-	knife: ["spoon", "fork"],
-};
+	spoon: ['fork', 'knife'],
+	fork: ['spoon', 'knife'],
+	knife: ['spoon', 'fork'],
+}
 ```
 
 ## Querying data
@@ -336,9 +336,9 @@ export const GADGET_RELATIONS: GadgetRelations = {
 Although we won't dive into this in detail, it's easy to write small helper functions to query data in our "database." Here's a simple example:
 
 ```ts
-const DrawersWithForksInside = select("id")
+const DrawersWithForksInside = select('id')
 	.from(DRAWERS)
-	.filter((drawer) => drawer.gadgets.includes("fork"));
+	.filter((drawer) => drawer.gadgets.includes('fork'))
 ```
 
 Methods like `Array.prototype.filter` (similar to `WHERE` in SQL) are already built into TypeScript, making data querying straightforward. If there’s interest, I'll provide more details on querying data in a future post.

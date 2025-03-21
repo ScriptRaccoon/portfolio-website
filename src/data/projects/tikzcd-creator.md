@@ -4,7 +4,7 @@ teaser: to create TikZ commutative diagrams visually
 repository: https://github.com/ScriptRaccoon/tikzcd-creator
 url: https://tikzcd-creator.netlify.app/
 tutorial:
-tags: ["Tool", "Mathematics", "CSS", "Svelte", "TypeScript"]
+tags: ['Tool', 'Mathematics', 'CSS', 'Svelte', 'TypeScript']
 date: 2025-01-03
 ---
 

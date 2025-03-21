@@ -4,14 +4,7 @@ teaser: transitioning between any set of images
 repository: https://github.com/ScriptRaccoon/words-of-pixels
 url: https://wordsofpixels.netlify.app/
 tutorial: https://youtu.be/4p8Y0wL3gdk
-tags:
-    [
-        "Creative Coding",
-        "HTML Canvas",
-        "TypeScript",
-        "CSS",
-        "Tutorial",
-    ]
+tags: ['Creative Coding', 'HTML Canvas', 'TypeScript', 'CSS', 'Tutorial']
 date: 2023-05-21
 ---
 

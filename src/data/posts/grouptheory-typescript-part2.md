@@ -47,7 +47,7 @@ The next step is to define the group <math>\mathbb{Z}/n\mathbb{Z}</math> (pronou
 
 ```typescript
 function interval(n: number): number[] {
-	return new Array(n).fill(0).map((_, i) => i);
+	return new Array(n).fill(0).map((_, i) => i)
 }
 ```
 
@@ -62,7 +62,7 @@ function additiveGroupModulo(n: number): Group<number> | undefined {
 		unit: 0,
 		inverse: (a) => (a === 0 ? 0 : n - a),
 		compose: (a, b) => (a + b >= n ? a + b - n : a + b),
-	});
+	})
 }
 ```
 
@@ -70,24 +70,24 @@ Since invalid arguments may be passed to the function, we need to add some error
 
 ```typescript
 if (n <= 0) {
-	console.error("Error: Only positive numbers are allowed for Z/nZ");
-	return undefined;
+	console.error('Error: Only positive numbers are allowed for Z/nZ')
+	return undefined
 }
 
 if (n != Math.ceil(n)) {
-	console.error("Error: Only whole numbers are allowed for Z/nZ");
-	return undefined;
+	console.error('Error: Only whole numbers are allowed for Z/nZ')
+	return undefined
 }
 ```
 
 Let us test this by looking at the group <math>\mathbb{Z}/7\mathbb{Z}</math>:
 
 ```typescript
-const Zmod7 = additiveGroupModulo(7)!;
-console.assert(Zmod7.isGroup);
-console.assert(Zmod7.order === 7);
-console.assert(Zmod7.compose(5, 3) === 1);
-console.assert(Zmod7.isCommutative);
+const Zmod7 = additiveGroupModulo(7)!
+console.assert(Zmod7.isGroup)
+console.assert(Zmod7.order === 7)
+console.assert(Zmod7.compose(5, 3) === 1)
+console.assert(Zmod7.isCommutative)
 ```
 
 There are more conceptual constructions of the group <math>\mathbb{Z}/n\mathbb{Z}</math> (with quotient groups), but the one above is easier to implement in our setup. There is also an infinite cyclic group, <math>\mathbb{Z}</math>, but as already explained in Part 1, we cannot model it in TypeScript.
@@ -130,19 +130,19 @@ For example, <math>S_2</math> has exactly two permutations, <math>[0,1]</math> a
 We are now able to write a recursive function that generates all permutations of the numbers <math>0,\dotsc,n-1</math>.
 
 ```typescript
-type permutation = number[];
+type permutation = number[]
 
 function listOfPermutations(n: number): permutation[] | undefined {
 	// TODO: error handling
 
 	if (n == 0) {
-		return [[]];
+		return [[]]
 	}
 
-	const list = listOfPermutations(n - 1);
-	if (!list) return undefined;
+	const list = listOfPermutations(n - 1)
+	if (!list) return undefined
 
-	const result: permutation[] = [];
+	const result: permutation[] = []
 
 	for (const perm of list) {
 		for (let index = 0; index < n; index++) {
@@ -150,10 +150,10 @@ function listOfPermutations(n: number): permutation[] | undefined {
 				...perm.slice(0, index),
 				n - 1,
 				...perm.slice(index, perm.length),
-			]);
+			])
 		}
 	}
-	return result;
+	return result
 }
 ```
 
@@ -162,15 +162,15 @@ Again, we need to add some error handling:
 ```typescript
 if (n < 0) {
 	console.error(
-		"Error: Only non-negative numbers are allowed for list of permutations",
-	);
-	return undefined;
+		'Error: Only non-negative numbers are allowed for list of permutations',
+	)
+	return undefined
 }
 if (n != Math.ceil(n)) {
 	console.error(
-		"Error: Only whole numbers are allowed for list of permutations",
-	);
-	return undefined;
+		'Error: Only whole numbers are allowed for list of permutations',
+	)
+	return undefined
 }
 ```
 
@@ -180,16 +180,15 @@ Next, we implement the symmetric group on <math>n</math> elements. Since its und
 function symmetricGroup(n: number): Group<permutation> | undefined {
 	// TODO: error handling
 
-	const permutations = listOfPermutations(n);
-	if (!permutations) return undefined;
+	const permutations = listOfPermutations(n)
+	if (!permutations) return undefined
 
 	return new Group<permutation>({
 		set: new SetWithEquality(permutations, equalTuples),
 		unit: interval(n),
-		inverse: (a) =>
-			interval(n).map((y) => a.findIndex((_y) => _y === y)),
+		inverse: (a) => interval(n).map((y) => a.findIndex((_y) => _y === y)),
 		compose: (a, b) => b.map((y) => a[y]),
-	});
+	})
 }
 ```
 
@@ -204,25 +203,23 @@ The composition <math>c(a,b)</math> is defined by <math>c(a,b)(x) := a(b(x))</ma
 Let us test that <math>S_3</math> behaves as we expect.
 
 ```typescript
-const S3 = symmetricGroup(3)!;
-console.assert(S3.isGroup);
-console.assert(!S3.isCommutative);
-console.assert(S3.order === 6);
-console.assert(S3.set.equal(S3.inverse([1, 2, 0]), [2, 0, 1]));
+const S3 = symmetricGroup(3)!
+console.assert(S3.isGroup)
+console.assert(!S3.isCommutative)
+console.assert(S3.order === 6)
+console.assert(S3.set.equal(S3.inverse([1, 2, 0]), [2, 0, 1]))
 ```
 
 Let's not forget the error handling:
 
 ```typescript
 if (n < 0) {
-	console.error(
-		"Error: Only non-negative numbers are allowed for S_n",
-	);
-	return undefined;
+	console.error('Error: Only non-negative numbers are allowed for S_n')
+	return undefined
 }
 if (n != Math.ceil(n)) {
-	console.error("Error: Only whole numbers are allowed for S_n");
-	return undefined;
+	console.error('Error: Only whole numbers are allowed for S_n')
+	return undefined
 }
 ```
 
@@ -242,16 +239,16 @@ This is called the Klein Four-Group, named after the mathematician _Felix Klein_
 
 ```typescript
 const KleinFourGroup = new Group<string>({
-	set: new SetWithEquality(["e", "a", "b", "c"]),
-	unit: "e",
+	set: new SetWithEquality(['e', 'a', 'b', 'c']),
+	unit: 'e',
 	inverse: (x) => x,
 	compose: (x, y) => {
-		if (x === "e") return y;
-		if (y === "e") return x;
-		if (x === y) return "e";
-		return ["a", "b", "c"].find((u) => u !== x && u !== y)!;
+		if (x === 'e') return y
+		if (y === 'e') return x
+		if (x === y) return 'e'
+		return ['a', 'b', 'c'].find((u) => u !== x && u !== y)!
 	},
-});
+})
 ```
 
 Notice that we have to tell TypeScript that the result of the `find` method is not undefined, using the `!` operator. Otherwise, it will complain.
@@ -259,10 +256,10 @@ Notice that we have to tell TypeScript that the result of the `find` method is n
 Let us test our implementation:
 
 ```typescript
-console.assert(KleinFourGroup.isGroup);
-console.assert(KleinFourGroup.order === 4);
-console.assert(KleinFourGroup.isCommutative);
-console.assert(KleinFourGroup.compose("a", "b") === "c");
+console.assert(KleinFourGroup.isGroup)
+console.assert(KleinFourGroup.order === 4)
+console.assert(KleinFourGroup.isCommutative)
+console.assert(KleinFourGroup.compose('a', 'b') === 'c')
 ```
 
 ## Groups of matrices
@@ -279,20 +276,20 @@ The modulo operator `%` in JavaScript does not behave correctly (from a mathemat
 
 ```typescript
 function mod(a: number, r: number) {
-	return ((a % r) + r) % r;
+	return ((a % r) + r) % r
 }
 ```
 
 In JavaScript, matrices can be modeled with two-dimensional arrays. The matrices here have only <math>0,1</math> as entries. We filter out the invertible matrices by the condition that the determinant is non-zero (modulo <math>2</math>). We use the `squareOfArray` utility function from Part 1.
 
 ```typescript
-type matrix = number[][];
+type matrix = number[][]
 
-const matrices: matrix[] = squareOfArray(squareOfArray(interval(2)));
+const matrices: matrix[] = squareOfArray(squareOfArray(interval(2)))
 
 const invertibleMatrices: matrix[] = matrices.filter(
 	([[a, b], [c, d]]) => mod(a * d - b * c, 2) !== 0,
-);
+)
 ```
 
 Next, we have to define the correct notion of equality for matrices.
@@ -302,7 +299,7 @@ function equalMatrices<T>(a: T[][], b: T[][]): boolean {
 	return (
 		a.length === b.length &&
 		a.every((_, index) => equalTuples(a[index], b[index]))
-	);
+	)
 }
 ```
 
@@ -323,15 +320,15 @@ const GL2_F2 = new Group<matrix>({
 		[mod(a * p + b * r, 2), mod(a * q + b * s, 2)],
 		[mod(c * p + d * r, 2), mod(c * q + d * s, 2)],
 	],
-});
+})
 ```
 
 As always, let us test this implementation:
 
 ```typescript
-console.assert(GL2_F2.isGroup);
-console.assert(GL2_F2.order === 6);
-console.assert(!GL2_F2.isCommutative);
+console.assert(GL2_F2.isGroup)
+console.assert(GL2_F2.order === 6)
+console.assert(!GL2_F2.isCommutative)
 ```
 
 ### Generalization
@@ -340,19 +337,19 @@ This example can be extended to a much more general construction. It is possible
 
 ```typescript
 interface CommRingData<X> {
-	set: SetWithEquality<X>;
-	zero: X;
-	one: X;
-	addition: (a: X, b: X) => X;
-	inverse: (a: X) => X;
-	multiplication: (a: X, b: X) => X;
+	set: SetWithEquality<X>
+	zero: X
+	one: X
+	addition: (a: X, b: X) => X
+	inverse: (a: X) => X
+	multiplication: (a: X, b: X) => X
 }
 ```
 
 The general linear group will be a function of type:
 
 ```typescript
-function GL<X>(n: number, R: CommRing<X>): Group<X>;
+function GL<X>(n: number, R: CommRing<X>): Group<X>
 ```
 
 ## Conclusion

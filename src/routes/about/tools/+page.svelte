@@ -1,12 +1,12 @@
 <script lang="ts">
-	import tools from "./tools.json";
+	import tools from './tools.json'
 </script>
 
 <h1>Tools and languages</h1>
 
 <p>
-	This page lists some of the tools and languages I am familiar with
-	in the context of web development.
+	This page lists some of the tools and languages I am familiar with in the
+	context of web development.
 </p>
 
 {#each tools as tool_list}

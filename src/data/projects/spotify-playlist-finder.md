@@ -4,7 +4,7 @@ teaser: to find all playlists which contain a specific song
 repository: https://github.com/ScriptRaccoon/spotify-playlist-finder
 url: https://spotify-playlist-finder.onrender.com/
 tutorial:
-tags: ["Tool", "Express", "Vanilla JS", "Authentication", "EJS"]
+tags: ['Tool', 'Express', 'Vanilla JS', 'Authentication', 'EJS']
 date: 2021-01-24
 ---
 

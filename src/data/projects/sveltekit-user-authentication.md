@@ -6,12 +6,12 @@ url: https://sveltekit-auth.netlify.app/
 tutorial: https://youtu.be/gNOzCaOCxBU
 tags:
     [
-        "Authentication",
-        "Full Stack",
-        "SvelteKit",
-        "MongoDB",
-        "Tutorial",
-        "TypeScript",
+        'Authentication',
+        'Full Stack',
+        'SvelteKit',
+        'MongoDB',
+        'Tutorial',
+        'TypeScript',
     ]
 date: 2023-04-22
 ---

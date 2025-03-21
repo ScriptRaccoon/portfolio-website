@@ -4,14 +4,7 @@ teaser: fully featured, made with SvelteKit
 repository: https://github.com/ScriptRaccoon/chessvelte
 url: https://chessvelte.netlify.app
 tutorial:
-tags:
-  [
-    "Browser game",
-    "SvelteKit",
-    "Full Stack",
-    "Socket.IO",
-    "TypeScript",
-  ]
+tags: ['Browser game', 'SvelteKit', 'Full Stack', 'Socket.IO', 'TypeScript']
 date: 2024-01-05
 ---
 

@@ -1,23 +1,23 @@
 <script lang="ts">
-	import { getContext } from "svelte";
-	import { slide } from "svelte/transition";
-	import type { Snippet } from "svelte";
+	import { getContext } from 'svelte'
+	import { slide } from 'svelte/transition'
+	import type { Snippet } from 'svelte'
 
 	type Props = {
-		summary: string;
-		children: Snippet;
-	};
+		summary: string
+		children: Snippet
+	}
 
-	let { summary, children }: Props = $props();
+	let { summary, children }: Props = $props()
 
-	let open = $state(false);
+	let open = $state(false)
 
-	const duration = getContext<boolean>("allow_animation") ? 200 : 0;
-	const button_id = crypto.randomUUID();
-	const content_id = crypto.randomUUID();
+	const duration = getContext<boolean>('allow_animation') ? 200 : 0
+	const button_id = crypto.randomUUID()
+	const content_id = crypto.randomUUID()
 
 	function toggle_open() {
-		open = !open;
+		open = !open
 	}
 </script>
 

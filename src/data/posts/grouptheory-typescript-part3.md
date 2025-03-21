@@ -28,27 +28,25 @@ First, let's define the generic interface.
 
 ```typescript
 interface HomomorphismOfGroupsData<X, Y> {
-	source: Group<X>;
-	target: Group<Y>;
-	map: (x: X) => Y;
+	source: Group<X>
+	target: Group<Y>
+	map: (x: X) => Y
 }
 ```
 
 Now, we define a class that implements this interface.
 
 ```typescript
-class HomomorphismOfGroups<X, Y>
-	implements HomomorphismOfGroupsData<X, Y>
-{
-	public source: Group<X>;
-	public target: Group<Y>;
-	public map: (x: X) => Y;
+class HomomorphismOfGroups<X, Y> implements HomomorphismOfGroupsData<X, Y> {
+	public source: Group<X>
+	public target: Group<Y>
+	public map: (x: X) => Y
 
 	constructor(data: HomomorphismOfGroupsData<X, Y>) {
-		const { source, target, map } = data;
-		this.source = source;
-		this.target = target;
-		this.map = map;
+		const { source, target, map } = data
+		this.source = source
+		this.target = target
+		this.map = map
 
 		// TODO: check homomorphism property
 	}
@@ -138,22 +136,22 @@ get isIsomorphism(): boolean {
 There is a basic example of a homomorphism from <math>\mathbb{Z}/2\mathbb{Z}</math> to <math>\mathbb{Z}/4\mathbb{Z}</math> which maps <math>0 \mapsto 0</math> and <math>1 \mapsto 2</math>. We can implement this with our class as follows.
 
 ```typescript
-const Zmod2 = additiveGroupModulo(2)!;
-const Zmod4 = additiveGroupModulo(4)!;
+const Zmod2 = additiveGroupModulo(2)!
+const Zmod4 = additiveGroupModulo(4)!
 
 const emb = new HomomorphismOfGroups({
 	source: Zmod2,
 	target: Zmod4,
 	map: (a) => 2 * a,
-});
+})
 ```
 
 And in fact, these assertions are true:
 
 ```typescript
-console.assert(emb.isHomomorphism);
-console.assert(!emb.isSurjective);
-console.assert(emb.isInjective);
+console.assert(emb.isHomomorphism)
+console.assert(!emb.isSurjective)
+console.assert(emb.isInjective)
 ```
 
 I really like the syntax here. A mathematician would say something like: "We define a homomorphism of groups with source Z modulo 2 and target Z modulo 4 which maps a to 2 \* a", and this is _exactly_ what is in our code above!
@@ -163,20 +161,20 @@ I really like the syntax here. A mathematician would say something like: "We def
 The groups <math>\mathbb{Z}/2\mathbb{Z}</math> and <math>\\{+1,-1\\}</math>, which were called `Zmod2` and `SignGroup` in previous parts, are essentially the same: they are [isomorphic](https://en.wikipedia.org/wiki/Isomorphism). We can verify this by defining an isomorphism between these two groups, as follows:
 
 ```typescript
-const Zmod2 = additiveGroupModulo(2)!;
+const Zmod2 = additiveGroupModulo(2)!
 
 const isomZmod2 = new HomomorphismOfGroups({
 	source: Zmod2,
 	target: SignGroup,
 	map: (a) => (a === 0 ? 1 : -1),
-});
+})
 ```
 
 So, we map <math>0 \mapsto 1</math> and <math>1 \mapsto -1</math>. We can run tests to verify that this is, indeed, an isomorphism.
 
 ```typescript
-console.assert(isomZmod2.isHomomorphism);
-console.assert(isomZmod2.isIsomorphism);
+console.assert(isomZmod2.isHomomorphism)
+console.assert(isomZmod2.isIsomorphism)
 ```
 
 ### The sign homomorphism
@@ -188,25 +186,25 @@ The group <math>S_3</math> consists of three 2-cycles, which have the sign <math
 This leads to the following implementation.
 
 ```typescript
-const S3 = symmetricGroup(3)!;
+const S3 = symmetricGroup(3)!
 
 const signum = new HomomorphismOfGroups({
 	source: S3,
 	target: SignGroup,
 	map: (a) => {
-		const fixedPoints = [0, 1, 2].filter((i) => a[i] === i);
-		return fixedPoints.length === 1 ? -1 : 1;
+		const fixedPoints = [0, 1, 2].filter((i) => a[i] === i)
+		return fixedPoints.length === 1 ? -1 : 1
 	},
-});
+})
 ```
 
 The sign is a surjective homomorphism, but it is not injective and hence not an isomorphism. This is confirmed by our tests:
 
 ```typescript
-console.assert(signum.isHomomorphism);
-console.assert(signum.isSurjective);
-console.assert(!signum.isInjective);
-console.assert(!signum.isIsomorphism);
+console.assert(signum.isHomomorphism)
+console.assert(signum.isSurjective)
+console.assert(!signum.isInjective)
+console.assert(!signum.isIsomorphism)
 ```
 
 ### An isomorphism of groups of order 6
@@ -229,7 +227,7 @@ const isomGL2 = new HomomorphismOfGroups({
 		[Number(a[0] !== 1), Number(a[1] !== 1)],
 		[Number(a[0] > 0), Number(a[1] > 0)],
 	],
-});
+})
 ```
 
 Remember that our permutations are 0-indexed arrays. The `Number` constructor transforms booleans into numbers, so `Number(false)=0` and `Number(true)=1`.
@@ -237,7 +235,7 @@ Remember that our permutations are 0-indexed arrays. The `Number` constructor tr
 The following test confirms that we have defined an isomorphism.
 
 ```typescript
-console.assert(isomGL2.isIsomorphism);
+console.assert(isomGL2.isIsomorphism)
 ```
 
 ### Trivial homomorphisms
@@ -250,15 +248,15 @@ function trivialHom<X, Y>(G: Group<X>, H: Group<Y>) {
 		source: G,
 		target: H,
 		map: (a) => H.unit,
-	});
+	})
 }
 ```
 
 This is indeed a homomorphism, which we can see in an example:
 
 ```typescript
-const trivialHomExample = trivialHom(S3, Zmod6);
-console.assert(trivialHomExample.isHomomorphism);
+const trivialHomExample = trivialHom(S3, Zmod6)
+console.assert(trivialHomExample.isHomomorphism)
 ```
 
 ## Orders of elements
@@ -280,13 +278,13 @@ class Group<X> {
 	// ...
 
 	orderOfElement(a: X): number {
-		let order = 1;
-		let power = a;
+		let order = 1
+		let power = a
 		while (!this.set.equal(power, this.unit)) {
-			order++;
-			power = this.compose(power, a);
+			order++
+			power = this.compose(power, a)
 		}
-		return order;
+		return order
 	}
 }
 ```
@@ -314,12 +312,12 @@ It turns out that the groups <math>\mathbb{Z}/n\mathbb{Z}</math> are cyclic (the
 Let us test the implementation:
 
 ```typescript
-console.assert(Zmod6.isCyclic);
-console.assert(!S3.isCyclic);
-console.assert(S3.orderOfElement(S3.unit) === 1);
-console.assert(S3.orderOfElement([1, 0, 2]) === 2);
-console.assert(S3.maximalOrderOfElement === 3);
-console.assert(KleinFourGroup.maximalOrderOfElement === 2);
+console.assert(Zmod6.isCyclic)
+console.assert(!S3.isCyclic)
+console.assert(S3.orderOfElement(S3.unit) === 1)
+console.assert(S3.orderOfElement([1, 0, 2]) === 2)
+console.assert(S3.maximalOrderOfElement === 3)
+console.assert(KleinFourGroup.maximalOrderOfElement === 2)
 ```
 
 ### Powers
@@ -349,9 +347,9 @@ power(a: X, n: number): X {
 Let us test this:
 
 ```typescript
-console.assert(KleinFourGroup.power("a", 2) === "e");
-console.assert(S3.set.equal(S3.power([2, 0, 1], 3), [0, 1, 2]));
-console.assert(Zmod6.power(2, -1) === 4);
+console.assert(KleinFourGroup.power('a', 2) === 'e')
+console.assert(S3.set.equal(S3.power([2, 0, 1], 3), [0, 1, 2]))
+console.assert(Zmod6.power(2, -1) === 4)
 ```
 
 ### Homomorphisms on cyclic groups
@@ -376,30 +374,30 @@ function homFromTorsion<X>(
 	n: number,
 ): HomomorphismOfGroups<number, X> | undefined {
 	// TODO: error handling when n is not a positive integer
-	const Zmodn = additiveGroupModulo(n)!;
+	const Zmodn = additiveGroupModulo(n)!
 
-	const power = G.power(a, n);
+	const power = G.power(a, n)
 
 	if (!G.set.equal(power, G.unit)) {
-		console.error("Error: The element is not n-torsion.");
-		return undefined;
+		console.error('Error: The element is not n-torsion.')
+		return undefined
 	}
 
 	return new HomomorphismOfGroups({
 		source: Zmodn,
 		target: G,
 		map: (k) => G.power(a, k),
-	});
+	})
 }
 ```
 
 For example, the permutation <math>[2,0,1]</math> has order <math>3</math> in <math>S_3</math>, and hence gives rise to an injective homomorphism <math>\mathbb{Z}/3\mathbb{Z} \hookrightarrow S_3</math>:
 
 ```typescript
-const g = homFromTorsion([2, 0, 1], S3, 3);
-console.assert(g != undefined);
-console.assert(g?.isHomomorphism);
-console.assert(g?.isInjective);
+const g = homFromTorsion([2, 0, 1], S3, 3)
+console.assert(g != undefined)
+console.assert(g?.isHomomorphism)
+console.assert(g?.isInjective)
 ```
 
 Let us point out that these are just example verifications. Our TypeScript code cannot give us general proof that the map <math>\mathbb{Z}/n\mathbb{Z} \to G</math> that we defined is a homomorphism, for every group <math>G</math> and every element inside it. For this, a bit of mathematics is necessary.

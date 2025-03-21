@@ -437,8 +437,8 @@ Of course, this is only the compiled HTML code. In development, you will likely 
 <!-- Link.svelte -->
 
 <script>
-	export let href = "";
-	export let text = "";
+	export let href = ''
+	export let text = ''
 </script>
 
 <a
@@ -630,9 +630,7 @@ Even quite basic CSS tasks can be a pain with a Tailwind. Let us look at the fol
 Since Tailwind's predefined [grid utilities](https://tailwindcss.com/docs/grid-template-columns) are quite limited, Tailwind requires you to bail out of its system and use arbitrary values and a really strange syntax instead.
 
 ```html
-<div
-	class="grid grid-cols-[auto_auto_1fr] grid-rows-[1fr_auto]"
-></div>
+<div class="grid grid-cols-[auto_auto_1fr] grid-rows-[1fr_auto]"></div>
 ```
 
 The docs also suggest expanding your theme file, which is not something you want to do every time you want to use a simple grid layout.
@@ -644,14 +642,14 @@ module.exports = {
 	theme: {
 		extend: {
 			gridTemplateColumns: {
-				mygrid: "auto auto 1fr",
+				mygrid: 'auto auto 1fr',
 			},
 			gridTemplateRows: {
-				mygrid: "1fr auto",
+				mygrid: '1fr auto',
 			},
 		},
 	},
-};
+}
 ```
 
 In particular, when you only want to use it once, this seems to be overly complicated compared to writing regular CSS. Also, you will have to come up with a name, which was one of the promises of Tailwind that you don't have to do. Tailwind is contradicting itself here.
@@ -794,9 +792,7 @@ These things happen to me all the time at my job: I have to scroll and search fo
 
 ```html
 <!-- container of cart item -->
-<div
-	class="some-extremely-long-class-list-without-any-descriptive-name"
-></div>
+<div class="some-extremely-long-class-list-without-any-descriptive-name"></div>
 ```
 
 Again we see that Tailwind introduces maintainability issues that we need to fix to work efficiently.

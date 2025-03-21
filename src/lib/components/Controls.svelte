@@ -1,7 +1,7 @@
 <script lang="ts">
-	import { page } from "$app/state";
-	import CopyText from "./CopyText.svelte";
-	import GoBack from "./GoBack.svelte";
+	import { page } from '$app/state'
+	import CopyText from './CopyText.svelte'
+	import GoBack from './GoBack.svelte'
 </script>
 
 <div>

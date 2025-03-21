@@ -26,49 +26,43 @@ function ProductOfSets<X, Y>(
 	A: SetWithEquality<X>,
 	B: SetWithEquality<Y>,
 ): SetWithEquality<[X, Y]> {
-	const product: [X, Y][] = [];
+	const product: [X, Y][] = []
 	for (const a of A) {
 		for (const b of B) {
-			product.push([a, b]);
+			product.push([a, b])
 		}
 	}
 
 	return new SetWithEquality<[X, Y]>(
 		product,
 		([a1, b1], [a2, b2]) => A.equal(a1, a2) && B.equal(b1, b2),
-	);
+	)
 }
 ```
 
 The group operations in a direct product of groups are also defined "component-wise". We can implement them accordingly. The following function yields for every pair of groups `A` and `B` a new group `productOfGroups(A,B)`, which stands for their direct product <math>A \times B</math>.
 
 ```typescript
-function productOfGroups<X, Y>(
-	A: Group<X>,
-	B: Group<Y>,
-): Group<[X, Y]> {
+function productOfGroups<X, Y>(A: Group<X>, B: Group<Y>): Group<[X, Y]> {
 	return new Group<[X, Y]>({
 		set: ProductOfSets(A.set, B.set),
 		unit: [A.unit, B.unit],
 		inverse: ([a, b]) => [A.inverse(a), B.inverse(b)],
-		compose: ([a1, b1], [a2, b2]) => [
-			A.compose(a1, a2),
-			B.compose(b1, b2),
-		],
-	});
+		compose: ([a1, b1], [a2, b2]) => [A.compose(a1, a2), B.compose(b1, b2)],
+	})
 }
 ```
 
 The type system has helped us here since it catches errors during development. For example, try to replace the result of the compose function above with
 
 ```typescript
-[A.compose(a1, b1), B.compose(a2, b2)];
+;[A.compose(a1, b1), B.compose(a2, b2)]
 ```
 
 The TypeScript compiler will inform us about a type error. Also, when you accidentally type
 
 ```typescript
-[A.compose(a1, a1), B.compose(b1, b2)];
+;[A.compose(a1, a1), B.compose(b1, b2)]
 ```
 
 the editor will tell you that `a2` is declared but never used. This means that the whole setup almost _forces_ us to write the correct implementation.
@@ -76,12 +70,12 @@ the editor will tell you that `a2` is declared but never used. This means that t
 But as always, let us also test the implementation in an example.
 
 ```typescript
-const Zmod7 = additiveGroupModulo(7)!;
-const S3 = symmetricGroup(3)!;
-const Zmod7_x_S3 = productOfGroups(Zmod7, S3);
-console.assert(Zmod7_x_S3.isGroup);
-console.assert(!Zmod7_x_S3.isCommutative);
-console.assert(Zmod7_x_S3.order === 42);
+const Zmod7 = additiveGroupModulo(7)!
+const S3 = symmetricGroup(3)!
+const Zmod7_x_S3 = productOfGroups(Zmod7, S3)
+console.assert(Zmod7_x_S3.isGroup)
+console.assert(!Zmod7_x_S3.isCommutative)
+console.assert(Zmod7_x_S3.order === 42)
 ```
 
 ### The Klein Four-Group as a direct product
@@ -91,22 +85,22 @@ There is an isomorphism between the Klein Four-Group (from [Part 2](/blog/groupt
 Let us implement this!
 
 ```typescript
-const Zmod2 = additiveGroupModulo(2)!;
+const Zmod2 = additiveGroupModulo(2)!
 
 const table: Record<string, [number, number]> = {
 	e: [0, 0],
 	a: [1, 0],
 	b: [0, 1],
 	c: [1, 1],
-};
+}
 
 const isomKlein = new HomomorphismOfGroups({
 	source: KleinFourGroup,
 	target: productOfGroups(Zmod2, Zmod2),
 	map: (x) => table[x],
-});
+})
 
-console.assert(isomKlein.isIsomorphism);
+console.assert(isomKlein.isIsomorphism)
 ```
 
 \*Any permutation is allowed since we have seen in the previous part that <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math> and <math>S_3</math> are isomorphic.
@@ -121,15 +115,15 @@ function isomSwap<X, Y>(A: Group<X>, B: Group<Y>) {
 		source: productOfGroups(A, B),
 		target: productOfGroups(B, A),
 		map: ([a, b]) => [b, a],
-	});
+	})
 }
 ```
 
 And test it:
 
 ```typescript
-const swap = isomSwap(Zmod7, S3);
-console.assert(swap.isIsomorphism);
+const swap = isomSwap(Zmod7, S3)
+console.assert(swap.isIsomorphism)
 ```
 
 Direct products are characterized by a _universal property_. I will not explain this in full detail, but one part of it is very simple, actually: Given two homomorphisms of groups
@@ -148,15 +142,15 @@ function pairHom<X, Y, Z>(
 	g: HomomorphismOfGroups<Z, Y>,
 ) {
 	if (f.source !== g.source) {
-		console.error("Error: Sources do not match");
-		return undefined;
+		console.error('Error: Sources do not match')
+		return undefined
 	}
 
 	return new HomomorphismOfGroups<Z, [X, Y]>({
 		source: f.source,
 		target: productOfGroups(f.target, g.target),
 		map: (c) => [f.map(c), g.map(c)],
-	});
+	})
 }
 ```
 
@@ -182,10 +176,10 @@ class SetWithEquality<X> extends Set<X> {
 
 	subset(list: X[]): SetWithEquality<X> {
 		if (list.some((a) => !this.contains(a))) {
-			console.error("Error: Subset property is not satisfied");
+			console.error('Error: Subset property is not satisfied')
 		}
 
-		return new SetWithEquality<X>(list, this.equal);
+		return new SetWithEquality<X>(list, this.equal)
 	}
 }
 ```
@@ -204,7 +198,7 @@ class Group<X> {
 			unit: this.unit,
 			compose: this.compose,
 			inverse: this.inverse,
-		});
+		})
 	}
 }
 ```
@@ -212,9 +206,9 @@ class Group<X> {
 We can then check for the subgroup property with the method `subgroupOfList(...).isGroup`.
 
 ```typescript
-console.assert(Zmod6.subgroupOfList([0]).isGroup);
-console.assert(!Zmod6.subgroupOfList([1]).isGroup);
-console.assert(Zmod6.subgroupOfList([0, 2, 4]).isGroup);
+console.assert(Zmod6.subgroupOfList([0]).isGroup)
+console.assert(!Zmod6.subgroupOfList([1]).isGroup)
+console.assert(Zmod6.subgroupOfList([0, 2, 4]).isGroup)
 ```
 
 For later usage, we also add a method that checks if a group is trivial:
@@ -239,8 +233,8 @@ export class HomomorphismOfGroups<X, Y> {
 		// source elements that map to the unit
 		const elements = this.source.elements.filter((a) =>
 			this.target.set.equal(this.map(a), this.target.unit),
-		);
-		return this.source.subgroupOfList(elements);
+		)
+		return this.source.subgroupOfList(elements)
 	}
 
 	get image(): Group<Y> {
@@ -249,8 +243,8 @@ export class HomomorphismOfGroups<X, Y> {
 			this.source.elements.some((a) =>
 				this.target.set.equal(this.map(a), b),
 			),
-		);
-		return this.target.subgroupOfList(elements);
+		)
+		return this.target.subgroupOfList(elements)
 	}
 }
 ```
@@ -258,16 +252,16 @@ export class HomomorphismOfGroups<X, Y> {
 We can test this implementation with all the homomorphisms from the [previous part](/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from <math>S_3 \to \mathrm{GL}\_2(\mathbb{F}\_2)</math>, then
 
 ```typescript
-console.assert(isomGL2.kernel.isTrivial);
-console.assert(isomGL2.image.order === 6);
+console.assert(isomGL2.kernel.isTrivial)
+console.assert(isomGL2.image.order === 6)
 ```
 
 When `signum` denotes the sign homomorphism <math>S_3 \to \\{+1,-1\\}</math>, we get:
 
 ```typescript
-console.assert(signum.kernel.order === 3);
-console.assert(signum.kernel.isCyclic);
-console.assert(signum.image.order === 2);
+console.assert(signum.kernel.order === 3)
+console.assert(signum.kernel.isCyclic)
+console.assert(signum.image.order === 2)
 ```
 
 ### Generated subgroups
@@ -285,27 +279,27 @@ class Group<X> {
 	// ...
 
 	subgroupGeneratedBy(generators: X[]): Group<X> {
-		let elements = [this.unit];
-		let done = false;
+		let elements = [this.unit]
+		let done = false
 
 		const getNewElements = (): X[] => {
-			const newElements = [];
+			const newElements = []
 			for (const element of elements) {
 				for (const generator of generators) {
-					const product = this.compose(element, generator);
+					const product = this.compose(element, generator)
 					const isOld = elements
 						.concat(newElements)
-						.some((s) => this.set.equal(s, product));
-					if (!isOld) newElements.push(product);
+						.some((s) => this.set.equal(s, product))
+					if (!isOld) newElements.push(product)
 				}
 			}
-			return newElements;
-		};
+			return newElements
+		}
 
 		while (!done) {
-			const newElements = getNewElements();
-			done = newElements.length === 0;
-			elements = elements.concat(newElements);
+			const newElements = getNewElements()
+			done = newElements.length === 0
+			elements = elements.concat(newElements)
 		}
 
 		return new Group<X>({
@@ -313,7 +307,7 @@ class Group<X> {
 			unit: this.unit,
 			compose: this.compose,
 			inverse: this.inverse,
-		});
+		})
 	}
 }
 ```
@@ -323,32 +317,30 @@ class Group<X> {
 We should test this extensively. First, some tests with cyclic groups.
 
 ```typescript
-console.assert(Zmod6.subgroupGeneratedBy([]).isTrivial);
-console.assert(Zmod6.subgroupGeneratedBy([1]).order === 6);
-console.assert(Zmod6.subgroupGeneratedBy([2]).order === 3);
-console.assert(Zmod6.subgroupGeneratedBy([3]).order === 2);
-console.assert(Zmod6.subgroupGeneratedBy([4]).order === 3);
+console.assert(Zmod6.subgroupGeneratedBy([]).isTrivial)
+console.assert(Zmod6.subgroupGeneratedBy([1]).order === 6)
+console.assert(Zmod6.subgroupGeneratedBy([2]).order === 3)
+console.assert(Zmod6.subgroupGeneratedBy([3]).order === 2)
+console.assert(Zmod6.subgroupGeneratedBy([4]).order === 3)
 ```
 
 The Klein Four-Group is generated by <math>a</math> and <math>b</math>:
 
 ```typescript
-console.assert(
-	KleinFourGroup.subgroupGeneratedBy(["a", "b"]).order == 4,
-);
+console.assert(KleinFourGroup.subgroupGeneratedBy(['a', 'b']).order == 4)
 ```
 
 In the symmetric group on 3 elements, 2-cycles generate subgroups of order 2:
 
 ```typescript
-console.assert(S3.subgroupGeneratedBy([[1, 0, 2]]).order == 2);
-console.assert(S3.subgroupGeneratedBy([[0, 2, 1]]).order == 2);
+console.assert(S3.subgroupGeneratedBy([[1, 0, 2]]).order == 2)
+console.assert(S3.subgroupGeneratedBy([[0, 2, 1]]).order == 2)
 ```
 
 Each 3-cycle generates the subgroup of order 3:
 
 ```typescript
-console.assert(S3.subgroupGeneratedBy([[1, 2, 0]]).order == 3);
+console.assert(S3.subgroupGeneratedBy([[1, 2, 0]]).order == 3)
 ```
 
 And two 2-cycles generate the whole group:
@@ -359,7 +351,7 @@ console.assert(
 		[1, 0, 2],
 		[0, 2, 1],
 	]).order == 6,
-);
+)
 ```
 
 ### Center of a group
@@ -373,8 +365,8 @@ class Group<X> {
 	get center(): Group<X> {
 		const elements = this.elements.filter((a) =>
 			this.elements.every((b) => this.isCommutingPair([a, b])),
-		);
-		return this.subgroupOfList(elements);
+		)
+		return this.subgroupOfList(elements)
 	}
 }
 ```
@@ -382,9 +374,9 @@ class Group<X> {
 The center of all symmetric groups is trivial (except for <math>S_2</math>). Let us test this by example:
 
 ```typescript
-const S5 = symmetricGroup(5)!;
-console.assert(S5.order === 120);
-console.assert(S5.center.isTrivial);
+const S5 = symmetricGroup(5)!
+console.assert(S5.order === 120)
+console.assert(S5.center.isTrivial)
 ```
 
 ## Conclusion

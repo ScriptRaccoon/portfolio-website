@@ -4,7 +4,7 @@ teaser: fully featured, made with Vanilla JS
 repository: https://github.com/ScriptRaccoon/chess-singleplayer
 url: https://chess-singleplayer.netlify.app/
 tutorial:
-tags: ["Browser game", "Vanilla JS", "CSS"]
+tags: ['Browser game', 'Vanilla JS', 'CSS']
 date: 2020-06-05
 ---
 

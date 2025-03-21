@@ -21,9 +21,9 @@ I like this in particular with SvelteKit. Say you are in a `load` function of th
 
 ```typescript
 export const load = async (event) => {
-	const id = event.params.id;
+	const id = event.params.id
 	// ...
-};
+}
 ```
 
 And there is no need to guess or remember if the property was called `searchParams` or `parameters` or something else. If you write something which doesn't fit the type definition of the event object, the TypeScript compiler will yell at you. This, of course, also means that you will produce fewer bugs!
@@ -31,7 +31,7 @@ And there is no need to guess or remember if the property was called `searchPara
 Autocompletion is even more useful when you are working with an object or an API you are not very familiar with. For example, when you are new to [Supabase](https://supabase.com) and you use their JavaScript / TypeScript client, it is just so nice that you only need to type `await supabase.` to get all the functions the Supabase client offers. For example, the following code inserts an array of posts into a corresponding table.
 
 ```typescript
-await supabase.from("posts").insert(posts);
+await supabase.from('posts').insert(posts)
 ```
 
 You don't need to learn or remember the syntax! Autocompletion will guide you. And even more: if the array of posts does not fit the database schema (which you can import as a type definition file), you will get an error, during development!
@@ -63,7 +63,7 @@ It is immediately clear, both from the name and the type declarations, that the 
 When you use these functions somewhere else in the codebase, you can just hover over them and immediately see the return type. And the TypeScript compiler will yell at you when you write something like
 
 ```typescript
-let tags: string[] = remove_duplicates(["..."]);
+let tags: string[] = remove_duplicates(['...'])
 ```
 
 since the return type of the function does not match the variable type.
@@ -73,7 +73,7 @@ since the return type of the function does not match the variable type.
 At my job, we mostly do not use TypeScript. As a consequence, often I just do not know what the variables are exactly. A typical situation is that a variable is declared like this:
 
 ```javascript
-const similar_products = [];
+const similar_products = []
 ```
 
 Alright, this will be an array containing all the similar products. But which properties do these objects have? Sometimes, you can already derive from the existing code which properties are present, but
@@ -88,21 +88,21 @@ This is so much easier with TypeScript. First, we make a single console log of a
 
 ```typescript
 type product = {
-	id: string;
-	name: string;
-	quantity: string;
-	colors: string[];
-	sizes: string[];
-	price: string;
-	discounted: boolean;
-	brand: string;
-};
+	id: string
+	name: string
+	quantity: string
+	colors: string[]
+	sizes: string[]
+	price: string
+	discounted: boolean
+	brand: string
+}
 ```
 
 Then, we declare the array like so:
 
 ```typescript
-const similar_products: product[] = [];
+const similar_products: product[] = []
 ```
 
 Now, when we loop over the array (later, when it has some entries)
@@ -131,17 +131,13 @@ export function draw_circle(x: number, y: number, r: number) {
 You execute this function in multiple places of the codebase. It could look like this:
 
 ```typescript
-draw_circle(10, 10, 2);
+draw_circle(10, 10, 2)
 ```
 
 At some point, you realize that this function call is not very explicit. The meaning of the three parameters is not clear when reading just the function call. So you refactor the function definition as follows:
 
 ```typescript
-export function draw_circle(options: {
-	x: number;
-	y: number;
-	r: number;
-}) {
+export function draw_circle(options: { x: number; y: number; r: number }) {
 	// ...
 }
 ```
@@ -153,7 +149,7 @@ TypeScript will immediately tell you that the function call above is not correct
 When you hover over the function, you see the type it expects. So you change the function call to
 
 ```typescript
-draw_circle({ x: 10, y: 10, r: 2 });
+draw_circle({ x: 10, y: 10, r: 2 })
 ```
 
 and TypeScript is happy. This also means that it is very likely that your code will be working again. Of course, JavaScript would not have told you anything about the bug you need to fix.

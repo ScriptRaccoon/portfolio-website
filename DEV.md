@@ -4,5 +4,5 @@
 - [Website](https://scriptraccoon.dev)
 - [Deployment at Netlify](https://app.netlify.com/sites/scriptraccoon/deploys)
 - Image sizes for projects:
-  - 576px (large)
-  - 190px (small)
+    - 576px (large)
+    - 190px (small)

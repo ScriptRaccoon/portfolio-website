@@ -80,7 +80,7 @@ In `Nav.svelte` we use `--nav-color`, but of course you can use or add any color
 The colors above represent a light mode. When the user switches to dark mode, we will add a corresponding attribute to the `html` element. We change the CSS variables accordingly:
 
 ```css
-html[data-theme="dark"] {
+html[data-theme='dark'] {
 	--font-color: #fff;
 	--bg-color: #222;
 	--accent-color: #ff0050;
@@ -107,33 +107,32 @@ In `Nav.svelte`, we need to calculate the current theme. We will do this in the 
 Either there is already a theme set on the `html` element, or we retrieve it from a media query, as follows.
 
 ```typescript
-let current_theme: string;
+let current_theme: string
 
 onMount(() => {
-	const saved_theme =
-		document.documentElement.getAttribute("data-theme");
+	const saved_theme = document.documentElement.getAttribute('data-theme')
 	if (saved_theme) {
-		current_theme = saved_theme;
-		return;
+		current_theme = saved_theme
+		return
 	}
 
 	const preference_is_dark = window.matchMedia(
-		"(prefers-color-scheme: dark)",
-	).matches;
+		'(prefers-color-scheme: dark)',
+	).matches
 
-	const theme = preference_is_dark ? "dark" : "light";
-	set_theme(theme); // TODO
-});
+	const theme = preference_is_dark ? 'dark' : 'light'
+	set_theme(theme) // TODO
+})
 ```
 
 The function `set_theme` adjusts the `data-theme` attribute of the `html` and also sets a cookie that lasts for one year. We set `path=/` so that the cookie is available on other pages such as our About page as well.
 
 ```typescript
 function set_theme(theme: string) {
-	const one_year = 60 * 60 * 24 * 365;
-	document.cookie = `theme=${theme}; max-age=${one_year}; path=/`;
-	document.documentElement.setAttribute("data-theme", theme);
-	current_theme = theme;
+	const one_year = 60 * 60 * 24 * 365
+	document.cookie = `theme=${theme}; max-age=${one_year}; path=/`
+	document.documentElement.setAttribute('data-theme', theme)
+	current_theme = theme
 }
 ```
 
@@ -159,8 +158,8 @@ The button triggers a function that toggles the theme:
 
 ```typescript
 function toggle_theme(): void {
-	const theme = current_theme === "light" ? "dark" : "light";
-	set_theme(theme);
+	const theme = current_theme === 'light' ? 'dark' : 'light'
+	set_theme(theme)
 }
 ```
 
@@ -196,14 +195,14 @@ export const handle = async ({ event, resolve }) => {
 
 	// the server handles the request
 	// and generates a response
-	const response = await resolve(event);
+	const response = await resolve(event)
 
 	// after the server handles the request,
 	// you can do stuff here
 
 	// the response is sent to the browser
-	return response;
-};
+	return response
+}
 ```
 
 If you want to know more, definitely check out [Learn SvelteKit Hooks Through Example](https://joyofcode.xyz/sveltekit-hooks) by Joy of Code.
@@ -212,12 +211,12 @@ Inside the handle hook, we first check if the cookie is not present. This will b
 
 ```typescript
 export const handle = async ({ event, resolve }) => {
-	const theme = event.cookies.get("theme");
+	const theme = event.cookies.get('theme')
 	if (!theme) {
-		return await resolve(event);
+		return await resolve(event)
 	}
 	// ...
-};
+}
 ```
 
 Now we need to treat the case that the cookie or theme is present.
@@ -227,9 +226,9 @@ The `resolve` function accepts a second parameter with options, including a func
 ```typescript
 return await resolve(event, {
 	transformPageChunk: ({ html }) => {
-		return html.replace('data-theme=""', `data-theme="${theme}"`);
+		return html.replace('data-theme=""', `data-theme="${theme}"`)
 	},
-});
+})
 ```
 
 And this is it! Since now the page is server-side rendered with the correct theme, there will be no flashing.

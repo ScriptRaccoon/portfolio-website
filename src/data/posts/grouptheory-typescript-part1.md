@@ -78,9 +78,9 @@ This is what our (preliminary) generic interface looks like:
 // group.ts
 
 interface GroupData<X> {
-	unit: X;
-	inverse: (a: X) => X;
-	compose: (a: X, b: X) => X;
+	unit: X
+	inverse: (a: X) => X
+	compose: (a: X, b: X) => X
 	// not finished
 }
 ```
@@ -95,10 +95,10 @@ In JavaScript, we cannot iterate over types, but over array-like structures. We 
 
 ```typescript
 interface GroupData<X> {
-	set: Set<X>;
-	unit: X;
-	inverse: (a: X) => X;
-	compose: (a: X, b: X) => X;
+	set: Set<X>
+	unit: X
+	inverse: (a: X) => X
+	compose: (a: X, b: X) => X
 	// not finished
 }
 ```
@@ -111,11 +111,11 @@ We need a more flexible notion of equality of elements of our sets. To achieve t
 
 ```typescript
 class SetWithEquality<X> extends Set<X> {
-	public equal: (a: X, b: X) => boolean;
+	public equal: (a: X, b: X) => boolean
 
 	constructor(elements: X[], equal?: (a: X, b: X) => boolean) {
-		super(elements);
-		this.equal = equal ?? ((a, b) => a === b);
+		super(elements)
+		this.equal = equal ?? ((a, b) => a === b)
 	}
 }
 ```
@@ -123,34 +123,31 @@ class SetWithEquality<X> extends Set<X> {
 When no equality function is passed to the constructor, we take the default one. For example,
 
 ```typescript
-new SetWithEquality([0, 1, 2, 3, 4]);
+new SetWithEquality([0, 1, 2, 3, 4])
 ```
 
 declares a set of 5 numbers with the usual notion of equality. For tuples, we define the utility function
 
 ```typescript
 function equalTuples<T>(a: T[], b: T[]): boolean {
-	return (
-		a.length === b.length &&
-		a.every((_, index) => a[index] === b[index])
-	);
+	return a.length === b.length && a.every((_, index) => a[index] === b[index])
 }
 ```
 
 and can declare a set of tuples like so:
 
 ```typescript
-new SetWithEquality([[0], [1]], equalTuples);
+new SetWithEquality([[0], [1]], equalTuples)
 ```
 
 This is our finished interface for groups:
 
 ```typescript
 interface GroupData<X> {
-	set: SetWithEquality<X>;
-	unit: X;
-	inverse: (a: X) => X;
-	compose: (a: X, b: X) => X;
+	set: SetWithEquality<X>
+	unit: X
+	inverse: (a: X) => X
+	compose: (a: X, b: X) => X
 }
 ```
 
@@ -165,9 +162,9 @@ contains(a: X): boolean {
 For example:
 
 ```typescript
-const M = new SetWithEquality([[0, 1]], equalTuples);
-console.assert(M.contains([0, 1]));
-console.assert(!M.has([0, 1])); // "wrong" equality
+const M = new SetWithEquality([[0, 1]], equalTuples)
+console.assert(M.contains([0, 1]))
+console.assert(!M.has([0, 1])) // "wrong" equality
 ```
 
 Reminder: `console.assert` does only log something when the assertion is not true. In our case, nothing is logged, which means that the assertions are true.
@@ -178,17 +175,17 @@ To construct groups and also verify the group axioms, we need to create a generi
 
 ```typescript
 class Group<X> implements GroupData<X> {
-	public set: SetWithEquality<X>;
-	public unit: X;
-	public inverse: (a: X) => X;
-	public compose: (a: X, b: X) => X;
+	public set: SetWithEquality<X>
+	public unit: X
+	public inverse: (a: X) => X
+	public compose: (a: X, b: X) => X
 
 	constructor(data: GroupData<X>) {
-		const { set, unit, inverse, compose } = data;
-		this.set = set;
-		this.unit = unit;
-		this.inverse = inverse;
-		this.compose = compose;
+		const { set, unit, inverse, compose } = data
+		this.set = set
+		this.unit = unit
+		this.inverse = inverse
+		this.compose = compose
 		// TODO: check group axioms
 	}
 	// TODO: add methods
@@ -205,19 +202,19 @@ const SignGroup = new Group<number>({
 	unit: 1,
 	compose: (a, b) => a * b,
 	inverse: (a) => 1 / a,
-});
+})
 ```
 
 For example:
 
 ```typescript
-console.assert(SignGroup.compose(-1, -1) === 1);
+console.assert(SignGroup.compose(-1, -1) === 1)
 ```
 
 There is a big difference here to the mathematical group <math>\\{+1,-1\\}</math>, though. This one has composition and inverse defined only for these two elements. The group `SignGroup` defined in TypeScript has a function `SignGroup.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
 
 ```typescript
-console.assert(SignGroup.compose(2, 3) === 6);
+console.assert(SignGroup.compose(2, 3) === 6)
 ```
 
 One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple.
@@ -243,8 +240,7 @@ get elements(): X[] {
 Let us check the associativity law for three elements. Instead of writing
 
 ```typescript
-this.compose(this.compose(a, b), c) ===
-	this.compose(a, this.compose(b, c));
+this.compose(this.compose(a, b), c) === this.compose(a, this.compose(b, c))
 ```
 
 which would be too strict, we use the notion of equality attached to our underlying set.
@@ -280,7 +276,7 @@ I ran into issues without the `bind(this)`. I assume this is because the functio
 We can test this with our example `SignGroup`.
 
 ```typescript
-console.assert(SignGroup.isAssociative);
+console.assert(SignGroup.isAssociative)
 ```
 
 ### Unit law
@@ -389,7 +385,7 @@ get isGroup(): boolean {
 The example group `SignGroup` from [before](#a-basic-example) is indeed a group:
 
 ```typescript
-console.assert(SignGroup.isGroup);
+console.assert(SignGroup.isGroup)
 ```
 
 Try to mess up the definition of `SignGroup.compose`, you will get an error.
@@ -418,7 +414,7 @@ get isCommutative(): boolean {
 Our example group `SignGroup` is commutative:
 
 ```typescript
-console.assert(SignGroup.isCommutative);
+console.assert(SignGroup.isCommutative)
 ```
 
 ### Order
@@ -434,7 +430,7 @@ get order(): number {
 For example,
 
 ```typescript
-console.assert(SignGroup.order === 2);
+console.assert(SignGroup.order === 2)
 ```
 
 confirms that `SignGroup` is a [finite simple group of order two](https://www.youtube.com/watch?v=BipvGD-LCjU).

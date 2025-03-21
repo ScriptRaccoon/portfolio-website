@@ -1,27 +1,27 @@
 <script lang="ts">
-	import { getContext } from "svelte";
-	import { fade } from "svelte/transition";
-	import Fa from "svelte-fa";
-	import { faRetweet } from "@fortawesome/free-solid-svg-icons";
+	import { getContext } from 'svelte'
+	import { fade } from 'svelte/transition'
+	import Fa from 'svelte-fa'
+	import { faRetweet } from '@fortawesome/free-solid-svg-icons'
 
-	let pending = $state(false);
+	let pending = $state(false)
 
 	type Props = {
-		text?: string;
-		name?: string;
-	};
-
-	let { text = "", name = "" }: Props = $props();
-
-	async function copy_text() {
-		if (pending) return;
-		pending = true;
-		await window.navigator.clipboard.writeText(text);
-		setTimeout(() => (pending = false), 1500);
+		text?: string
+		name?: string
 	}
 
-	const allow_animation = getContext("allow_animation");
-	const animation_speed = allow_animation ? 150 : 0;
+	let { text = '', name = '' }: Props = $props()
+
+	async function copy_text() {
+		if (pending) return
+		pending = true
+		await window.navigator.clipboard.writeText(text)
+		setTimeout(() => (pending = false), 1500)
+	}
+
+	const allow_animation = getContext('allow_animation')
+	const animation_speed = allow_animation ? 150 : 0
 </script>
 
 <button

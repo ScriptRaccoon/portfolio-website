@@ -4,7 +4,7 @@ teaser: to easily display code in Svelte projects
 repository: https://github.com/ScriptRaccoon/codeblocks
 url: https://codeblocks-shiki.netlify.app/
 tutorial: https://www.youtube.com/watch?v=MzoPVWyov2k
-tags: ["SvelteKit", "TypeScript", "Tutorial"]
+tags: ['SvelteKit', 'TypeScript', 'Tutorial']
 date: 2023-05-18
 ---
 

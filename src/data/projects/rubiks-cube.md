@@ -4,8 +4,7 @@ teaser: fully functional, made with CSS and Svelte
 repository: https://github.com/ScriptRaccoon/RubiksCubeSvelte
 url: https://rubikscubesvelte.netlify.app
 tutorial: https://www.youtube.com/watch?v=GdlUdnYZnfc
-tags:
-    ["Svelte", "CSS", "Browser game", "3D", "Tutorial", "Mathematics"]
+tags: ['Svelte', 'CSS', 'Browser game', '3D', 'Tutorial', 'Mathematics']
 date: 2022-03-05
 ---
 
@@ -15,8 +14,8 @@ A help menu shows the various keys to interact with the cube. All layers can be 
 
 Additionally, the cube can be
 
--   rotated in all directions
--   zoomed in/out
--   scrambled
--   reset to its original position
--   made half-transparent
+- rotated in all directions
+- zoomed in/out
+- scrambled
+- reset to its original position
+- made half-transparent

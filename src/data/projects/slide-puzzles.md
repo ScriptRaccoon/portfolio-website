@@ -4,7 +4,7 @@ teaser: featuring nice graphics and smooth animations
 repository: https://github.com/ScriptRaccoon/slidepuzzles
 url: https://slidepuzzles.netlify.app/
 tutorial:
-tags: ["Browser game", "CSS", "Vanilla JS"]
+tags: ['Browser game', 'CSS', 'Vanilla JS']
 date: 2022-01-10
 ---
 

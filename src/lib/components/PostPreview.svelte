@@ -1,13 +1,13 @@
 <script lang="ts">
-	import PreviewCard from "$lib/components/PreviewCard.svelte";
-	import type { PublishedPostMetaData } from "$lib/shared/types";
-	import More from "./More.svelte";
+	import PreviewCard from '$lib/components/PreviewCard.svelte'
+	import type { PublishedPostMetaData } from '$lib/shared/types'
+	import More from './More.svelte'
 
 	type Props = {
-		post: PublishedPostMetaData;
-	};
+		post: PublishedPostMetaData
+	}
 
-	let { post }: Props = $props();
+	let { post }: Props = $props()
 </script>
 
 <PreviewCard href="/blog/{post.id}">

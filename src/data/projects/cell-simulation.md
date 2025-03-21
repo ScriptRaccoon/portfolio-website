@@ -4,7 +4,7 @@ teaser: with several stages of evolution
 repository: https://github.com/ScriptRaccoon/Cell-Simulation
 url: https://cell-simulation.netlify.app/
 tutorial:
-tags: ["Vanilla JS", "HTML Canvas", "Creative Coding"]
+tags: ['Vanilla JS', 'HTML Canvas', 'Creative Coding']
 date: 2021-11-28
 ---
 
