@@ -5,7 +5,11 @@
 	import { current_theme } from "$lib/shared/state.svelte";
 </script>
 
-<button onclick={current_theme.toggle} aria-label="Toggle theme">
+<button
+	onclick={current_theme.toggle}
+	aria-label="Toggle theme, current theme is {current_theme.value}"
+	class={current_theme.value}
+>
 	<Fa icon={faMoon} class="moon" />
 	<Fa icon={faSun} class="sun" />
 </button>
@@ -31,8 +35,8 @@
 		}
 	}
 
-	:global(body[data-theme="dark"] .sun),
-	:global(body[data-theme="light"] .moon) {
+	button.light :global(.moon),
+	button.dark :global(.sun) {
 		opacity: 0;
 		rotate: 45deg;
 	}

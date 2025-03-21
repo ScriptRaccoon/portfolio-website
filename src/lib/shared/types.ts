@@ -13,9 +13,9 @@ export type PublishedPostMetaData = PostMetaData & {
 export type ProjectMetaData = {
 	id: string;
 	name: string;
-	repository: string;
-	url: string;
-	tutorial: string;
+	repository: string | null;
+	url: string | null;
+	tutorial: string | null;
 	tags: string[];
 	teaser: string;
 	date: Date;

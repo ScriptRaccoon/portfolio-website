@@ -4,25 +4,17 @@
 	import type { Snippet } from "svelte";
 
 	type Props = {
-		open?: boolean;
-		summary?: string;
-		animated?: boolean;
-		role: string;
-		children?: Snippet;
+		summary: string;
+		children: Snippet;
 	};
 
-	let {
-		open = $bindable(false),
-		summary = "Toggle",
-		animated = true,
-		role,
-		children,
-	}: Props = $props();
+	let { summary, children }: Props = $props();
 
-	const duration =
-		getContext("allow_animation") && animated ? 200 : 0;
+	let open = $state(false);
+
+	const duration = getContext<boolean>("allow_animation") ? 200 : 0;
 	const button_id = crypto.randomUUID();
-	const contents_id = crypto.randomUUID();
+	const content_id = crypto.randomUUID();
 
 	function toggle_open() {
 		open = !open;
@@ -32,17 +24,17 @@
 <button
 	id={button_id}
 	aria-expanded={open}
-	aria-controls={contents_id}
+	aria-controls={content_id}
 	onclick={toggle_open}
 	class:closed={!open}
 >
 	{summary}
 </button>
 
-<div id={contents_id} aria-labelledby={button_id} {role}>
+<div id={content_id} aria-labelledby={button_id}>
 	{#if open}
 		<div transition:slide={{ duration }}>
-			{@render children?.()}
+			{@render children()}
 		</div>
 	{/if}
 </div>

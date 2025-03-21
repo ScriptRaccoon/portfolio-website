@@ -11,4 +11,3 @@ vite.config.ts.timestamp-*
 
 .netlify
 todo.txt
-src/data/**/_draft*.md

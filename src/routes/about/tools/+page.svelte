@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { tool_data } from "./tools.config";
+	import tools from "./tools.json";
 </script>
 
 <h1>Tools and languages</h1>
@@ -9,7 +9,7 @@
 	in the context of web development.
 </p>
 
-{#each tool_data as tool_list}
+{#each tools as tool_list}
 	<section>
 		<h2>{tool_list.level}</h2>
 		<ul>

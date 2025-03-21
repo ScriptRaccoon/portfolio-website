@@ -76,22 +76,19 @@
 <p>I am also a passionate drummer. 🥁</p>
 
 <style>
-	img {
-		border-radius: 100vw;
-		width: 130px;
-	}
-
 	.intro {
 		display: grid;
 	}
 
-	.subtitle {
-		color: var(--h3-color);
-	}
-
 	img {
+		border-radius: 100vw;
+		width: 130px;
 		grid-row: 2;
 		justify-self: center;
+	}
+
+	.subtitle {
+		color: var(--h3-color);
 	}
 
 	@media (min-width: 38rem) {

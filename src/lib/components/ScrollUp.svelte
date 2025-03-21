@@ -1,8 +1,6 @@
 <script lang="ts">
-	import { onDestroy, onMount } from "svelte";
 	import { fade } from "svelte/transition";
 	import { getContext } from "svelte";
-	import { browser } from "$app/environment";
 	import Fa from "svelte-fa";
 	import { faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
@@ -10,19 +8,17 @@
 	let timer: number | null = null;
 	let scroll_position = 0;
 
-	const duration = getContext("allow_animation") ? 150 : 0;
+	const duration = getContext<boolean>("allow_animation") ? 150 : 0;
 
-	onMount(() => {
+	$effect(() => {
 		scroll_position = window.scrollY;
-		if (browser) window.addEventListener("scroll", handle_scroll);
-	});
-
-	onDestroy(() => {
-		if (browser) window.removeEventListener("scroll", handle_scroll);
+		window.addEventListener("scroll", handle_scroll);
+		() => {
+			window.removeEventListener("scroll", handle_scroll);
+		};
 	});
 
 	function handle_scroll() {
-		if (!browser) return;
 		if (window.scrollY === 0) {
 			show = false;
 		} else if (window.scrollY < scroll_position) {
@@ -35,7 +31,7 @@
 	}
 
 	function scroll_to_top() {
-		if (browser) window.scrollTo(0, 0);
+		window.scrollTo(0, 0);
 	}
 </script>
 

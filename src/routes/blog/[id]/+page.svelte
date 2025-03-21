@@ -8,7 +8,7 @@
 	let { title, published, updated } = $derived(data.attributes);
 </script>
 
-<Controls variant="top" />
+<Controls />
 
 <h1>
 	{title}
@@ -37,8 +37,9 @@
 	{@html data.html_code}
 </article>
 
-<Controls variant="bottom" />
-
+<div class="control-container">
+	<Controls />
+</div>
 <Comments />
 
 <style lang="scss">
@@ -60,6 +61,10 @@
 		a {
 			text-decoration-color: var(--secondary-font-color);
 		}
+	}
+
+	.control-container {
+		margin-block: 1rem 2rem;
 	}
 
 	article {

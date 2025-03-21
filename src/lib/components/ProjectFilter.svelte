@@ -6,21 +6,15 @@
 	type Props = ProjectFilterData;
 
 	let { tags, years }: Props = $props();
-
-	let focussed_tag: string | null = $state(null);
-	let focussed_year: number | null = $state(null);
 </script>
 
 <section aria-label="Project Filters">
-	<Expand summary="Toggle filters" role="group">
-		<div class="filter-list">
+	<Expand summary="Toggle filters">
+		<div class="filter-list" role="group">
 			{#each tags as tag}
 				<label
 					class="tag"
 					class:selected={project_filter.value.tags.includes(tag)}
-					class:focus={focussed_tag === tag}
-					onfocusin={() => (focussed_tag = tag)}
-					onfocusout={() => (focussed_tag = null)}
 				>
 					<input
 						type="checkbox"
@@ -31,13 +25,11 @@
 					{tag}
 				</label>
 			{/each}
+
 			{#each years as year}
 				<label
 					class="tag"
 					class:selected={project_filter.value.years.includes(year)}
-					class:focus={focussed_year === year}
-					onfocusin={() => (focussed_year = year)}
-					onfocusout={() => (focussed_year = null)}
 				>
 					<input
 						type="checkbox"
@@ -62,11 +54,13 @@
 
 	label {
 		cursor: pointer;
+
 		&.selected {
 			background-color: var(--accent-color);
 			color: var(--inverted-font-color);
 		}
-		&.focus {
+
+		&:has(:focus-visible) {
 			outline: 0.1rem solid var(--accent-color);
 		}
 	}

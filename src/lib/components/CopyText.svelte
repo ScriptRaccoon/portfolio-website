@@ -42,6 +42,7 @@
 	button {
 		position: relative;
 	}
+
 	span {
 		font-size: var(--small-font);
 		border-radius: 0.25rem;

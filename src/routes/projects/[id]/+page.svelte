@@ -16,7 +16,7 @@
 	);
 </script>
 
-<Controls variant="top" />
+<Controls />
 
 <h1>
 	{name}
@@ -54,6 +54,7 @@
 	img {
 		margin-block: 1.5rem;
 	}
+
 	.year {
 		margin-top: -0.5rem;
 		font-size: var(--small-font);

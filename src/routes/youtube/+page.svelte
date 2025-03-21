@@ -1,12 +1,10 @@
 <script lang="ts">
+	import youtube_data from "../../data/youtube/youtube.json";
+
 	import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 	import Fa from "svelte-fa";
 
-	let { data } = $props();
-	const { stats, video } = data;
-
-	if (!stats) console.warn("Could not retrieve YouTube statistics.");
-	if (!video) console.warn("Could not retrieve latest video.");
+	const { stats, video } = youtube_data;
 </script>
 
 <h1>YouTube</h1>
