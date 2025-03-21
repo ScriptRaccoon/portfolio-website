@@ -3,20 +3,17 @@
 
 	let { data } = $props();
 
-	let html_code = data.html_code;
-	let name = data.attributes.name;
-	let url = data.attributes.url;
-	let repository = data.attributes.repository;
-	let tutorial = data.attributes.tutorial;
-	let year = data.attributes.date.getFullYear();
-	let tags = data.attributes.tags;
-	let id = data.attributes.id;
+	let { id, name, url, repository, tutorial, tags, date } = $derived(
+		data.attributes,
+	);
 
-	let links = [
-		{ label: "URL", href: url },
-		{ label: "Repository", href: repository },
-		{ label: "Tutorial", href: tutorial },
-	].filter((link) => link.href?.length > 0);
+	let links = $derived(
+		[
+			{ label: "URL", href: url },
+			{ label: "Repository", href: repository },
+			{ label: "Tutorial", href: tutorial },
+		].filter((link) => link.href),
+	);
 </script>
 
 <Controls variant="top" />
@@ -26,7 +23,7 @@
 </h1>
 
 <p class="year">
-	{year}
+	{date.getFullYear()}
 </p>
 
 <section aria-label="links" class="links">
@@ -36,7 +33,7 @@
 </section>
 
 <article>
-	{@html html_code}
+	{@html data.html_code}
 </article>
 
 <img

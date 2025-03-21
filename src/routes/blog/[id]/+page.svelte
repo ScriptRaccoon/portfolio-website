@@ -5,11 +5,7 @@
 
 	let { data } = $props();
 
-	let toc = data.toc;
-	let html_code = data.html_code;
-	let title = data.attributes.title;
-	let published = data.attributes.published.toLocaleDateString();
-	let updated = data.attributes.updated?.toLocaleDateString();
+	let { title, published, updated } = $derived(data.attributes);
 </script>
 
 <Controls variant="top" />
@@ -19,16 +15,16 @@
 </h1>
 
 <div class="dates">
-	<div>Published: {published}</div>
+	<div>Published: {published.toLocaleDateString()}</div>
 	{#if updated}
-		<div>Updated: {updated}</div>
+		<div>Updated: {updated.toLocaleDateString()}</div>
 	{/if}
 </div>
 
-{#if toc.length > 0}
-	<Expand summary="Table of Contents" role="navigation">
-		<ol class="toc">
-			{#each toc as item}
+{#if data.toc.length > 0}
+	<Expand summary="Table of Contents">
+		<ol class="toc" role="navigation">
+			{#each data.toc as item}
 				<li>
 					<a href="#{item.id}">{item.text}</a>
 				</li>
@@ -38,7 +34,7 @@
 {/if}
 
 <article>
-	{@html html_code}
+	{@html data.html_code}
 </article>
 
 <Controls variant="bottom" />
