@@ -29,15 +29,12 @@
 		position: absolute;
 
 		@media (prefers-reduced-motion: no-preference) {
-			transition:
-				opacity 250ms linear,
-				rotate 250ms linear;
+			transition: opacity 250ms linear;
 		}
 	}
 
 	button.light :global(.moon),
 	button.dark :global(.sun) {
 		opacity: 0;
-		rotate: 45deg;
 	}
 </style>
