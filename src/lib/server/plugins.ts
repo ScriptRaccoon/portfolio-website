@@ -1,6 +1,6 @@
 import shiki from 'shiki'
 import type MarkdownIt from 'markdown-it'
-import type Token from 'markdown-it/lib/token'
+import type { Token } from 'markdown-it/index.js'
 
 /**
  * Plugin to automatically add target="_blank" to external links,
