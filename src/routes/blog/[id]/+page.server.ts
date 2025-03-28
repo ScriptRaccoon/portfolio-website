@@ -5,7 +5,6 @@ import {
 	type PublishedPostMetaData,
 } from '$lib/shared/types'
 import {
-	highlight_code,
 	add_ids_to_headings,
 	get_table_of_contents,
 	render_formulas,
@@ -46,7 +45,6 @@ export const load = async (event) => {
 		render_formulas,
 		transform_external_links,
 		add_ids_to_headings,
-		highlight_code,
 	])(html_raw)
 
 	const toc = get_table_of_contents(html_raw)
