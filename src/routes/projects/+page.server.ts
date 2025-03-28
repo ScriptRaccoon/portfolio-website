@@ -1,5 +1,5 @@
 import type { ProjectMetaData } from '$lib/shared/types'
-import { get_frontmatter } from '$lib/server/blog-processing'
+import { get_frontmatter } from '$lib/server/frontmatter'
 
 export const load = async () => {
 	const unsorted_projects = get_frontmatter<ProjectMetaData>(

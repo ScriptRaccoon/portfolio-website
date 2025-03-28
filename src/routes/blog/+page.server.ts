@@ -1,5 +1,5 @@
 import type { PostMetaData } from '$lib/shared/types'
-import { get_frontmatter } from '$lib/server/blog-processing'
+import { get_frontmatter } from '$lib/server/frontmatter'
 import { is_published } from '$lib/shared/utils'
 
 export const load = async () => {

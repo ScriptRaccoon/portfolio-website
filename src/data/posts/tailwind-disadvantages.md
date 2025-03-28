@@ -490,7 +490,7 @@ For instance, when you have three buttons (Login, Logout, Dashboard) in a menu, 
 
 And what happens in this example when you want to add a fourth button? Do you want to add a fourth element to an array, just to render a button? With Tailwind, many developers will instead just copy-paste the existing code, since this is the easiest Tailwind-compatible solution here, thus producing code duplication. With regular CSS, you do not need to touch the `.btn` class at all and just add another button with that class. It cannot be any simpler, and Tailwind prevents you from doing this.
 
-The docs also mention component frameworks, which are not always suitable as already mentioned, and the @apply directive, which will be addressed in a [separate section](#the-@apply-directive).
+The docs also mention component frameworks, which are not always suitable as already mentioned, and the @apply directive, which will be addressed in a [separate section](#the-apply-directive).
 
 ### Pseudo-classes
 
@@ -1017,7 +1017,7 @@ Tailwind promises that styling and markup can be found in only one file and that
 But in practice, this is not the case, and Tailwind forces you to switch between files quite often:
 
 - Not every portion of CSS can be realized with Tailwind. Sometimes, this is due to the complexity of the CSS. Sometimes, this is due to newer or less common CSS features that are not (yet) implemented in Tailwind (see also the section on [missing features](#missing-features)). So you do end up with a separate CSS file. And now every time you want to change the styling you have to ask yourself which file you need to look at!
-- The same happens when you use the [@apply directive](#the-@apply-directive). This will be in a CSS file.
+- The same happens when you use the [@apply directive](#the-apply-directive). This will be in a CSS file.
 - The standard configuration of Tailwind can be adjusted (`tailwind.config.js`), and many projects need to do this. You have to check this custom configuration to know what certain Tailwind classes actually mean. This applies in particular to custom colors and sizes.
 - Some of the applied styles are contained in Tailwind's CSS reset file _preflight_. Maybe that file has been adjusted as well.
 - At my job, we have a large codebase that has started to migrate the styles from [Less](https://lesscss.org/) to Tailwind. The migration is incomplete (and takes a lot of time). The Less files are considered to be legacy, but there are still hundreds of them. And it is not clear when and sometimes even how (as mentioned above) to migrate these. So again we have to switch between our Tailwind-styled markup and CSS resp. Less files. I am aware that not everyone using Tailwind will face this issue, in particular, if you start a project with Tailwind right away, but on the other hand, I can imagine that this kind of incomplete migration is not untypical.

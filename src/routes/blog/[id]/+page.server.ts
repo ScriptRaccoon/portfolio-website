@@ -4,14 +4,11 @@ import {
 	type PostMetaData,
 	type PublishedPostMetaData,
 } from '$lib/shared/types'
-import {
-	add_ids_to_headings,
-	get_table_of_contents,
-	render_formulas,
-	transform_external_links,
-	render_markdown,
-} from '$lib/server/blog-processing'
-import { compose, is_published } from '$lib/shared/utils'
+
+import { is_published } from '$lib/shared/utils'
+import { render_markdown } from '$lib/server/markdown'
+import { render_formulas } from '$lib/server/formulas.js'
+import { get_table_of_contents } from '$lib/server/toc'
 
 const posts_record = import.meta.glob('/src/data/posts/*.md', {
 	as: 'raw',
@@ -41,11 +38,7 @@ export const load = async (event) => {
 
 	const html_raw = render_markdown(body)
 
-	const html_code = compose([
-		render_formulas,
-		transform_external_links,
-		add_ids_to_headings,
-	])(html_raw)
+	const html_code = render_formulas(html_raw) // TODO: use plugin for that as well
 
 	const toc = get_table_of_contents(html_raw)
 
