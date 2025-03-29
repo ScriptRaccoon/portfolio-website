@@ -31,6 +31,10 @@
 				"url": "https://github.com/features/copilot/"
 			},
 			{
+				"name": "Netlify",
+				"url": "https://www.netlify.com/"
+			},
+			{
 				"name": "Sass",
 				"url": "https://sass-lang.com"
 			},
@@ -55,8 +59,16 @@
 				"url": "https://nodejs.org"
 			},
 			{
+				"name": "pnpm",
+				"url": "https://pnpm.io/"
+			},
+			{
 				"name": "Express",
 				"url": "http://expressjs.com/"
+			},
+			{
+				"name": "socket.io",
+				"url": "https://socket.io/"
 			},
 			{
 				"name": "Google Apps Script",
@@ -69,6 +81,10 @@
 			{
 				"name": "Jest",
 				"url": "https://jestjs.io/"
+			},
+			{
+				"name": "Vitest",
+				"url": "https://vitest.dev/"
 			},
 			{
 				"name": "jQuery",
@@ -94,6 +110,10 @@
 			{
 				"name": "Supabase",
 				"url": "https://supabase.com"
+			},
+			{
+				"name": "SQLite",
+				"url": "https://www.sqlite.org/"
 			},
 			{
 				"name": "Vite",
@@ -148,6 +168,14 @@
 				"url": "https://gulpjs.com/"
 			},
 			{
+				"name": "GitHub Actions",
+				"url": "https://github.com/features/actions"
+			},
+			{
+				"name": "Postman",
+				"url": "https://www.postman.com/"
+			},
+			{
 				"name": "Tailwind",
 				"url": "/blog/tailwind-disadvantages"
 			}
@@ -156,6 +184,18 @@
 	{
 		"level": "Basic knowledge",
 		"data": [
+			{
+				"name": "Google Cloud Platform",
+				"url": "https://cloud.google.com/"
+			},
+			{
+				"name": "Storybook",
+				"url": "https://storybook.js.org/"
+			},
+			{
+				"name": "D3",
+				"url": "https://d3js.org/"
+			},
 			{
 				"name": "Java",
 				"url": "https://www.java.com"
@@ -179,6 +219,14 @@
 			{
 				"name": "Pug",
 				"url": "https://pugjs.org/"
+			},
+			{
+				"name": "Puppeteer",
+				"url": "https://pptr.dev/"
+			},
+			{
+				"name": "Turso",
+				"url": "https://turso.tech/"
 			}
 		]
 	}
