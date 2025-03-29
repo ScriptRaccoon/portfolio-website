@@ -11,8 +11,32 @@
 				"url": "https://www.typescriptlang.org/"
 			},
 			{
+				"name": "Node.js",
+				"url": "https://nodejs.org"
+			},
+			{
+				"name": "HTML",
+				"url": "https://developer.mozilla.org/de/docs/Web/HTML"
+			},
+			{
 				"name": "CSS",
 				"url": "https://developer.mozilla.org/de/docs/Web/CSS"
+			},
+			{
+				"name": "Sass",
+				"url": "https://sass-lang.com"
+			},
+			{
+				"name": "Svelte",
+				"url": "https://svelte.dev/"
+			},
+			{
+				"name": "SvelteKit",
+				"url": "https://kit.svelte.dev/"
+			},
+			{
+				"name": "Google Apps Script",
+				"url": "https://developers.google.com/apps-script"
 			},
 			{
 				"name": "Python",
@@ -35,28 +59,8 @@
 				"url": "https://www.netlify.com/"
 			},
 			{
-				"name": "Sass",
-				"url": "https://sass-lang.com"
-			},
-			{
 				"name": "Canvas API",
 				"url": "https://developer.mozilla.org/en-US/docs/Web/API/Canvas_API"
-			},
-			{
-				"name": "HTML",
-				"url": "https://developer.mozilla.org/de/docs/Web/HTML"
-			},
-			{
-				"name": "Svelte",
-				"url": "https://svelte.dev/"
-			},
-			{
-				"name": "SvelteKit",
-				"url": "https://kit.svelte.dev/"
-			},
-			{
-				"name": "Node.js",
-				"url": "https://nodejs.org"
 			},
 			{
 				"name": "pnpm",
@@ -71,14 +75,6 @@
 				"url": "https://socket.io/"
 			},
 			{
-				"name": "Google Apps Script",
-				"url": "https://developers.google.com/apps-script"
-			},
-			{
-				"name": "Visual Studio Code",
-				"url": "https://code.visualstudio.com/"
-			},
-			{
 				"name": "Jest",
 				"url": "https://jestjs.io/"
 			},
@@ -89,6 +85,10 @@
 			{
 				"name": "jQuery",
 				"url": "https://jquery.com/"
+			},
+			{
+				"name": "Visual Studio Code",
+				"url": "https://code.visualstudio.com/"
 			}
 		]
 	},
@@ -96,12 +96,40 @@
 		"level": "Advanced knowledge",
 		"data": [
 			{
-				"name": "HTTP",
-				"url": "https://developer.mozilla.org/en-US/docs/Web/HTTP"
+				"name": "Vue.js",
+				"url": "https://vuejs.org/"
+			},
+			{
+				"name": "React",
+				"url": "https://reactjs.org/"
+			},
+			{
+				"name": "Next.js",
+				"url": "https://nextjs.org/"
+			},
+			{
+				"name": "PHP",
+				"url": "https://www.php.net/"
+			},
+			{
+				"name": "Vite",
+				"url": "https://vitejs.dev"
+			},
+			{
+				"name": "GitHub Actions",
+				"url": "https://github.com/features/actions"
 			},
 			{
 				"name": "Astro",
 				"url": "https://astro.build"
+			},
+			{
+				"name": "esbuild",
+				"url": "https://esbuild.github.io/"
+			},
+			{
+				"name": "gulp",
+				"url": "https://gulpjs.com/"
 			},
 			{
 				"name": "Firebase",
@@ -120,28 +148,12 @@
 				"url": "https://www.sqlite.org/"
 			},
 			{
-				"name": "Vite",
-				"url": "https://vitejs.dev"
-			},
-			{
-				"name": "Vue.js",
-				"url": "https://vuejs.org/"
-			},
-			{
-				"name": "React",
-				"url": "https://reactjs.org/"
-			},
-			{
-				"name": "Next.js",
-				"url": "https://nextjs.org/"
-			},
-			{
-				"name": "PHP",
-				"url": "https://www.php.net/"
-			},
-			{
 				"name": "EJS",
 				"url": "https://ejs.co/"
+			},
+			{
+				"name": "SVG",
+				"url": "https://developer.mozilla.org/en-US/docs/Web/SVG?"
 			},
 			{
 				"name": "Mocha",
@@ -160,20 +172,8 @@
 				"url": "https://cucumber.io/"
 			},
 			{
-				"name": "SVG",
-				"url": "https://developer.mozilla.org/en-US/docs/Web/SVG?"
-			},
-			{
-				"name": "esbuild",
-				"url": "https://esbuild.github.io/"
-			},
-			{
-				"name": "gulp",
-				"url": "https://gulpjs.com/"
-			},
-			{
-				"name": "GitHub Actions",
-				"url": "https://github.com/features/actions"
+				"name": "HTTP",
+				"url": "https://developer.mozilla.org/en-US/docs/Web/HTTP"
 			},
 			{
 				"name": "Postman",
@@ -193,20 +193,20 @@
 				"url": "https://cloud.google.com/"
 			},
 			{
-				"name": "Storybook",
-				"url": "https://storybook.js.org/"
-			},
-			{
-				"name": "D3",
-				"url": "https://d3js.org/"
-			},
-			{
 				"name": "Java",
 				"url": "https://www.java.com"
 			},
 			{
 				"name": "MySQL",
 				"url": "https://www.mysql.com/"
+			},
+			{
+				"name": "Storybook",
+				"url": "https://storybook.js.org/"
+			},
+			{
+				"name": "D3",
+				"url": "https://d3js.org/"
 			},
 			{
 				"name": "Lit",
