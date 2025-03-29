@@ -34,6 +34,7 @@
 		"@fortawesome/free-regular-svg-icons": "^6.7.2",
 		"@fortawesome/free-solid-svg-icons": "^6.7.2",
 		"@giscus/svelte": "^3.0.0",
+		"@mdit/plugin-mathjax": "^0.16.0",
 		"front-matter": "^4.0.2",
 		"markdown-it": "^14.1.0",
 		"mathjax": "^3.2.2",

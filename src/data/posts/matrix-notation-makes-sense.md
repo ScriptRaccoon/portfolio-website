@@ -7,16 +7,16 @@ description: Ever wondered why we write a_ij for the entry in row i and column j
 
 I learned to work and calculate with matrices long ago, but curiously I only recently understood why the common notation for their entries makes sense. This might be embarrassing, but I will share it nevertheless. The insight came from programming.
 
-Let me briefly recall what a matrix is. An <math>m</math> by <math>n</math> matrix is a rectangular grid of numbers with <math>m</math> rows and <math>n</math> columns. Here is an example for <math>m = 2</math> and <math>n = 3</math>. (Perhaps I can convince my MathJax plugin someday to render this properly.)
+Let me briefly recall what a matrix is. An $m$ by $n$ matrix is a rectangular grid of numbers with $m$ rows and $n$ columns. Here is an example for $m = 2$ and $n = 3$. (Perhaps I can convince my MathJax plugin someday to render this properly.)
 
 ```json
 | 2  3 0 |
 | 0 -1 9 |
 ```
 
-In mathematics, you denote the matrix entry in row <math>i</math> and column <math>j</math> by <math>a\_{ij}</math> (when the matrix is called <math>A</math>, when it is called <math>U</math> you write <math>u\_{ij}</math> etc.). So in the example above, we therefore have <math>a\_{12}=3</math> and <math>a\_{22} = -1</math>, for example. A general matrix is then written as <math>(a\_{ij})\_{1 \leq i \leq m,~ 1 \leq j \leq n}</math>
+In mathematics, you denote the matrix entry in row $i$ and column $j$ by $a_{ij}$ (when the matrix is called $A$, when it is called $U$ you write $u_{ij}$ etc.). So in the example above, we therefore have $a_{12}=3$ and $a_{22} = -1$, for example. A general matrix is then written as $(a_{ij})_{1 \leq i \leq m,~ 1 \leq j \leq n}$
 
-When I first learned this, it seemed a bit strange to me. I was so used to the cartesian coordinate system that, for me, the <math>x</math>-coordinate should come first, then the <math>y</math>-coordinate. And obviously, the column should be the <math>x</math>-coordinate and hence go first, and after that comes the row which is the <math>y</math>-coordinate. (Let's ignore for the moment that in a usual cartesian coordinate system the <math>y</math>-values grow when you go up, in a matrix it's versa.) Wouldn't it then make more sense to write <math>a\_{21} = 3</math>?
+When I first learned this, it seemed a bit strange to me. I was so used to the cartesian coordinate system that, for me, the $x$-coordinate should come first, then the $y$-coordinate. And obviously, the column should be the $x$-coordinate and hence go first, and after that comes the row which is the $y$-coordinate. (Let's ignore for the moment that in a usual cartesian coordinate system the $y$-values grow when you go up, in a matrix it's versa.) Wouldn't it then make more sense to write $a_{21} = 3$?
 
 As with any notation, after some time you just get used to it. I never really had any problems with distinguishing a point on a coordinate system and the location of a matrix entry.
 
@@ -31,7 +31,7 @@ How would you model the matrix written above, as a 2-dimensional array? The only
 ]
 ```
 
-The matrix is an array of rows, and each row is an array. Accordingly, when you want to access the `3` here, you write `a[0][1]`. First comes the row index `0` and only then the column index `1`. Since mathematicians tend to start their indices with `1`, they write <math>a\_{12}</math> instead of <math>a\_{01}</math>, but in principle, it's the same. First row, then column.
+The matrix is an array of rows, and each row is an array. Accordingly, when you want to access the `3` here, you write `a[0][1]`. First comes the row index `0` and only then the column index `1`. Since mathematicians tend to start their indices with `1`, they write $a_{12}$ instead of $a_{01}$, but in principle, it's the same. First row, then column.
 
 Of course, you _could_ also do it the other way, but then when you print out the 2-dimensional array, it won't look like the usual visual representation of the matrix. You will see the transposed matrix.
 

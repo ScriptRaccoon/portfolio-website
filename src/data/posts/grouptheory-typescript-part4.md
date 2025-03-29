@@ -40,7 +40,7 @@ function ProductOfSets<X, Y>(
 }
 ```
 
-The group operations in a direct product of groups are also defined "component-wise". We can implement them accordingly. The following function yields for every pair of groups `A` and `B` a new group `productOfGroups(A,B)`, which stands for their direct product <math>A \times B</math>.
+The group operations in a direct product of groups are also defined "component-wise". We can implement them accordingly. The following function yields for every pair of groups `A` and `B` a new group `productOfGroups(A,B)`, which stands for their direct product $A \times B$.
 
 ```typescript
 function productOfGroups<X, Y>(A: Group<X>, B: Group<Y>): Group<[X, Y]> {
@@ -80,7 +80,7 @@ console.assert(Zmod7_x_S3.order === 42)
 
 ### The Klein Four-Group as a direct product
 
-There is an isomorphism between the Klein Four-Group (from [Part 2](/blog/grouptheory-typescript-part2)) and the direct product of <math>\mathbb{Z}/2\mathbb{Z}</math> with itself. The idea is to send <math>e</math> to <math>[0,0]</math> (which is forced by the homomorphism property) and map the other three source elements <math>a,b,c</math> randomly\* to the other target elements <math>[1,0], [0,1], [1,1]</math>.
+There is an isomorphism between the Klein Four-Group (from [Part 2](/blog/grouptheory-typescript-part2)) and the direct product of $\mathbb{Z}/2\mathbb{Z}$ with itself. The idea is to send $e$ to $[0,0]$ (which is forced by the homomorphism property) and map the other three source elements $a,b,c$ randomly\* to the other target elements $[1,0], [0,1], [1,1]$.
 
 Let us implement this!
 
@@ -103,11 +103,11 @@ const isomKlein = new HomomorphismOfGroups({
 console.assert(isomKlein.isIsomorphism)
 ```
 
-\*Any permutation is allowed since we have seen in the previous part that <math>\mathrm{GL}\_2(\mathbb{F}\_2)</math> and <math>S_3</math> are isomorphic.
+\*Any permutation is allowed since we have seen in the previous part that $\mathrm{GL}_2(\mathbb{F}_2)$ and $S_3$ are isomorphic.
 
 ### Properties of the direct product
 
-It is a general fact that the groups <math>A \times B</math> and <math>B \times A</math> are isomorphic. We can construct this isomorphism as follows:
+It is a general fact that the groups $A \times B$ and $B \times A$ are isomorphic. We can construct this isomorphism as follows:
 
 ```typescript
 function isomSwap<X, Y>(A: Group<X>, B: Group<Y>) {
@@ -128,11 +128,11 @@ console.assert(swap.isIsomorphism)
 
 Direct products are characterized by a _universal property_. I will not explain this in full detail, but one part of it is very simple, actually: Given two homomorphisms of groups
 
-<math>f : C \to A, ~ g : C \to B</math>,
+$f : C \to A, ~ g : C \to B$,
 
 we can construct a homomorphism
 
-<math>(f,g) : C \to A \times B,~ (f,g)(c) := (f(c),g(c))</math>.
+$(f,g) : C \to A \times B,~ (f,g)(c) := (f(c),g(c))$.
 
 The homomorphism property is easy to check. We can implement this construction as follows.
 
@@ -154,7 +154,7 @@ function pairHom<X, Y, Z>(
 }
 ```
 
-We can also define the projection homomorphisms <math>A \times B \to A</math> and <math>A \times B \to B</math> and formulate the universal property with these, but as already indicated many times before it is unfortunately not possible to verify anything like this in full generality with our code alone. We still have to rely on mathematics for proof.
+We can also define the projection homomorphisms $A \times B \to A$ and $A \times B \to B$ and formulate the universal property with these, but as already indicated many times before it is unfortunately not possible to verify anything like this in full generality with our code alone. We still have to rely on mathematics for proof.
 
 At least, the TypeScript compiler helps us to write down _meaningful formulas_. For example, in the code above we cannot replace `g.map(c)` with `f.map(c)` without the TypeScript compiler yelling at us. Indeed, this is a type error.
 
@@ -184,7 +184,7 @@ class SetWithEquality<X> extends Set<X> {
 }
 ```
 
-For example, `Zmod2.set.subset([0])` declares the subset of the underlying set of <math>\mathbb{Z}/2\mathbb{Z}</math> (which is <math>\\{0,1\\}</math>) that just consists of the zero.
+For example, `Zmod2.set.subset([0])` declares the subset of the underlying set of $\mathbb{Z}/2\mathbb{Z}$ (which is $\{0,1\}$) that just consists of the zero.
 
 Now, a subgroup of a group consists of a subset of the underlying set with all group operations being inherited from the whole group. Of course, this deserves only the name _subgroup_ when the result is indeed a group. But remember that we already included the check for all group axioms in the `Group<X>` constructor, so we do not need to repeat it here:
 
@@ -221,7 +221,7 @@ get isTrivial(): boolean {
 
 ### Kernels and Images
 
-Many examples of subgroups arise from homomorphisms. Every homomorphism <math>f : A \to B</math> yields a [kernel](<https://en.wikipedia.org/wiki/Kernel_(algebra)>), which is a subgroup of <math>A</math>, and an [image](<https://en.wikipedia.org/wiki/Image_(mathematics)>), which is a subgroup of <math>B</math>.
+Many examples of subgroups arise from homomorphisms. Every homomorphism $f : A \to B$ yields a [kernel](<https://en.wikipedia.org/wiki/Kernel_(algebra)>), which is a subgroup of $A$, and an [image](<https://en.wikipedia.org/wiki/Image_(mathematics)>), which is a subgroup of $B$.
 
 To implement these two subgroups, we extend the `HomomorphismOfGroups<X,Y>` class as follows:
 
@@ -249,14 +249,14 @@ export class HomomorphismOfGroups<X, Y> {
 }
 ```
 
-We can test this implementation with all the homomorphisms from the [previous part](/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from <math>S_3 \to \mathrm{GL}\_2(\mathbb{F}\_2)</math>, then
+We can test this implementation with all the homomorphisms from the [previous part](/blog/grouptheory-typescript-part3). For example, when `isomGL2` denotes the isomorphism from $S_3 \to \mathrm{GL}_2(\mathbb{F}_2)$, then
 
 ```typescript
 console.assert(isomGL2.kernel.isTrivial)
 console.assert(isomGL2.image.order === 6)
 ```
 
-When `signum` denotes the sign homomorphism <math>S_3 \to \\{+1,-1\\}</math>, we get:
+When `signum` denotes the sign homomorphism $S_3 \to \{+1,-1\}$, we get:
 
 ```typescript
 console.assert(signum.kernel.order === 3)
@@ -266,11 +266,11 @@ console.assert(signum.image.order === 2)
 
 ### Generated subgroups
 
-If <math>S</math> is any subset of the underlying set of a group <math>G</math>, we wish to build the smallest subgroup of <math>G</math> which contains <math>S</math>. This is the subgroup [generated by](https://en.wikipedia.org/wiki/Generating_set_of_a_group) <math>S</math>.
+If $S$ is any subset of the underlying set of a group $G$, we wish to build the smallest subgroup of $G$ which contains $S$. This is the subgroup [generated by](https://en.wikipedia.org/wiki/Generating_set_of_a_group) $S$.
 
 The following pseudo-algorithm constructs the elements of this group:
 
-We build the list of elements step by step and start with <math>[e]</math> (where <math>e</math> is the unit). For every element <math>s \in S</math>, we compute the products <math>g \* s</math> with all the elements <math>g</math> from the list. If no product is new, we are done: we return the list of elements with the inherited group operations. Otherwise, we add all of them to the list (without duplicates). Now, we continue with that larger list.
+We build the list of elements step by step and start with $[e]$ (where $e$ is the unit). For every element $s \in S$, we compute the products $g * s$ with all the elements $g$ from the list. If no product is new, we are done: we return the list of elements with the inherited group operations. Otherwise, we add all of them to the list (without duplicates). Now, we continue with that larger list.
 
 In our code, we can do this with a `while` loop which runs as long as new elements have been found. The process of finding new elements will be extracted into its own function\* for better readability.
 
@@ -324,7 +324,7 @@ console.assert(Zmod6.subgroupGeneratedBy([3]).order === 2)
 console.assert(Zmod6.subgroupGeneratedBy([4]).order === 3)
 ```
 
-The Klein Four-Group is generated by <math>a</math> and <math>b</math>:
+The Klein Four-Group is generated by $a$ and $b$:
 
 ```typescript
 console.assert(KleinFourGroup.subgroupGeneratedBy(['a', 'b']).order == 4)
@@ -371,7 +371,7 @@ class Group<X> {
 }
 ```
 
-The center of all symmetric groups is trivial (except for <math>S_2</math>). Let us test this by example:
+The center of all symmetric groups is trivial (except for $S_2$). Let us test this by example:
 
 ```typescript
 const S5 = symmetricGroup(5)!

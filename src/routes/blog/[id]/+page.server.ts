@@ -7,7 +7,6 @@ import {
 
 import { is_published } from '$lib/shared/utils'
 import { render_markdown } from '$lib/server/markdown'
-import { render_formulas } from '$lib/server/formulas.js'
 import { get_table_of_contents } from '$lib/server/toc'
 
 const posts_record = import.meta.glob('/src/data/posts/*.md', {
@@ -36,11 +35,9 @@ export const load = async (event) => {
 
 	attributes satisfies PublishedPostMetaData
 
-	const html_raw = render_markdown(body)
+	const html_code = render_markdown(body)
 
-	const html_code = render_formulas(html_raw) // TODO: use plugin for that as well
-
-	const toc = get_table_of_contents(html_raw)
+	const toc = get_table_of_contents(html_code)
 
 	const { title, description } = attributes
 	const meta = { title, description }

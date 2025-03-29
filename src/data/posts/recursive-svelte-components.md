@@ -246,9 +246,9 @@ You can see the result [on this site](https://recursive-svelte-components.netlif
 
 The [Fibonacci sequence](https://en.wikipedia.org/wiki/Fibonacci_sequence) can be generated using Svelte. We adapt the definition
 
-<math>F_n = F\_{n-1} + F\_{n-2}</math>
+$F_n = F_{n-1} + F_{n-2}$
 
-by designing the `Fibonacci.svelte` component to call itself twice: once with a decremented index and once with the index decremented by two. When the index is one, the component renders exactly one block (since <math>F_1 = 1</math>), and when the index is zero, it renders nothing (since <math>F_0 = 0</math>). This ensures that eventually, the component renders <math>F_n</math> blocks.
+by designing the `Fibonacci.svelte` component to call itself twice: once with a decremented index and once with the index decremented by two. When the index is one, the component renders exactly one block (since $F_1 = 1$), and when the index is zero, it renders nothing (since $F_0 = 0$). This ensures that eventually, the component renders $F_n$ blocks.
 
 ```svelte
 <script lang="ts">
@@ -266,7 +266,7 @@ by designing the `Fibonacci.svelte` component to call itself twice: once with a 
 {/if}
 ```
 
-You can style the `block` however you like. For example, `<Fibonacci index={8} />` renders 21 blocks, as <math>F_8 = 21</math>. The parent component may also count the blocks using Vanilla JS and display their number (as demonstrated [here](https://recursive-svelte-components.netlify.app/fibonacci)).
+You can style the `block` however you like. For example, `<Fibonacci index={8} />` renders 21 blocks, as $F_8 = 21$. The parent component may also count the blocks using Vanilla JS and display their number (as demonstrated [here](https://recursive-svelte-components.netlify.app/fibonacci)).
 
 ![21 Blocks counting the 8th Fibonacci number](/media/blog/recursive-fibonacci.png)
 
@@ -321,7 +321,7 @@ The basic structure of the markup is as follows:
 {/if}
 ```
 
-The `size` prop passed to the nested `Tree` components is calculated using basic trigonometry. Specifically, the trigonometric definitions of sine and cosine are used: if <math>s</math> is the length of the hypotenuse of a right triangle and <math>\alpha</math> is one of its angles, the lengths of the legs are <math>s \cdot \cos(\alpha)</math> and <math>s \cdot \sin(\alpha)</math>.
+The `size` prop passed to the nested `Tree` components is calculated using basic trigonometry. Specifically, the trigonometric definitions of sine and cosine are used: if $s$ is the length of the hypotenuse of a right triangle and $\alpha$ is one of its angles, the lengths of the legs are $s \cdot \cos(\alpha)$ and $s \cdot \sin(\alpha)$.
 
 The left and right parts are placed inside the square, allowing CSS to handle their relative positioning to each other.
 

@@ -11,9 +11,9 @@ description: Let's develop some mathematics with generic classes!
 
 Even if you haven't heard of groups (in mathematics) yet, you use them all the time: the standard example of a group is the set of integers
 
-<math>\mathbb{Z} = \\{ \dotsc, -1, 0, +1, +2, \dotsc \\}</math>
+$\mathbb{Z} = \{ \dotsc, -1, 0, +1, +2, \dotsc \}$
 
-equipped with the common arithmetical operations <math>+</math> and <math>-</math> of adding and subtracting integers. (A more precise definition is explained below.)
+equipped with the common arithmetical operations $+$ and $-$ of adding and subtracting integers. (A more precise definition is explained below.)
 
 Ever wondered why, when performing the same set of moves to a solved Rubik's cube again and again (for example: front, top, front, top, ...), you [eventually get back to its original position](/media/blog/rubikscuberotations.mp4)? Well, this is a consequence of Lagrange's theorem in group theory. The beauty of mathematics, and group theory in particular, is that it allows us to understand these "happy accidents" on a much more conceptual level.
 
@@ -30,45 +30,45 @@ All of the code below can be found on [GitHub](https://github.com/ScriptRaccoon/
 
 ## What is a group?
 
-A group consists of a set <math>X</math> together with
+A group consists of a set $X$ together with
 
-- an element <math>e \in X</math> ("unit element")
-- a function <math>c : X \times X \to X</math> ("composition")
-- a function <math>i : X \to X</math> ("inverse")
+- an element $e \in X$ ("unit element")
+- a function $c : X \times X \to X$ ("composition")
+- a function $i : X \to X$ ("inverse")
 
-satisfying some conditions. The notation means that, given any two elements <math>x,y \in X</math>, we get a new element <math>c(x,y) \in X</math>. Also, we have an element <math>i(x) \in X</math>, for every element <math>x \in X</math>. So, <math>e</math> is a constant, <math>c</math> is a function of two arguments, and <math>i</math> is a function of one argument. The group is the tuple <math>G = (X,e,c,i)</math> with all the data.
+satisfying some conditions. The notation means that, given any two elements $x,y \in X$, we get a new element $c(x,y) \in X$. Also, we have an element $i(x) \in X$, for every element $x \in X$. So, $e$ is a constant, $c$ is a function of two arguments, and $i$ is a function of one argument. The group is the tuple $G = (X,e,c,i)$ with all the data.
 
-For example, in the group of integers <math>\mathbb{Z}</math>, the set consists of all integers <math>...,-1,0,+1,+2,...</math>, the unit is the zero <math>0</math>, the composition maps two integers <math>x,y</math> to their _sum_ <math>x + y</math>, and the inverse of <math>x</math> is <math>-x</math>.
+For example, in the group of integers $\mathbb{Z}$, the set consists of all integers $...,-1,0,+1,+2,...$, the unit is the zero $0$, the composition maps two integers $x,y$ to their _sum_ $x + y$, and the inverse of $x$ is $-x$.
 
-Another example is the group <math>\mathbb{Q}^\*</math> of all non-zero rational numbers (floats) with the unit element <math>1</math>, the composition of <math>x,y</math> is their _product_ <math>x \* y</math>, and the inverse of <math>x</math> is <math>1/x</math>.
+Another example is the group $\mathbb{Q}^*$ of all non-zero rational numbers (floats) with the unit element $1$, the composition of $x,y$ is their _product_ $x * y$, and the inverse of $x$ is $1/x$.
 
 The conditions for a group, called _group axioms_, are the following:
 
-1. **Associativity law**: For all elements <math>x,y,z \in X</math> we have <math>c(x,c(y,z)) = c(c(x,y),z)</math>.
-2. **Unit law**: For all elements <math>x \in X</math> we have <math>c(x,e) = x</math> and <math>c(e,x) = x</math>.
-3. **Inverses law**: For all elements <math>x \in X</math> we have <math>c(x,i(x)) = e</math> and <math>c(i(x),x) = e</math>.
+1. **Associativity law**: For all elements $x,y,z \in X$ we have $c(x,c(y,z)) = c(c(x,y),z)$.
+2. **Unit law**: For all elements $x \in X$ we have $c(x,e) = x$ and $c(e,x) = x$.
+3. **Inverses law**: For all elements $x \in X$ we have $c(x,i(x)) = e$ and $c(i(x),x) = e$.
 
-When you write down these conditions for <math>\mathbb{Q}^\*</math>, you get:
+When you write down these conditions for $\mathbb{Q}^*$, you get:
 
-1. <math>x \* (y \* z) = (x \* y) \* z</math> for all non-zero rational numbers <math>x,y,z</math>
-2. <math>x \* 1 = x</math> and <math>1 \* x = x</math> for all non-zero rational numbers <math>x</math>
-3. <math>x \* 1/x = 1</math> and <math>1/x \* x = 1</math> for all non-zero rational numbers <math>x</math>
+1. $x * (y * z) = (x * y) * z$ for all non-zero rational numbers $x,y,z$
+2. $x * 1 = x$ and $1 * x = x$ for all non-zero rational numbers $x$
+3. $x * 1/x = 1$ and $1/x * x = 1$ for all non-zero rational numbers $x$
 
-Looks familiar, right? And for <math>\mathbb{Z}</math>, the conditions are:
+Looks familiar, right? And for $\mathbb{Z}$, the conditions are:
 
-1. <math>x + (y + z) = (x + y) + z</math> for all integers <math>x,y,z</math>
-2. <math>x + 0 = x</math> and <math>0 + x = x</math> for all integers <math>x</math>
-3. <math>x + (-x) = 0</math> and <math>(-x) + x = 0</math> for all integers <math>x</math>
+1. $x + (y + z) = (x + y) + z$ for all integers $x,y,z$
+2. $x + 0 = x$ and $0 + x = x$ for all integers $x$
+3. $x + (-x) = 0$ and $(-x) + x = 0$ for all integers $x$
 
-These equations are true, verifying that <math>\mathbb{Z}</math> and <math>\mathbb{Q}^\*</math> are, indeed, groups.
+These equations are true, verifying that $\mathbb{Z}$ and $\mathbb{Q}^*$ are, indeed, groups.
 
 Groups are nothing but structures in which you can compute like you normally would, just in a more abstract way.
 
-Examples such as <math>\mathbb{Q}^\*</math> are the reason why many authors also like to write <math>x \* y</math> instead of <math>c(x,y)</math> in the case of an abstract group, but this can be confusing for beginners (after all, the composition operation could even be an addition!) and will be avoided here.
+Examples such as $\mathbb{Q}^*$ are the reason why many authors also like to write $x * y$ instead of $c(x,y)$ in the case of an abstract group, but this can be confusing for beginners (after all, the composition operation could even be an addition!) and will be avoided here.
 
 ## Group interface
 
-To translate the definition of a group to TypeScript, we will replace the set <math>X</math> with a type `X`. It has to be arbitrary so that we will use a generic type.
+To translate the definition of a group to TypeScript, we will replace the set $X$ with a type `X`. It has to be arbitrary so that we will use a generic type.
 
 The unit can be any element of type `X`. The composition is a function of two arguments, both of type `X`, producing an element of type `X`. And the inverse operation takes an element of type `X` to an element of type `X`.
 
@@ -105,7 +105,7 @@ interface GroupData<X> {
 
 Remember that all sets in JavaScript / TypeScript are finite so we will only be able to model _finite groups_. Infinite groups can only be modeled "partially".
 
-The interface above is still not finished. Remember that we want to write down the group axioms, and these require the equality of pairs of elements. But in JavaScript, the equality of two non-primitive objects is often too strict. For example, `[1,2] === [1,2]` is false! In mathematics, <math>x = x</math> is always true.
+The interface above is still not finished. Remember that we want to write down the group axioms, and these require the equality of pairs of elements. But in JavaScript, the equality of two non-primitive objects is often too strict. For example, `[1,2] === [1,2]` is false! In mathematics, $x = x$ is always true.
 
 We need a more flexible notion of equality of elements of our sets. To achieve this, we extend the generic class `Set<X>` with a new generic class that has such a notion by definition:
 
@@ -194,7 +194,7 @@ class Group<X> implements GroupData<X> {
 
 ## A basic example
 
-Before we continue with the group class, let us look at a basic example. This is a subgroup of <math>\mathbb{Q}^\*</math> which has just two elements: <math>\\{+1,-1\\}</math>. The group operations are inherited from <math>\mathbb{Q}^\*</math>, so for example the composition is just ordinary multiplication.
+Before we continue with the group class, let us look at a basic example. This is a subgroup of $\mathbb{Q}^*$ which has just two elements: $\{+1,-1\}$. The group operations are inherited from $\mathbb{Q}^*$, so for example the composition is just ordinary multiplication.
 
 ```typescript
 const SignGroup = new Group<number>({
@@ -211,7 +211,7 @@ For example:
 console.assert(SignGroup.compose(-1, -1) === 1)
 ```
 
-There is a big difference here to the mathematical group <math>\\{+1,-1\\}</math>, though. This one has composition and inverse defined only for these two elements. The group `SignGroup` defined in TypeScript has a function `SignGroup.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
+There is a big difference here to the mathematical group $\{+1,-1\}$, though. This one has composition and inverse defined only for these two elements. The group `SignGroup` defined in TypeScript has a function `SignGroup.compose` which is defined for _all_ pairs of numbers (at least, those JavaScript can handle). For example:
 
 ```typescript
 console.assert(SignGroup.compose(2, 3) === 6)
@@ -219,7 +219,7 @@ console.assert(SignGroup.compose(2, 3) === 6)
 
 One idea might be to throw an error when the function is applied to members outside of the set of elements. But we will not do that to keep the code simple.
 
-In mathematics, the _type_ of the group elements and their underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group <math>\mathbb{Q}^\*</math> in TypeScript, since it is infinite. We cannot write `Set(AllNumbers)`.
+In mathematics, the _type_ of the group elements and their underlying set are practically the same (and they _are_ in type theory). In TypeScript, unfortunately, we have to distinguish the two. We also cannot construct the whole group $\mathbb{Q}^*$ in TypeScript, since it is infinite. We cannot write `Set(AllNumbers)`.
 
 The TypeScript version of a group clearly differs from the mathematical version. Nevertheless, we can try to bring over some group theory to TypeScript. We will cover the group axioms next.
 
@@ -396,7 +396,7 @@ A lot of group theory can now be added to our group class. For now, let us only 
 
 ### Commutativity
 
-In mathematics, a group <math>(X,e,c,i)</math> is called _commutative_ if <math>c(x,y) = c(y,x)</math> holds for all elements <math>x,y \in X</math>. For example, <math>\mathbb{Z}</math> and <math>\mathbb{Q}^\*</math> are commutative.
+In mathematics, a group $(X,e,c,i)$ is called _commutative_ if $c(x,y) = c(y,x)$ holds for all elements $x,y \in X$. For example, $\mathbb{Z}$ and $\mathbb{Q}^*$ are commutative.
 
 We can easily add a commutativity check to our group class.
 

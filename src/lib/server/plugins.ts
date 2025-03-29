@@ -1,6 +1,7 @@
 import shiki from 'shiki'
 import type MarkdownIt from 'markdown-it'
-import type { Token } from 'markdown-it/index.js'
+import type Token from 'markdown-it/lib/token.mjs'
+import { createMathjaxInstance } from '@mdit/plugin-mathjax'
 
 /**
  * Plugin to automatically add target="_blank" to external links,
@@ -11,7 +12,7 @@ export function handle_external_links(md: MarkdownIt): void {
 		tokens: Token[],
 		idx: number,
 		options: any,
-		env: any,
+		_env: any,
 		slf: any,
 	): string => {
 		const token = tokens[idx]
@@ -89,3 +90,15 @@ export function add_ids_to_headings(md: MarkdownIt): void {
 		return slf.renderToken(tokens, idx, options)
 	}
 }
+
+export const mathjax_instance = createMathjaxInstance({
+	loader: { load: ['input/tex', 'output/svg'] },
+	tex: {
+		// @ts-ignore shut up
+		inlineMath: [['$', '$']],
+	},
+	mathml: {
+		enabled: true,
+	},
+	a11y: false, // FIXME. When true, formulas are rendered twice.
+})
