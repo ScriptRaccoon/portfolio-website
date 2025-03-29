@@ -33,8 +33,6 @@
 
 <MetaTags />
 
-<ScrollUp />
-
 <div class="wrapper">
 	<Nav />
 	<main>
@@ -42,11 +40,14 @@
 	</main>
 </div>
 
+<ScrollUp />
+
 <style>
 	.wrapper {
 		max-width: 52rem;
 		margin-inline: auto;
 	}
+
 	main {
 		padding-inline: 0.75rem;
 		padding-top: 1rem;

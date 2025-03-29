@@ -57,5 +57,6 @@
 		place-content: center;
 		background-color: var(--accent-color);
 		color: var(--inverted-font-color);
+		z-index: 10;
 	}
 </style>
