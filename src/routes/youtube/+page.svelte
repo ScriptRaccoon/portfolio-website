@@ -14,29 +14,25 @@
 	<a href="https://www.youtube.com/scriptraccoon" target="_blank">
 		YouTube channel
 	</a>
-	on web development (in German).
-	{#if stats}
-		Today, the channel has
-		<strong>{stats.subscriber_count}</strong>
-		subscribers and
-		<strong>{stats.video_count}</strong>
-		published videos.
-	{/if}
+	on web development (in German). Today, the channel has
+	<strong>{stats.subscriber_count}</strong>
+	subscribers and
+	<strong>{stats.video_count}</strong>
+	published videos.
 </p>
 
-{#if video}
-	<p>My latest video:</p>
-	<a class="videolink" href={video.url} target="_blank">
-		<img
-			class="thumbnail"
-			src={video.thumbnail_url}
-			alt="thumbnail of latest video: {video.title}"
-		/>
-		<div class="logo" aria-hidden="true">
-			<Fa icon={faYoutube} />
-		</div>
-	</a>
-{/if}
+<p>My latest video:</p>
+
+<a class="videolink" href={video.url} target="_blank">
+	<img
+		class="thumbnail"
+		src={video.thumbnail_url}
+		alt="thumbnail of latest video: {video.title}"
+	/>
+	<div class="logo" aria-hidden="true">
+		<Fa icon={faYoutube} />
+	</div>
+</a>
 
 <p>
 	On my channel I usually do not talk about one concept per video, what most
