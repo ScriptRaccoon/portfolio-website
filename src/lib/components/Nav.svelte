@@ -66,7 +66,7 @@
 	</ul>
 </nav>
 
-<style>
+<style lang="scss">
 	nav {
 		padding-block: 0.5rem;
 		border-bottom: 1px solid var(--border-color);
@@ -75,6 +75,10 @@
 		background-color: var(--bg-color);
 		box-shadow: 0rem -2rem 0rem 2rem var(--bg-color);
 		z-index: 5;
+
+		@media (min-width: 38rem) {
+			padding-block: 1rem;
+		}
 	}
 
 	ul {
@@ -88,11 +92,5 @@
 		align-items: center;
 		justify-content: center;
 		padding-block: 0.1rem;
-	}
-
-	@media (min-width: 38rem) {
-		nav {
-			padding-block: 1rem;
-		}
 	}
 </style>

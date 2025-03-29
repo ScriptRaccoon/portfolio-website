@@ -17,7 +17,7 @@
 	class:animated
 ></div>
 
-<style>
+<style lang="scss">
 	.underline {
 		position: absolute;
 		height: 0.1rem;
@@ -25,24 +25,24 @@
 		left: 0;
 		transform: translateX(calc(var(--pos) * 100%));
 		width: calc(100% / var(--cols));
-	}
 
-	.underline.animated {
-		transition:
-			transform 200ms ease,
-			opacity 200ms ease;
-	}
+		&.animated {
+			transition:
+				transform 200ms ease,
+				opacity 200ms ease;
+		}
 
-	.underline.invisible {
-		opacity: 0;
-	}
+		&.invisible {
+			opacity: 0;
+		}
 
-	.underline::before {
-		content: '';
-		position: absolute;
-		left: 10%;
-		width: 80%;
-		height: 100%;
-		background-color: var(--accent-color);
+		&::before {
+			content: '';
+			position: absolute;
+			left: 10%;
+			width: 80%;
+			height: 100%;
+			background-color: var(--accent-color);
+		}
 	}
 </style>

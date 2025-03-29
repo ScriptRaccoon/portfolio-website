@@ -82,18 +82,11 @@
 
 	.toc {
 		padding-top: 1rem;
-
-		a {
-			text-decoration-color: var(--secondary-font-color);
-		}
-	}
-
-	.control-container {
-		margin-block: 1rem 2rem;
 	}
 
 	article {
 		:global(h2) {
+			// adjusts scroll position
 			padding-top: 5rem;
 			margin-top: -3.5rem;
 		}
@@ -142,14 +135,11 @@
 			tab-size: 4;
 
 			scrollbar-width: thin;
-
 			&::-webkit-scrollbar {
 				width: 0.4rem;
 				height: 0.4rem;
 			}
-
 			scrollbar-color: var(--secondary-font-color) var(--code-bg-color);
-
 			&::-webkit-scrollbar-thumb {
 				background-color: var(--secondary-font-color);
 			}
@@ -158,8 +148,7 @@
 		:global(code:not(pre code)) {
 			font-family: monospace;
 			background-color: var(--inline-code-bg-color);
-			padding-inline: 0.5rem;
-			padding-block: 0.05rem;
+			padding: 0.05rem 0.5rem;
 			border-radius: 0.2rem;
 			font-size: var(--small-font);
 			white-space: nowrap;
@@ -178,5 +167,9 @@
 				padding: 0.25rem;
 			}
 		}
+	}
+
+	.control-container {
+		margin-block: 1rem 2rem;
 	}
 </style>

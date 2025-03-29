@@ -18,17 +18,15 @@
 	<span>{name}</span>
 </a>
 
-<style>
+<style lang="scss">
 	a {
 		text-decoration: none;
 	}
 
 	span {
 		font-size: var(--small-font);
-	}
 
-	@media (max-width: 38rem) {
-		span {
+		@media (max-width: 38rem) {
 			position: absolute;
 			left: -100vw;
 		}

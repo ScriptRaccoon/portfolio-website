@@ -23,13 +23,13 @@
 		align-items: center;
 		justify-content: center;
 		position: relative;
-	}
 
-	button :global(svg) {
-		position: absolute;
+		:global(svg) {
+			position: absolute;
 
-		@media (prefers-reduced-motion: no-preference) {
-			transition: opacity 250ms linear;
+			@media (prefers-reduced-motion: no-preference) {
+				transition: opacity 250ms linear;
+			}
 		}
 	}
 
