@@ -22,11 +22,19 @@
 	{name}
 </h1>
 
-<p class="year">
+<ul class="no-bullets tag-list" aria-label="list of tags">
+	{#each tags as tag}
+		<li class="tag">
+			{tag}
+		</li>
+	{/each}
+</ul>
+
+<p class="year" aria-label="year">
 	{date.getFullYear()}
 </p>
 
-<section aria-label="links" class="links">
+<section class="links" aria-label="links">
 	{#each links as { href, label }}
 		<a {href} target="_blank">{label}</a>
 	{/each}
@@ -39,24 +47,19 @@
 <img
 	style="view-transition-name: image_{id}"
 	src={`/media/projects/${id}.webp`}
-	alt="screenshot"
+	alt="screenshot of the application"
 />
 
-<ul class="no-bullets tag-list" aria-label="list of tags">
-	{#each tags as tag}
-		<li class="tag">
-			{tag}
-		</li>
-	{/each}
-</ul>
-
 <style>
-	img {
-		margin-block: 1.5rem;
+	.tag-list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: -0.75rem;
+		margin-bottom: 1.5rem;
 	}
 
 	.year {
-		margin-top: -0.5rem;
 		font-size: var(--small-font);
 		color: var(--secondary-font-color);
 	}
@@ -68,9 +71,7 @@
 		font-size: var(--small-font);
 	}
 
-	.tag-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.5rem;
+	img {
+		margin-block: 1.5rem;
 	}
 </style>
