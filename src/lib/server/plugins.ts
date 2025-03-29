@@ -91,6 +91,9 @@ export function add_ids_to_headings(md: MarkdownIt): void {
 	}
 }
 
+/**
+ * Plugin configuration to highlight math formulas with MathJax
+ */
 export const mathjax_instance = createMathjaxInstance({
 	loader: { load: ['input/tex', 'output/svg'] },
 	tex: {
@@ -102,3 +105,23 @@ export const mathjax_instance = createMathjaxInstance({
 	},
 	a11y: false, // FIXME. When true, formulas are rendered twice.
 })
+
+/**
+ * Plugin that adds a button to copy the code to clipboard
+ */
+export function add_copy_buttons(md: MarkdownIt) {
+	const default_fence =
+		md.renderer.rules.fence ??
+		((tokens, idx, options, _env, self) =>
+			self.renderToken(tokens, idx, options))
+
+	md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+		const codeHtml = default_fence(tokens, idx, options, env, self)
+
+		return `
+		<div class="code-block">
+			<button class="copy-btn">Copy</button>
+		  	${codeHtml}
+		</div>`
+	}
+}

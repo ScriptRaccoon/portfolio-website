@@ -2,10 +2,34 @@
 	import Controls from '$lib/components/Controls.svelte'
 	import Expand from '$lib/components/Expand.svelte'
 	import Comments from '$lib/components/Comments.svelte'
+	import { onMount } from 'svelte'
 
 	let { data } = $props()
 
 	let { title, published, updated } = $derived(data.attributes)
+
+	async function copy_code(button: HTMLButtonElement) {
+		const code = button.nextElementSibling?.querySelector('code')
+		if (!code) return
+		await navigator.clipboard.writeText(code.innerText)
+		button.innerText = 'Copied!'
+		button.classList.add('copied')
+		setTimeout(() => {
+			button.innerText = 'Copy'
+			button.classList.remove('copied')
+		}, 2000)
+	}
+
+	onMount(() => {
+		const copy_buttons =
+			document.querySelectorAll<HTMLButtonElement>('button.copy-btn')
+
+		copy_buttons.forEach((button) => {
+			button.addEventListener('click', () => {
+				copy_code(button as HTMLButtonElement)
+			})
+		})
+	})
 </script>
 
 <Controls />
@@ -40,6 +64,7 @@
 <div class="control-container">
 	<Controls />
 </div>
+
 <Comments />
 
 <style lang="scss">
@@ -83,11 +108,34 @@
 			line-height: 1.6;
 		}
 
+		:global(.code-block) {
+			margin-block: 1rem;
+			position: relative;
+		}
+
+		:global(.copy-btn) {
+			position: absolute;
+			top: 0.25rem;
+			right: 0.25rem;
+			color: var(--secondary-font-color);
+			font-size: var(--tiny-font);
+			font-family: monospace;
+			background-color: #fff2;
+			padding: 0.25rem 0.5rem;
+			border-radius: 0.25rem;
+			transition: color 0.2s;
+		}
+
+		:global(.copy-btn.copied),
+		:global(.copy-btn:hover),
+		:global(.copy-btn:focus-visible) {
+			color: var(--font-color);
+		}
+
 		:global(pre) {
 			@include bordered();
 			font-size: var(--small-font);
 			padding: 1rem;
-			margin-block: 1rem;
 			overflow: auto;
 			max-height: 30rem;
 			background-color: var(--code-bg-color);
