@@ -104,6 +104,7 @@ export const mathjax_instance = createMathjaxInstance({
 		enabled: true,
 	},
 	a11y: false, // FIXME. When true, formulas are rendered twice.
+	enableAssistiveMml: false,
 })
 
 /**
