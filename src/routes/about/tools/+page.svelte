@@ -6,16 +6,16 @@
 
 <p>
 	This page lists some of the tools and languages I am familiar with in the
-	context of web development.
+	context of software development.
 </p>
 
 {#each tools as tool_list}
 	<section>
 		<h2>{tool_list.level}</h2>
-		<ul>
+		<ul class="no-bullets">
 			{#each tool_list.data as tool}
 				<li>
-					<a href={tool.url} target="_blank">
+					<a class="tag" href={tool.url} target="_blank">
 						{tool.name}
 					</a>
 				</li>
@@ -23,3 +23,19 @@
 		</ul>
 	</section>
 {/each}
+
+<style>
+	h2 {
+		margin-block: 2rem 0.5rem;
+	}
+
+	ul {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	a {
+		text-decoration: none;
+	}
+</style>
