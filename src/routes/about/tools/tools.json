@@ -96,6 +96,10 @@
 		"level": "Advanced knowledge",
 		"data": [
 			{
+				"name": "HTTP",
+				"url": "https://developer.mozilla.org/en-US/docs/Web/HTTP"
+			},
+			{
 				"name": "Astro",
 				"url": "https://astro.build"
 			},
