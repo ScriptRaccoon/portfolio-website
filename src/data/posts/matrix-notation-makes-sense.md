@@ -1,18 +1,15 @@
 ---
 title: Why matrix notation makes sense
 published: 2023-12-26
-updated:
+updated: 2025-03-29
 description: Ever wondered why we write a_ij for the entry in row i and column j?
 ---
 
 I learned to work and calculate with matrices long ago, but curiously I only recently understood why the common notation for their entries makes sense. This might be embarrassing, but I will share it nevertheless. The insight came from programming.
 
-Let me briefly recall what a matrix is. An $m$ by $n$ matrix is a rectangular grid of numbers with $m$ rows and $n$ columns. Here is an example for $m = 2$ and $n = 3$. (Perhaps I can convince my MathJax plugin someday to render this properly.)
+Let me briefly recall what a matrix is. An $m$ by $n$ matrix is a rectangular grid of numbers with $m$ rows and $n$ columns. Here is an example for $m = 2$ and $n = 3$.
 
-```json
-| 2  3 0 |
-| 0 -1 9 |
-```
+$\begin{pmatrix} 2 & 3 & 0 \\ 0 & -1 & 9 \end{pmatrix}$
 
 In mathematics, you denote the matrix entry in row $i$ and column $j$ by $a_{ij}$ (when the matrix is called $A$, when it is called $U$ you write $u_{ij}$ etc.). So in the example above, we therefore have $a_{12}=3$ and $a_{22} = -1$, for example. A general matrix is then written as $(a_{ij})_{1 \leq i \leq m,~ 1 \leq j \leq n}$
 
