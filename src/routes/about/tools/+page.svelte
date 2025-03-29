@@ -1,6 +1,9 @@
 <script lang="ts">
+	import Controls from '$lib/components/Controls.svelte'
 	import tools from './tools.json'
 </script>
+
+<Controls />
 
 <h1>Tools and languages</h1>
 
