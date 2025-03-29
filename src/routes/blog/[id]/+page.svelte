@@ -78,6 +78,8 @@
 		margin-bottom: 1rem;
 		font-size: var(--small-font);
 		color: var(--secondary-font-color);
+		display: flex;
+		justify-content: space-between;
 	}
 
 	.toc {
@@ -95,7 +97,6 @@
 			margin-block: 1rem;
 			margin-left: 1rem;
 			padding-left: 0.5rem;
-			color: var(--secondary-font-color);
 			font-size: var(--small-font);
 			border-left: 0.2rem solid var(--border-color);
 			line-height: 1.6;
@@ -110,19 +111,20 @@
 			position: absolute;
 			top: 0.25rem;
 			right: 0.25rem;
-			color: var(--secondary-font-color);
 			font-size: var(--tiny-font);
 			font-family: monospace;
-			background-color: #fff2;
+			background-color: var(--inline-code-bg-color);
+			color: var(--inverted-font-color);
 			padding: 0.25rem 0.5rem;
 			border-radius: 0.25rem;
-			transition: color 0.2s;
+			opacity: 0.5;
+			transition: opacity 0.2s;
 		}
 
 		:global(.copy-btn.copied),
 		:global(.copy-btn:hover),
 		:global(.copy-btn:focus-visible) {
-			color: var(--font-color);
+			opacity: 1;
 		}
 
 		:global(pre) {
