@@ -15,9 +15,3 @@
 		</li>
 	{/each}
 </ol>
-
-<style>
-	ol {
-		margin-top: 1rem;
-	}
-</style>

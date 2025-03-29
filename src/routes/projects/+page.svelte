@@ -37,9 +37,3 @@
 {:else}
 	<p>No projects within this filter</p>
 {/if}
-
-<style>
-	ol {
-		margin-top: 1rem;
-	}
-</style>
