@@ -13,7 +13,7 @@
 	term="Welcome to @giscus/svelte component!"
 	reactionsEnabled="1"
 	emitMetadata="0"
-	inputPosition="top"
+	inputPosition="bottom"
 	theme={current_theme.value}
 	lang="en"
 	loading="lazy"
