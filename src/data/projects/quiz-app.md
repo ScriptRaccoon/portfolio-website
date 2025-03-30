@@ -26,3 +26,5 @@ The following concepts are present in both frameworks, with very similar syntax:
 - computed properties
 
 The code shows in comparison that the syntax in Svelte is simpler.
+
+I made a [similar project with React and Svelte](/projects/week-planner).
