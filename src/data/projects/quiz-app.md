@@ -10,7 +10,7 @@ tags: ['Vue', 'Svelte', 'TypeScript', 'Tutorial']
 date: 2023-04-01
 ---
 
-This is a small quiz app made with Vue, serving as a demonstration to a [feature-identical app](https://github.com/ScriptRaccoon/quiz-about-svelte) made with Svelte. The app is also accessible via keyboard navigation and screen reader usage. In the top, there is a progress bar for the number of questions.
+This is a small quiz app made both with Vue and Svelte. The app is accessible via keyboard navigation and screen reader usage. In the top, there is a progress bar for the number of questions.
 
 The following concepts are present in both frameworks, with very similar syntax:
 
