@@ -14,7 +14,9 @@ export type ProjectMetaData = {
 	id: string
 	name: string
 	repository: string | null
+	repository2?: string
 	url: string | null
+	url2?: string
 	tutorial: string | null
 	tags: string[]
 	teaser: string

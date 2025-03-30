@@ -3,14 +3,15 @@
 
 	let { data } = $props()
 
-	let { id, name, url, repository, tutorial, tags, date } = $derived(
-		data.attributes,
-	)
+	let { id, name, url, repository, url2, repository2, tutorial, tags, date } =
+		$derived(data.attributes)
 
 	let links = $derived(
 		[
 			{ label: 'URL', href: url },
+			{ label: 'URL (2)', href: url2 },
 			{ label: 'Repository', href: repository },
+			{ label: 'Repository (2)', href: repository2 },
 			{ label: 'Tutorial', href: tutorial },
 		].filter((link) => link.href),
 	)
