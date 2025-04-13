@@ -137,7 +137,7 @@ sudo apt update && sudo apt upgrade
 
 In short, `update` refreshes the list of available updates, while `upgrade` actually applies those updates.
 
-It's a good practice to run `sudo apt update && sudo apt upgrade` regularly to keep your system secure and stable.
+It's a good practice to run `sudo apt update` and `sudo apt upgrade` regularly to keep your system secure and stable.
 
 ## 5. Install Node.js (using nvm)
 
