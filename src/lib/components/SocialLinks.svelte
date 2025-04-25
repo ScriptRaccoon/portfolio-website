@@ -1,5 +1,6 @@
 <script lang="ts">
 	import {
+		faBluesky,
 		faCodepen,
 		faGithub,
 		faTwitter,
@@ -17,6 +18,7 @@
 			<Fa icon={faEnvelope} />
 		</a>
 	</li>
+
 	<li>
 		<a
 			aria-label="Twitter"
@@ -29,6 +31,16 @@
 
 	<li>
 		<a
+			aria-label="Bluesky"
+			href="https://bsky.app/profile/scriptraccoon.dev"
+			target="_blank"
+		>
+			<Fa icon={faBluesky} />
+		</a>
+	</li>
+
+	<li>
+		<a
 			aria-label="GitHub"
 			href="https://github.com/scriptraccoon"
 			target="_blank"
@@ -36,6 +48,7 @@
 			<Fa icon={faGithub} />
 		</a>
 	</li>
+
 	<li>
 		<a
 			aria-label="Codepen"
