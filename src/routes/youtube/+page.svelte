@@ -89,7 +89,7 @@
 	> which is dedicated to twisty puzzles.
 </p>
 
-<style lang="scss">
+<style>
 	.videolink {
 		position: relative;
 		display: inline-block;

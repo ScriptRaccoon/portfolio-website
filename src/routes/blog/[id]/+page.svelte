@@ -67,12 +67,7 @@
 
 <Comments />
 
-<style lang="scss">
-	@mixin bordered() {
-		border-radius: 0.4rem;
-		border: 0.15rem solid var(--code-border-color);
-	}
-
+<style>
 	.dates {
 		margin-top: -0.5rem;
 		margin-bottom: 1rem;
@@ -88,7 +83,7 @@
 
 	article {
 		:global(h2) {
-			// adjusts scroll position
+			/* adjusts scroll position */
 			padding-top: 5rem;
 			margin-top: -3.5rem;
 		}
@@ -128,7 +123,8 @@
 		}
 
 		:global(pre) {
-			@include bordered();
+			border-radius: 0.4rem;
+			border: 0.15rem solid var(--code-border-color);
 			font-size: var(--small-font);
 			padding: 1rem;
 			overflow: auto;
@@ -157,7 +153,8 @@
 		}
 
 		:global(img) {
-			@include bordered();
+			border-radius: 0.4rem;
+			border: 0.15rem solid var(--code-border-color);
 			margin-inline: auto;
 		}
 

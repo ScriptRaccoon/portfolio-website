@@ -22,7 +22,7 @@
 
 <SocialLinks />
 
-<style lang="scss">
+<style>
 	.logo-container {
 		margin-block: 2rem;
 		display: flex;

@@ -17,7 +17,7 @@
 	class:animated
 ></div>
 
-<style lang="scss">
+<style>
 	.underline {
 		position: absolute;
 		height: 0.1rem;

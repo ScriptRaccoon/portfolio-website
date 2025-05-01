@@ -44,7 +44,7 @@
 	</Expand>
 </section>
 
-<style lang="scss">
+<style>
 	.filter-list {
 		display: flex;
 		flex-wrap: wrap;

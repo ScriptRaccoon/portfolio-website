@@ -18,7 +18,7 @@
 	<span>{name}</span>
 </a>
 
-<style lang="scss">
+<style>
 	a {
 		text-decoration: none;
 	}
