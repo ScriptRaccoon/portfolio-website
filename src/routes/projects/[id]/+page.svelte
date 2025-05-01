@@ -45,11 +45,7 @@
 	{@html data.html_code}
 </article>
 
-<img
-	style="view-transition-name: image_{id}"
-	src={`/media/projects/${id}.webp`}
-	alt="screenshot of the application"
-/>
+<img src={`/media/projects/${id}.webp`} alt="screenshot of the application" />
 
 <style>
 	.tag-list {
