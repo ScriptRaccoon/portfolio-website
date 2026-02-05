@@ -15,7 +15,6 @@
 		"seed": "cd data && sqlite3 local.db < seed.sql"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "^3.0.10",
 		"@sveltejs/kit": "^2.50.2",
 		"@sveltejs/vite-plugin-svelte": "^4.0.4",
 		"@types/markdown-it": "^14.1.2",
@@ -36,6 +35,7 @@
 		"@giscus/svelte": "^3.1.0",
 		"@libsql/client": "^0.17.0",
 		"@mdit/plugin-mathjax": "^0.16.0",
+		"@sveltejs/adapter-netlify": "^5.2.4",
 		"es6-crawler-detect": "^4.0.2",
 		"front-matter": "^4.0.2",
 		"markdown-it": "^14.1.0",
