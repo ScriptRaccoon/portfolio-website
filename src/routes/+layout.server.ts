@@ -1,3 +1,5 @@
+import { TRACKED_PATHS } from '$lib/server/config'
+
 export const prerender = true
 
 export const load = async () => {
@@ -6,5 +8,5 @@ export const load = async () => {
 		description:
 			'Find more about me and my personal projects in web development',
 	}
-	return { meta }
+	return { meta, tracked_paths: TRACKED_PATHS }
 }

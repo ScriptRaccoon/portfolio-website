@@ -47,6 +47,7 @@ body[data-theme='light'] {
 	--h1-color: var(--accent-color);
 	--h2-color: var(--accent-color);
 	--h3-color: var(--accent-color);
+	--bar-color: var(--accent-color);
 }
 
 body[data-theme='dark'] {
@@ -66,6 +67,7 @@ body[data-theme='dark'] {
 	--h1-color: hsl(60, 100%, 50%);
 	--h2-color: skyblue;
 	--h3-color: hsl(60, 100%, 45%);
+	--bar-color: skyblue;
 }
 
 body {

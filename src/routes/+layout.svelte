@@ -1,17 +1,15 @@
 <script lang="ts">
-	import { setContext, type Snippet } from 'svelte'
+	import { setContext } from 'svelte'
 
 	import './app.css'
 	import Nav from '$lib/components/Nav.svelte'
 	import ScrollUp from '$lib/components/ScrollUp.svelte'
 	import { onNavigate } from '$app/navigation'
 	import MetaTags from '$lib/components/MetaTags.svelte'
+	import { track_visit } from '$lib/client/track'
+	import { page } from '$app/state'
 
-	type Props = {
-		children?: Snippet
-	}
-
-	let { children }: Props = $props()
+	let { data, children } = $props()
 
 	const allow_animation =
 		typeof window !== 'undefined' &&
@@ -28,6 +26,10 @@
 				await navigation.complete
 			})
 		})
+	})
+
+	$effect(() => {
+		track_visit(page.url.pathname, data.tracked_paths)
 	})
 </script>
 
