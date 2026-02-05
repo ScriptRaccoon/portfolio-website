@@ -8,7 +8,7 @@
 	import type { ProjectMetaData } from '$lib/shared/types.js'
 
 	let { data } = $props()
-	const { projects, tags, years } = data
+	const { projects, tags, years } = $derived(data)
 
 	const allow_animation = getContext<boolean>('allow_animation')
 
