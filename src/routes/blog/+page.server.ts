@@ -1,6 +1,6 @@
-import type { PostMetaData } from '$lib/shared/types'
+import type { PostMetaData } from '$lib/types'
 import { get_frontmatter } from '$lib/server/frontmatter'
-import { is_published } from '$lib/shared/utils'
+import { is_published } from '$lib/server/utils'
 
 export const load = async () => {
 	const unsorted_posts = get_frontmatter<PostMetaData>(
@@ -16,10 +16,5 @@ export const load = async () => {
 		(p, q) => q.published.getTime() - p.published.getTime(),
 	)
 
-	const meta = {
-		title: 'Script Raccoon - Blog',
-		description: 'Some thoughts on web development',
-	}
-
-	return { meta, posts }
+	return { posts }
 }

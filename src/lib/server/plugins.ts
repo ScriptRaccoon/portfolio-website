@@ -4,8 +4,7 @@ import type Token from 'markdown-it/lib/token.mjs'
 import { createMathjaxInstance } from '@mdit/plugin-mathjax'
 
 /**
- * Plugin to automatically add target="_blank" to external links,
- * those starting with http:// or https://.
+ * Plugin to automatically add target="_blank" to external links
  */
 export function handle_external_links(md: MarkdownIt): void {
 	md.renderer.rules.link_open = (

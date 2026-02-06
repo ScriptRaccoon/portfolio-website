@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { browser } from '$app/environment'
 	import BarChart from '$lib/components/BarChart.svelte'
+	import MetaTags from '$lib/components/MetaTags.svelte'
 
 	let { data } = $props()
 
@@ -22,6 +23,11 @@
 		device_is_tracked = true
 	}
 </script>
+
+<MetaTags
+	title="Script Raccoon – Page Stats"
+	description="A basic analytics dashboard"
+/>
 
 <header>
 	<h1>Page Stats</h1>

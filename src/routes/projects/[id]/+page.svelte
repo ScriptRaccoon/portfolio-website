@@ -1,10 +1,21 @@
 <script lang="ts">
 	import Controls from '$lib/components/Controls.svelte'
+	import MetaTags from '$lib/components/MetaTags.svelte'
 
 	let { data } = $props()
 
-	let { id, name, url, repository, url2, repository2, tutorial, tags, date } =
-		$derived(data.attributes)
+	let {
+		id,
+		name,
+		url,
+		repository,
+		url2,
+		repository2,
+		tutorial,
+		tags,
+		date,
+		teaser,
+	} = $derived(data.attributes)
 
 	let links = $derived(
 		[
@@ -16,6 +27,8 @@
 		].filter((link) => link.href),
 	)
 </script>
+
+<MetaTags title={name} description={teaser} />
 
 <Controls />
 

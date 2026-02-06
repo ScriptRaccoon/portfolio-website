@@ -1,3 +1,5 @@
+import type { PostMetaData, PublishedPostMetaData } from '$lib/types'
+
 /**
  * Returns the current month in the format YYYY-MM.
  */
@@ -23,4 +25,10 @@ export function add_month(month_str: string): string {
 	}
 
 	return `${year}-${String(month).padStart(2, '0')}`
+}
+
+export function is_published(
+	metadata: PostMetaData,
+): metadata is PublishedPostMetaData {
+	return metadata.published !== null
 }

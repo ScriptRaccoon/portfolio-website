@@ -1,4 +1,4 @@
-import type { ProjectMetaData } from '$lib/shared/types'
+import type { ProjectMetaData } from '$lib/types'
 import { get_frontmatter } from '$lib/server/frontmatter'
 
 export const load = async () => {
@@ -19,10 +19,5 @@ export const load = async () => {
 	const tag_list = projects.map((p) => p.tags).flat()
 	const tags = [...new Set(tag_list)].sort((a, b) => a.localeCompare(b))
 
-	const meta = {
-		title: 'Script Raccoon - Projects',
-		description: 'Find out about my personal projects in web development',
-	}
-
-	return { meta, projects, tags, years }
+	return { projects, tags, years }
 }

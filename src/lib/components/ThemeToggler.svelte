@@ -2,13 +2,13 @@
 	import Fa from 'svelte-fa'
 	import { faMoon } from '@fortawesome/free-solid-svg-icons'
 	import { faSun } from '@fortawesome/free-regular-svg-icons'
-	import { current_theme } from '$lib/shared/state.svelte'
+	import { theme } from '$lib/client/theme.svelte'
 </script>
 
 <button
-	onclick={current_theme.toggle}
-	aria-label="Toggle theme, current theme is {current_theme.value}"
-	class={current_theme.value}
+	onclick={theme.toggle}
+	aria-label="Toggle theme, current theme is {theme.value}"
+	class={theme.value}
 >
 	<Fa icon={faMoon} class="moon" />
 	<Fa icon={faSun} class="sun" />

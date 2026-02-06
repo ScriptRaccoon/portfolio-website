@@ -1,7 +1,13 @@
 <script lang="ts">
 	import Controls from '$lib/components/Controls.svelte'
+	import MetaTags from '$lib/components/MetaTags.svelte'
 	import tools from './tools.json'
 </script>
+
+<MetaTags
+	title="Script Raccoon - Tools"
+	description="The tools and languages I use to create applications"
+/>
 
 <Controls />
 

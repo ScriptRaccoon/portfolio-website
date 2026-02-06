@@ -3,10 +3,11 @@
 	import Expand from '$lib/components/Expand.svelte'
 	import Comments from '$lib/components/Comments.svelte'
 	import { onMount } from 'svelte'
+	import MetaTags from '$lib/components/MetaTags.svelte'
 
 	let { data } = $props()
 
-	let { title, published, updated } = $derived(data.attributes)
+	let { title, published, updated, description } = $derived(data.attributes)
 
 	async function copy_code(button: HTMLButtonElement) {
 		const code = button.nextElementSibling?.querySelector('code')
@@ -31,6 +32,8 @@
 		})
 	})
 </script>
+
+<MetaTags {title} {description} />
 
 <Controls />
 

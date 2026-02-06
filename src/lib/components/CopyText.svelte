@@ -20,7 +20,7 @@
 		setTimeout(() => (pending = false), 1500)
 	}
 
-	const allow_animation = getContext('allow_animation')
+	const allow_animation = getContext<boolean>('allow_animation')
 	const animation_speed = allow_animation ? 150 : 0
 </script>
 

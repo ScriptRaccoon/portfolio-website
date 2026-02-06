@@ -7,13 +7,7 @@ declare global {
 			session_id: string
 		}
 		// interface Platform {}
-
-		interface PageData {
-			meta: {
-				title: string
-				description: string
-			}
-		}
+		// interface PageData {}
 	}
 }
 

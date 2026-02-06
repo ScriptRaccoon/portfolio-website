@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { current_theme } from '$lib/shared/state.svelte'
+	import { theme } from '$lib/client/theme.svelte'
 	import Giscus from '@giscus/svelte'
 </script>
 
@@ -14,7 +14,7 @@
 	reactionsEnabled="1"
 	emitMetadata="0"
 	inputPosition="bottom"
-	theme={current_theme.value}
+	theme={theme.value}
 	lang="en"
 	loading="lazy"
 />

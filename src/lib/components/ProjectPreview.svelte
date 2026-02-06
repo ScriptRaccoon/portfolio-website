@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { ProjectMetaData } from '$lib/shared/types'
+	import type { ProjectMetaData } from '$lib/types'
 	import PreviewCard from '$lib/components/PreviewCard.svelte'
 	import More from './More.svelte'
 

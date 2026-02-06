@@ -1,4 +1,5 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/MetaTags.svelte'
 	import youtube_data from '../../data/youtube/youtube.json'
 
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons'
@@ -6,6 +7,11 @@
 
 	const { stats, video } = youtube_data
 </script>
+
+<MetaTags
+	title="Script Raccoon - YouTube"
+	description="About my YouTube channel"
+/>
 
 <h1>YouTube</h1>
 
@@ -77,9 +83,9 @@
 </p>
 
 <p>
-	You can always check out the <strong>code</strong> which I link in the video
-	description. Of course, the code has English variable names, and the README also
-	often includes some pieces of explanation.
+	You can always check out the <strong>code</strong> which I link in the video description.
+	Of course, the code has English variable names, and the README also often includes
+	some pieces of explanation.
 </p>
 
 <p>

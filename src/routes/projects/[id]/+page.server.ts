@@ -1,6 +1,6 @@
 import fm from 'front-matter'
 import { error } from '@sveltejs/kit'
-import type { ProjectMetaData } from '$lib/shared/types'
+import type { ProjectMetaData } from '$lib/types'
 import { render_markdown } from '$lib/server/markdown'
 
 const projects_record = import.meta.glob('/src/data/projects/*.md', {
@@ -19,16 +19,12 @@ export const load = async (event) => {
 	const markdown = projects_record[path]
 	const { attributes: _attributes, body } =
 		fm<Omit<ProjectMetaData, 'id'>>(markdown)
+
 	const attributes: ProjectMetaData = { ..._attributes, id }
 
 	attributes.tags.sort((a, b) => a.localeCompare(b))
 
 	const html_code = render_markdown(body)
 
-	const meta = {
-		title: attributes.name,
-		description: attributes.teaser,
-	}
-
-	return { meta, attributes, html_code }
+	return { attributes, html_code }
 }

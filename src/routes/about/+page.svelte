@@ -1,3 +1,12 @@
+<script lang="ts">
+	import MetaTags from '$lib/components/MetaTags.svelte'
+</script>
+
+<MetaTags
+	title="Script Raccoon - About"
+	description="About my journey becoming a web developer"
+/>
+
 <h1>About me</h1>
 
 <div class="intro">

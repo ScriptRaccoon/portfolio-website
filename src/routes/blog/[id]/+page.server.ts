@@ -1,13 +1,10 @@
 import fm from 'front-matter'
 import { error } from '@sveltejs/kit'
-import {
-	type PostMetaData,
-	type PublishedPostMetaData,
-} from '$lib/shared/types'
+import { type PostMetaData } from '$lib/types'
 
-import { is_published } from '$lib/shared/utils'
 import { render_markdown } from '$lib/server/markdown'
 import { get_table_of_contents } from '$lib/server/toc'
+import { is_published } from '$lib/server/utils'
 
 const posts_record = import.meta.glob('/src/data/posts/*.md', {
 	as: 'raw',
@@ -19,7 +16,7 @@ export const load = async (event) => {
 	const path = `/src/data/posts/${id}.md`
 
 	if (!(path in posts_record)) {
-		error(404, 'There is no post with this ID')
+		error(404, 'Not Found')
 	}
 
 	const markdown = posts_record[path]
@@ -30,17 +27,12 @@ export const load = async (event) => {
 	const attributes: PostMetaData = { ..._attributes, id }
 
 	if (!is_published(attributes)) {
-		error(404, 'This post is not published')
+		error(404, 'Not Found')
 	}
-
-	attributes satisfies PublishedPostMetaData
 
 	const html_code = render_markdown(body)
 
 	const toc = get_table_of_contents(html_code)
 
-	const { title, description } = attributes
-	const meta = { title, description }
-
-	return { meta, attributes, html_code, toc, id }
+	return { attributes, html_code, toc, id }
 }

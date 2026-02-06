@@ -1,8 +1,14 @@
 <script lang="ts">
+	import MetaTags from '$lib/components/MetaTags.svelte'
 	import PostPreview from '$lib/components/PostPreview.svelte'
 
 	let { data } = $props()
 </script>
+
+<MetaTags
+	title="Script Raccoon - Blog"
+	description="Some thoughts on web development"
+/>
 
 <h1>Blog</h1>
 
