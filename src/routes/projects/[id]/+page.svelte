@@ -32,9 +32,13 @@
 
 <Controls />
 
-<h1>
-	{name}
-</h1>
+<header>
+	<h1>{name}</h1>
+
+	<p class="year" aria-label="year">
+		{date.getFullYear()}
+	</p>
+</header>
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
 	{#each tags as tag}
@@ -44,23 +48,25 @@
 	{/each}
 </ul>
 
-<p class="year" aria-label="year">
-	{date.getFullYear()}
-</p>
-
 <section class="links" aria-label="links">
 	{#each links as { href, label }}
 		<a {href} target="_blank">{label}</a>
 	{/each}
 </section>
 
+<img src={`/media/projects/${id}.webp`} alt="screenshot of the application" />
+
 <article>
 	{@html data.html_code}
 </article>
 
-<img src={`/media/projects/${id}.webp`} alt="screenshot of the application" />
-
 <style>
+	header {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
 	.tag-list {
 		display: flex;
 		flex-wrap: wrap;
