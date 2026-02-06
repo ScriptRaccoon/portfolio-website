@@ -165,6 +165,7 @@ button {
 
 .button {
 	background-color: var(--accent-color);
+	color: var(--inverted-font-color);
 	padding: 0.5rem 1rem;
 	border-radius: 0.25rem;
 	font-size: var(--small-font);
