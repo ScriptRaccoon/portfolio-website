@@ -1,4 +1,4 @@
-if (typeof window !== undefined) {
+if (typeof window !== 'undefined') {
 	const saved_theme = localStorage.getItem('theme')
 
 	if (saved_theme === 'light' || saved_theme === 'dark') {
