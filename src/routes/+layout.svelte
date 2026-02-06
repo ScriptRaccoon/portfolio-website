@@ -46,14 +46,16 @@
 	<meta name="theme-color" content="#ffffff" />
 
 	<!-- global meta tags -->
-	<title>Script Raccoon - Web Developer</title>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://scriptraccoon.dev" />
 	<meta property="og:site_name" content="Script Raccoon" />
-	<meta
-		property="og:image"
-		content="https://scriptraccoon.dev/media/general/ScriptRaccoon.png"
-	/>
+
+	{#if !page.url.pathname.startsWith('/blog/')}
+		<meta
+			property="og:image"
+			content="https://scriptraccoon.dev/media/general/ScriptRaccoon.png"
+		/>
+	{/if}
 </svelte:head>
 
 <div class="wrapper">

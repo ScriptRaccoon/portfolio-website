@@ -7,7 +7,9 @@
 
 	let { data } = $props()
 
-	let { title, published, updated, description } = $derived(data.attributes)
+	let { title, published, updated, description, id } = $derived(
+		data.attributes,
+	)
 
 	async function copy_code(button: HTMLButtonElement) {
 		const code = button.nextElementSibling?.querySelector('code')
@@ -33,7 +35,11 @@
 	})
 </script>
 
-<MetaTags {title} {description} />
+<MetaTags
+	{title}
+	{description}
+	image="https://scriptraccoon.dev/media/og_images/og_{id}.webp"
+/>
 
 <Controls />
 
