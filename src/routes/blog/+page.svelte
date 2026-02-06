@@ -7,7 +7,7 @@
 
 <MetaTags
 	title="Script Raccoon - Blog"
-	description="Some thoughts on web development"
+	description="My thoughts on web development"
 />
 
 <h1>Blog</h1>

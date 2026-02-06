@@ -9,11 +9,11 @@
 </script>
 
 <MetaTags
-	title="Script Raccoon - YouTube"
-	description="About my YouTube channel"
+	title="Script Raccoon - YouTube channel"
+	description="About my YouTube channel on web development"
 />
 
-<h1>YouTube</h1>
+<h1>YouTube channel</h1>
 
 <p>
 	In 2019 I started a
