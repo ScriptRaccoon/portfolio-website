@@ -53,6 +53,7 @@
 		gap: 3px;
 		align-items: end;
 		height: 5rem;
+		margin-block: 2rem;
 	}
 
 	.bar {

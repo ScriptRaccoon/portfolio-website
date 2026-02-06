@@ -105,7 +105,7 @@ a {
 	text-decoration-color: var(--secondary-font-color);
 }
 
-:is(a, button, pre):focus-visible {
+:is(a, button, pre, summary):focus-visible {
 	outline: 1px solid var(--accent-color);
 	outline-offset: 0.2rem;
 }
