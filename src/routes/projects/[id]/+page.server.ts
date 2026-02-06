@@ -13,7 +13,7 @@ export const load = async (event) => {
 	const path = `/src/data/projects/${id}.md`
 
 	if (!(path in projects_record)) {
-		error(404, 'There is no project with this ID')
+		error(404, 'Not Found')
 	}
 
 	const markdown = projects_record[path]
