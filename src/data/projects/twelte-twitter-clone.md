@@ -1,5 +1,5 @@
 ---
-name: Twelte
+name: Twitter clone "Twelte"
 teaser: Twitter clone made with SvelteKit
 repository: https://github.com/ScriptRaccoon/twelte
 url: https://twelte.netlify.app/
@@ -8,7 +8,7 @@ tags: ['SvelteKit', 'SQLite', 'Full Stack', 'Authentication', 'TypeScript']
 date: 2025-04-24
 ---
 
-_Twelte_ is a Twitter clone made with SvelteKit.
+_Twelte_ is a Twitter clone made with SvelteKit and SQLite.
 
 Here is a rough summary of the **features**:
 
