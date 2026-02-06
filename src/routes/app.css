@@ -163,6 +163,13 @@ button {
 	cursor: pointer;
 }
 
+.button {
+	background-color: var(--accent-color);
+	padding: 0.5rem 1rem;
+	border-radius: 0.25rem;
+	font-size: var(--small-font);
+}
+
 img {
 	display: block;
 	max-width: 100%;

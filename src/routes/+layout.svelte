@@ -8,6 +8,7 @@
 	import MetaTags from '$lib/components/MetaTags.svelte'
 	import { track_visit } from '$lib/client/track'
 	import { page } from '$app/state'
+	import { browser } from '$app/environment'
 
 	let { data, children } = $props()
 
@@ -29,7 +30,9 @@
 	})
 
 	$effect(() => {
-		track_visit(page.url.pathname, data.tracked_paths)
+		if (browser && !window.localStorage.getItem('notrack')) {
+			track_visit(page.url.pathname, data.tracked_paths)
+		}
 	})
 </script>
 

@@ -1,7 +1,26 @@
 <script lang="ts">
+	import { browser } from '$app/environment'
 	import BarChart from '$lib/components/BarChart.svelte'
 
 	let { data } = $props()
+
+	let device_is_tracked = $state(false)
+
+	if (browser) {
+		device_is_tracked = !window.localStorage.getItem('notrack')
+	}
+
+	function untrack_device() {
+		if (!browser) return
+		window.localStorage.setItem('notrack', 'true')
+		device_is_tracked = false
+	}
+
+	function track_device() {
+		if (!browser) return
+		window.localStorage.removeItem('notrack')
+		device_is_tracked = true
+	}
 </script>
 
 <header>
@@ -20,6 +39,18 @@
 	</section>
 {/each}
 
+<div class="actions">
+	{#if device_is_tracked}
+		<button class="button" onclick={untrack_device}>
+			Don't track this device
+		</button>
+	{:else}
+		<button class="button" onclick={track_device}>
+			Track this device
+		</button>
+	{/if}
+</div>
+
 <style>
 	h2 {
 		color: var(--h1-color);
@@ -33,5 +64,9 @@
 	.total {
 		font-size: 1.5rem;
 		color: var(--bar-color);
+	}
+
+	.actions {
+		margin-top: 2rem;
 	}
 </style>
