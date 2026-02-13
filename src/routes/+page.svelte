@@ -23,12 +23,7 @@
 </p>
 
 <p class="logo-container">
-	<button
-		onclick={() => (window.location.href = '/internal/stats')}
-		tabindex="-1"
-	>
-		<img src="/media/general/ScriptRaccoon.png" alt="raccoon logo" />
-	</button>
+	<img src="/media/general/ScriptRaccoon.png" alt="raccoon logo" />
 </p>
 
 <SocialLinks />

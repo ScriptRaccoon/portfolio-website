@@ -5,9 +5,8 @@
 	import Nav from '$lib/components/Nav.svelte'
 	import ScrollUp from '$lib/components/ScrollUp.svelte'
 	import { onNavigate } from '$app/navigation'
-	import { track_visit } from '$lib/client/track'
+	import { track_view } from '$lib/client/track'
 	import { page } from '$app/state'
-	import { browser } from '$app/environment'
 
 	let { data, children } = $props()
 
@@ -29,9 +28,7 @@
 	})
 
 	$effect(() => {
-		if (browser && !window.localStorage.getItem('notrack')) {
-			track_visit(page.url.pathname, data.tracked_paths)
-		}
+		track_view(page.url.pathname, data.tracked_paths)
 	})
 </script>
 

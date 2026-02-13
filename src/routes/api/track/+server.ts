@@ -81,12 +81,12 @@ export const POST: RequestHandler = async (event) => {
 	const month = get_current_month()
 
 	const sql = `
-        INSERT INTO page_stats
-            (path, month, visits)
+        INSERT INTO page_views
+            (path, month, views)
         VALUES
             (?, ?, 1)
         ON CONFLICT (path, month)
-            DO UPDATE SET visits = visits + 1`
+            DO UPDATE SET views = views + 1`
 
 	const args = [path, month]
 
@@ -100,5 +100,5 @@ export const POST: RequestHandler = async (event) => {
 	const expires_at = Date.now() + 1000 * 60 * 60 // 1h
 	visits_cache.set(cache_key, expires_at)
 
-	return json({ message: 'Page visit has been tracked successfully' })
+	return json({ message: 'Page view has been tracked successfully' })
 }
