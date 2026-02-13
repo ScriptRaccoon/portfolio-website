@@ -1,7 +1,7 @@
-CREATE TABLE IF NOT EXISTS page_stats (
+CREATE TABLE IF NOT EXISTS page_views (
     id INTEGER PRIMARY KEY,
     path TEXT NOT NULL,
     month TEXT NOT NULL,
-    visits INTEGER NOT NULL DEFAULT 0,
+    views INTEGER NOT NULL DEFAULT 0,
     UNIQUE (path, month)
 );
