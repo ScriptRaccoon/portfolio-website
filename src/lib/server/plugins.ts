@@ -40,6 +40,7 @@ const shiki_highlighter = await shiki.getHighlighter({
 		'markdown',
 		'json',
 		'pug',
+		'sql',
 	],
 })
 
