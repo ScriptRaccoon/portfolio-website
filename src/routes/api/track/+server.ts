@@ -41,12 +41,12 @@ export const POST: RequestHandler = async (event) => {
 
 	const ua = event.request.headers.get('user-agent') ?? ''
 	if (CrawlerDetector.isCrawler(ua)) {
-		return json({ error: 'Forbiddden' }, { status: 403 })
+		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	const content_type = event.request.headers.get('Content-Type')
 	if (content_type !== 'application/json') {
-		return json({ error: 'Forbiddden' }, { status: 403 })
+		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	const body: unknown = await event.request.json()
