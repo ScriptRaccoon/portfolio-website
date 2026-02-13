@@ -2,32 +2,32 @@ import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
 import { add_month } from '$lib/server/utils'
-import { PAGEVIEWS_CREDENTIALS } from '$env/static/private'
+import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
 
 export const prerender = false
 
-const sql_views = `
-	SELECT path, month, views
-	FROM page_views
+const sql_visits = `
+	SELECT path, month, visits
+	FROM page_visits
 	ORDER BY path, month`
 
 const sql_month_range = `
 	SELECT
 		MIN(month) as min_month,
 		MAX(month) as max_month
-	FROM page_views`
+	FROM page_visits`
 
 export const load: PageServerLoad = async (event) => {
 	const auth_header = event.request.headers.get('authorization')
 
-	if (auth_header !== `Basic ${btoa(PAGEVIEWS_CREDENTIALS)}`) {
+	if (auth_header !== `Basic ${btoa(PAGEVISITS_CREDENTIALS)}`) {
 		event.setHeaders({ 'WWW-Authenticate': 'Basic realm="Protected"' })
 		error(401, 'Unauthorized')
 	}
 
 	try {
-		const [res_views, res_month_range] = await db.batch([
-			{ sql: sql_views },
+		const [res_visits, res_month_range] = await db.batch([
+			{ sql: sql_visits },
 			{ sql: sql_month_range },
 		])
 
@@ -45,42 +45,42 @@ export const load: PageServerLoad = async (event) => {
 			}
 		}
 
-		const rows = res_views.rows as unknown as {
+		const rows = res_visits.rows as unknown as {
 			path: string
 			month: string
-			views: number
+			visits: number
 		}[]
 
 		type PathsRec = Record<
 			string,
-			{ total: number; monthly_views: Record<string, number> }
+			{ total: number; monthly_visits: Record<string, number> }
 		>
 
 		const paths_rec: PathsRec = {}
 
-		for (const { path, month, views } of rows) {
+		for (const { path, month, visits } of rows) {
 			paths_rec[path] ??= {
 				total: 0,
-				monthly_views: Object.fromEntries(
+				monthly_visits: Object.fromEntries(
 					month_list.map((m) => [m, 0]),
 				),
 			}
 
-			paths_rec[path].total += views
-			paths_rec[path].monthly_views[month] = views
+			paths_rec[path].total += visits
+			paths_rec[path].monthly_visits[month] = visits
 		}
 
 		const paths = Object.entries(paths_rec)
-			.map(([path, { total, monthly_views }]) => ({
+			.map(([path, { total, monthly_visits }]) => ({
 				path,
 				total,
-				monthly_views: Object.entries(monthly_views),
+				monthly_visits: Object.entries(monthly_visits),
 			}))
 			.sort((a, b) => b.total - a.total)
 
 		return { paths }
 	} catch (err) {
 		console.error(err)
-		error(500, 'Could not load page views')
+		error(500, 'Could not load page visits')
 	}
 }

@@ -9,28 +9,28 @@
 	let { data } = $props()
 </script>
 
+<MetaTags title="Script Raccoon – Page Visits" description="Basic analytics" />
+
 <header>
-	<h1>Page Views</h1>
+	<h1>Page Visits</h1>
 </header>
 
-<MetaTags title="Script Raccoon – Page Views" description="Basic analytics" />
-
-{#each data.paths as { path, total, monthly_views } (path)}
+{#each data.paths as { path, total, monthly_visits } (path)}
 	<section>
 		<h2 class="path">{path}</h2>
 
-		<div aria-label="{total} views in total" class="total">
+		<div aria-label="{total} visits in total" class="total">
 			<Fa icon={faEye} />
 			{total}
 		</div>
 
-		<BarChart data_points={monthly_views} />
+		<BarChart data_points={monthly_visits} />
 
 		<details>
 			<summary>Show details</summary>
 			<DataTable
-				data_points={monthly_views}
-				labels={['Month', 'Views']}
+				data_points={monthly_visits}
+				labels={['Month', 'Visits']}
 			/>
 		</details>
 	</section>

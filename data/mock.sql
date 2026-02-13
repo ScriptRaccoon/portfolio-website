@@ -1,5 +1,5 @@
 INSERT INTO
-    page_stats (path, month, visits)
+    page_visits (path, month, visits)
 VALUES
     ("/", "2024-01", 8),
     ("/", "2024-02", 13),
@@ -28,7 +28,7 @@ VALUES
     ("/", "2025-12", 7) ON CONFLICT DO NOTHING;
 
 INSERT INTO
-    page_stats (path, month, visits)
+    page_visits (path, month, visits)
 VALUES
     ("/about", "2024-03", 2),
     ("/about", "2024-04", 12),
@@ -50,7 +50,7 @@ VALUES
     ("/about", "2025-12", 1) ON CONFLICT DO NOTHING;
 
 INSERT INTO
-    page_stats (path, month, visits)
+    page_visits (path, month, visits)
 VALUES
     ("/blog", "2024-01", 2),
     ("/blog", "2024-04", 1),

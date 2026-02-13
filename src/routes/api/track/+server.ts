@@ -81,12 +81,12 @@ export const POST: RequestHandler = async (event) => {
 	const month = get_current_month()
 
 	const sql = `
-        INSERT INTO page_views
-            (path, month, views)
+        INSERT INTO page_visits
+            (path, month, visits)
         VALUES
             (?, ?, 1)
         ON CONFLICT (path, month)
-            DO UPDATE SET views = views + 1`
+            DO UPDATE SET visits = visits + 1`
 
 	const args = [path, month]
 
