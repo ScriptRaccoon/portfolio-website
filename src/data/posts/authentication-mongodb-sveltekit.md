@@ -65,7 +65,7 @@ We will store our users in a MongoDB database. We will use [MongoDB Atlas](https
 
 Open your MongoDB dashboard and create a cluster (if you are unsure how that works, check out their [tutorial](https://www.mongodb.com/basics/clusters/mongodb-cluster-setup)). By clicking "Connect", you will get a URI of the form
 
-```markdown
+```bash
 mongodb+srv://{USER_NAME}:{USER_PASSWORD}@{CLUSTER_NAME}.mongodb.net/data?retryWrites=true&w=majority`;
 ```
 
@@ -75,7 +75,7 @@ Save the URI as an environment variable `SECRET_MONGODB_URI` in the `.env` file 
 
 To connect with MongoDB, we will use the [mongoose package](https://mongoosejs.com/):
 
-```markdown
+```bash
 npm i mongoose
 ```
 
@@ -132,7 +132,7 @@ Notice that the restraint `unique: true` in the email field will throw an error 
 
 Of course, we will not save the real passwords in the database. We will hash them. A convenient way to do this is via the [bcrypt package](https://www.npmjs.com/package/bcrypt). Let us install it right away. If you use TypeScript, you will also want to install the types as a dev dependency.
 
-```markdown
+```bash
 npm i bcrypt
 npm i -D @types/bcrypt
 ```
@@ -521,7 +521,7 @@ The encryption is done via some secret key that must be stored as an environment
 
 To use JWT, we have to install the [jsonwebtoken package](https://www.npmjs.com/package/jsonwebtoken) (and its types):
 
-```markdown
+```bash
 npm i jsonwebtoken
 npm i -D @types/jsonwebtoken
 ```
