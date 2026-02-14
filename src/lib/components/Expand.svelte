@@ -37,7 +37,7 @@
 	<Fa icon={open ? faCaretRight : faCaretDown} />
 </button>
 
-<div id={content_id} aria-labelledby={button_id}>
+<div id={content_id} aria-labelledby={button_id} role="region">
 	{#if open}
 		<div transition:slide={{ duration }}>
 			{@render children()}
