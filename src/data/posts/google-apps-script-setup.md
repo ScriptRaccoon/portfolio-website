@@ -218,7 +218,7 @@ For the build script, you should not use the `--minify` option by esbuild. The r
 
 Applying both yields the much shorter output
 
-```text
+```bash
 "use strict";console.log("The answer is",42);
 ```
 

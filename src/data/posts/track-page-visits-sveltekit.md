@@ -398,7 +398,7 @@ You can secure the page or endpoint with [authentication](http://localhost:5173/
 
 You may also prevent crawlers from accessing the page by updating `robots.txt`:
 
-```txt
+```bash
 User-agent: *
 Disallow: /page-visits
 ```
