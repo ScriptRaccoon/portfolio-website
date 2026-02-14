@@ -194,7 +194,6 @@ To clone private repositories from GitHub directly onto your VPS, you need to au
     ```
 
 3. Copy the entire output of the `cat` command and add it to your GitHub account:
-
     - Go to [GitHub SSH Key Settings](https://github.com/settings/keys).
     - Click **"New SSH Key"**.
     - Paste the public key into the "Key" field.

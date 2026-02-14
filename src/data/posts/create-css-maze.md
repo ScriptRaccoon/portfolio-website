@@ -659,8 +659,8 @@ To draw both walls at the same time, we just concatenate the values:
 ```scss
 .maze {
 	// ... see above
-	background-image: linear-gradient($color 0% 100%),
-		linear-gradient($color 0% 100%);
+	background-image:
+		linear-gradient($color 0% 100%), linear-gradient($color 0% 100%);
 	background-size:
 		2.5rem 0.25rem,
 		0.25rem 2.5rem;
