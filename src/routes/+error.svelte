@@ -6,12 +6,10 @@
 
 <MetaTags title="Script Raccoon - Error" description="Error Page" />
 
-<h1>
-	{page.status}
-</h1>
+<header>
+	<h1>{page.status}</h1>
+</header>
 
-<p>
-	{page.error?.message}
-</p>
+<p>{page.error?.message}</p>
 
 <GoBack />

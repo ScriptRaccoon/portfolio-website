@@ -8,7 +8,9 @@
 	description="Find more about me and my personal projects in web development"
 />
 
-<h1>Script Raccoon</h1>
+<header>
+	<h1>Script Raccoon</h1>
+</header>
 
 <p>Welcome! I am Martin, a web developer based in Berlin, Germany.</p>
 

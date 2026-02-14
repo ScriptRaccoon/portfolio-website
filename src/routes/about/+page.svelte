@@ -7,7 +7,9 @@
 	description="About my journey becoming a web developer"
 />
 
-<h1>About me</h1>
+<header>
+	<h1>About me</h1>
+</header>
 
 <div class="intro">
 	<img src="/media/general/portrait.webp" alt="Martin portrait" />

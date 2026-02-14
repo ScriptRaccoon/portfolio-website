@@ -10,7 +10,9 @@
 	description="My thoughts on web development"
 />
 
-<h1>Blog</h1>
+<header>
+	<h1>Blog</h1>
+</header>
 
 <p>Here you find thoughts and tutorials on web development.</p>
 

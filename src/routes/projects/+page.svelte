@@ -28,7 +28,9 @@
 	description="Find out about my personal projects in web development"
 />
 
-<h1>Projects</h1>
+<header>
+	<h1>Projects</h1>
+</header>
 
 <p>This is a selection of my personal projects in web development.</p>
 

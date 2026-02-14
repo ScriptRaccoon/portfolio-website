@@ -13,7 +13,9 @@
 	description="About my YouTube channel on web development"
 />
 
-<h1>YouTube channel</h1>
+<header>
+	<h1>YouTube channel</h1>
+</header>
 
 <p>
 	In 2019 I started a

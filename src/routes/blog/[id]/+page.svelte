@@ -43,9 +43,9 @@
 
 <Controls />
 
-<h1>
-	{title}
-</h1>
+<header>
+	<h1>{title}</h1>
+</header>
 
 <div class="dates">
 	<div>Published: {published.toLocaleDateString()}</div>

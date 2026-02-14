@@ -11,7 +11,9 @@
 
 <Controls />
 
-<h1>Tools and languages</h1>
+<header>
+	<h1>Tools and languages</h1>
+</header>
 
 <p>
 	This page lists some of the tools and languages I am familiar with in the
