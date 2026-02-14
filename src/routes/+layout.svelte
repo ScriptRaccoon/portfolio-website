@@ -53,6 +53,15 @@
 			content="https://scriptraccoon.dev/media/general/ScriptRaccoon.png"
 		/>
 	{/if}
+
+	<!-- preload font -->
+	<link
+		rel="preload"
+		href="/fonts/NunitoSans.woff2"
+		as="font"
+		type="font/woff2"
+		crossorigin="anonymous"
+	/>
 </svelte:head>
 
 <div class="wrapper">
