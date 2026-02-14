@@ -1,4 +1,4 @@
-import shiki from 'shiki'
+import { createHighlighter } from 'shiki'
 import type MarkdownIt from 'markdown-it'
 import type Token from 'markdown-it/lib/token.mjs'
 import { createMathjaxInstance } from '@mdit/plugin-mathjax'
@@ -28,10 +28,11 @@ export function handle_external_links(md: MarkdownIt): void {
 /**
  * Shiki highlighter for code highlighting
  */
-const shiki_highlighter = await shiki.getHighlighter({
-	theme: 'slack-dark',
+const shiki_highlighter = await createHighlighter({
+	themes: ['slack-dark'],
 	langs: [
 		'javascript',
+		'bash',
 		'html',
 		'css',
 		'svelte',
@@ -48,7 +49,10 @@ const shiki_highlighter = await shiki.getHighlighter({
  * Plugin to highlight code with Shiki
  */
 export function highlight(code: string, lang: string): string {
-	const highlighted_code = shiki_highlighter.codeToHtml(code, { lang })
+	const highlighted_code = shiki_highlighter.codeToHtml(code, {
+		theme: 'slack-dark',
+		lang,
+	})
 	const highlighted_code_without_bg = highlighted_code.replace(
 		/<pre([^>]*)style="[^"]*background-color:[^"]*"(.*?)>/g,
 		'<pre$1$2>',
@@ -94,7 +98,7 @@ export function add_ids_to_headings(md: MarkdownIt): void {
 /**
  * Plugin configuration to highlight math formulas with MathJax
  */
-export const mathjax_instance = createMathjaxInstance({
+export const mathjax_instance = await createMathjaxInstance({
 	loader: { load: ['input/tex', 'output/svg'] },
 	tex: {
 		// @ts-ignore shut up
