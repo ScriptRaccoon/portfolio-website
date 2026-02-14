@@ -1,7 +1,7 @@
 ---
 title: How to track page visits in SvelteKit
 published: 2026-02-13
-updated:
+updated: 2026-02-14
 description: Counting visits without external analytics
 ---
 
@@ -328,6 +328,13 @@ This SQL statement sets the counter to `1` for a new (path, month) pair, and inc
 
 With this, all page visits are fully tracked.
 
+By inspecting request headers, you can store more than just a visit counter. For example, the `user-agent` header provides information about the user's device and browser. If your app is deployed on Netlify, you can use the `x-country` header to determine the user's country, and the `x-nf-geo` header contains a base64-encoded object with more detailed location data.
+
+```ts
+// user's country
+const country = event.request.headers.get('x-country')
+```
+
 ## Visualize page visits
 
 To get an overview of page visits, create a page at `/page-visits`, load the data from the database in the server load function, process it, and choose any type of visualization.
@@ -460,7 +467,7 @@ if (content_type !== 'application/json') {
 
 Optionally, you may add rate limiting if it's not already handled by an API gateway. These measures do not guarantee 100% security, but they are sufficient for this analytics API.
 
-With a server-only approach, most of these checks would be unnecessary. However, using the client-side approach allows us to track prerendered pages as well. This very blog post is an example.
+With a server-only approach, most of these checks would be unnecessary. However, using the client-side approach allows us to track prerendered pages as well. This very blog post is an example. One day after publishing it, it got 41 visits (from Singapore, Washington, Berlin, Los Angeles, ...).
 
 ## Conclusion
 
