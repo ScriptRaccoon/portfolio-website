@@ -1,24 +1,27 @@
 <script lang="ts">
 	type Props = {
-		data_points: [string, number][]
-		labels: [string, string]
+		data_points: (string | number)[][]
+		labels: string[]
+		size?: 'small' | 'normal'
 	}
 
-	let { data_points, labels }: Props = $props()
+	let { data_points, labels, size = 'normal' }: Props = $props()
 </script>
 
-<table>
+<table class:small={size === 'small'}>
 	<thead>
 		<tr>
-			<th>{labels[0]}</th>
-			<th>{labels[1]}</th>
+			{#each labels as label}
+				<th>{label}</th>
+			{/each}
 		</tr>
 	</thead>
 	<tbody>
-		{#each data_points as [label, value]}
+		{#each data_points as row_data}
 			<tr>
-				<td>{label}</td>
-				<td>{value}</td>
+				{#each row_data as item}
+					<td>{item}</td>
+				{/each}
 			</tr>
 		{/each}
 	</tbody>
@@ -29,6 +32,10 @@
 		border-collapse: collapse;
 		margin-block: 1rem;
 		font-size: var(--small-font);
+	}
+
+	table.small {
+		font-size: var(--tiny-font);
 	}
 
 	tbody {
