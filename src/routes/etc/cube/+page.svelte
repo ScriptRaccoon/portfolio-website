@@ -14,11 +14,9 @@
 		perspective: 20rem;
 		display: grid;
 		place-items: center;
-		background-color: #222;
 		max-width: 22rem;
 		aspect-ratio: 1/1;
 		margin: 1rem auto;
-		border-radius: 0.75rem;
 		overflow: hidden;
 	}
 
