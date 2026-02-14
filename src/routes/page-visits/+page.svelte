@@ -15,6 +15,18 @@
 	<h1>Page Visits</h1>
 </header>
 
+<section aria-label="most recent visits">
+	<details>
+		<summary>Show 100 most recent visits</summary>
+
+		<DataTable
+			data_points={data.logs}
+			labels={['date', 'path', 'country']}
+			size="small"
+		/>
+	</details>
+</section>
+
 {#each data.paths as { path, total, monthly_visits } (path)}
 	<section>
 		<h2 class="path">{path}</h2>

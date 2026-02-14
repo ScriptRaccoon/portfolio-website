@@ -17,6 +17,11 @@ const sql_month_range = `
 		MAX(month) as max_month
 	FROM page_visits`
 
+const sql_logs = `
+	SELECT date, path, country
+	FROM page_visit_logs
+	ORDER BY date DESC`
+
 export const load: PageServerLoad = async (event) => {
 	const auth_header = event.request.headers.get('authorization')
 
@@ -26,9 +31,10 @@ export const load: PageServerLoad = async (event) => {
 	}
 
 	try {
-		const [res_visits, res_month_range] = await db.batch([
+		const [res_visits, res_month_range, res_logs] = await db.batch([
 			{ sql: sql_visits },
 			{ sql: sql_month_range },
+			{ sql: sql_logs },
 		])
 
 		const min_month = res_month_range.rows[0].min_month as string | null
@@ -78,7 +84,19 @@ export const load: PageServerLoad = async (event) => {
 			}))
 			.sort((a, b) => b.total - a.total)
 
-		return { paths }
+		const logs_objects = res_logs.rows as unknown as {
+			date: string
+			path: string
+			country: string | null
+		}[]
+
+		const logs = logs_objects.map((log) => [
+			log.date,
+			log.path,
+			log.country ?? '',
+		])
+
+		return { paths, logs }
 	} catch (err) {
 		console.error(err)
 		error(500, 'Could not load page visits')

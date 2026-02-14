@@ -80,7 +80,9 @@ export const POST: RequestHandler = async (event) => {
 
 	const month = get_current_month()
 
-	const sql = `
+	const country = event.request.headers.get('x-country')
+
+	const sql_month = `
         INSERT INTO page_visits
             (path, month, visits)
         VALUES
@@ -88,10 +90,16 @@ export const POST: RequestHandler = async (event) => {
         ON CONFLICT (path, month)
             DO UPDATE SET visits = visits + 1`
 
-	const args = [path, month]
+	const sql_log = `
+		INSERT INTO page_visit_logs
+			(path, country)
+		VALUES (?, ?)`
 
 	try {
-		await db.execute(sql, args)
+		await db.batch([
+			{ sql: sql_month, args: [path, month] },
+			{ sql: sql_log, args: [path, country] },
+		])
 	} catch (err) {
 		console.error(err)
 		return json({ error: 'Database error' }, { status: 500 })
@@ -100,5 +108,5 @@ export const POST: RequestHandler = async (event) => {
 	const expires_at = Date.now() + 1000 * 60 * 60 // 1h
 	visits_cache.set(cache_key, expires_at)
 
-	return json({ message: 'Page view has been tracked successfully' })
+	return json({ message: 'Page visit has been tracked successfully' })
 }
