@@ -18,7 +18,7 @@ const sql_month_range = `
 	FROM page_visits`
 
 const sql_logs = `
-	SELECT date, path, country
+	SELECT date, path, country, city
 	FROM page_visit_logs
 	ORDER BY date DESC`
 
@@ -88,12 +88,14 @@ export const load: PageServerLoad = async (event) => {
 			date: string
 			path: string
 			country: string | null
+			city: string | null
 		}[]
 
 		const logs = logs_objects.map((log) => [
 			log.date,
 			log.path,
 			log.country ?? '',
+			log.city ?? '',
 		])
 
 		return { paths, logs }

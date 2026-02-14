@@ -34,6 +34,25 @@ function is_same_origin(request: Request, site_origin: string): boolean {
 	return false
 }
 
+function get_geo_data(request: Request): {
+	country: string | null
+	city: string | null
+} {
+	// Netlify specific header
+	const geo_header = request.headers.get('x-nf-geo')
+
+	if (!geo_header) return { country: null, city: null }
+
+	try {
+		const decoded = JSON.parse(atob(geo_header))
+		const city = decoded.city || null
+		const country = decoded.country?.name || null
+		return { country, city }
+	} catch (_) {
+		return { country: null, city: null }
+	}
+}
+
 export const POST: RequestHandler = async (event) => {
 	if (!is_same_origin(event.request, event.url.origin)) {
 		return json({ error: 'Forbidden' }, { status: 403 })
@@ -80,7 +99,7 @@ export const POST: RequestHandler = async (event) => {
 
 	const month = get_current_month()
 
-	const country = event.request.headers.get('x-country')
+	const { city, country } = get_geo_data(event.request)
 
 	const sql_month = `
         INSERT INTO page_visits
@@ -92,13 +111,13 @@ export const POST: RequestHandler = async (event) => {
 
 	const sql_log = `
 		INSERT INTO page_visit_logs
-			(path, country)
-		VALUES (?, ?)`
+			(path, country, city)
+		VALUES (?, ?, ?)`
 
 	try {
 		await db.batch([
 			{ sql: sql_month, args: [path, month] },
-			{ sql: sql_log, args: [path, country] },
+			{ sql: sql_log, args: [path, country, city] },
 		])
 	} catch (err) {
 		console.error(err)

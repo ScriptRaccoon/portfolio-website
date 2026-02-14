@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS page_visit_logs (
     id INTEGER PRIMARY KEY,
     path TEXT NOT NULL,
     date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    city TEXT,
     country TEXT
 );
 

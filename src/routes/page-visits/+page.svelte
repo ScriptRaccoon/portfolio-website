@@ -21,7 +21,7 @@
 
 		<DataTable
 			data_points={data.logs}
-			labels={['date', 'path', 'country']}
+			labels={['date', 'path', 'country', 'city']}
 		/>
 	</details>
 </section>
