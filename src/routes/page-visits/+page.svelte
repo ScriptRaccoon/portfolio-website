@@ -22,7 +22,6 @@
 		<DataTable
 			data_points={data.logs}
 			labels={['date', 'path', 'country']}
-			size="small"
 		/>
 	</details>
 </section>

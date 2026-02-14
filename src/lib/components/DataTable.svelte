@@ -2,13 +2,12 @@
 	type Props = {
 		data_points: (string | number)[][]
 		labels: string[]
-		size?: 'small' | 'normal'
 	}
 
-	let { data_points, labels, size = 'normal' }: Props = $props()
+	let { data_points, labels }: Props = $props()
 </script>
 
-<table class:small={size === 'small'}>
+<table>
 	<thead>
 		<tr>
 			{#each labels as label}
@@ -31,10 +30,6 @@
 	table {
 		border-collapse: collapse;
 		margin-block: 1rem;
-		font-size: var(--small-font);
-	}
-
-	table.small {
 		font-size: var(--tiny-font);
 	}
 
