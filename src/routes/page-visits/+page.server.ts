@@ -3,6 +3,7 @@ import type { PageServerLoad } from './$types'
 import { db } from '$lib/server/db'
 import { add_month } from '$lib/server/utils'
 import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
+import { dev } from '$app/environment'
 
 export const prerender = false
 
@@ -23,11 +24,13 @@ const sql_logs = `
 	ORDER BY date DESC`
 
 export const load: PageServerLoad = async (event) => {
-	const auth_header = event.request.headers.get('authorization')
+	if (!dev) {
+		const auth_header = event.request.headers.get('authorization')
 
-	if (auth_header !== `Basic ${btoa(PAGEVISITS_CREDENTIALS)}`) {
-		event.setHeaders({ 'WWW-Authenticate': 'Basic realm="Protected"' })
-		error(401, 'Unauthorized')
+		if (auth_header !== `Basic ${btoa(PAGEVISITS_CREDENTIALS)}`) {
+			event.setHeaders({ 'WWW-Authenticate': 'Basic realm="Protected"' })
+			error(401, 'Unauthorized')
+		}
 	}
 
 	try {
