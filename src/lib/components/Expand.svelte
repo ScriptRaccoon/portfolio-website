@@ -46,6 +46,10 @@
 </div>
 
 <style>
+	div {
+		max-width: 100%;
+		overflow-x: auto;
+	}
 	span {
 		margin-right: 0.25rem;
 	}

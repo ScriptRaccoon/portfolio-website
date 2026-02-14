@@ -31,6 +31,7 @@
 		border-collapse: collapse;
 		margin-block: 1rem;
 		font-size: var(--tiny-font);
+		width: 100%;
 	}
 
 	tbody {
@@ -45,6 +46,7 @@
 	td {
 		border: 1px solid var(--border-color);
 		padding: 0.25rem 0.5rem;
+		white-space: nowrap;
 	}
 
 	th,
