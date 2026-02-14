@@ -1280,12 +1280,12 @@ The following code produces a 3-dimensional rotating cube with CSS ([preview](/e
 ```html
 <div class="scene">
 	<div class="cube">
-		<div class="front" />
-		<div class="back" />
-		<div class="left" />
-		<div class="right" />
-		<div class="top" />
-		<div class="bottom" />
+		<div class="front"></div>
+		<div class="back"></div>
+		<div class="left"></div>
+		<div class="right"></div>
+		<div class="top"></div>
+		<div class="bottom"></div>
 	</div>
 </div>
 

@@ -258,7 +258,7 @@ by designing the `Fibonacci.svelte` component to call itself twice: once with a 
 </script>
 
 {#if index === 1}
-	<div class="block" />
+	<div class="block"></div>
 {:else if index >= 2}
 	<!-- The component renders itself! -->
 	<Fibonacci index={index - 1} />
