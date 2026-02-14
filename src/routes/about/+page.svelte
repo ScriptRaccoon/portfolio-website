@@ -26,9 +26,8 @@
 		>my nLab page</a
 	>. In 2014 I left university, but I still publish and review research
 	articles from time to time. I also published a
-	<a
-		href="https://link.springer.com/book/10.1007/978-3-662-53521-9"
-		target="_blank">textbook on category theory</a
+	<a href="https://www.kategorientheorie.de" target="_blank"
+		>textbook on category theory</a
 	>. 📚
 </p>
 
