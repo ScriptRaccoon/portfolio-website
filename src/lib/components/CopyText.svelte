@@ -4,20 +4,17 @@
 	import Fa from 'svelte-fa'
 	import { faRetweet } from '@fortawesome/free-solid-svg-icons'
 
-	let pending = $state(false)
+	type Props = { text: string; name: string }
 
-	type Props = {
-		text?: string
-		name?: string
-	}
+	let { text, name }: Props = $props()
 
-	let { text = '', name = '' }: Props = $props()
+	let copied = $state(false)
 
 	async function copy_text() {
-		if (pending) return
-		pending = true
+		if (copied) return
+		copied = true
 		await window.navigator.clipboard.writeText(text)
-		setTimeout(() => (pending = false), 1500)
+		setTimeout(() => (copied = false), 1500)
 	}
 
 	const allow_animation = getContext<boolean>('allow_animation')
@@ -31,7 +28,7 @@
 >
 	<Fa icon={faRetweet} />
 
-	{#if pending}
+	{#if copied}
 		<span transition:fade={{ duration: animation_speed }}>
 			Copied {name}
 		</span>
@@ -46,7 +43,7 @@
 	span {
 		font-size: var(--small-font);
 		border-radius: 0.25rem;
-		padding: 0.4rem 0.8rem;
+		padding: 0.2rem 0.6rem;
 		border: 1px solid var(--border-color);
 		background-color: var(--bg-color);
 		white-space: nowrap;
