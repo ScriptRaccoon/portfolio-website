@@ -12,16 +12,17 @@
 	<h1>Script Raccoon</h1>
 </header>
 
-<p>Welcome! I am Martin, a web developer based in Berlin, Germany.</p>
+<p>Welcome. I'm Martin, a web developer based in Berlin, Germany.</p>
 
 <p>
-	Here you can find out more <a href="/about">about myself</a> and my
-	<a href="/projects">personal projects</a>.
+	This site is a brief overview of my <a href="/projects">personal projects</a
+	>. You can also find out more <a href="/about">about myself</a>.
 </p>
 
 <p>
-	I run a <a href="/youtube">Youtube channel</a> and also write
-	<a href="/blog">blog posts</a>.
+	I run a <a href="/youtube">Youtube channel</a> and write about web
+	development on my
+	<a href="/blog">blog</a>.
 </p>
 
 <p class="logo-container">

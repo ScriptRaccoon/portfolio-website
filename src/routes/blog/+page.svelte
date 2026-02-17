@@ -14,7 +14,7 @@
 	<h1>Blog</h1>
 </header>
 
-<p>Here you find thoughts and tutorials on web development.</p>
+<p>Here I share tutorials and notes on web development.</p>
 
 <ol class="no-bullets">
 	{#each data.posts as post (post.id)}

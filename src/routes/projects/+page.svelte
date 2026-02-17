@@ -32,7 +32,7 @@
 	<h1>Projects</h1>
 </header>
 
-<p>This is a selection of my personal projects in web development.</p>
+<p>A selection of personal web development projects.</p>
 
 <ProjectsFilter {tags} {years} bind:selected_tags bind:selected_years />
 

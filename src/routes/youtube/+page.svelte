@@ -22,7 +22,7 @@
 	<a href="https://www.youtube.com/scriptraccoon" target="_blank">
 		YouTube channel
 	</a>
-	on web development (in German). Today, the channel has
+	on web development. Today, the channel has
 	<strong>{stats.subscriber_count}</strong>
 	subscribers and
 	<strong>{stats.video_count}</strong>
@@ -65,9 +65,9 @@
 	I decided to do the channel in <strong>German</strong> (my native language),
 	for the sole reason that there are already lots of very good channels in
 	English, but only a few in German. Many people have asked me to change to
-	English or make subtitles. Sorry, but I will not do that. There is a place
-	for YouTube channels in every language. If you want good English content,
-	please check out the channels by
+	English or make subtitles. I do not plan to do that. There is a place for
+	YouTube channels in every language. If you want good English content, please
+	check out the channels by
 	<a href="https://www.youtube.com/@DaveGrayTeachesCode" target="_blank"
 		>Dave Gray</a
 	>,
@@ -86,15 +86,15 @@
 
 <p>
 	You can always check out the <strong>code</strong> which I link in the video description.
-	Of course, the code has English variable names, and the README also often includes
+	Of course, the code is written in English, and the README also often includes
 	some pieces of explanation.
 </p>
 
 <p>
-	Since March 2024, I also create videos for the channel
+	Since 2024, I also create videos for the channel
 	<a href="https://www.youtube.com/@cuberaccoon" target="_blank"
 		>Cube Raccoon</a
-	> which is dedicated to twisty puzzles.
+	>, which is dedicated to twisty puzzles.
 </p>
 
 <style>

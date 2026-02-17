@@ -44,7 +44,7 @@
 </p>
 
 <p>
-	Since 2022 I work as a <strong>full stack web developer</strong>
+	From 2022 to 2025 I worked as a <strong>full stack web developer</strong>
 	for a company in the sports retail industry. If you are interested, see
 	<a href="/about/tools">Tools</a> for the list of tools I am familiar with. 🧪
 </p>
