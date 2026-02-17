@@ -37,11 +37,11 @@
 		},
 	] as const
 
-	let current_path = $derived(page.url.pathname)
-
 	let page_pos = $derived.by(() => {
-		if (current_path === '/') return 0
-		return 1 + links.findIndex(({ path }) => current_path.startsWith(path))
+		const pathname = page.url.pathname
+		if (pathname === '/') return 0
+		const index = links.findIndex(({ path }) => pathname.startsWith(path))
+		return index >= 0 ? index + 1 : -1
 	})
 
 	const animated = getContext<boolean>('allow_animation')
