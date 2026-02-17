@@ -29,3 +29,11 @@ WHERE
     );
 
 END;
+
+CREATE TABLE IF NOT EXISTS theme_stats (theme TEXT PRIMARY KEY, count INTEGER NOT NULL DEFAULT 0);
+
+INSERT INTO
+    theme_stats (theme)
+VALUES
+    ("dark"),
+    ("light") ON CONFLICT DO NOTHING;

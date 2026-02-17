@@ -5,8 +5,9 @@
 	import Nav from '$lib/components/Nav.svelte'
 	import ScrollUp from '$lib/components/ScrollUp.svelte'
 	import { onNavigate } from '$app/navigation'
-	import { track_view } from '$lib/client/track'
+	import { track_theme, track_view } from '$lib/client/track'
 	import { page } from '$app/state'
+	import { theme } from '$lib/client/theme.svelte'
 
 	let { data, children } = $props()
 
@@ -29,6 +30,13 @@
 
 	$effect(() => {
 		track_view(page.url.pathname, data.tracked_paths)
+	})
+
+	/**
+	 * temporary code to estimate how many users are using which theme
+	 */
+	$effect(() => {
+		track_theme(theme.value)
 	})
 </script>
 
