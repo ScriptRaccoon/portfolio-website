@@ -1,8 +1,8 @@
 ---
 title: How to track page visits in SvelteKit
 published: 2026-02-13
-updated: 2026-02-14
-description: Counting visits without external analytics
+updated: 2026-02-17
+description: Counting visits without external analytics provider
 ---
 
 ## Introduction
