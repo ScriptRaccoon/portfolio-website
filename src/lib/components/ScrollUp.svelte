@@ -12,8 +12,9 @@
 
 	$effect(() => {
 		scroll_position = window.scrollY
+
 		window.addEventListener('scroll', handle_scroll)
-		;() => {
+		return () => {
 			window.removeEventListener('scroll', handle_scroll)
 		}
 	})
