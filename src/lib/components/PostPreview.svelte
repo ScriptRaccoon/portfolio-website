@@ -27,6 +27,5 @@
 	.date {
 		color: var(--secondary-font-color);
 		font-size: var(--small-font);
-		margin-bottom: 0.5rem;
 	}
 </style>

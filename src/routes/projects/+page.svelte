@@ -45,5 +45,5 @@
 		{/each}
 	</ol>
 {:else}
-	<p>No projects within this filter</p>
+	<p>No projects matching this filter</p>
 {/if}

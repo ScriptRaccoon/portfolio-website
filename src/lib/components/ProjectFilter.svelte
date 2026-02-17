@@ -3,51 +3,46 @@
 
 	type Props = {
 		tags: string[]
-		selected_tags: string[]
 		years: number[]
+		selected_tags: string[]
 		selected_years: number[]
 	}
 
 	let {
 		tags,
-		selected_years = $bindable(),
 		years,
 		selected_tags = $bindable(),
+		selected_years = $bindable(),
 	}: Props = $props()
 </script>
 
-<section aria-label="Project Filters">
-	<Expand summary="Toggle filters">
-		<div class="filter-list" role="group">
-			{#each tags as tag}
-				<label class="tag" class:selected={selected_tags.includes(tag)}>
-					<input
-						type="checkbox"
-						value={tag}
-						bind:group={selected_tags}
-						class="visually-hidden"
-					/>
-					{tag}
-				</label>
-			{/each}
+<Expand summary="Toggle filters">
+	<div class="filter-list" role="group">
+		{#each tags as tag}
+			<label class="tag" class:selected={selected_tags.includes(tag)}>
+				<input
+					type="checkbox"
+					value={tag}
+					bind:group={selected_tags}
+					class="sr-only"
+				/>
+				{tag}
+			</label>
+		{/each}
 
-			{#each years as year}
-				<label
-					class="tag"
-					class:selected={selected_years.includes(year)}
-				>
-					<input
-						type="checkbox"
-						value={year}
-						bind:group={selected_years}
-						class="visually-hidden"
-					/>
-					{year}
-				</label>
-			{/each}
-		</div>
-	</Expand>
-</section>
+		{#each years as year}
+			<label class="tag" class:selected={selected_years.includes(year)}>
+				<input
+					type="checkbox"
+					value={year}
+					bind:group={selected_years}
+					class="sr-only"
+				/>
+				{year}
+			</label>
+		{/each}
+	</div>
+</Expand>
 
 <style>
 	.filter-list {

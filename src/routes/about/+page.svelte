@@ -13,7 +13,7 @@
 
 <div class="intro">
 	<img src="/media/general/portrait.webp" alt="Martin portrait" />
-	<p class="roles">Mathematician | Web developer | Content creator</p>
+	<div class="roles">Mathematician | Web developer | Content creator</div>
 	<p class="me">
 		My name is Martin Brandenburg. I live in Berlin, Germany. 🏡
 	</p>
@@ -72,9 +72,9 @@
 	<a href="/youtube">YouTube channel</a> on web development, in which context
 	I go by the name
 	<strong>Script Raccoon</strong>. In 2024 I also started a
-	<a href="https://www.youtube.com/@cuberaccoon" target="_blank"
-		>second YouTube channel</a
-	>
+	<a href="https://www.youtube.com/@cuberaccoon" target="_blank">
+		second YouTube channel
+	</a>
 	on twisty puzzles under the name <strong>Cube Raccoon</strong>. 🦝
 </p>
 
@@ -93,7 +93,9 @@
 	}
 
 	.roles {
-		color: var(--h3-color);
+		color: var(--secondary-font-color);
+		text-align: center;
+		margin-bottom: 1rem;
 	}
 
 	@media (min-width: 38rem) {
@@ -103,12 +105,13 @@
 			padding-inline: 1rem;
 		}
 
-		img {
-			grid-row: 1 / span 2;
+		.roles {
+			text-align: unset;
+			margin-bottom: 0;
 		}
 
-		.roles {
-			margin: 0;
+		img {
+			grid-row: 1 / span 2;
 		}
 
 		.me {

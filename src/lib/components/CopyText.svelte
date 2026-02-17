@@ -2,7 +2,7 @@
 	import { getContext } from 'svelte'
 	import { fade } from 'svelte/transition'
 	import Fa from 'svelte-fa'
-	import { faRetweet } from '@fortawesome/free-solid-svg-icons'
+	import { faCopy } from '@fortawesome/free-regular-svg-icons'
 
 	type Props = { text: string; name: string }
 
@@ -14,7 +14,7 @@
 		if (copied) return
 		copied = true
 		await window.navigator.clipboard.writeText(text)
-		setTimeout(() => (copied = false), 1500)
+		setTimeout(() => (copied = false), 2000)
 	}
 
 	const allow_animation = getContext<boolean>('allow_animation')
@@ -26,7 +26,7 @@
 	aria-label="copy {name} to clipboard"
 	aria-live="polite"
 >
-	<Fa icon={faRetweet} />
+	<Fa icon={faCopy} />
 
 	{#if copied}
 		<span transition:fade={{ duration: animation_speed }}>
@@ -41,15 +41,15 @@
 	}
 
 	span {
+		position: absolute;
+		top: calc(100% + 0.25rem);
+		right: 0;
+		z-index: 1;
 		font-size: var(--small-font);
 		border-radius: 0.25rem;
 		padding: 0.2rem 0.6rem;
 		border: 1px solid var(--border-color);
 		background-color: var(--bg-color);
 		white-space: nowrap;
-		position: absolute;
-		top: calc(100% + 0.25rem);
-		right: 0;
-		z-index: 1;
 	}
 </style>

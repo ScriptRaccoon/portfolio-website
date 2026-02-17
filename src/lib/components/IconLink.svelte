@@ -1,6 +1,5 @@
 <script lang="ts">
 	import Fa from 'svelte-fa'
-
 	import { type IconDefinition as IconDefinitionSolid } from '@fortawesome/free-solid-svg-icons'
 	import { type IconDefinition as IconDefinitionBrand } from '@fortawesome/free-brands-svg-icons'
 

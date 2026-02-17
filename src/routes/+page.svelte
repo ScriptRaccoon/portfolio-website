@@ -26,7 +26,7 @@
 </p>
 
 <p class="logo-container">
-	<img src="/media/general/ScriptRaccoon.png" alt="raccoon logo" />
+	<img src="/media/general/ScriptRaccoon.webp" alt="raccoon logo" />
 </p>
 
 <SocialLinks />

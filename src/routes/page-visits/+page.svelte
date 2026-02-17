@@ -4,8 +4,6 @@
 	import Expand from '$lib/components/Expand.svelte'
 	import MetaTags from '$lib/components/MetaTags.svelte'
 	import TrackToggle from '$lib/components/TrackToggle.svelte'
-	import { faEye } from '@fortawesome/free-solid-svg-icons'
-	import Fa from 'svelte-fa'
 
 	let { data } = $props()
 </script>
@@ -14,26 +12,27 @@
 
 <header>
 	<h1>Page Visits</h1>
-
-	<TrackToggle />
 </header>
+
+<p>
+	<TrackToggle />
+</p>
 
 <Expand summary="Show 100 most recent visits">
 	<DataTable
 		data_points={data.logs}
-		labels={['date', 'path', 'country', 'city']}
+		labels={['Date', 'Path', 'Country', 'City']}
 	/>
 </Expand>
 
 {#each data.paths as { path, total, monthly_visits } (path)}
-	<section class="path-section">
+	<section>
 		<h2>
 			<a class="path" href={path}>{path}</a>
 		</h2>
 
-		<div aria-label="{total} visits in total" class="total">
-			<Fa icon={faEye} />
-			{total}
+		<div class="total">
+			<strong class="number">{total}</strong> visits in total
 		</div>
 
 		<div class="chart-wrapper">
@@ -50,20 +49,13 @@
 {/each}
 
 <style>
-	header {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-	}
-
 	section {
-		border-bottom: 1px solid var(--border-color);
+		border-bottom: 2px solid var(--border-color);
 		padding-block: 1rem;
 	}
 
 	section:first-of-type {
-		margin-top: 1rem;
-		border-top: 1px solid var(--border-color);
+		margin-top: 2rem;
 	}
 
 	.path {
@@ -72,9 +64,11 @@
 	}
 
 	.total {
-		display: flex;
-		align-items: center;
-		gap: 0.25rem;
+		color: var(--secondary-font-color);
+
+		.number {
+			color: var(--font-color);
+		}
 	}
 
 	.chart-wrapper {

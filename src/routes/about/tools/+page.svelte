@@ -36,8 +36,12 @@
 {/each}
 
 <style>
+	section {
+		margin-block: 2rem;
+	}
+
 	h2 {
-		margin-block: 2rem 0.5rem;
+		margin-bottom: 1rem;
 	}
 
 	ul {

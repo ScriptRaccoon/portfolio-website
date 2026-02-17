@@ -22,9 +22,9 @@
 </script>
 
 {#if device_is_tracked}
-	<button class="button" onclick={untrack_device}
-		>Do not track this device</button
-	>
+	<button class="button" onclick={untrack_device}>
+		Do not track this device
+	</button>
 {:else}
 	<button class="button" onclick={track_device}>Track this device</button>
 {/if}

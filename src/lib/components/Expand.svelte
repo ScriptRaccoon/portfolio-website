@@ -26,31 +26,39 @@
 	}
 </script>
 
-<button
-	id={button_id}
-	aria-expanded={open}
-	aria-controls={content_id}
-	onclick={toggle_open}
-	class:closed={!open}
->
-	<span>{summary}</span>
-	<Fa icon={open ? faCaretRight : faCaretDown} />
-</button>
+<div>
+	<button
+		id={button_id}
+		aria-expanded={open}
+		aria-controls={content_id}
+		onclick={toggle_open}
+		class:closed={!open}
+	>
+		<span class="summary">{summary}</span>
+		<Fa icon={open ? faCaretRight : faCaretDown} />
+	</button>
 
-<div id={content_id} aria-labelledby={button_id} role="region">
-	{#if open}
-		<div transition:slide={{ duration }}>
-			{@render children()}
-		</div>
-	{/if}
+	<div
+		class="details"
+		id={content_id}
+		aria-labelledby={button_id}
+		role="region"
+	>
+		{#if open}
+			<div transition:slide={{ duration }}>
+				{@render children()}
+			</div>
+		{/if}
+	</div>
 </div>
 
 <style>
-	div {
+	.summary {
+		margin-right: 0.25rem;
+	}
+
+	.details {
 		max-width: 100%;
 		overflow-x: auto;
-	}
-	span {
-		margin-right: 0.25rem;
 	}
 </style>

@@ -1,15 +1,10 @@
 <script lang="ts">
 	import { page } from '$app/state'
 	import { getContext } from 'svelte'
-
 	import ThemeToggler from './ThemeToggler.svelte'
-
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons'
-	import {
-		faCircleQuestion,
-		faClipboardList,
-		faPenToSquare,
-	} from '@fortawesome/free-solid-svg-icons'
+	import { faDisplay, faUser } from '@fortawesome/free-solid-svg-icons'
+	import { faPenToSquare } from '@fortawesome/free-regular-svg-icons'
 	import IconLink from './IconLink.svelte'
 	import HomeLink from './HomeLink.svelte'
 	import NavUnderline from './NavUnderline.svelte'
@@ -23,7 +18,7 @@
 		{
 			name: 'Projects',
 			path: '/projects',
-			icon: faClipboardList,
+			icon: faDisplay,
 		},
 		{
 			name: 'Blog',
@@ -33,7 +28,7 @@
 		{
 			name: 'About',
 			path: '/about',
-			icon: faCircleQuestion,
+			icon: faUser,
 		},
 	] as const
 
@@ -46,11 +41,11 @@
 
 	const animated = getContext<boolean>('allow_animation')
 
-	const items = links.length + 2
+	const number_items = links.length + 2
 </script>
 
 <nav>
-	<ul class="no-bullets" style:--cols={items}>
+	<ul class="no-bullets" style:--cols={number_items}>
 		<li class:current={page_pos === 0}>
 			<HomeLink />
 		</li>
@@ -62,7 +57,7 @@
 		<li>
 			<ThemeToggler />
 		</li>
-		<NavUnderline pos={page_pos} {animated} cols={items} />
+		<NavUnderline pos={page_pos} {animated} cols={number_items} />
 	</ul>
 </nav>
 

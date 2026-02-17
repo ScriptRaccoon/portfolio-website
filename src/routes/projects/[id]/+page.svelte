@@ -35,9 +35,9 @@
 <header>
 	<h1>{name}</h1>
 
-	<p class="year" aria-label="year">
+	<span class="year" aria-label="year">
 		{date.getFullYear()}
-	</p>
+	</span>
 </header>
 
 <ul class="no-bullets tag-list" aria-label="list of tags">
@@ -67,24 +67,22 @@
 		align-items: center;
 	}
 
+	.year {
+		font-size: var(--small-font);
+		color: var(--secondary-font-color);
+	}
+
 	.tag-list {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-		margin-top: -0.75rem;
-		margin-bottom: 1.5rem;
-	}
-
-	.year {
-		font-size: var(--small-font);
-		color: var(--secondary-font-color);
+		margin-block: 1rem;
 	}
 
 	.links {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.5rem;
-		font-size: var(--small-font);
 	}
 
 	img {

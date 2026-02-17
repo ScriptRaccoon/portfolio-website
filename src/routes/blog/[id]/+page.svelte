@@ -98,8 +98,8 @@
 		}
 
 		:global(blockquote) {
-			margin-block: 1rem;
-			margin-left: 1rem;
+			margin-block: 1.25rem;
+			margin-left: 1.25rem;
 			padding-left: 0.5rem;
 			font-size: var(--small-font);
 			border-left: 0.2rem solid var(--border-color);
@@ -107,28 +107,25 @@
 		}
 
 		:global(.code-block) {
-			margin-block: 1rem;
+			margin-block: 1.5rem;
 			position: relative;
 		}
 
 		:global(.copy-btn) {
 			position: absolute;
-			top: 0.25rem;
+			bottom: calc(100% + 0.25rem);
 			right: 0.25rem;
 			font-size: var(--tiny-font);
 			font-family: monospace;
-			background-color: var(--inline-code-bg-color);
-			color: var(--inverted-font-color);
-			padding: 0.25rem 0.5rem;
+			color: var(--secondary-font-color);
 			border-radius: 0.25rem;
-			opacity: 0.5;
 			transition: opacity 0.2s;
-		}
 
-		:global(.copy-btn.copied),
-		:global(.copy-btn:hover),
-		:global(.copy-btn:focus-visible) {
-			opacity: 1;
+			&.copied,
+			&:hover,
+			&:focus-visible {
+				color: var(--font-color);
+			}
 		}
 
 		:global(pre) {
@@ -140,22 +137,14 @@
 			max-height: 30rem;
 			background-color: var(--code-bg-color);
 			tab-size: 4;
-
 			scrollbar-width: thin;
-			&::-webkit-scrollbar {
-				width: 0.4rem;
-				height: 0.4rem;
-			}
 			scrollbar-color: var(--secondary-font-color) var(--code-bg-color);
-			&::-webkit-scrollbar-thumb {
-				background-color: var(--secondary-font-color);
-			}
 		}
 
 		:global(code:not(pre code)) {
 			font-family: monospace;
 			background-color: var(--inline-code-bg-color);
-			padding: 0.05rem 0.5rem;
+			padding: 0.1rem 0.5rem;
 			border-radius: 0.2rem;
 			font-size: var(--small-font);
 			white-space: nowrap;
@@ -163,13 +152,14 @@
 
 		:global(img) {
 			border-radius: 0.4rem;
-			border: 0.15rem solid var(--code-border-color);
+			border: 2px solid var(--code-border-color);
 			margin-inline: auto;
 		}
 
 		:global(table) {
 			border-collapse: collapse;
 
+			/* hack for article on recursive svelte components */
 			:global(td) {
 				width: 50%;
 				padding: 0.25rem;
@@ -178,6 +168,6 @@
 	}
 
 	.control-container {
-		margin-block: 1rem 2rem;
+		margin-top: 1rem;
 	}
 </style>

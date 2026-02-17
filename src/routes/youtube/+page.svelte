@@ -1,7 +1,6 @@
 <script lang="ts">
 	import MetaTags from '$lib/components/MetaTags.svelte'
 	import youtube_data from '../../data/youtube/youtube.json'
-
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 	import Fa from 'svelte-fa'
 
@@ -35,9 +34,9 @@
 	<img
 		class="thumbnail"
 		src={video.thumbnail_url}
-		alt="thumbnail of latest video: {video.title}"
+		alt="video thumbnail: {video.title}"
 	/>
-	<div class="logo" aria-hidden="true">
+	<div class="youtube-logo" aria-hidden="true">
 		<Fa icon={faYoutube} />
 	</div>
 </a>
@@ -68,20 +67,21 @@
 	English or make subtitles. I do not plan to do that. There is a place for
 	YouTube channels in every language. If you want good English content, please
 	check out the channels by
-	<a href="https://www.youtube.com/@DaveGrayTeachesCode" target="_blank"
-		>Dave Gray</a
-	>,
-	<a href="https://www.youtube.com/@TraversyMedia" target="_blank"
-		>Traversy Media</a
-	>,
-	<a href="https://www.youtube.com/@KevinPowell" target="_blank"
-		>Kevin Powell</a
-	>,
-	<a href="https://www.youtube.com/@WebDevSimplified" target="_blank"
-		>Web Dev Simplified</a
-	>, and
-	<a href="https://www.youtube.com/@NetNinja" target="_blank">The Net Ninja</a
-	>, for example.
+	<a href="https://www.youtube.com/@DaveGrayTeachesCode" target="_blank">
+		Dave Gray
+	</a>,
+	<a href="https://www.youtube.com/@TraversyMedia" target="_blank">
+		Traversy Media
+	</a>,
+	<a href="https://www.youtube.com/@KevinPowell" target="_blank">
+		Kevin Powell
+	</a>,
+	<a href="https://www.youtube.com/@WebDevSimplified" target="_blank">
+		Web Dev Simplified
+	</a>, and
+	<a href="https://www.youtube.com/@NetNinja" target="_blank">
+		The Net Ninja
+	</a>, for example.
 </p>
 
 <p>
@@ -92,41 +92,18 @@
 
 <p>
 	Since 2024, I also create videos for the channel
-	<a href="https://www.youtube.com/@cuberaccoon" target="_blank"
-		>Cube Raccoon</a
-	>, which is dedicated to twisty puzzles.
+	<a href="https://www.youtube.com/@cuberaccoon" target="_blank">
+		Cube Raccoon
+	</a>, which is dedicated to twisty puzzles.
 </p>
 
 <style>
-	.videolink {
-		position: relative;
-		display: inline-block;
-
-		&:hover,
-		&:focus-visible {
-			.thumbnail {
-				opacity: 0.5;
-			}
-			.logo {
-				opacity: 1;
-				scale: 1;
-			}
-		}
-	}
-
-	@media (prefers-reduced-motion: no-preference) {
-		.thumbnail,
-		.logo {
-			transition: all 200ms ease;
-		}
-	}
-
 	.thumbnail {
 		width: min(100%, 320px);
 		border-radius: 0.4rem;
 	}
 
-	.logo {
+	.youtube-logo {
 		font-size: 4rem;
 		color: var(--font-color);
 		position: absolute;
@@ -136,5 +113,29 @@
 		transform-origin: top left;
 		opacity: 0;
 		scale: 0.9;
+	}
+
+	@media (prefers-reduced-motion: no-preference) {
+		.thumbnail,
+		.youtube-logo {
+			transition: all 200ms ease;
+		}
+	}
+
+	.videolink {
+		position: relative;
+		display: inline-block;
+
+		&:hover,
+		&:focus-visible {
+			.thumbnail {
+				opacity: 0.5;
+			}
+
+			.youtube-logo {
+				opacity: 1;
+				scale: 1;
+			}
+		}
 	}
 </style>

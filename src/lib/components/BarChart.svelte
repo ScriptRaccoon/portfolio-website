@@ -35,12 +35,25 @@
 
 	.bar {
 		width: 1rem;
+		flex: 1;
 		height: calc(100% * var(--value) / var(--max-value));
 		background-color: var(--bar-color);
-		position: relative;
 		font-family: monospace;
 		font-size: 0.875rem;
 		text-wrap: nowrap;
+		position: relative;
+
+		.value {
+			position: absolute;
+			bottom: 100%;
+			opacity: 0;
+		}
+
+		.label {
+			position: absolute;
+			top: 100%;
+			opacity: 0;
+		}
 
 		&:hover,
 		&:focus-visible {
@@ -52,17 +65,5 @@
 				opacity: 1;
 			}
 		}
-	}
-
-	.value {
-		position: absolute;
-		bottom: 100%;
-		opacity: 0;
-	}
-
-	.label {
-		position: absolute;
-		top: 100%;
-		opacity: 0;
 	}
 </style>
