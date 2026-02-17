@@ -139,6 +139,8 @@
 			tab-size: 4;
 			scrollbar-width: thin;
 			scrollbar-color: var(--secondary-font-color) var(--code-bg-color);
+			/* fix scrollbars on safari: */
+			color-scheme: dark;
 		}
 
 		:global(code:not(pre code)) {
