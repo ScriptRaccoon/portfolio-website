@@ -50,7 +50,7 @@
 	{#if !page.url.pathname.startsWith('/blog/')}
 		<meta
 			property="og:image"
-			content="https://scriptraccoon.dev/media/general/ScriptRaccoon.png"
+			content="https://scriptraccoon.dev/media/general/og.webp"
 		/>
 	{/if}
 
