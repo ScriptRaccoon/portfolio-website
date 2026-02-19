@@ -7,26 +7,30 @@
 	let { objects, labels }: Props = $props()
 </script>
 
-<div class="wrapper">
-	<table>
-		<thead>
-			<tr>
-				{#each Object.values(labels) as label}
-					<th>{label}</th>
-				{/each}
-			</tr>
-		</thead>
-		<tbody>
-			{#each objects as obj}
+{#if objects.length}
+	<div class="wrapper">
+		<table>
+			<thead>
 				<tr>
-					{#each Object.keys(labels) as key}
-						<td>{obj[key]}</td>
+					{#each Object.values(labels) as label}
+						<th>{label}</th>
 					{/each}
 				</tr>
-			{/each}
-		</tbody>
-	</table>
-</div>
+			</thead>
+			<tbody>
+				{#each objects as obj}
+					<tr>
+						{#each Object.keys(labels) as key}
+							<td>{obj[key]}</td>
+						{/each}
+					</tr>
+				{/each}
+			</tbody>
+		</table>
+	</div>
+{:else}
+	<p>No data yet</p>
+{/if}
 
 <style>
 	.wrapper {

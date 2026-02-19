@@ -68,6 +68,8 @@
 			objects={data.grouped_visits_monthly[path]}
 			labels={{ month: 'Month', counter: '#' }}
 		/>
+	{:else}
+		<p>No data yet</p>
 	{/each}
 </section>
 
