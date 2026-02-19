@@ -1,7 +1,7 @@
 ---
 title: How to track page visits in SvelteKit
 published: 2026-02-13
-updated: 2026-02-17
+updated: 2026-02-19
 description: Counting visits without external analytics provider
 ---
 
@@ -26,6 +26,7 @@ One obvious idea is to handle the page visit inside the [page server load functi
 3. If you decide to track only certain pages, that decision is scattered across multiple files. There is no visible global configuration.
 4. Prerendered pages would not work. This is especially problematic for blog posts. For me, this was the deal breaker.
 5. By default, hovering over an internal link already triggers a page load in SvelteKit. That should not count as a page visit.
+6. We do not want to track a visit if the load function fails, whether the failure is expected or unexpected. In particular, visits of nonexistent dynamic routes (such as blog posts) should not be tracked.
 
 Points 1 and 3 can be improved by using the [handle hook](https://svelte.dev/docs/kit/hooks#Server-hooks-handle) and checking whether `event.request.method` is `GET`, which indicates a page visit. However, the other issues remain. The layout server load function is not a solution either because it does not run often enough.
 
