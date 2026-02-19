@@ -19,12 +19,21 @@ export function get_geo_data(request: Request): {
 
 	if (!geo_header) return { country: null, city: null }
 
+	console.info('TEMPORARY LOGS FOR NETLIFY GEO DATA')
+	console.info('geo_header:', geo_header)
+
 	try {
-		const decoded = JSON.parse(atob(geo_header))
+		const txt = atob(geo_header)
+		console.info('txt', txt)
+		const decoded = JSON.parse(txt)
+		console.info('decoded', decoded)
 		const city = decoded.city || null
+		console.info('city', city)
 		const country = decoded.country?.name || null
+		console.info('country', country)
 		return { country, city }
 	} catch (_) {
+		console.error('Netlify geo header cannot be parsed')
 		return { country: null, city: null }
 	}
 }
