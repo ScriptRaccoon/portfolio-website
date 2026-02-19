@@ -6,63 +6,6 @@ import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
 
 export const prerender = false
 
-type SessionLive = {
-	id: string
-	created_at: string
-	referrer: string
-	browser: string | null
-	os: string | null
-	country: string | null
-	city: string | null
-	theme: string
-}
-
-type SessionsMonthly = {
-	month: string
-	counter: number
-}
-
-type ReferrersTotal = {
-	referrer: string
-	counter: number
-}
-
-type BrowsersTotal = {
-	browser: string
-	counter: number
-}
-
-type OSTotal = {
-	os: string
-	counter: number
-}
-
-type CountriesTotal = {
-	country: string
-	counter: number
-}
-
-type ThemesTotal = {
-	theme: string
-	counter: number
-}
-
-type VisitLive = {
-	id: number
-	session_id: string
-	path: string
-	created_at: string
-}
-
-type VisitMonthly = {
-	id: number
-	month: string
-	path: string
-	counter: number
-}
-
-type MonthlyGroupedVisits = Record<string, { month: string; counter: number }[]>
-
 export const load: PageServerLoad = async (event) => {
 	const auth_header = event.request.headers.get('authorization')
 
@@ -78,6 +21,17 @@ export const load: PageServerLoad = async (event) => {
         WHERE aggregated_at IS NULL
         ORDER BY created_at DESC`
 
+	type SessionLive = {
+		id: string
+		created_at: string
+		referrer: string
+		browser: string | null
+		os: string | null
+		country: string | null
+		city: string | null
+		theme: string
+	}
+
 	const { rows: sessions_live, err: err_sessions_live } =
 		await query<SessionLive>(sql_sessions_live)
 	if (err_sessions_live) error(500, 'Could not load live sessions')
@@ -86,6 +40,11 @@ export const load: PageServerLoad = async (event) => {
         SELECT month, counter
         FROM sessions_monthly
         ORDER BY month ASC`
+
+	type SessionsMonthly = {
+		month: string
+		counter: number
+	}
 
 	const { rows: sessions_monthly, err: err_sessions_monthly } =
 		await query<SessionsMonthly>(sql_sessions_monthly)
@@ -96,6 +55,11 @@ export const load: PageServerLoad = async (event) => {
         FROM referrers_total
         ORDER BY counter DESC`
 
+	type ReferrersTotal = {
+		referrer: string
+		counter: number
+	}
+
 	const { rows: referrers_total, err: err_referrers_total } =
 		await query<ReferrersTotal>(sql_referrers_total)
 	if (err_referrers_total) error(500, 'Could not load referrers')
@@ -104,6 +68,11 @@ export const load: PageServerLoad = async (event) => {
         SELECT browser, counter
         FROM browsers_total
         ORDER BY counter DESC`
+
+	type BrowsersTotal = {
+		browser: string
+		counter: number
+	}
 
 	const { rows: browsers_total, err: err_browsers_total } =
 		await query<BrowsersTotal>(sql_browsers_total)
@@ -114,6 +83,11 @@ export const load: PageServerLoad = async (event) => {
         FROM os_total
         ORDER BY counter DESC`
 
+	type OSTotal = {
+		os: string
+		counter: number
+	}
+
 	const { rows: os_total, err: err_os_total } =
 		await query<OSTotal>(sql_os_total)
 	if (err_os_total) error(500, 'Could not load operating systems')
@@ -123,6 +97,11 @@ export const load: PageServerLoad = async (event) => {
         FROM countries_total
         ORDER BY counter DESC`
 
+	type CountriesTotal = {
+		country: string
+		counter: number
+	}
+
 	const { rows: countries_total, err: err_countries_total } =
 		await query<CountriesTotal>(sql_countries_total)
 	if (err_countries_total) error(500, 'Could not load countries')
@@ -131,6 +110,11 @@ export const load: PageServerLoad = async (event) => {
         SELECT theme, counter
         FROM themes_total
         ORDER BY counter DESC`
+
+	type ThemesTotal = {
+		theme: string
+		counter: number
+	}
 
 	const { rows: themes_total, err: err_themes_total } =
 		await query<ThemesTotal>(sql_themes_total)
@@ -143,6 +127,13 @@ export const load: PageServerLoad = async (event) => {
 		WHERE aggregated_at IS NULL
 		ORDER BY created_at DESC`
 
+	type VisitLive = {
+		id: number
+		session_id: string
+		path: string
+		created_at: string
+	}
+
 	const { rows: visits_live, err: err_visits_live } =
 		await query<VisitLive>(sql_visits_live)
 	if (err_visits_live) error(500, 'Could not load live visits')
@@ -153,9 +144,21 @@ export const load: PageServerLoad = async (event) => {
 		FROM visits_monthly
 		ORDER BY path, month ASC`
 
+	type VisitMonthly = {
+		id: number
+		month: string
+		path: string
+		counter: number
+	}
+
 	const { rows: visits_monthly, err: err_visits_monthly } =
 		await query<VisitMonthly>(sql_visits_monthly)
 	if (err_visits_monthly) error(500, 'Could not load monthly visits')
+
+	type MonthlyGroupedVisits = Record<
+		string,
+		{ month: string; counter: number }[]
+	>
 
 	const grouped_visits_monthly: MonthlyGroupedVisits = {}
 
