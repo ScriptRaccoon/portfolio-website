@@ -2,6 +2,7 @@ import { query } from '$lib/server/db'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { add_percentages } from '$lib/server/utils'
+import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
 
 type SessionLive = {
 	id: string
@@ -60,7 +61,14 @@ type VisitMonthly = {
 
 type MonthlyGroupedVisits = Record<string, { month: string; counter: number }[]>
 
-export const load: PageServerLoad = async () => {
+export const load: PageServerLoad = async (event) => {
+	const auth_header = event.request.headers.get('authorization')
+
+	if (auth_header !== `Basic ${btoa(PAGEVISITS_CREDENTIALS)}`) {
+		event.setHeaders({ 'WWW-Authenticate': 'Basic realm="Protected"' })
+		error(401, 'Unauthorized')
+	}
+
 	const sql_sessions_live = `
         SELECT
             id, created_at, referrer, browser, os, country, city, theme
