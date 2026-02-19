@@ -4,6 +4,8 @@ import type { PageServerLoad } from './$types'
 import { add_percentages } from '$lib/server/utils'
 import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
 
+export const prerender = false
+
 type SessionLive = {
 	id: string
 	created_at: string
