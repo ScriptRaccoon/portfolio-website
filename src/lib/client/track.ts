@@ -1,11 +1,11 @@
 import { browser } from '$app/environment'
 
 export const NOTRACK_STORAGE_KEY = 'notrack'
+const TRACKED_SESSION_KEY = 'tracked-session'
 
-export async function track_view(path: string, tracked_paths: string[]) {
-	if (!browser || window.localStorage.getItem(NOTRACK_STORAGE_KEY)) {
-		return
-	}
+export async function track_visit(path: string, tracked_paths: string[]) {
+	if (!browser) return
+	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
 
 	const trackable =
 		tracked_paths.includes(path) ||
@@ -18,7 +18,7 @@ export async function track_view(path: string, tracked_paths: string[]) {
 	if (!trackable) return
 
 	try {
-		await fetch('/api/track', {
+		await fetch('/api/track-visit', {
 			method: 'POST',
 			body: JSON.stringify({ path }),
 			headers: { 'Content-Type': 'application/json' },
@@ -28,23 +28,22 @@ export async function track_view(path: string, tracked_paths: string[]) {
 	}
 }
 
-/**
- * temporary code to estimate how many users are using which theme
- */
-export async function track_theme(theme: 'dark' | 'light') {
+export async function track_session(theme: 'dark' | 'light') {
 	if (!browser) return
-	if (window.sessionStorage.getItem('tracked-theme')) return
 	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
+	if (window.sessionStorage.getItem(TRACKED_SESSION_KEY)) return
+
+	const referrer = document.referrer || 'direct'
 
 	try {
-		await fetch('/api/track-theme', {
+		await fetch('/api/track-session', {
 			method: 'POST',
-			body: JSON.stringify({ theme }),
+			body: JSON.stringify({ theme, referrer }),
 			headers: { 'Content-Type': 'application/json' },
 		})
 	} catch (err) {
 		console.error(err)
 	}
 
-	window.sessionStorage.setItem('tracked-theme', '1')
+	window.sessionStorage.setItem(TRACKED_SESSION_KEY, '1')
 }

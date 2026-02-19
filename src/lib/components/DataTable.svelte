@@ -1,35 +1,49 @@
 <script lang="ts">
 	type Props = {
-		data_points: (string | number)[][]
-		labels: string[]
+		objects: Record<string, string | number | null>[]
+		labels: Record<string, string>
 	}
 
-	let { data_points, labels }: Props = $props()
+	let { objects, labels }: Props = $props()
 </script>
 
-<table>
-	<thead>
-		<tr>
-			{#each labels as label}
-				<th>{label}</th>
-			{/each}
-		</tr>
-	</thead>
-	<tbody>
-		{#each data_points as row_data}
+<div class="wrapper">
+	<table>
+		<thead>
 			<tr>
-				{#each row_data as item}
-					<td>{item}</td>
+				{#each Object.values(labels) as label}
+					<th>{label}</th>
 				{/each}
 			</tr>
-		{/each}
-	</tbody>
-</table>
+		</thead>
+		<tbody>
+			{#each objects as obj}
+				<tr>
+					{#each Object.keys(labels) as key}
+						<td>{obj[key]}</td>
+					{/each}
+				</tr>
+			{/each}
+		</tbody>
+	</table>
+</div>
 
 <style>
+	.wrapper {
+		overflow: auto;
+		max-height: 10lh;
+		scrollbar-width: thin;
+		scrollbar-color: var(--secondary-font-color) var(--code-bg-color);
+		margin-block: 1rem;
+	}
+
+	thead {
+		position: sticky;
+		top: 0;
+	}
+
 	table {
 		border-collapse: collapse;
-		margin-block: 1rem;
 		font-size: var(--tiny-font);
 		width: 100%;
 	}

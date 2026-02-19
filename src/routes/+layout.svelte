@@ -5,7 +5,7 @@
 	import Nav from '$lib/components/Nav.svelte'
 	import ScrollUp from '$lib/components/ScrollUp.svelte'
 	import { onNavigate } from '$app/navigation'
-	import { track_theme, track_view } from '$lib/client/track'
+	import { track_session, track_visit } from '$lib/client/track'
 	import { page } from '$app/state'
 	import { theme } from '$lib/client/theme.svelte'
 
@@ -29,14 +29,11 @@
 	})
 
 	$effect(() => {
-		track_view(page.url.pathname, data.tracked_paths)
+		track_visit(page.url.pathname, data.tracked_paths)
 	})
 
-	/**
-	 * temporary code to estimate how many users are using which theme
-	 */
 	$effect(() => {
-		track_theme(theme.value)
+		track_session(theme.value)
 	})
 </script>
 

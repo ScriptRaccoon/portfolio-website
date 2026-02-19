@@ -1,4 +1,7 @@
 <script lang="ts">
+	/**
+	 * @deprecated
+	 */
 	type Props = {
 		data_points: [string, number][]
 	}

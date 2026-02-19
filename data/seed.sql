@@ -1,39 +1,134 @@
-CREATE TABLE IF NOT EXISTS page_visits (
-    id INTEGER PRIMARY KEY,
-    path TEXT NOT NULL,
-    month TEXT NOT NULL,
-    visits INTEGER NOT NULL DEFAULT 0,
-    UNIQUE (path, month)
-);
-
-CREATE TABLE IF NOT EXISTS page_visit_logs (
-    id INTEGER PRIMARY KEY,
-    path TEXT NOT NULL,
-    date TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+CREATE TABLE IF NOT EXISTS sessions_live (
+    id TEXT PRIMARY KEY,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    referrer TEXT NOT NULL,
+    user_agent TEXT NOT NULL,
+    browser TEXT,
+    os TEXT,
+    country TEXT,
     city TEXT,
-    country TEXT
+    theme TEXT NOT NULL,
+    aggregated_at TEXT
 );
 
-CREATE TRIGGER IF NOT EXISTS keep_last_100_visits AFTER INSERT ON page_visit_logs BEGIN
-DELETE FROM page_visit_logs
+CREATE INDEX IF NOT EXISTS idx_session_created_at ON sessions_live (created_at);
+
+CREATE TABLE IF NOT EXISTS sessions_monthly (
+    month TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated monthly from sessions_live
+);
+
+CREATE TABLE IF NOT EXISTS referrers_total (
+    referrer TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated instantly from sessions_live
+);
+
+CREATE TABLE IF NOT EXISTS browsers_total (
+    browser TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated instantly from sessions_live
+);
+
+CREATE TABLE IF NOT EXISTS os_total (
+    os TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated instantly from sessions_live
+);
+
+CREATE TABLE IF NOT EXISTS countries_total (
+    country TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated instantly from sessions_live
+);
+
+CREATE TABLE IF NOT EXISTS themes_total (
+    theme TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated instantly from sessions_live
+);
+
+CREATE TRIGGER IF NOT EXISTS update_aggregates AFTER INSERT ON sessions_live FOR EACH ROW BEGIN
+-- referrer
+INSERT INTO
+    referrers_total (referrer, counter)
+VALUES
+    (NEW.referrer, 1) ON CONFLICT (referrer) DO
+UPDATE
+SET
+    counter = counter + 1;
+
+-- browser
+INSERT INTO
+    browsers_total (browser, counter)
+SELECT
+    NEW.browser,
+    1
 WHERE
-    id NOT IN (
-        SELECT
-            id
-        FROM
-            page_visit_logs
-        ORDER BY
-            date DESC
-        LIMIT
-            100
-    );
+    NEW.browser IS NOT NULL ON CONFLICT (browser) DO
+UPDATE
+SET
+    counter = counter + 1;
+
+-- os
+INSERT INTO
+    os_total (os, counter)
+SELECT
+    NEW.os,
+    1
+WHERE
+    NEW.os IS NOT NULL ON CONFLICT (os) DO
+UPDATE
+SET
+    counter = counter + 1;
+
+-- country
+INSERT INTO
+    countries_total (country, counter)
+SELECT
+    NEW.country,
+    1
+WHERE
+    NEW.country IS NOT NULL ON CONFLICT (country) DO
+UPDATE
+SET
+    counter = counter + 1;
+
+-- theme
+INSERT INTO
+    themes_total (theme, counter)
+SELECT
+    NEW.theme,
+    1
+WHERE
+    NEW.theme IS NOT NULL ON CONFLICT (theme) DO
+UPDATE
+SET
+    counter = counter + 1;
 
 END;
 
-CREATE TABLE IF NOT EXISTS theme_stats (theme TEXT PRIMARY KEY, count INTEGER NOT NULL DEFAULT 0);
+CREATE TABLE IF NOT EXISTS visits_live (
+    id INTEGER PRIMARY KEY,
+    -- session_id is no formal foreign key because we cannot
+    -- guarantee that the visit is tracked after the session
+    session_id TEXT NOT NULL,
+    path TEXT NOT NULL,
+    created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    aggregated_at TEXT,
+    UNIQUE (session_id, path)
+);
 
-INSERT INTO
-    theme_stats (theme)
-VALUES
-    ("dark"),
-    ("light") ON CONFLICT DO NOTHING;
+CREATE INDEX IF NOT EXISTS idx_visit_created_at ON visits_live (created_at);
+
+CREATE INDEX IF NOT EXISTS idx_visit_session_id ON visits_live (session_id);
+
+CREATE TABLE IF NOT EXISTS visits_monthly (
+    id INTEGER PRIMARY KEY,
+    month TEXT NOT NULL,
+    path TEXT NOT NULL,
+    counter INTEGER NOT NULL DEFAULT 0,
+    UNIQUE (month, path)
+    -- aggregated monthly from visits_live
+);
