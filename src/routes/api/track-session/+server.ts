@@ -2,13 +2,18 @@ import { json } from '@sveltejs/kit'
 import type { RequestHandler } from './$types'
 import { query } from '$lib/server/db'
 import * as v from 'valibot'
-import { get_device_data, get_geo_data } from '$lib/server/utils'
+import {
+	get_device_data,
+	get_device_type,
+	get_geo_data,
+} from '$lib/server/utils'
 import { is_same_origin } from '$lib/server/utils'
 import { is_bot } from '$lib/server/utils'
 
 const request_body_schema = v.object({
 	theme: v.pipe(v.string(), v.nonEmpty()),
 	referrer: v.pipe(v.string(), v.nonEmpty()),
+	viewport_width: v.pipe(v.number(), v.integer(), v.minValue(0)),
 })
 
 export const POST: RequestHandler = async (event) => {
@@ -32,7 +37,7 @@ export const POST: RequestHandler = async (event) => {
 		return json({ error: 'Invalid request body' }, { status: 400 })
 	}
 
-	const { theme, referrer } = parsed_body.output
+	const { theme, referrer, viewport_width } = parsed_body.output
 
 	const session_id = event.locals.session_id
 
@@ -40,12 +45,13 @@ export const POST: RequestHandler = async (event) => {
 
 	const { browser, os } = get_device_data(event.request)
 	const { country, city } = get_geo_data(event.request)
+	const device_type = get_device_type(viewport_width)
 
 	const sql = `
 		INSERT INTO sessions_live
-			(id, referrer, user_agent, browser, os, country, city, theme)
+			(id, referrer, user_agent, browser, os, country, city, theme, device_type)
 		VALUES
-			(?, ?, ?, ?, ?, ?, ?, ?)
+			(?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (id) DO NOTHING`
 
 	const args = [
@@ -57,6 +63,7 @@ export const POST: RequestHandler = async (event) => {
 		country,
 		city,
 		theme,
+		device_type,
 	]
 
 	const { err } = await query(sql, args)

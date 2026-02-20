@@ -1,7 +1,7 @@
 import { query } from '$lib/server/db'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
-import { add_percentages } from '$lib/server/utils'
+import { add_percentages, type DeviceType } from '$lib/server/utils'
 import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
 
 export const prerender = false
@@ -16,7 +16,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const sql_sessions_live = `
         SELECT
-            id, created_at, referrer, browser, os, country, city, theme
+            id, created_at, referrer, browser, os, country, city, theme, device_type
         FROM sessions_live
         WHERE aggregated_at IS NULL
         ORDER BY created_at DESC`
@@ -30,6 +30,7 @@ export const load: PageServerLoad = async (event) => {
 		country: string | null
 		city: string | null
 		theme: string
+		device_type: DeviceType | null
 	}
 
 	const { rows: sessions_live, err: err_sessions_live } =
@@ -120,6 +121,20 @@ export const load: PageServerLoad = async (event) => {
 		await query<ThemesTotal>(sql_themes_total)
 	if (err_themes_total) error(500, 'Could not load themes')
 
+	const sql_device_types_total = `
+        SELECT device_type, counter
+        FROM device_types_total
+        ORDER BY counter DESC`
+
+	type DeviceTypesTotal = {
+		theme: string
+		counter: number
+	}
+
+	const { rows: device_types_total, err: err_device_types_total } =
+		await query<DeviceTypesTotal>(sql_device_types_total)
+	if (err_device_types_total) error(500, 'Could not load device types')
+
 	const sql_visits_live = `
 		SELECT
 			id, session_id, path, created_at
@@ -176,6 +191,7 @@ export const load: PageServerLoad = async (event) => {
 		os_total: add_percentages(os_total),
 		countries_total: add_percentages(countries_total),
 		themes_total: add_percentages(themes_total),
+		device_types_total: add_percentages(device_types_total),
 		visits_live,
 		grouped_visits_monthly,
 	}

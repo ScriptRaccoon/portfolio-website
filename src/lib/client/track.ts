@@ -3,6 +3,27 @@ import { browser } from '$app/environment'
 export const NOTRACK_STORAGE_KEY = 'notrack'
 const TRACKED_SESSION_KEY = 'tracked-session'
 
+export async function track_session(theme: 'dark' | 'light') {
+	if (!browser) return
+	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
+	if (window.sessionStorage.getItem(TRACKED_SESSION_KEY)) return
+
+	const referrer = document.referrer || 'direct'
+	const viewport_width = window.innerWidth
+
+	try {
+		await fetch('/api/track-session', {
+			method: 'POST',
+			body: JSON.stringify({ theme, referrer, viewport_width }),
+			headers: { 'Content-Type': 'application/json' },
+		})
+	} catch (err) {
+		console.error(err)
+	}
+
+	window.sessionStorage.setItem(TRACKED_SESSION_KEY, '1')
+}
+
 export async function track_visit(path: string, tracked_paths: string[]) {
 	if (!browser) return
 	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
@@ -26,24 +47,4 @@ export async function track_visit(path: string, tracked_paths: string[]) {
 	} catch (err) {
 		console.error(err)
 	}
-}
-
-export async function track_session(theme: 'dark' | 'light') {
-	if (!browser) return
-	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
-	if (window.sessionStorage.getItem(TRACKED_SESSION_KEY)) return
-
-	const referrer = document.referrer || 'direct'
-
-	try {
-		await fetch('/api/track-session', {
-			method: 'POST',
-			body: JSON.stringify({ theme, referrer }),
-			headers: { 'Content-Type': 'application/json' },
-		})
-	} catch (err) {
-		console.error(err)
-	}
-
-	window.sessionStorage.setItem(TRACKED_SESSION_KEY, '1')
 }

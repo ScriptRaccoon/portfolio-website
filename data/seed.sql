@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS sessions_live (
     country TEXT,
     city TEXT,
     theme TEXT NOT NULL,
+    device_type TEXT,
     aggregated_at TEXT
 );
 
@@ -45,6 +46,12 @@ CREATE TABLE IF NOT EXISTS countries_total (
 
 CREATE TABLE IF NOT EXISTS themes_total (
     theme TEXT PRIMARY KEY,
+    counter INTEGER NOT NULL DEFAULT 0
+    -- aggregated instantly from sessions_live
+);
+
+CREATE TABLE IF NOT EXISTS device_types_total (
+    device_type TEXT PRIMARY KEY,
     counter INTEGER NOT NULL DEFAULT 0
     -- aggregated instantly from sessions_live
 );
@@ -103,6 +110,18 @@ SELECT
     1
 WHERE
     NEW.theme IS NOT NULL ON CONFLICT (theme) DO
+UPDATE
+SET
+    counter = counter + 1;
+
+-- device type
+INSERT INTO
+    device_types_total (device_type, counter)
+SELECT
+    NEW.device_type,
+    1
+WHERE
+    NEW.device_type IS NOT NULL ON CONFLICT (device_type) DO
 UPDATE
 SET
     counter = counter + 1;

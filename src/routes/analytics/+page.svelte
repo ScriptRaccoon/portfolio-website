@@ -33,6 +33,7 @@
 			country: 'Country',
 			city: 'City',
 			theme: 'Theme',
+			device_type: 'Device Type',
 		}}
 	/>
 </section>
@@ -115,6 +116,15 @@
 	<DataTable
 		objects={data.themes_total}
 		labels={{ theme: 'Theme', counter: '#', percentage: '%' }}
+	/>
+</section>
+
+<section>
+	<h2>Device Types</h2>
+
+	<DataTable
+		objects={data.device_types_total}
+		labels={{ device_type: 'Device Type', counter: '#', percentage: '%' }}
 	/>
 </section>
 

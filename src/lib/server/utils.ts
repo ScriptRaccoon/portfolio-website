@@ -72,3 +72,11 @@ export function add_percentages<T extends { counter: number }>(
 		percentage: round_two_digits((100 * obj.counter) / sum),
 	}))
 }
+
+export type DeviceType = 'mobile' | 'tablet' | 'desktop'
+
+export function get_device_type(width: number): DeviceType {
+	if (width < 640) return 'mobile'
+	if (width < 1024) return 'tablet'
+	return 'desktop'
+}
