@@ -10,30 +10,28 @@ export function is_published(
 	return metadata.published !== null
 }
 
+function decode_base64_utf8(input: string): string {
+	const bytes = Uint8Array.from(atob(input), (c) => c.charCodeAt(0))
+	return new TextDecoder('utf-8').decode(bytes)
+}
+
 export function get_geo_data(request: Request): {
 	country: string | null
 	city: string | null
 } {
-	// Netlify specific header
+	// Netlify specific geo header
 	const geo_header = request.headers.get('x-nf-geo')
 
 	if (!geo_header) return { country: null, city: null }
 
-	console.info('TEMPORARY LOGS FOR NETLIFY GEO DATA')
-	console.info('geo_header:', geo_header)
-
 	try {
-		const txt = atob(geo_header)
-		console.info('txt', txt)
+		const txt = decode_base64_utf8(geo_header)
 		const decoded = JSON.parse(txt)
-		console.info('decoded', decoded)
 		const city = decoded.city || null
-		console.info('city', city)
 		const country = decoded.country?.name || null
-		console.info('country', country)
 		return { country, city }
 	} catch (_) {
-		console.error('Netlify geo header cannot be parsed')
+		console.error('Netlify geo header cannot be parsed:', geo_header)
 		return { country: null, city: null }
 	}
 }
