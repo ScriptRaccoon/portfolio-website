@@ -321,7 +321,7 @@ Because Tailwind is just a bunch of abbreviations, a long list of Tailwind class
 ```html
 <div
 	class="w-9 h-9 rounded-lg flex items-center justify-center text-slate-700 peer-checked:font-semibold peer-checked:bg-slate-900 peer-checked:text-white"
-/>
+></div>
 ```
 
 resembles very much _minified code_. No developer would get the idea to write minified JavaScript, this is the job of build-tools. Why? Because it is hard to write, read, understand and maintain. But this applies to every language, and CSS is no exception. Writing minified CSS is bad for maintainability.
@@ -364,7 +364,7 @@ Since Tailwind's philosophy is against using reusable classes, but your page wil
 
 Already our first code snippet from Tailwind's website in the section on [maintainability](#maintainability-issues) suffers from code duplication, it repeats the classes
 
-```
+```markdown
 w-9 h-9 rounded-lg flex items-center justify-center text-slate-700
 ```
 

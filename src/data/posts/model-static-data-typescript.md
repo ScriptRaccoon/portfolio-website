@@ -180,7 +180,7 @@ type Gadget = {
 
 However, this alone causes a circular reference error:
 
-```
+```markdown
 Type alias 'GadgetID' circularly references itself.
 ```
 

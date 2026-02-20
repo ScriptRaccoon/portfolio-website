@@ -53,6 +53,7 @@ export function highlight(code: string, lang: string): string {
 		theme: 'slack-dark',
 		lang,
 	})
+	if (!lang) console.error('Missing language for code snippet:', code)
 	const highlighted_code_without_bg = highlighted_code.replace(
 		/<pre([^>]*)style="[^"]*background-color:[^"]*"(.*?)>/g,
 		'<pre$1$2>',

@@ -84,11 +84,11 @@ nano ~/.ssh/config
 
 Add the following entry to the file:
 
-```
+```markdown
 Host yourserver
-    HostName 1.2.3.4
-    User ubuntu
-    IdentityFile ~/.ssh/id_ed25519
+HostName 1.2.3.4
+User ubuntu
+IdentityFile ~/.ssh/id_ed25519
 ```
 
 - **Host**: This is the alias you'll use to connect (e.g., `yourserver`).
@@ -106,7 +106,7 @@ ssh yourserver
 
 The first time you connect, you'll see a prompt asking you to confirm the server's authenticity:
 
-```
+```bash
 The authenticity of host '1.2.3.4 (1.2.3.4)' can't be established.
 ED25519 key fingerprint is SHA256:...
 Are you sure you want to continue connecting (yes/no/[fingerprint])?
@@ -116,7 +116,7 @@ Type `yes` and press Enter. This will add the server to your list of known hosts
 
 Once connected, you'll see a welcome message like this:
 
-```
+```bash
 Welcome to Ubuntu 24.04.2 LTS (GNU/Linux ...)
 ```
 
@@ -189,7 +189,7 @@ To clone private repositories from GitHub directly onto your VPS, you need to au
 
     This will output the public key, which looks something like this:
 
-    ```
+    ```bash
     ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAA... your_email@example.com
     ```
 
@@ -208,7 +208,7 @@ To clone private repositories from GitHub directly onto your VPS, you need to au
 
     If everything is set up correctly, you'll see a message like this:
 
-    ```
+    ```bash
     Hi yourusername! You've successfully authenticated, but GitHub does not provide shell access.
     ```
 
@@ -310,7 +310,7 @@ To make your app accessible via a browser, you'll set up **NGINX** as a reverse 
 
     Add the following configuration (adjust the IP address and port as needed):
 
-    ```
+    ```bash
     server {
         listen 80;
         server_name your-domain.com; # Replace with your domain or VPS IP
@@ -347,7 +347,7 @@ To make your app accessible via a custom domain, follow these steps:
 
 1. Log in to your domain registrar's dashboard and add an **A record** pointing to your VPS IP address. For example:
 
-    ```
+    ```bash
     Type: A
     Name: @
     Value: 1.2.3.4
