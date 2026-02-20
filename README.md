@@ -11,4 +11,4 @@ It features:
 - an overview of my YouTube channel
 - personal information about me
 
-The website is built with [SvelteKit](https://kit.svelte.dev). Channel statistics are updated automatically through a GitHub Action that queries the YouTube Data API.
+The website is built with [SvelteKit](https://svelte.dev). Channel statistics are updated automatically through a GitHub Action that queries the YouTube Data API.

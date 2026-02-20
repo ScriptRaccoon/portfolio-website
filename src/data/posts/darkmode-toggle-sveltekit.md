@@ -1,7 +1,7 @@
 ---
 title: How to implement a cookie-based dark mode toggle in SvelteKit
 published: 2023-06-23
-updated: 2023-06-24
+updated: 2026-02-20
 description: Implemented using server-side rendering and SvelteKit's handle hook.
 ---
 
@@ -152,7 +152,7 @@ Let us add a toggle button in the markup of our `Nav.svelte`.
 </button>
 ```
 
-Inside it, we can render a sun component or whatever we like. We can also go fancy and add an animation that interpolates between a sun and a moon (depending on the state of `current_theme`), just as on the [SvelteKit website](https://kit.svelte.dev/), but this will not be covered here.
+Inside it, we can render a sun component or whatever we like. We can also go fancy and add an animation that interpolates between a sun and a moon (depending on the state of `current_theme`), but this will not be covered here.
 
 The button triggers a function that toggles the theme:
 

@@ -148,7 +148,7 @@ The registration of users is done in four steps:
 
 ### Get the form data
 
-Let us create an [action handler](https://kit.svelte.dev/docs/form-actions) for the register page and retrieve the form data. We normalize email and name.
+Let us create an [action handler](https://svelte.dev/docs/kit/form-actions) for the register page and retrieve the form data. We normalize email and name.
 
 ```typescript
 // /register/+page.server.ts
