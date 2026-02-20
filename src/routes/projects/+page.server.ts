@@ -6,7 +6,8 @@ import { error } from '@sveltejs/kit'
 export const load = async () => {
 	const unsorted_projects = get_frontmatter<ProjectMetaData>(
 		import.meta.glob('/src/data/projects/*.md', {
-			as: 'raw',
+			query: '?raw',
+			import: 'default',
 			eager: true,
 		}),
 	)

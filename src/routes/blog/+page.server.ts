@@ -5,7 +5,8 @@ import { is_published } from '$lib/server/utils'
 export const load = async () => {
 	const unsorted_posts = get_frontmatter<PostMetaData>(
 		import.meta.glob('/src/data/posts/**/*.md', {
-			as: 'raw',
+			query: '?raw',
+			import: 'default',
 			eager: true,
 		}),
 	)

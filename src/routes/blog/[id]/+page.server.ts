@@ -6,20 +6,20 @@ import { render_markdown } from '$lib/server/markdown'
 import { get_table_of_contents } from '$lib/server/toc'
 import { is_published } from '$lib/server/utils'
 
-const posts_record = import.meta.glob('/src/data/posts/*.md', {
-	as: 'raw',
-	eager: true,
-})
-
 export const load = async (event) => {
 	const id = event.params.id
 	const path = `/src/data/posts/${id}.md`
 
-	if (!(path in posts_record)) {
-		error(404, 'Not Found')
-	}
+	const posts_record = import.meta.glob('/src/data/posts/*.md', {
+		query: '?raw',
+		import: 'default',
+	})
 
-	const markdown = posts_record[path]
+	const loader = posts_record[path]
+
+	if (!loader) error(404, 'Not Found')
+
+	const markdown = (await loader()) as string
 
 	const { attributes: _attributes, body } =
 		fm<Omit<PostMetaData, 'id'>>(markdown)
