@@ -22,21 +22,23 @@
 <section>
 	<h2>Live Sessions</h2>
 
-	<DataTable
-		objects={data.sessions_live}
-		labels={{
-			id: 'ID',
-			created_at: 'Date',
-			country: 'Country',
-			city: 'City',
-			device_type: 'Device Type',
-			browser: 'Browser',
-			os: 'OS',
-			theme: 'Theme',
-			referrer: 'Referrer',
-		}}
-		ids={['id']}
-	/>
+	<div class="full_bleed">
+		<DataTable
+			objects={data.sessions_live}
+			labels={{
+				id: 'ID',
+				created_at: 'Date',
+				country: 'Country',
+				city: 'City',
+				device_type: 'Device Type',
+				browser: 'Browser',
+				os: 'OS',
+				theme: 'Theme',
+				referrer: 'Referrer',
+			}}
+			ids={['id']}
+		/>
+	</div>
 </section>
 
 <section>

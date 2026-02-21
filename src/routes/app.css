@@ -84,6 +84,7 @@ body {
 	line-height: var(--line-height);
 	overflow-y: scroll;
 	padding-bottom: 1.5rem;
+	--page-margin: 0.75rem;
 }
 
 @media (prefers-reduced-motion) {
@@ -213,4 +214,10 @@ button {
 	clip: rect(0, 0, 0, 0);
 	white-space: nowrap;
 	border-width: 0;
+}
+
+.full_bleed {
+	width: calc(100vw - 2 * var(--page-margin));
+	margin-left: calc(50% - 50vw + var(--page-margin));
+	margin-right: calc(50% - 50vw + var(--page-margin));
 }

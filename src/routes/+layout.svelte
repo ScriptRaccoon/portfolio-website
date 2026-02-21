@@ -69,7 +69,7 @@
 	/>
 </svelte:head>
 
-<div class="wrapper">
+<div class="page-wrapper">
 	<Nav />
 	<main>
 		{@render children?.()}
@@ -79,13 +79,13 @@
 <ScrollUp />
 
 <style>
-	.wrapper {
+	.page-wrapper {
 		max-width: 52rem;
 		margin-inline: auto;
 	}
 
 	main {
-		padding-inline: 0.75rem;
+		margin-inline: var(--page-margin);
 		padding-top: 1rem;
 	}
 </style>
