@@ -16,6 +16,7 @@ export async function track_session(theme: 'dark' | 'light') {
 			method: 'POST',
 			body: JSON.stringify({ theme, referrer, viewport_width }),
 			headers: { 'Content-Type': 'application/json' },
+			credentials: 'include',
 		})
 	} catch (err) {
 		console.error(err)
@@ -43,6 +44,7 @@ export async function track_visit(path: string, tracked_paths: string[]) {
 			method: 'POST',
 			body: JSON.stringify({ path }),
 			headers: { 'Content-Type': 'application/json' },
+			credentials: 'include',
 		})
 	} catch (err) {
 		console.error(err)
