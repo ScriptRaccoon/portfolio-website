@@ -3,13 +3,14 @@ import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
 import { add_percentages, type DeviceType } from '$lib/server/utils'
 import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
+import { dev } from '$app/environment'
 
 export const prerender = false
 
 export const load: PageServerLoad = async (event) => {
 	const auth_header = event.request.headers.get('authorization')
 
-	if (auth_header !== `Basic ${btoa(PAGEVISITS_CREDENTIALS)}`) {
+	if (!dev && auth_header !== `Basic ${btoa(PAGEVISITS_CREDENTIALS)}`) {
 		event.setHeaders({ 'WWW-Authenticate': 'Basic realm="Protected"' })
 		error(401, 'Unauthorized')
 	}
