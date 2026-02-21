@@ -1,7 +1,7 @@
 ---
 title: How to track page visits in SvelteKit
 published: 2026-02-13
-updated: 2026-02-19
+updated: 2026-02-21
 description: Counting visits without external analytics provider
 ---
 
@@ -9,7 +9,7 @@ description: Counting visits without external analytics provider
 
 Ever wondered how often your website is visited? Or how often a specific blog post is read?
 
-This post explains step by step how to track page visits in a SvelteKit application. We will do this manually, without using an analytics provider. This is a valid approach for personal websites and smaller projects. It also gives you full control over how you store and visualize the data. You could even bring back one of those 90s page view counters!
+This post explains step by step how to track page visits in a SvelteKit application. We will do this manually without external analytics provider. This is a valid approach for personal websites and smaller projects. It also gives you full control over how you store and visualize the data. You could even bring back one of those 90s page view counters!
 
 **Prerequisites.** Your SvelteKit application needs access to a database. The specific type of database does not matter. In my case, I use a SQLite database hosted on [Turso](https://turso.tech). This post also assumes that you are familiar with [standard SvelteKit concepts](https://svelte.dev/docs/kit/introduction).
 
@@ -126,7 +126,7 @@ This `POST` request sends the `path` in the request body. With that, the `track_
 
 ## Session Management
 
-To avoid counting multiple page views from the same user (which is just one page _visit_), we generate a random, anonymous session identifier per user. This identifier is stored in a cookie for one hour and attached to `event.locals.session_id` for later use. The following utility in `$lib/server/sessions.ts` handles this:
+To avoid counting multiple page views from the same user (which is just one page _visit_), we generate a random, anonymous session identifier per user. This identifier is stored in a session cookie and attached to `event.locals.session_id` for later use. The following utility in `$lib/server/sessions.ts` handles this:
 
 ```ts
 // sessions.ts
@@ -148,7 +148,6 @@ export function handle_session(event: RequestEvent) {
 
 	event.cookies.set(SESSION_COOKIE, session_id, {
 		path: '/',
-		maxAge: 60 * 60, // 1 hour
 		sameSite: true,
 		httpOnly: true,
 		secure: true,
