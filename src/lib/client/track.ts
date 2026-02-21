@@ -8,7 +8,7 @@ export async function track_session(theme: 'dark' | 'light') {
 	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
 	if (window.sessionStorage.getItem(TRACKED_SESSION_KEY)) return
 
-	const referrer = document.referrer || 'direct'
+	const referrer = document.referrer || 'unknown'
 	const viewport_width = window.innerWidth
 
 	try {
