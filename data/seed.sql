@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS sessions_live (
     country TEXT,
     city TEXT,
     theme TEXT NOT NULL,
-    device_type TEXT,
+    device_type TEXT NOT NULL,
     aggregated_at TEXT
 );
 

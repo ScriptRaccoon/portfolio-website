@@ -30,7 +30,7 @@ export const load: PageServerLoad = async (event) => {
 		country: string | null
 		city: string | null
 		theme: string
-		device_type: DeviceType | null
+		device_type: DeviceType
 	}
 
 	const { rows: sessions_live, err: err_sessions_live } =
