@@ -15,7 +15,6 @@ export function handle_session(event: RequestEvent) {
 
 	event.cookies.set(SESSION_COOKIE, session_id, {
 		path: '/',
-		maxAge: 60 * 60, // 1h
 		sameSite: true,
 		httpOnly: true,
 		secure: true,
