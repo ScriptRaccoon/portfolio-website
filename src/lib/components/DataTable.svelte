@@ -59,6 +59,10 @@
 		margin-block: 1rem;
 	}
 
+	.wrapper:focus-visible {
+		outline: 1px solid var(--accent-color);
+	}
+
 	table {
 		border-collapse: collapse;
 		font-size: var(--tiny-font);
