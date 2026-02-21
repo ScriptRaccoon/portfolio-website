@@ -10,7 +10,6 @@ OR REPLACE INTO sessions_live (
     browser,
     os,
     country,
-    city,
     theme,
     device_type,
     aggregated_at
@@ -24,7 +23,6 @@ VALUES
         'Chrome',
         'Windows',
         'Germany',
-        'Berlin',
         'dark',
         'desktop',
         NULL
@@ -37,7 +35,6 @@ VALUES
         'Firefox',
         'Linux',
         'Germany',
-        'Hamburg',
         'light',
         'desktop',
         NULL
@@ -50,7 +47,6 @@ VALUES
         'Safari',
         'macOS',
         'France',
-        'Paris',
         'dark',
         'desktop',
         NULL
@@ -63,7 +59,6 @@ VALUES
         'Edge',
         'Windows',
         'United States',
-        'New York',
         'light',
         'desktop',
         NULL
@@ -76,7 +71,6 @@ VALUES
         'Chrome',
         'Android',
         'Germany',
-        'Munich',
         'dark',
         'mobile',
         NULL
@@ -89,7 +83,6 @@ VALUES
         'Safari',
         'iOS',
         'United States',
-        'San Francisco',
         'light',
         'mobile',
         NULL
@@ -102,7 +95,6 @@ VALUES
         'Chrome',
         'Windows',
         'India',
-        'Bangalore',
         'dark',
         'desktop',
         NULL
@@ -115,7 +107,6 @@ VALUES
         'Chrome',
         'Android',
         'Brazil',
-        'São Paulo',
         'light',
         'mobile',
         NULL
@@ -128,7 +119,6 @@ VALUES
         'Firefox',
         'Windows',
         'Canada',
-        'Toronto',
         'dark',
         'desktop',
         NULL
@@ -141,7 +131,6 @@ VALUES
         'Safari',
         'macOS',
         'United Kingdom',
-        'London',
         'light',
         'desktop',
         NULL
@@ -154,7 +143,6 @@ VALUES
         'Chrome',
         'Android',
         'Spain',
-        'Madrid',
         'dark',
         'mobile',
         NULL
@@ -167,7 +155,6 @@ VALUES
         'Safari',
         'iOS',
         'Italy',
-        'Rome',
         'light',
         'mobile',
         NULL
@@ -180,7 +167,6 @@ VALUES
         'Edge',
         'Windows',
         'Netherlands',
-        'Amsterdam',
         'dark',
         'desktop',
         NULL
@@ -193,7 +179,6 @@ VALUES
         'Firefox',
         'Linux',
         'Sweden',
-        'Stockholm',
         'light',
         'desktop',
         NULL
@@ -206,7 +191,6 @@ VALUES
         'Chrome',
         'ChromeOS',
         'United States',
-        'Chicago',
         'dark',
         'desktop',
         NULL
@@ -219,7 +203,6 @@ VALUES
         'Safari',
         'iOS',
         'Japan',
-        'Tokyo',
         'light',
         'mobile',
         NULL
@@ -232,7 +215,6 @@ VALUES
         'Chrome',
         'Android',
         'Australia',
-        'Sydney',
         'dark',
         'mobile',
         NULL
@@ -245,7 +227,6 @@ VALUES
         'Edge',
         'Windows',
         'South Africa',
-        'Cape Town',
         'light',
         'desktop',
         NULL
@@ -258,7 +239,6 @@ VALUES
         'Firefox',
         'Linux',
         'Switzerland',
-        'Zurich',
         'dark',
         'desktop',
         NULL
@@ -270,7 +250,6 @@ VALUES
         'UA20',
         'Chrome',
         'Android',
-        'Singapore',
         'Singapore',
         'light',
         'mobile',
