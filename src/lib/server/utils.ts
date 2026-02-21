@@ -17,22 +17,20 @@ function decode_base64_utf8(input: string): string {
 
 export function get_geo_data(request: Request): {
 	country: string | null
-	city: string | null
 } {
 	// Netlify specific geo header
 	const geo_header = request.headers.get('x-nf-geo')
 
-	if (!geo_header) return { country: null, city: null }
+	if (!geo_header) return { country: null }
 
 	try {
 		const txt = decode_base64_utf8(geo_header)
 		const decoded = JSON.parse(txt)
-		const city = decoded.city || null
 		const country = decoded.country?.name || null
-		return { country, city }
+		return { country }
 	} catch (_) {
 		console.error('Netlify geo header cannot be parsed:', geo_header)
-		return { country: null, city: null }
+		return { country: null }
 	}
 }
 

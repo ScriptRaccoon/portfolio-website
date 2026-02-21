@@ -44,14 +44,14 @@ export const POST: RequestHandler = async (event) => {
 	const user_agent = event.request.headers.get('user-agent') || null
 
 	const { browser, os } = get_device_data(event.request)
-	const { country, city } = get_geo_data(event.request)
+	const { country } = get_geo_data(event.request)
 	const device_type = get_device_type(viewport_width)
 
 	const sql = `
 		INSERT INTO sessions_live
-			(id, referrer, user_agent, browser, os, country, city, theme, device_type)
+			(id, referrer, user_agent, browser, os, country, theme, device_type)
 		VALUES
-			(?, ?, ?, ?, ?, ?, ?, ?, ?)
+			(?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT (id) DO NOTHING`
 
 	const args = [
@@ -61,7 +61,6 @@ export const POST: RequestHandler = async (event) => {
 		browser,
 		os,
 		country,
-		city,
 		theme,
 		device_type,
 	]

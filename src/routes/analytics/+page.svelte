@@ -29,7 +29,6 @@
 				id: 'ID',
 				created_at: 'Date',
 				country: 'Country',
-				city: 'City',
 				device_type: 'Device Type',
 				browser: 'Browser',
 				os: 'OS',

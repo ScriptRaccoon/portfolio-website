@@ -16,7 +16,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const sql_sessions_live = `
         SELECT
-            id, created_at, referrer, browser, os, country, city, theme, device_type
+            id, created_at, referrer, browser, os, country, theme, device_type
         FROM sessions_live
         WHERE aggregated_at IS NULL
         ORDER BY created_at DESC`
@@ -28,7 +28,6 @@ export const load: PageServerLoad = async (event) => {
 		browser: string | null
 		os: string | null
 		country: string | null
-		city: string | null
 		theme: string
 		device_type: DeviceType
 	}

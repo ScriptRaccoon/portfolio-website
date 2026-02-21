@@ -6,7 +6,6 @@ CREATE TABLE IF NOT EXISTS sessions_live (
     browser TEXT,
     os TEXT,
     country TEXT,
-    city TEXT,
     theme TEXT NOT NULL,
     device_type TEXT NOT NULL,
     aggregated_at TEXT
