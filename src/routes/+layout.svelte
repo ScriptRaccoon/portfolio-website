@@ -8,6 +8,7 @@
 	import { track_session, track_visit } from '$lib/client/track'
 	import { page } from '$app/state'
 	import { theme } from '$lib/client/theme.svelte'
+	import Footer from '$lib/components/Footer.svelte'
 
 	let { data, children } = $props()
 
@@ -75,6 +76,8 @@
 		{@render children?.()}
 	</main>
 </div>
+
+<Footer />
 
 <ScrollUp />
 
