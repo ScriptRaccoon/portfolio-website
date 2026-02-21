@@ -2,9 +2,10 @@
 	type Props = {
 		objects: Record<string, string | number | null>[]
 		labels: Record<string, string>
+		ids?: string[]
 	}
 
-	let { objects, labels }: Props = $props()
+	let { objects, labels, ids = [] }: Props = $props()
 </script>
 
 {#if objects.length}
@@ -21,7 +22,16 @@
 				{#each objects as obj}
 					<tr>
 						{#each Object.keys(labels) as key}
-							<td>{obj[key]}</td>
+							{@const short = String(obj[key]).substring(0, 8)}
+							<td>
+								{#if ids.includes(key)}
+									<span title={String(obj[key])}>
+										{short}
+									</span>
+								{:else}
+									{obj[key]}
+								{/if}
+							</td>
 						{/each}
 					</tr>
 				{/each}

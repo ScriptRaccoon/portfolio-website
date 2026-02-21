@@ -27,14 +27,15 @@
 		labels={{
 			id: 'ID',
 			created_at: 'Date',
-			referrer: 'Referrer',
-			browser: 'Browser',
-			os: 'OS',
 			country: 'Country',
 			city: 'City',
-			theme: 'Theme',
 			device_type: 'Device Type',
+			browser: 'Browser',
+			os: 'OS',
+			theme: 'Theme',
+			referrer: 'Referrer',
 		}}
+		ids={['id']}
 	/>
 </section>
 
@@ -48,6 +49,7 @@
 			path: 'Path',
 			created_at: 'Date',
 		}}
+		ids={['session_id']}
 	/>
 </section>
 
