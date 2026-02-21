@@ -77,11 +77,20 @@
 </section>
 
 <section>
-	<h2>Referrers</h2>
+	<h2>Countries</h2>
 
 	<DataTable
-		objects={data.referrers_total}
-		labels={{ referrer: 'Referrer', counter: '#', percentage: '%' }}
+		objects={data.countries_total}
+		labels={{ country: 'Country', counter: '#', percentage: '%' }}
+	/>
+</section>
+
+<section>
+	<h2>Device Types</h2>
+
+	<DataTable
+		objects={data.device_types_total}
+		labels={{ device_type: 'Device Type', counter: '#', percentage: '%' }}
 	/>
 </section>
 
@@ -104,15 +113,6 @@
 </section>
 
 <section>
-	<h2>Countries</h2>
-
-	<DataTable
-		objects={data.countries_total}
-		labels={{ country: 'Country', counter: '#', percentage: '%' }}
-	/>
-</section>
-
-<section>
 	<h2>Themes</h2>
 
 	<DataTable
@@ -122,11 +122,11 @@
 </section>
 
 <section>
-	<h2>Device Types</h2>
+	<h2>Referrers</h2>
 
 	<DataTable
-		objects={data.device_types_total}
-		labels={{ device_type: 'Device Type', counter: '#', percentage: '%' }}
+		objects={data.referrers_total}
+		labels={{ referrer: 'Referrer', counter: '#', percentage: '%' }}
 	/>
 </section>
 
