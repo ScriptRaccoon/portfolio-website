@@ -1,3 +1,9 @@
+<script lang="ts">
+	import TrackToggle, {
+		device_is_tracked,
+	} from '$lib/components/TrackToggle.svelte'
+</script>
+
 <header>
 	<h1>Privacy Policy</h1>
 </header>
@@ -97,6 +103,22 @@
 		contact me
 	</a>.
 </p>
+
+<h2>Analytics Preferences</h2>
+
+{#if device_is_tracked.value}
+	<p>
+		You can opt out of session and page visit tracking by clicking the
+		button below. This will stop all analytics for your device.
+	</p>
+{:else}
+	<p>
+		Analytics is disabled on this device. Click the button below to
+		re-enable it.
+	</p>
+{/if}
+
+<TrackToggle />
 
 <style>
 	h2 {
