@@ -68,7 +68,7 @@
 		position: sticky;
 		top: 0;
 		background-color: var(--bg-color);
-		box-shadow: 0rem -2rem 0rem 2rem var(--bg-color);
+		box-shadow: 0rem -100vw 0rem 100vw var(--bg-color);
 		z-index: 5;
 
 		@media (min-width: 38rem) {
