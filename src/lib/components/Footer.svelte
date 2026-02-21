@@ -4,6 +4,7 @@
 			href="https://github.com/ScriptRaccoon/portfolio-website"
 			target="_blank">Source Code</a
 		>
+		<a href="/legal/privacy-policy">Privacy Policy</a>
 	</div>
 </footer>
 
