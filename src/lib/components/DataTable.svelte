@@ -3,14 +3,22 @@
 		objects: Record<string, string | number | null>[]
 		labels: Record<string, string>
 		ids?: string[]
+		widths?: number[]
 	}
 
-	let { objects, labels, ids = [] }: Props = $props()
+	let { objects, labels, ids = [], widths }: Props = $props()
 </script>
 
 {#if objects.length}
 	<div class="wrapper">
 		<table>
+			{#if widths}
+				<colgroup>
+					{#each widths as width}
+						<col style="width: {width}%" />
+					{/each}
+				</colgroup>
+			{/if}
 			<thead>
 				<tr>
 					{#each Object.values(labels) as label}
@@ -51,15 +59,15 @@
 		margin-block: 1rem;
 	}
 
-	thead {
-		position: sticky;
-		top: 0;
-	}
-
 	table {
 		border-collapse: collapse;
 		font-size: var(--tiny-font);
 		width: 100%;
+	}
+
+	thead {
+		position: sticky;
+		top: 0;
 	}
 
 	tbody {

@@ -48,10 +48,11 @@
 		objects={data.visits_live}
 		labels={{
 			session_id: 'Session ID',
-			path: 'Path',
 			created_at: 'Date',
+			path: 'Path',
 		}}
 		ids={['session_id']}
+		widths={[20, 30, 50]}
 	/>
 </section>
 
@@ -61,6 +62,7 @@
 	<DataTable
 		objects={data.sessions_monthly}
 		labels={{ month: 'Month', counter: '#' }}
+		widths={[50, 50]}
 	/>
 </section>
 
@@ -72,6 +74,7 @@
 		<DataTable
 			objects={data.grouped_visits_monthly[path]}
 			labels={{ month: 'Month', counter: '#' }}
+			widths={[50, 50]}
 		/>
 	{:else}
 		<p>No data yet</p>
@@ -84,6 +87,7 @@
 	<DataTable
 		objects={data.countries_total}
 		labels={{ country: 'Country', counter: '#', percentage: '%' }}
+		widths={[50, 25, 25]}
 	/>
 </section>
 
@@ -93,6 +97,7 @@
 	<DataTable
 		objects={data.device_types_total}
 		labels={{ device_type: 'Device Type', counter: '#', percentage: '%' }}
+		widths={[50, 25, 25]}
 	/>
 </section>
 
@@ -102,6 +107,7 @@
 	<DataTable
 		objects={data.browsers_total}
 		labels={{ browser: 'Browser', counter: '#', percentage: '%' }}
+		widths={[50, 25, 25]}
 	/>
 </section>
 
@@ -111,6 +117,7 @@
 	<DataTable
 		objects={data.os_total}
 		labels={{ os: 'OS', counter: '#', percentage: '%' }}
+		widths={[50, 25, 25]}
 	/>
 </section>
 
@@ -120,6 +127,7 @@
 	<DataTable
 		objects={data.themes_total}
 		labels={{ theme: 'Theme', counter: '#', percentage: '%' }}
+		widths={[50, 25, 25]}
 	/>
 </section>
 
@@ -129,6 +137,7 @@
 	<DataTable
 		objects={data.referrers_total}
 		labels={{ referrer: 'Referrer', counter: '#', percentage: '%' }}
+		widths={[50, 25, 25]}
 	/>
 </section>
 
