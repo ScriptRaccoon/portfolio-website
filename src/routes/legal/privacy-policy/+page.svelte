@@ -41,7 +41,7 @@
 		immediately into usage statistics.
 	</li>
 	<li>
-		Session counts and page visits are aggregated weekly into monthly
+		Session counts and page visits are aggregated daily into monthly
 		statistics.
 	</li>
 	<li>
