@@ -16,7 +16,7 @@
 			<h2>
 				{project.name}
 			</h2>
-			<div class="teaser">
+			<div class="secondary teaser">
 				{project.teaser}
 			</div>
 			<More />
@@ -40,7 +40,6 @@
 	}
 
 	.teaser {
-		color: var(--secondary-font-color);
 		margin-bottom: 0.5rem;
 	}
 

@@ -35,7 +35,7 @@
 <header>
 	<h1>{name}</h1>
 
-	<span class="year" aria-label="year">
+	<span class="secondary small" aria-label="year">
 		{date.getFullYear()}
 	</span>
 </header>
@@ -65,11 +65,6 @@
 		display: flex;
 		justify-content: space-between;
 		align-items: center;
-	}
-
-	.year {
-		font-size: var(--small-font);
-		color: var(--secondary-font-color);
 	}
 
 	.tag-list {

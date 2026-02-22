@@ -13,7 +13,9 @@
 
 <div class="intro">
 	<img src="/media/general/portrait.webp" alt="Martin portrait" />
-	<div class="roles">Mathematician | Web developer | Content creator</div>
+	<div class="secondary roles">
+		Mathematician | Web developer | Content creator
+	</div>
 	<p class="me">
 		My name is Martin Brandenburg. I live in Berlin, Germany. 🏡
 	</p>
@@ -93,7 +95,6 @@
 	}
 
 	.roles {
-		color: var(--secondary-font-color);
 		text-align: center;
 		margin-bottom: 1rem;
 	}

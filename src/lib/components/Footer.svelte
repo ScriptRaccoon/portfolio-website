@@ -1,4 +1,4 @@
-<footer>
+<footer class="secondary">
 	<div class="links">
 		<a
 			href="https://github.com/ScriptRaccoon/portfolio-website"
@@ -10,7 +10,6 @@
 
 <style>
 	.links {
-		color: var(--secondary-font-color);
 		font-size: var(--small-font);
 		display: flex;
 		gap: 1rem;

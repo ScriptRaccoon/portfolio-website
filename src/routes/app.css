@@ -225,3 +225,7 @@ button {
 .secondary {
 	color: var(--secondary-font-color);
 }
+
+.small {
+	font-size: var(--small-font);
+}

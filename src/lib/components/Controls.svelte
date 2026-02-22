@@ -4,7 +4,7 @@
 	import GoBack from './GoBack.svelte'
 </script>
 
-<div>
+<div class="secondary">
 	<GoBack />
 	<CopyText text={page.url.href} name="URL" />
 </div>
@@ -13,6 +13,5 @@
 	div {
 		display: flex;
 		justify-content: space-between;
-		color: var(--secondary-font-color);
 	}
 </style>

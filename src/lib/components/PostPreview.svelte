@@ -14,7 +14,7 @@
 	<h2>
 		{post.title}
 	</h2>
-	<div class="date">
+	<div class="secondary small">
 		{post.published.toLocaleDateString()}
 	</div>
 	<p>
@@ -22,10 +22,3 @@
 	</p>
 	<More />
 </PreviewCard>
-
-<style>
-	.date {
-		color: var(--secondary-font-color);
-		font-size: var(--small-font);
-	}
-</style>

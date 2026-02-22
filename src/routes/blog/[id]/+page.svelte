@@ -47,7 +47,7 @@
 	<h1>{title}</h1>
 </header>
 
-<div class="dates">
+<div class="dates secondary small">
 	<div>Published: {published.toLocaleDateString()}</div>
 	{#if updated}
 		<div>Updated: {updated.toLocaleDateString()}</div>
@@ -80,8 +80,6 @@
 	.dates {
 		margin-top: -0.5rem;
 		margin-bottom: 1rem;
-		font-size: var(--small-font);
-		color: var(--secondary-font-color);
 		display: flex;
 		justify-content: space-between;
 	}
