@@ -55,7 +55,7 @@
 		overflow: auto;
 		max-height: 10lh;
 		scrollbar-width: thin;
-		scrollbar-color: var(--secondary-font-color) var(--code-bg-color);
+		scrollbar-color: var(--secondary-font-color) transparent;
 		margin-block: 1rem;
 	}
 
