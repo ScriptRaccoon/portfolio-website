@@ -5,10 +5,10 @@
 	import Nav from '$lib/components/Nav.svelte'
 	import ScrollUp from '$lib/components/ScrollUp.svelte'
 	import { onNavigate } from '$app/navigation'
-	import { track_session, track_visit } from '$lib/client/track'
 	import { page } from '$app/state'
 	import { theme } from '$lib/client/theme.svelte'
 	import Footer from '$lib/components/Footer.svelte'
+	import { track } from '$lib/client/track'
 
 	let { data, children } = $props()
 
@@ -30,11 +30,7 @@
 	})
 
 	$effect(() => {
-		track_visit(page.url.pathname, data.tracked_paths)
-	})
-
-	$effect(() => {
-		track_session(theme.value)
+		track(theme.value, page.url.pathname, data.tracked_paths)
 	})
 </script>
 

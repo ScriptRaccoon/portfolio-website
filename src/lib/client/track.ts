@@ -3,32 +3,39 @@ import { browser } from '$app/environment'
 export const NOTRACK_STORAGE_KEY = 'notrack'
 const TRACKED_SESSION_KEY = 'tracked-session'
 
-export async function track_session(theme: 'dark' | 'light') {
+export async function track(
+	theme: 'dark' | 'light',
+	path: string,
+	tracked_paths: string[],
+) {
 	if (!browser) return
 	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
+
+	await track_session(theme)
+	await track_visit(path, tracked_paths)
+}
+
+async function track_session(theme: 'dark' | 'light') {
 	if (window.sessionStorage.getItem(TRACKED_SESSION_KEY)) return
 
 	const referrer = document.referrer || 'unknown'
 	const viewport_width = window.innerWidth
 
 	try {
-		await fetch('/api/track-session', {
+		const res = await fetch('/api/track-session', {
 			method: 'POST',
 			body: JSON.stringify({ theme, referrer, viewport_width }),
 			headers: { 'Content-Type': 'application/json' },
 			credentials: 'include',
 		})
+
+		if (res.ok) window.sessionStorage.setItem(TRACKED_SESSION_KEY, '1')
 	} catch (err) {
 		console.error(err)
 	}
-
-	window.sessionStorage.setItem(TRACKED_SESSION_KEY, '1')
 }
 
-export async function track_visit(path: string, tracked_paths: string[]) {
-	if (!browser) return
-	if (window.localStorage.getItem(NOTRACK_STORAGE_KEY)) return
-
+async function track_visit(path: string, tracked_paths: string[]) {
 	const trackable =
 		tracked_paths.includes(path) ||
 		tracked_paths.some(
