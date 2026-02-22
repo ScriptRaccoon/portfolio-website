@@ -14,14 +14,17 @@ const request_body_schema = v.object({
 
 export const POST: RequestHandler = async (event) => {
 	if (!is_same_origin(event.request, event.url.origin)) {
+		console.info('Blocked: different origin')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	if (is_bot(event.request)) {
+		console.info('Blocked: is bot')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	if (event.request.headers.get('Content-Type') !== 'application/json') {
+		console.info('Blocked: invalid content type')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
@@ -30,6 +33,7 @@ export const POST: RequestHandler = async (event) => {
 	const parsed_body = v.safeParse(request_body_schema, body)
 
 	if (!parsed_body.success) {
+		console.info('Blocked: invalid request body')
 		return json({ error: 'Invalid request body' }, { status: 400 })
 	}
 
@@ -44,6 +48,7 @@ export const POST: RequestHandler = async (event) => {
 		)
 
 	if (!trackable) {
+		console.info('Blocked: invalid path')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
@@ -56,6 +61,8 @@ export const POST: RequestHandler = async (event) => {
 		ON CONFLICT DO NOTHING`
 
 	const args = [session_id, path]
+
+	console.info('will add visit:', args)
 
 	const { err } = await query(sql, args)
 

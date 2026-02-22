@@ -17,15 +17,19 @@ const request_body_schema = v.object({
 })
 
 export const POST: RequestHandler = async (event) => {
+	// TEMP LOGS
 	if (!is_same_origin(event.request, event.url.origin)) {
+		console.info('Blocked: different origin')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	if (is_bot(event.request)) {
+		console.info('Blocked: is bot')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	if (event.request.headers.get('Content-Type') !== 'application/json') {
+		console.info('Blocked: wrong content type')
 		return json({ error: 'Forbidden' }, { status: 403 })
 	}
 
@@ -34,6 +38,7 @@ export const POST: RequestHandler = async (event) => {
 	const parsed_body = v.safeParse(request_body_schema, body)
 
 	if (!parsed_body.success) {
+		console.info('Blocked: invalid request body')
 		return json({ error: 'Invalid request body' }, { status: 400 })
 	}
 
@@ -65,9 +70,14 @@ export const POST: RequestHandler = async (event) => {
 		device_type,
 	]
 
+	console.info('will add session:', args)
+
 	const { err } = await query(sql, args)
 
-	if (err) return json({ error: 'Database error' }, { status: 500 })
+	if (err) {
+		console.error('Database error when inserting new session')
+		return json({ error: 'Database error' }, { status: 500 })
+	}
 
 	return json({ message: 'Session has been tracked' })
 }
