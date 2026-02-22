@@ -221,3 +221,7 @@ button {
 	margin-left: calc(50% - 50vw + var(--page-margin));
 	margin-right: calc(50% - 50vw + var(--page-margin));
 }
+
+.secondary {
+	color: var(--secondary-font-color);
+}

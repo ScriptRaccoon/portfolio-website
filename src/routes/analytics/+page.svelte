@@ -140,6 +140,8 @@
 	/>
 </section>
 
+<p class="secondary">Data has been collected since 23 February 2026.</p>
+
 <style>
 	section:first-of-type {
 		margin-top: 2rem;
