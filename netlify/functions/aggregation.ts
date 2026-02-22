@@ -2,7 +2,7 @@ import { type Client, createClient } from '@libsql/client/web'
 import type { Config } from '@netlify/functions'
 
 export const config: Config = {
-	schedule: '@weekly',
+	schedule: '@daily',
 }
 
 export default async () => {

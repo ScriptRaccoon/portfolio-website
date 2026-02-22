@@ -19,7 +19,6 @@ export const load: PageServerLoad = async (event) => {
         SELECT
             id, created_at, referrer, browser, os, country, theme, device_type
         FROM sessions_live
-        WHERE aggregated_at IS NULL
         ORDER BY created_at DESC`
 
 	type SessionLive = {
@@ -139,7 +138,6 @@ export const load: PageServerLoad = async (event) => {
 		SELECT
 			id, session_id, path, created_at
 		FROM visits_live
-		WHERE aggregated_at IS NULL
 		ORDER BY created_at DESC`
 
 	type VisitLive = {
