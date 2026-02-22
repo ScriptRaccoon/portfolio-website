@@ -10,6 +10,7 @@ export const TRACKED_PATHS = [
 	'/projects',
 	'/projects/*',
 	'/youtube',
+	'/legal/*',
 ]
 
 export const PROJECT_TAGS = [
