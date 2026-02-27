@@ -11,9 +11,9 @@
 		"lint": "prettier --plugin-search-dir . --check .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"prepare": "husky",
-		"db": "cd data && sqlite3 local.db",
-		"seed": "cd data && sqlite3 local.db < seed.sql",
-		"mock": "cd data && sqlite3 local.db < mock.sql"
+		"db": "cd database && sqlite3 local.db",
+		"seed": "cd database && sqlite3 local.db < seed.sql",
+		"mock": "cd database && sqlite3 local.db < mock.sql"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.51.0",
