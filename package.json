@@ -13,7 +13,8 @@
 		"prepare": "husky",
 		"db": "cd database && sqlite3 local.db",
 		"seed": "cd database && sqlite3 local.db < seed.sql",
-		"mock": "cd database && sqlite3 local.db < mock.sql"
+		"mock": "cd database && sqlite3 local.db < mock.sql",
+		"post": "python3 tools/post.py"
 	},
 	"devDependencies": {
 		"@sveltejs/kit": "^2.51.0",
