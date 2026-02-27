@@ -62,8 +62,6 @@ export const POST: RequestHandler = async (event) => {
 
 	const args = [session_id, path]
 
-	console.info('will add visit:', args)
-
 	const { err } = await query(sql, args)
 
 	if (err) return json({ error: 'Database error' }, { status: 500 })

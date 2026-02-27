@@ -70,8 +70,6 @@ export const POST: RequestHandler = async (event) => {
 		device_type,
 	]
 
-	console.info('will add session:', args)
-
 	const { err } = await query(sql, args)
 
 	if (err) {
