@@ -572,4 +572,6 @@ After submitting, the page reloads, showing the updated title. The URL no longer
 
 In this post, we built a fully functional task management application in SvelteKit without relying on any client-side JavaScript. We explored how to handle all CRUD operations (creating, reading, updating, and deleting tasks) entirely on the server using form actions and load functions. We have used the URL to store which task is in rename mode.
 
+The same method can be used for more complex applications as well. In fact, I use this mental model all the time. By the way, my repository [sveltekit-forms](https://github.com/ScriptRaccoon/sveltekit-forms) explores similar ideas.
+
 If you enjoyed this post, share it with other developers online or leave a comment below.
