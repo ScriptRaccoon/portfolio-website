@@ -8,7 +8,7 @@ tags: ['SvelteKit', 'SQLite', 'Mathematics', 'TypeScript', 'Tool']
 date: 2026-03-17
 ---
 
-_CatDat_ is a comprehensive and searchable database of [categories](https://en.wikipedia.org/wiki/Category_theory) and their properties. This project is a **community effort** and is open for [contributions](CONTRIBUTING.md) from the mathematics community.
+_CatDat_ is a comprehensive and searchable database of [categories](https://en.wikipedia.org/wiki/Category_theory) and their properties. This project is a **community effort** and is open for [contributions](https://github.com/ScriptRaccoon/CatDat/blob/main/CONTRIBUTING.md) from the mathematics community.
 
 **Features**
 
