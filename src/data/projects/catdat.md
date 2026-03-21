@@ -12,7 +12,7 @@ _CatDat_ is a comprehensive and searchable database of [categories](https://en.w
 
 **Features**
 
-- **Searchable Database**: Easily find categories based on properties and non-properties.
+- **Searchable Database**: Easily find categories based on satisfied properties and unsatisfied properties.
 - **Deduction System**: Automatically infers properties from existing ones, powered by a database of implications.
 - **Reason/Reference for Implications**: Each implication has a reason/reference, providing a data-based knowledge base of category theory.
 - **Automatic Dualization**: Automatically dualizes implications.
