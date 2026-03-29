@@ -25,22 +25,25 @@
 	<a href="/blog">blog</a>.
 </p>
 
-<p class="logo-container">
-	<img src="/media/general/ScriptRaccoon.webp" alt="raccoon logo" />
+<p class="coffee-container">
+	<a class="coffee-link" href="https://buymeacoffee.com/scriptraccoon">
+		Buy me a coffee
+	</a>
 </p>
 
 <SocialLinks />
 
 <style>
-	.logo-container {
-		margin-block: 2rem;
-		display: flex;
-		justify-content: center;
+	.coffee-container {
+		text-align: center;
+		margin-block: 2.5rem;
+	}
 
-		img {
-			width: min(70vw, 8rem);
-			border-radius: 50%;
-			box-shadow: 0rem 0rem 1rem var(--shadow-color);
-		}
+	.coffee-link {
+		text-decoration: none;
+		background-color: var(--accent-color);
+		color: var(--inverted-font-color);
+		padding: 0.5rem 1.25rem;
+		border-radius: 100vw;
 	}
 </style>
