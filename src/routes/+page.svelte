@@ -25,25 +25,4 @@
 	<a href="/blog">blog</a>.
 </p>
 
-<p class="coffee-container">
-	<a class="coffee-link" href="https://buymeacoffee.com/scriptraccoon">
-		Buy me a coffee
-	</a>
-</p>
-
 <SocialLinks />
-
-<style>
-	.coffee-container {
-		text-align: center;
-		margin-block: 2.5rem;
-	}
-
-	.coffee-link {
-		text-decoration: none;
-		background-color: var(--accent-color);
-		color: var(--inverted-font-color);
-		padding: 0.5rem 1.25rem;
-		border-radius: 100vw;
-	}
-</style>

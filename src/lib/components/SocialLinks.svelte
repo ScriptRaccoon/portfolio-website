@@ -6,7 +6,7 @@
 		faXTwitter,
 		faYoutube,
 	} from '@fortawesome/free-brands-svg-icons'
-	import { faEnvelope } from '@fortawesome/free-solid-svg-icons'
+	import { faEnvelope, faMugHot } from '@fortawesome/free-solid-svg-icons'
 	import Fa from 'svelte-fa'
 </script>
 
@@ -63,6 +63,16 @@
 			target="_blank"
 		>
 			<Fa icon={faBluesky} />
+		</a>
+	</li>
+
+	<li>
+		<a
+			aria-label="Buy me a coffee"
+			href="https://buymeacoffee.com/scriptraccoon"
+			target="_blank"
+		>
+			<Fa icon={faMugHot} />
 		</a>
 	</li>
 </ul>
