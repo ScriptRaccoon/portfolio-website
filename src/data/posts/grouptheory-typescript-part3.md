@@ -181,7 +181,7 @@ console.assert(isomZmod2.isIsomorphism)
 
 There is an interesting example of a homomorphism from any finite symmetric group to $\{+1,-1\}$, called the [sign homomorphism](https://en.wikipedia.org/wiki/Parity_of_a_permutation). Here, we will only cover the special case $S_3$.
 
-The group $S_3$ consists of three 2-cycles, which have the sign $1$, and three other permutations, whose sign is $-1$. The 2-cycles can be distinguished by the fact that they have exactly one fixed point.
+The group $S_3$ consists of three 2-cycles, which have the sign $-1$, and three other permutations, whose sign is $1$. The 2-cycles can be distinguished by the fact that they have exactly one fixed point.
 
 This leads to the following implementation.
 
