@@ -10,9 +10,9 @@
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"@types/node": "^22.13.5",
-		"dotenv": "^16.4.7",
-		"googleapis": "^144.0.0",
-		"tsx": "^4.19.3"
+		"@types/node": "^26.6.3",
+		"dotenv": "^18.0.4",
+		"googleapis": "^182.0.0",
+		"tsx": "^4.23.15"
 	}
 }
