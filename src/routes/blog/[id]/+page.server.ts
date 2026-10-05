@@ -1,10 +1,10 @@
 import fm from 'front-matter'
 import { error } from '@sveltejs/kit'
-import { type PostMetaData } from '$lib/types'
+import { type PostMetaData } from '#lib/types.js'
 
-import { render_markdown } from '$lib/server/markdown'
-import { get_table_of_contents } from '$lib/server/toc'
-import { is_published } from '$lib/server/utils'
+import { render_markdown } from '#lib/server/markdown.js'
+import { get_table_of_contents } from '#lib/server/toc.js'
+import { is_published } from '#lib/server/utils.js'
 
 export const load = async (event) => {
 	const id = event.params.id

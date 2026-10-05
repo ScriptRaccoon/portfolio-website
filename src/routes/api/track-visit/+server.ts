@@ -1,7 +1,7 @@
-import { json, type RequestHandler } from '@sveltejs/kit'
-import { is_bot, is_same_origin } from '$lib/server/utils'
-import { query } from '$lib/server/db'
-import { TRACKED_PATHS } from '$lib/server/config'
+import { type RequestHandler } from '@sveltejs/kit'
+import { is_bot, is_same_origin } from '#lib/server/utils.js'
+import { query } from '#lib/server/db.js'
+import { TRACKED_PATHS } from '#lib/server/config.js'
 import * as v from 'valibot'
 
 const request_body_schema = v.object({
@@ -15,17 +15,17 @@ const request_body_schema = v.object({
 export const POST: RequestHandler = async (event) => {
 	if (!is_same_origin(event.request, event.url.origin)) {
 		console.info('Blocked: different origin')
-		return json({ error: 'Forbidden' }, { status: 403 })
+		return Response.json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	if (is_bot(event.request)) {
 		console.info('Blocked: is bot')
-		return json({ error: 'Forbidden' }, { status: 403 })
+		return Response.json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	if (event.request.headers.get('Content-Type') !== 'application/json') {
 		console.info('Blocked: invalid content type')
-		return json({ error: 'Forbidden' }, { status: 403 })
+		return Response.json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	const body: unknown = await event.request.json()
@@ -34,7 +34,7 @@ export const POST: RequestHandler = async (event) => {
 
 	if (!parsed_body.success) {
 		console.info('Blocked: invalid request body')
-		return json({ error: 'Invalid request body' }, { status: 400 })
+		return Response.json({ error: 'Invalid request body' }, { status: 400 })
 	}
 
 	const { path } = parsed_body.output
@@ -49,7 +49,7 @@ export const POST: RequestHandler = async (event) => {
 
 	if (!trackable) {
 		console.info('Blocked: invalid path')
-		return json({ error: 'Forbidden' }, { status: 403 })
+		return Response.json({ error: 'Forbidden' }, { status: 403 })
 	}
 
 	const session_id = event.locals.session_id
@@ -64,7 +64,7 @@ export const POST: RequestHandler = async (event) => {
 
 	const { err } = await query(sql, args)
 
-	if (err) return json({ error: 'Database error' }, { status: 500 })
+	if (err) return Response.json({ error: 'Database error' }, { status: 500 })
 
-	return json({ message: 'Page visit has been tracked' })
+	return Response.json({ message: 'Page visit has been tracked' })
 }

@@ -1,9 +1,9 @@
-import { query } from '$lib/server/db'
+import { query } from '#lib/server/db.js'
 import { error } from '@sveltejs/kit'
 import type { PageServerLoad } from './$types'
-import { add_percentages, type DeviceType } from '$lib/server/utils'
-import { PAGEVISITS_CREDENTIALS } from '$env/static/private'
-import { dev } from '$app/environment'
+import { add_percentages, type DeviceType } from '#lib/server/utils.js'
+import { PAGEVISITS_CREDENTIALS } from '$app/env/private'
+import { dev } from '$app/env'
 
 export const prerender = false
 
@@ -34,6 +34,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: sessions_live, err: err_sessions_live } =
 		await query<SessionLive>(sql_sessions_live)
+
 	if (err_sessions_live) error(500, 'Could not load live sessions')
 
 	const sql_sessions_monthly = `
@@ -48,6 +49,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: sessions_monthly, err: err_sessions_monthly } =
 		await query<SessionsMonthly>(sql_sessions_monthly)
+
 	if (err_sessions_monthly) error(500, 'Could not load monthly sessions')
 
 	const sql_referrers_total = `
@@ -62,6 +64,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: referrers_total, err: err_referrers_total } =
 		await query<ReferrersTotal>(sql_referrers_total)
+
 	if (err_referrers_total) error(500, 'Could not load referrers')
 
 	const sql_browsers_total = `
@@ -76,6 +79,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: browsers_total, err: err_browsers_total } =
 		await query<BrowsersTotal>(sql_browsers_total)
+
 	if (err_browsers_total) error(500, 'Could not load browsers')
 
 	const sql_os_total = `
@@ -90,6 +94,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: os_total, err: err_os_total } =
 		await query<OSTotal>(sql_os_total)
+
 	if (err_os_total) error(500, 'Could not load operating systems')
 
 	const sql_countries_total = `
@@ -104,6 +109,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: countries_total, err: err_countries_total } =
 		await query<CountriesTotal>(sql_countries_total)
+
 	if (err_countries_total) error(500, 'Could not load countries')
 
 	const sql_themes_total = `
@@ -118,6 +124,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: themes_total, err: err_themes_total } =
 		await query<ThemesTotal>(sql_themes_total)
+
 	if (err_themes_total) error(500, 'Could not load themes')
 
 	const sql_device_types_total = `
@@ -132,6 +139,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: device_types_total, err: err_device_types_total } =
 		await query<DeviceTypesTotal>(sql_device_types_total)
+
 	if (err_device_types_total) error(500, 'Could not load device types')
 
 	const sql_visits_live = `
@@ -149,6 +157,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: visits_live, err: err_visits_live } =
 		await query<VisitLive>(sql_visits_live)
+
 	if (err_visits_live) error(500, 'Could not load live visits')
 
 	const sql_visits_monthly = `
@@ -166,6 +175,7 @@ export const load: PageServerLoad = async (event) => {
 
 	const { rows: visits_monthly, err: err_visits_monthly } =
 		await query<VisitMonthly>(sql_visits_monthly)
+
 	if (err_visits_monthly) error(500, 'Could not load monthly visits')
 
 	type MonthlyGroupedVisits = Record<

@@ -1,6 +1,6 @@
 <script lang="ts">
-	import MetaTags from '$lib/components/MetaTags.svelte'
-	import PostPreview from '$lib/components/PostPreview.svelte'
+	import MetaTags from '#lib/components/MetaTags.svelte'
+	import PostPreview from '#lib/components/PostPreview.svelte'
 
 	let { data } = $props()
 </script>

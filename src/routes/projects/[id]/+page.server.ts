@@ -1,7 +1,7 @@
 import fm from 'front-matter'
 import { error } from '@sveltejs/kit'
-import type { ProjectMetaData } from '$lib/types'
-import { render_markdown } from '$lib/server/markdown'
+import type { ProjectMetaData } from '#lib/types.js'
+import { render_markdown } from '#lib/server/markdown.js'
 
 export const load = async (event) => {
 	const id = event.params.id

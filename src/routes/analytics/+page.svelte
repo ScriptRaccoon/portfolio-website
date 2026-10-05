@@ -1,7 +1,7 @@
 <script lang="ts">
-	import DataTable from '$lib/components/DataTable.svelte'
-	import MetaTags from '$lib/components/MetaTags.svelte'
-	import TrackToggle from '$lib/components/TrackToggle.svelte'
+	import DataTable from '#lib/components/DataTable.svelte'
+	import MetaTags from '#lib/components/MetaTags.svelte'
+	import TrackToggle from '#lib/components/TrackToggle.svelte'
 
 	let { data } = $props()
 </script>

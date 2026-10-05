@@ -1,4 +1,4 @@
-import { TRACKED_PATHS } from '$lib/server/config'
+import { TRACKED_PATHS } from '#lib/server/config.js'
 
 export const prerender = true
 

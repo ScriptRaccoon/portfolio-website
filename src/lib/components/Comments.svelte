@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { theme } from '$lib/client/theme.svelte'
+	import { theme } from '#lib/client/theme.svelte.js'
 	import Giscus from '@giscus/svelte'
 </script>
 

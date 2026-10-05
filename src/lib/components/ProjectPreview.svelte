@@ -1,6 +1,6 @@
 <script lang="ts">
-	import type { ProjectMetaData } from '$lib/types'
-	import PreviewCard from '$lib/components/PreviewCard.svelte'
+	import type { ProjectMetaData } from '#lib/types.js'
+	import PreviewCard from '#lib/components/PreviewCard.svelte'
 	import More from './More.svelte'
 
 	type Props = {

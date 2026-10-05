@@ -1,4 +1,4 @@
-import type { PostMetaData, PublishedPostMetaData } from '$lib/types'
+import type { PostMetaData, PublishedPostMetaData } from '#lib/types.js'
 import { Crawler } from 'es6-crawler-detect'
 import { UAParser } from 'my-ua-parser'
 

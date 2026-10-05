@@ -1,7 +1,7 @@
 <script lang="ts">
 	import TrackToggle, {
 		device_is_tracked,
-	} from '$lib/components/TrackToggle.svelte'
+	} from '#lib/components/TrackToggle.svelte'
 </script>
 
 <header>

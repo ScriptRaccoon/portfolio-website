@@ -1,7 +1,7 @@
 <script lang="ts">
 	import Fa from 'svelte-fa'
 	import { faMoon, faSun } from '@fortawesome/free-solid-svg-icons'
-	import { theme } from '$lib/client/theme.svelte'
+	import { theme } from '#lib/client/theme.svelte.js'
 </script>
 
 <button

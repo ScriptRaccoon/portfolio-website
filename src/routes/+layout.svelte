@@ -1,17 +1,15 @@
 <script lang="ts">
 	import './app.css'
-
 	import { setContext } from 'svelte'
-	import Nav from '$lib/components/Nav.svelte'
-	import ScrollUp from '$lib/components/ScrollUp.svelte'
+	import Nav from '#lib/components/Nav.svelte'
+	import ScrollUp from '#lib/components/ScrollUp.svelte'
 	import { onNavigate } from '$app/navigation'
 	import { page } from '$app/state'
-	import { theme } from '$lib/client/theme.svelte'
-	import Footer from '$lib/components/Footer.svelte'
-	import { track } from '$lib/client/track'
+	import { theme } from '#lib/client/theme.svelte.js'
+	import Footer from '#lib/components/Footer.svelte'
+	import { track } from '#lib/client/track.js'
 
 	let { data, children } = $props()
-
 	const allow_animation =
 		typeof window !== 'undefined' &&
 		window.matchMedia('(prefers-reduced-motion: no-preference)').matches
@@ -19,6 +17,7 @@
 	setContext<boolean>('allow_animation', allow_animation)
 
 	onNavigate((navigation) => {
+		if (navigation.shallow) return
 		if (!document.startViewTransition || !allow_animation) return
 
 		return new Promise((resolve) => {

@@ -2,10 +2,10 @@
 	import { fade } from 'svelte/transition'
 	import { getContext } from 'svelte'
 
-	import ProjectsFilter from '$lib/components/ProjectFilter.svelte'
-	import ProjectPreview from '$lib/components/ProjectPreview.svelte'
-	import type { ProjectMetaData } from '$lib/types'
-	import MetaTags from '$lib/components/MetaTags.svelte'
+	import ProjectsFilter from '#lib/components/ProjectFilter.svelte'
+	import ProjectPreview from '#lib/components/ProjectPreview.svelte'
+	import type { ProjectMetaData } from '#lib/types.js'
+	import MetaTags from '#lib/components/MetaTags.svelte'
 
 	let { data } = $props()
 	const { projects, tags, years } = $derived(data)

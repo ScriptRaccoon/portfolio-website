@@ -1,6 +1,6 @@
 <script lang="ts">
-	import PreviewCard from '$lib/components/PreviewCard.svelte'
-	import type { PublishedPostMetaData } from '$lib/types'
+	import PreviewCard from '#lib/components/PreviewCard.svelte'
+	import type { PublishedPostMetaData } from '#lib/types.js'
 	import More from './More.svelte'
 
 	type Props = {

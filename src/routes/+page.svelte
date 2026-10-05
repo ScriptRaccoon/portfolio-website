@@ -1,6 +1,6 @@
 <script lang="ts">
-	import MetaTags from '$lib/components/MetaTags.svelte'
-	import SocialLinks from '$lib/components/SocialLinks.svelte'
+	import MetaTags from '#lib/components/MetaTags.svelte'
+	import SocialLinks from '#lib/components/SocialLinks.svelte'
 </script>
 
 <MetaTags

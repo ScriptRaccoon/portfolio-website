@@ -1,6 +1,7 @@
-import { browser } from '$app/environment'
+import { browser } from '$app/env'
 
 export const NOTRACK_STORAGE_KEY = 'notrack'
+
 const TRACKED_SESSION_KEY = 'tracked-session'
 
 export async function track(

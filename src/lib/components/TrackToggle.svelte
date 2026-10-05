@@ -1,6 +1,6 @@
 <script module lang="ts">
-	import { browser } from '$app/environment'
-	import { NOTRACK_STORAGE_KEY } from '$lib/client/track'
+	import { browser } from '$app/env'
+	import { NOTRACK_STORAGE_KEY } from '#lib/client/track.js'
 	export const device_is_tracked = $state({ value: false })
 
 	if (browser) {

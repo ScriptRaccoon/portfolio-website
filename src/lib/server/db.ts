@@ -1,4 +1,4 @@
-import { DB_AUTH_TOKEN, DB_URL } from '$env/static/private'
+import { DB_AUTH_TOKEN, DB_URL } from '$app/env/private'
 import { createClient, type LibsqlError } from '@libsql/client'
 
 export const db = createClient({

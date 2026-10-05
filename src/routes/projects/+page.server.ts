@@ -1,6 +1,6 @@
-import type { ProjectMetaData } from '$lib/types'
-import { get_frontmatter } from '$lib/server/frontmatter'
-import { PROJECT_TAGS } from '$lib/server/config'
+import type { ProjectMetaData } from '#lib/types.js'
+import { get_frontmatter } from '#lib/server/frontmatter.js'
+import { PROJECT_TAGS } from '#lib/server/config.js'
 import { error } from '@sveltejs/kit'
 
 export const load = async () => {

@@ -1,6 +1,6 @@
-import type { PostMetaData } from '$lib/types'
-import { get_frontmatter } from '$lib/server/frontmatter'
-import { is_published } from '$lib/server/utils'
+import type { PostMetaData } from '#lib/types.js'
+import { get_frontmatter } from '#lib/server/frontmatter.js'
+import { is_published } from '#lib/server/utils.js'
 
 export const load = async () => {
 	const unsorted_posts = get_frontmatter<PostMetaData>(

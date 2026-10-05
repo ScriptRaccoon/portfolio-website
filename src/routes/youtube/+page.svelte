@@ -1,5 +1,5 @@
 <script lang="ts">
-	import MetaTags from '$lib/components/MetaTags.svelte'
+	import MetaTags from '#lib/components/MetaTags.svelte'
 	import youtube_data from '../../data/youtube/youtube.json'
 	import { faYoutube } from '@fortawesome/free-brands-svg-icons'
 	import Fa from 'svelte-fa'

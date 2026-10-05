@@ -1,9 +1,9 @@
 <script lang="ts">
-	import Controls from '$lib/components/Controls.svelte'
-	import Expand from '$lib/components/Expand.svelte'
-	import Comments from '$lib/components/Comments.svelte'
+	import Controls from '#lib/components/Controls.svelte'
+	import Expand from '#lib/components/Expand.svelte'
+	import Comments from '#lib/components/Comments.svelte'
 	import { onMount } from 'svelte'
-	import MetaTags from '$lib/components/MetaTags.svelte'
+	import MetaTags from '#lib/components/MetaTags.svelte'
 
 	let { data } = $props()
 

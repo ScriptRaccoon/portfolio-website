@@ -1,6 +1,6 @@
 <script lang="ts">
-	import Controls from '$lib/components/Controls.svelte'
-	import MetaTags from '$lib/components/MetaTags.svelte'
+	import Controls from '#lib/components/Controls.svelte'
+	import MetaTags from '#lib/components/MetaTags.svelte'
 
 	let { data } = $props()
 
