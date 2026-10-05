@@ -194,7 +194,7 @@ class Group<X> implements GroupData<X> {
 
 ## A basic example
 
-Before we continue with the group class, let us look at a basic example. This is a subgroup of $\mathbb{Q}^*$ which has just two elements: $\{+1,-1\}$. The group operations are inherited from $\mathbb{Q}^*$, so for example the composition is just ordinary multiplication.
+Before we continue with the group class, let us look at a basic example. This is a subgroup of $\mathbb{Q}^\ast$ which has just two elements: $\{+1,-1\}$. The group operations are inherited from $\mathbb{Q}^\ast$, so for example the composition is just ordinary multiplication.
 
 ```typescript
 const SignGroup = new Group<number>({

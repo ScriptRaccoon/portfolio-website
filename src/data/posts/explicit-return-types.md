@@ -167,8 +167,7 @@ which is much more complex and repetitive than
 
 ```typescript
 type return_type = { status_code: number } & (
-	| { message: string }
-	| { error: string }
+	{ message: string } | { error: string }
 )
 ```
 
