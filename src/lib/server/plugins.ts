@@ -1,7 +1,6 @@
 import { createHighlighter } from 'shiki'
-import type MarkdownIt from 'markdown-it'
-import type Token from 'markdown-it/lib/token.mjs'
-import { createMathjaxInstance } from '@mdit/plugin-mathjax'
+import type { MarkdownIt, Token } from 'markdown-it'
+import { createMathjaxInstance, type TexPackage } from '@mdit/plugin-mathjax'
 
 /**
  * Plugin to automatically add target="_blank" to external links
@@ -17,7 +16,7 @@ export function handle_external_links(md: MarkdownIt): void {
 		const token = tokens[idx]
 		const href = token.attrGet('href')
 
-		if (href?.startsWith('http')) {
+		if (typeof href === 'string' && href.startsWith('http')) {
 			token.attrSet('target', '_blank')
 		}
 
@@ -97,11 +96,59 @@ export function add_ids_to_headings(md: MarkdownIt): void {
 }
 
 /**
+ * MathJax TeX packages: all packages loaded by @mdit/plugin-mathjax by default,
+ * except "bboldx", which redefines \mathbb to use a font extension
+ * that is not installed (so \mathbb{Z} would render as a plain Z).
+ * The type cast is necessary since TexPackage does not include "base".
+ */
+const mathjax_packages = [
+	'base',
+	'action',
+	'ams',
+	'amscd',
+	'bbm',
+	'bbox',
+	'begingroup',
+	'boldsymbol',
+	'braket',
+	'bussproofs',
+	'cancel',
+	'cases',
+	'centernot',
+	'color',
+	'colortbl',
+	'colorv2',
+	'configmacros',
+	'dsfont',
+	'empheq',
+	'enclose',
+	'extpfeil',
+	'gensymb',
+	'html',
+	'mathtools',
+	'mhchem',
+	'newcommand',
+	'noerrors',
+	'noundefined',
+	'physics',
+	'setoptions',
+	'tagformat',
+	'texhtml',
+	'textcomp',
+	'textmacros',
+	'unicode',
+	'units',
+	'upgreek',
+	'verb',
+] as TexPackage[]
+
+/**
  * Plugin configuration to highlight math formulas with MathJax
  */
 export const mathjax_instance = await createMathjaxInstance({
 	loader: { load: ['input/tex', 'output/svg'] },
 	tex: {
+		packages: mathjax_packages,
 		// @ts-ignore shut up
 		inlineMath: [['$', '$']],
 	},
@@ -111,6 +158,14 @@ export const mathjax_instance = await createMathjaxInstance({
 	a11y: false,
 	enableAssistiveMml: false,
 })
+
+/**
+ * Glyphs for variants such as \mathbb live in dynamically loaded font files,
+ * which cannot be loaded during the synchronous markdown rendering.
+ */
+if (!mathjax_instance) throw new Error('MathJax could not be initialized')
+
+await mathjax_instance.documentOptions.OutputJax.font.loadDynamicFiles()
 
 /**
  * Plugin that adds a button to copy the code to clipboard
