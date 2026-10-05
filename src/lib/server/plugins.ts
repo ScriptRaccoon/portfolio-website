@@ -1,6 +1,6 @@
 import { createHighlighter } from 'shiki'
 import type { MarkdownIt, Token } from 'markdown-it'
-import { createMathjaxInstance, type TexPackage } from '@mdit/plugin-mathjax'
+import katex from 'katex'
 
 /**
  * Plugin to automatically add target="_blank" to external links
@@ -96,76 +96,58 @@ export function add_ids_to_headings(md: MarkdownIt): void {
 }
 
 /**
- * MathJax TeX packages: all packages loaded by @mdit/plugin-mathjax by default,
- * except "bboldx", which redefines \mathbb to use a font extension
- * that is not installed (so \mathbb{Z} would render as a plain Z).
- * The type cast is necessary since TexPackage does not include "base".
+ * Plugin to render math formulas with KaTeX.
+ * Inline formulas are written as $...$, display formulas as $$...$$.
+ * Following Pandoc, the opening $ must not be followed by whitespace,
+ * and the closing $ must not be preceded by whitespace nor followed
+ * by a digit (so that "$5 to $10" is not treated as math).
  */
-const mathjax_packages = [
-	'base',
-	'action',
-	'ams',
-	'amscd',
-	'bbm',
-	'bbox',
-	'begingroup',
-	'boldsymbol',
-	'braket',
-	'bussproofs',
-	'cancel',
-	'cases',
-	'centernot',
-	'color',
-	'colortbl',
-	'colorv2',
-	'configmacros',
-	'dsfont',
-	'empheq',
-	'enclose',
-	'extpfeil',
-	'gensymb',
-	'html',
-	'mathtools',
-	'mhchem',
-	'newcommand',
-	'noerrors',
-	'noundefined',
-	'physics',
-	'setoptions',
-	'tagformat',
-	'texhtml',
-	'textcomp',
-	'textmacros',
-	'unicode',
-	'units',
-	'upgreek',
-	'verb',
-] as TexPackage[]
+export function render_math(md: MarkdownIt): void {
+	md.inline.ruler.after('escape', 'math', (state, silent) => {
+		const src = state.src
+		const start = state.pos
+		if (src[start] !== '$') return false
 
-/**
- * Plugin configuration to highlight math formulas with MathJax
- */
-export const mathjax_instance = await createMathjaxInstance({
-	loader: { load: ['input/tex', 'output/svg'] },
-	tex: {
-		packages: mathjax_packages,
-		// @ts-ignore shut up
-		inlineMath: [['$', '$']],
-	},
-	mathml: {
-		enabled: true,
-	},
-	a11y: false,
-	enableAssistiveMml: false,
-})
+		const display = src[start + 1] === '$'
+		const delimiter = display ? '$$' : '$'
+		const content_start = start + delimiter.length
 
-/**
- * Glyphs for variants such as \mathbb live in dynamically loaded font files,
- * which cannot be loaded during the synchronous markdown rendering.
- */
-if (!mathjax_instance) throw new Error('MathJax could not be initialized')
+		if (!display && /\s/.test(src[content_start] ?? ' ')) return false
 
-await mathjax_instance.documentOptions.OutputJax.font.loadDynamicFiles()
+		let end = content_start
+		while (true) {
+			end = src.indexOf(delimiter, end)
+			if (end === -1) return false
+			if (src[end - 1] === '\\') {
+				end++
+				continue
+			}
+			if (!display && /\s/.test(src[end - 1])) return false
+			if (!display && /\d/.test(src[end + 1] ?? '')) return false
+			break
+		}
+
+		const formula = src.slice(content_start, end)
+		if (!formula.trim()) return false
+
+		if (!silent) {
+			const token = state.push('math', 'math', 0)
+			token.content = formula
+			token.markup = delimiter
+		}
+
+		state.pos = end + delimiter.length
+		return true
+	})
+
+	md.renderer.rules.math = (tokens, idx) => {
+		const { content, markup } = tokens[idx]
+		return katex.renderToString(content, {
+			displayMode: markup === '$$',
+			throwOnError: true,
+		})
+	}
+}
 
 /**
  * Plugin that adds a button to copy the code to clipboard

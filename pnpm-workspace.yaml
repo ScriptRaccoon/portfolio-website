@@ -2,9 +2,6 @@ allowBuilds:
     '@parcel/watcher': true
     esbuild: true
 minimumReleaseAgeExclude:
-    - '@mdit/helper@1.1.2'
-    - '@mdit/plugin-mathjax@1.2.2'
-    - '@mdit/plugin-tex@1.1.2'
     - '@types/node@26.6.3'
 overrides:
     cookie@<0.7.0: ^0.7.0

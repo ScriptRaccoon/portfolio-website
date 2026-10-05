@@ -1,4 +1,5 @@
 <script lang="ts">
+	import 'katex/dist/katex.min.css'
 	import Controls from '#lib/components/Controls.svelte'
 	import MetaTags from '#lib/components/MetaTags.svelte'
 

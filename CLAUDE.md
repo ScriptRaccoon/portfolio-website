@@ -24,15 +24,17 @@ Env vars (see `.env.example`): `DB_URL` (e.g. `file:database/local.db` locally),
 **Imports:** use the Node subpath alias `#lib/...` (defined in `package.json` `imports`) rather than `$lib`, with `.js` extensions, e.g. `import { query } from '#lib/server/db.js'`. SvelteKit 3 env/runtime modules are `$app/env` and `$app/env/private`. SvelteKit config (adapter, preprocess) lives in `vite.config.ts`; there is no `svelte.config.js`.
 
 **Content as Markdown:** projects and posts are Markdown files with YAML frontmatter in `src/data/projects/` and `src/data/posts/`; the filename is the route id. Loaders read them via `import.meta.glob(..., { query: '?raw' })` and parse with `front-matter` (`src/lib/server/frontmatter.ts`). Frontmatter shapes are `ProjectMetaData` / `PostMetaData` in `src/lib/types.ts`.
+
 - Posts with `published: null` are drafts and are hidden/404 (`is_published`).
 - Every project tag must appear in `PROJECT_TAGS` in `src/lib/server/config.ts`, otherwise `/projects` throws a 400.
 - Project images go in `static/media/projects/<id>.webp` and `<id>_thumb.webp` (576px large, 190px small); blog images in `static/media/blog/`. `convert-png-to-webp.sh` helps convert.
 
-**Markdown rendering** (`src/lib/server/markdown.ts`, `plugins.ts`): markdown-it with Shiki highlighting (fixed language list in `plugins.ts` — add a language there if a code block uses a new one; code fences must specify a language), MathJax (`$...$`), IDs on `h2` headings (used to build the table of contents in `toc.ts`), copy buttons on code blocks, and `target="_blank"` on external links.
+**Markdown rendering** (`src/lib/server/markdown.ts`, `plugins.ts`): markdown-it with Shiki highlighting (fixed language list in `plugins.ts` — add a language there if a code block uses a new one; code fences must specify a language), KaTeX (`$...$` inline, `$$...$$` display; custom inline rule `render_math`), IDs on `h2` headings (used to build the table of contents in `toc.ts`), copy buttons on code blocks, and `target="_blank"` on external links.
 
 **Prerendering:** the root layout sets `prerender = true`, so the site is mostly static. `/analytics` opts out with `prerender = false`; the `/api/*` POST endpoints run as Netlify functions.
 
 **Analytics pipeline:**
+
 1. `src/hooks.server.ts` assigns a `session_id` cookie on every request (`src/lib/server/sessions.ts`).
 2. The root layout calls `track()` (`src/lib/client/track.ts`) on navigation, which POSTs once per browser session to `/api/track-session` and per page to `/api/track-visit`. Users can opt out via a `notrack` localStorage flag.
 3. API endpoints reject cross-origin requests, bots, non-JSON bodies, and paths not in `TRACKED_PATHS` (`config.ts`; `*` suffix = prefix match — the same matching logic is duplicated client-side). Bodies are validated with valibot. Geo data comes from Netlify's `x-nf-geo` header.

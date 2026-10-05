@@ -252,9 +252,9 @@ by designing the `Fibonacci.svelte` component to call itself twice: once with a 
 
 ```svelte
 <script lang="ts">
-    import Fibonacci from "./Fibonacci.svelte";
+	import Fibonacci from './Fibonacci.svelte'
 
-    let { index }: { index: number }; = $props();
+	let { index }: { index: number } = $props()
 </script>
 
 {#if index === 1}
